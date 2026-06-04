@@ -148,7 +148,17 @@ export does **not** need a server — it loads the deck over `file://`.
 
 ## 6. Open items for the AI-agent talk
 
-- **Skill QR URL** is a placeholder (`https://coolhandlabs.com/skill`). When the
-  real URL is known, update `assets/qr/qr.config.json` and rerun `npm run qr`.
-- **Speaker visuals** (Slide 5 trace, Slide 8 live demo, `og-cover.png`) are
-  placeholders — drop real assets into `assets/img/`.
+- **`og-cover.png`** (1200×630 social share image) is not yet supplied — drop it
+  into `assets/img/` so Open Graph / Twitter cards render.
+- QR targets are final: talk page, Substack, Coolhand (UTM-tagged), and the
+  skill repo (`github.com/Coolhand-Labs/feedback-collection-skill`). Edit
+  `assets/qr/qr.config.json` + rerun `npm run qr` if any change.
+
+## 7. GitHub Pages
+
+This site serves files **verbatim** — a root `.nojekyll` disables Jekyll so the
+deck (and the `{{TOKEN}}` placeholders in `tools/deck-template/`) ship as-is.
+The deck uses **relative** asset paths, so it works at its public URL with no
+build step. Merging to `master` publishes it at
+`https://michael.carroll.io/talks/2026/your-ai-agent-has-notes/` (CNAME already
+set). Do not remove `.nojekyll`.
