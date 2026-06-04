@@ -684,10 +684,26 @@
   to   { opacity: 1; transform: none; }
 }
 
+/* A bar that holds back until clicked (used for Discovery 01's week 4):
+   skip the load animation, sit collapsed, then grow when revealed. */
+.cost-chart .bar--beat {
+  animation: none !important;
+  transform: scaleY(0);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s linear;
+}
+
+.cost-chart .bar--beat.is-visible {
+  transform: scaleY(1);
+}
+
 /* Print/PDF and reduced-motion: show the final populated state immediately. */
 html.is-print .cost-chart .bar,
 html.is-print .optim tbody tr {
   animation: none !important;
+}
+
+html.is-print .cost-chart .bar--beat {
+  transform: scaleY(1) !important;
 }
 
 @media print {

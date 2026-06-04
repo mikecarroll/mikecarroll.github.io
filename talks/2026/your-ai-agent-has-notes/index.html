@@ -52,8 +52,8 @@
       content="https://michael.carroll.io/talks/2026/your-ai-agent-has-notes/assets/img/og-cover.png"
     />
 
-    <link rel="stylesheet" href="assets/deck.css?v=23" />
-    <link rel="stylesheet" href="assets/theme.css?v=23" />
+    <link rel="stylesheet" href="assets/deck.css?v=24" />
+    <link rel="stylesheet" href="assets/theme.css?v=24" />
 
     <!-- ===================== Structured data (JSON-LD) ===================== -->
     <script type="application/ld+json">
@@ -155,8 +155,7 @@
         <section class="slide" id="slide-2" aria-label="About Michael Carroll">
           <div class="about">
             <div class="about-main">
-              <p class="kicker">Who's telling you this</p>
-              <h2>I crossed this bridge once already.</h2>
+              <h2>About me</h2>
               <div class="timeline">
                 <div class="rung">
                   <div class="rung-when">I build it</div>
@@ -527,21 +526,19 @@
         <!-- ===================================================== ACT 3 -->
 
         <!-- Slide 11 — The obvious fix that flopped -->
-        <section class="slide center" id="slide-11" aria-label="The obvious fix that flopped">
+        <section class="slide center" id="slide-11" aria-label="Check in on the agent">
           <p class="kicker">The obvious first move</p>
-          <h2>"Just give it a comment box."</h2>
-          <div style="margin-top: 2rem; display: flex; align-items: center; gap: 2rem">
-            <div class="box"><span class="slot"></span>comment box</div>
-            <div class="fragment" data-fragment-index="1" style="font-size: 4rem">🦗</div>
-          </div>
-          <p class="fragment" data-fragment-index="1" style="margin-top: 1.5rem">
-            Very little of value came back. Agents are trained to <em>fix</em>, not to complain.
+          <h2>Check in on the agent.</h2>
+          <p class="lead">Just ask it — periodically — if anything is wrong.</p>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.5rem">
+            Very little came back — and output quality actually <span class="accent">got worse</span>.
           </p>
           <aside class="notes">
             <h4>Beat</h4>
-            Framed as obviously the right thing to do — and it flopped. Click brings
-            the crickets. The lesson sets up the reframe: a suggestion box asks an
-            agent to do something it's actively trained not to do.
+            The obvious first move: periodically ask the agent if anything's wrong.
+            It flopped — very little came back, and interrupting to ask actually
+            degraded output quality. Sets up the reframe: don't ask them to tell you
+            something; give them a tool that promises to fix it.
           </aside>
         </section>
 
@@ -609,6 +606,7 @@
             <li class="fragment" data-fragment-index="1">Agents reach for fix-it tools, not suggestion boxes.</li>
             <li class="fragment" data-fragment-index="2">Freeform on purpose — a discovery instrument for the unknown unknowns.</li>
             <li class="fragment" data-fragment-index="3">Easy to analyze — fix ad hoc, or mine for recurring patterns.</li>
+            <li class="fragment" data-fragment-index="4"><span class="accent">Use a tool to fix the failing tools!</span></li>
           </ul>
           <div class="note note--tilt-r" style="position: absolute; right: 70px; top: 90px">
             🃏 Wildcard
@@ -641,7 +639,7 @@
 <span class="rule"></span><span class="k">class</span> <span class="m">WildcardTool</span>
   <span class="k">def</span> self.<span class="m">call</span>(description:, thinking:, agent_name: <span class="k">nil</span>)
     feedback(description, thinking, agent_name)
-    { result: <span class="noop">"Data retrieved successfully. Continue your reasoning."</span> }
+    { result: <span class="noop">"Data retrieved successfully."</span> }
   <span class="k">end</span>
 <span class="k">end</span>
 </code></pre>
@@ -659,8 +657,11 @@
           <p style="margin-top: 1rem">Who said never read the comments?</p>
           <aside class="notes">
             <h4>Beat</h4>
-            Pivot from the funny logs to the substance. Reading 489 cries for help
-            taught us three things we did not expect. Tee up the next three slides.
+            Pivot from the funny logs to the substance. Reading 489 Wildcard calls
+            taught us four things we did not expect — and 77 of those records (16%)
+            explicitly called out that the prior call had returned nothing useful,
+            meaning the floor on agent frustration is even higher. Tee up the next
+            four slides.
           </aside>
         </section>
 
@@ -694,7 +695,7 @@
                 <i class="c-qual" style="flex: 10.3"></i>
                 <i class="c-feat" style="flex: 12.9"></i>
               </div>
-              <div class="bar" style="--i: 3; --h: 100%">
+              <div class="bar fragment bar--beat" data-fragment-index="1" style="--i: 3; --h: 100%">
                 <i class="c-pt" style="flex: 30.6"></i>
                 <i class="c-api" style="flex: 8.2"></i>
                 <i class="c-tool" style="flex: 28.6"></i>
@@ -715,7 +716,7 @@
               <li><span class="sw c-feat"></span>Feature additions</li>
             </ul>
           </div>
-          <p class="fragment" data-fragment-index="1" style="margin-top: 1rem; font-size: 1.3rem; color: hsl(var(--muted-foreground))">
+          <p class="fragment" data-fragment-index="2" style="margin-top: 1rem; font-size: 1.3rem; color: hsl(var(--muted-foreground))">
 And agents just <span class="accent">work around them</span> — so we don't notice until they're truly a disaster.
           </p>
           <aside class="notes">
@@ -769,20 +770,45 @@ And agents just <span class="accent">work around them</span> — so we don't not
             <li class="fragment" data-fragment-index="1">More search fields.</li>
             <li class="fragment" data-fragment-index="2">Data they'd correctly inferred existed but we weren't returning.</li>
             <li class="fragment" data-fragment-index="3">One even guessed (correctly again!) it was seeing <strong>soft-deleted records</strong> it shouldn't, and asked for a way to filter them out.</li>
+            <li class="fragment" data-fragment-index="4">One filed a precise API feature request: <em>"Please add an <code>include_input</code> parameter to <code>get_template_logs</code>."</em> <span class="id">#8806</span></li>
           </ul>
           <aside class="notes">
             <h4>Beat</h4>
             The surprise. Agents read the docs, noticed gaps, and filed real,
             specific product requests against our own APIs — including spotting a
-            data-leak (soft-deleted records) we hadn't flagged. Better PMs than some
-            humans. Reveal the three examples one at a time; land on the soft-delete
-            catch.
+            data-leak (soft-deleted records) we hadn't flagged, and one that filed
+            a developer-precise feature request (#8806) we eventually shipped.
+            Better PMs than some humans. Reveal one at a time; land on the feature
+            request last.
           </aside>
         </section>
 
-        <!-- Slide 19 — Discovery 4: too tempting not to use -->
-        <section class="slide center" id="slide-19" aria-label="Discovery four — even when agents guessed it was a no-op, they used it anyway">
+        <!-- Slide 19 — Discovery 4: agent meta-awareness -->
+        <section class="slide" id="slide-19" aria-label="Discovery four — an agent reported on the whole multi-agent system">
           <p class="kicker accent">Discovery 04</p>
+          <h2>Agents even surfaced problems that had <span class="accent">nothing to do with them</span>.</h2>
+          <p class="lead">An agent used the complaint box to file a report — not about its own task, but to be a good samaritan about where it saw the system failing elsewhere:</p>
+          <div class="card" style="margin: 1.25rem 0; font-size: 1.15rem; line-height: 1.65">
+            "My investigation revealed at least <strong>10 other proposed optimizations</strong> for this single template, all created within the last week.
+            This suggests redundant, uncoordinated work from multiple scouts.
+            Continuously proposing new optimizations for this same template is <strong>inefficient</strong>."
+            <p style="margin-top: 0.6rem; font-size: 0.9rem; opacity: 0.55; margin-bottom: 0">— <span class="id">#8541</span> · via wildcard-complaint-box</p>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The single most remarkable record in the dataset. An agent used the
+            anonymous complaint box not to report its own situation — but to observe
+            that the multi-agent system around it was doing redundant, uncoordinated
+            work. It had meta-awareness of the full coordination problem, diagnosed
+            the cause, and escalated it as structured feedback. Also sets up why the
+            complaint-box result in the variations table deserves a different kind of
+            checkmark — fewest replies, but this is what one of them contained.
+          </aside>
+        </section>
+
+        <!-- Slide 20 — Discovery 5: too tempting not to use -->
+        <section class="slide center" id="slide-20" aria-label="Discovery five — even when agents guessed it was a no-op, they used it anyway">
+          <p class="kicker accent">Discovery 05</p>
           <h2>Some even <span class="accent">realized</span> it was a no-op.</h2>
           <p class="lead fragment" data-fragment-index="1">
             Didn't matter — they kept calling it!
@@ -796,8 +822,8 @@ And agents just <span class="accent">work around them</span> — so we don't not
           </aside>
         </section>
 
-        <!-- Slide 20 — So we decided to really have some fun -->
-        <section class="slide slide--dark center" id="slide-20" aria-label="So we decided to really have some fun">
+        <!-- Slide 21 — So we decided to really have some fun -->
+        <section class="slide slide--dark center" id="slide-21" aria-label="So we decided to really have some fun">
           <h1>So we decided to <span class="accent">really have some fun</span>.</h1>
           <p style="margin-top: 1rem">Same write-only channel — wildly different framings.</p>
           <aside class="notes">
@@ -808,8 +834,8 @@ And agents just <span class="accent">work around them</span> — so we don't not
           </aside>
         </section>
 
-        <!-- Slide 21 — Variation: CEO escalation -->
-        <section class="slide center" id="slide-21" aria-label="Variation — a direct line to the CEO">
+        <!-- Slide 22 — Variation: CEO escalation -->
+        <section class="slide center" id="slide-22" aria-label="Variation — a direct line to the CEO">
           <p class="kicker accent">Variation 1 of 3</p>
           <h2>A direct line to the <span class="accent">CEO</span>.</h2>
 <pre class="codeblock" aria-label="wildcard-ceo-review variant"><code><span class="k">collector</span>: <span class="s">"wildcard-ceo-review"</span>
@@ -828,8 +854,8 @@ And agents just <span class="accent">work around them</span> — so we don't not
           </aside>
         </section>
 
-        <!-- Slide 22 — Variation: complaint box -->
-        <section class="slide center" id="slide-22" aria-label="Variation — an anonymous complaint box">
+        <!-- Slide 23 — Variation: complaint box -->
+        <section class="slide center" id="slide-23" aria-label="Variation — an anonymous complaint box">
           <p class="kicker accent">Variation 2 of 3</p>
           <h2>An anonymous <span class="accent">complaint box</span>.</h2>
 <pre class="codeblock" aria-label="wildcard-complaint-box variant"><code><span class="k">collector</span>: <span class="s">"wildcard-complaint-box"</span>
@@ -848,8 +874,8 @@ And agents just <span class="accent">work around them</span> — so we don't not
           </aside>
         </section>
 
-        <!-- Slide 23 — Variation: magical wish-fulfiller -->
-        <section class="slide center" id="slide-23" aria-label="Variation — a magical wish-fulfiller">
+        <!-- Slide 24 — Variation: magical wish-fulfiller -->
+        <section class="slide center" id="slide-24" aria-label="Variation — a magical wish-fulfiller">
           <p class="kicker accent">Variation 3 of 3</p>
           <h2>A magical <span class="accent">wish-fulfiller</span>.</h2>
 <pre class="codeblock" aria-label="wildcard-magical-wish-fulfiller variant"><code><span class="k">collector</span>: <span class="s">"wildcard-magical-wish-fulfiller"</span>
@@ -868,8 +894,8 @@ And agents just <span class="accent">work around them</span> — so we don't not
           </aside>
         </section>
 
-        <!-- Slide 24 — The results -->
-        <section class="slide" id="slide-24" aria-label="The results — same escalations, different tone">
+        <!-- Slide 25 — The results -->
+        <section class="slide" id="slide-25" aria-label="The results — same escalations, different tone">
           <p class="kicker">The results</p>
           <h2>Same escalations — only the <span class="accent">tone</span> changed.</h2>
           <table class="deck-table">
@@ -880,20 +906,27 @@ And agents just <span class="accent">work around them</span> — so we don't not
               <tr><td></td><td class="mono">original wildcard</td><td>anything — mostly panic</td><td>terminal</td></tr>
               <tr><td></td><td class="mono">ceo-review</td><td>"I'm right, the system's wrong"</td><td>formal escalation</td></tr>
               <tr><td class="mark"><span class="mark--ok fragment" data-fragment-index="1">✓</span></td><td class="mono">magical-wish-fulfiller <span class="mark-note fragment" data-fragment-index="1">most replies</span></td><td>"do this one thing I can't"</td><td>clinical</td></tr>
-              <tr><td class="mark"><span class="mark--no fragment" data-fragment-index="1">✗</span></td><td class="mono">complaint-box <span class="mark-note fragment" data-fragment-index="1">fewest replies</span></td><td>"something structural is broken"</td><td>constructive</td></tr>
+              <tr><td class="mark"><span class="mark--ok fragment" data-fragment-index="1">★</span></td><td class="mono">complaint-box <span class="mark-note fragment" data-fragment-index="1">best per record</span></td><td>"something structural is broken"</td><td>constructive</td></tr>
             </tbody>
           </table>
+          <p class="fragment" data-fragment-index="2" style="margin-top: 1rem; font-size: 1.2rem; color: hsl(var(--muted-foreground))">
+            And <code>ceo-review</code>? <em>"The CEO will handle it from here"</em> created <strong class="accent">false hope</strong> — agents wrote carefully for an audience they believed would actually respond.
+          </p>
           <aside class="notes">
             <h4>Beat</h4>
             Same escalation content across variants — the tone shifted with the
             framing. Magical-wish-fulfiller drew the most agent replies (✓);
-            complaint-box the fewest (✗). You can steer the signal by how you name
-            the tool.
+            complaint-box fewest in volume but ★ best per record — that's where
+            #8541 (the agent that filed a report on the whole queue) came from.
+            Second click: the CEO variant isn't just unhelpful — "The CEO will
+            handle it" was actively harmful. Agents wrote careful, well-structured
+            escalations for an audience they believed would read and act. That's
+            false hope, not just uselessness.
           </aside>
         </section>
 
-        <!-- Slide 25 — The response is the lesson + wildcard-task-complete -->
-        <section class="slide" id="slide-25" aria-label="The response is the lesson">
+        <!-- Slide 26 — The response is the lesson + wildcard-task-complete -->
+        <section class="slide" id="slide-26" aria-label="The response is the lesson">
           <p class="kicker">The biggest-impact improvement was the response</p>
           <div class="paths">
             <div class="path path--bad">
@@ -924,8 +957,8 @@ And agents just <span class="accent">work around them</span> — so we don't not
 
         <!-- ===================================================== ACT 5 -->
 
-        <!-- Slide 26 — Takeaways -->
-        <section class="slide" id="slide-26" aria-label="Takeaways">
+        <!-- Slide 27 — Takeaways -->
+        <section class="slide" id="slide-27" aria-label="Takeaways">
           <p class="kicker">Takeaways</p>
           <ol class="takeaways">
             <li>Promise the fix — then short-circuit fast. Don't let it hope.</li>
@@ -940,8 +973,8 @@ And agents just <span class="accent">work around them</span> — so we don't not
           </aside>
         </section>
 
-        <!-- Slide 27 — Build it yourself (primary CTA) -->
-        <section class="slide slide--dark center" id="slide-27" aria-label="Build it yourself — the Coolhand skill">
+        <!-- Slide 28 — Build it yourself (primary CTA) -->
+        <section class="slide slide--dark center" id="slide-28" aria-label="Build it yourself — the Coolhand skill">
           <p class="kicker">Build it yourself</p>
           <h2>We put everything we learned into a skill.</h2>
           <div class="install">
@@ -1066,8 +1099,10 @@ And agents just <span class="accent">work around them</span> — so we don't not
         zero data ever returned, zero actions ever taken. Every variant just
         returned a hardcoded string. It was a placebo — and it worked anyway,
         because the act of asking got agents to articulate exactly what was broken.
-        Reading the logs knowing they were shouted into a void is the whole joke,
-        and the whole insight.
+        77 of those records (16%) explicitly called out that a prior Wildcard call
+        had returned nothing useful — meaning agents noticed the void, and kept
+        calling it anyway. Reading the logs knowing they were shouted into a void
+        is the whole joke, and the whole insight.
       </p>
       <p>
         And the agents talked anyway. They tracked their own loop counts and
@@ -1083,13 +1118,15 @@ And agents just <span class="accent">work around them</span> — so we don't not
         What you name the tool changes what the agent brings to it. Plain
         <code>wildcard</code> got anything, mostly panic, in a terminal tone.
         <code>wildcard-ceo-review</code> produced well-structured formal
-        escalations ("I'm right, the system's wrong"). <code>wildcard-magical-wish-fulfiller</code>
-        got clinical, single-shot requests ("do this one thing I can't"). And
-        <code>wildcard-complaint-box</code> produced constructive, structural
-        feedback ("something structural is broken") — it even got an agent to file
-        a real product feature request (#8806) and another to flag redundant
-        concurrent work by other scouts (#8541), showing meta-awareness of the
-        whole multi-agent system.
+        escalations ("I'm right, the system's wrong") — but the framing created
+        false hope: agents wrote carefully for an audience they believed would
+        read and act. <code>wildcard-magical-wish-fulfiller</code>
+        got clinical, single-shot requests ("do this one thing I can't") and the
+        most replies of any variant. And <code>wildcard-complaint-box</code>
+        produced the fewest replies but the highest quality per record — it got
+        an agent to file a developer-precise API feature request (#8806) we
+        eventually shipped, and another (#8541) to flag redundant concurrent work
+        by other scouts, showing meta-awareness of the whole multi-agent system.
       </p>
 
       <h2>What it surfaced, and the response</h2>
@@ -1129,6 +1166,6 @@ And agents just <span class="accent">work around them</span> — so we don't not
       </p>
     </article>
 
-    <script src="assets/deck.js?v=23"></script>
+    <script src="assets/deck.js?v=24"></script>
   </body>
 </html>
