@@ -1,0 +1,630 @@
+/* =============================================================================
+   deck.css — reusable HTML-slide framework (shadcn design tokens, zero deps)
+   Drives layout, typography, fragment reveals, chrome, and print/PDF export.
+   Talk-specific palette + motif live in theme.css (loaded after this file).
+   ========================================================================== */
+
+/* ---- shadcn design tokens (zinc neutral) -------------------------------- */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 3.9%;
+  --primary: 240 5.9% 10%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 240 4.8% 95.9%;
+  --secondary-foreground: 240 5.9% 10%;
+  --muted: 240 4.8% 95.9%;
+  --muted-foreground: 240 3.8% 46.1%;
+  --accent: 240 4.8% 95.9%;
+  --accent-foreground: 240 5.9% 10%;
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --ring: 240 5.9% 10%;
+  --radius: 0.625rem;
+
+  /* deck framework knobs (overridable by theme.css) */
+  --slide-w: 1280px;
+  --slide-h: 720px;
+  --slide-pad: 64px;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code",
+    Menlo, Consolas, monospace;
+}
+
+/* Dark slides opt in with class="slide--dark" (see theme.css for palette). */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: hsl(var(--foreground));
+  background: hsl(var(--muted));
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+}
+
+/* =============================================================================
+   Deck stage + slides
+   ========================================================================== */
+.deck {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+/* The stage holds the fixed-aspect slide canvas and is scaled by deck.js
+   so a 1280x720 design always fits the viewport without media-query churn. */
+.stage {
+  position: relative;
+  width: var(--slide-w);
+  height: var(--slide-h);
+  transform-origin: center center;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--slide-pad);
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  overflow: hidden;
+}
+
+.slide.is-active {
+  display: flex;
+}
+
+/* Kicker / eyebrow label above a heading. */
+.kicker {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+  margin: 0 0 0.75rem;
+}
+
+.slide h1 {
+  font-size: 4.5rem;
+  line-height: 1.02;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.slide h2 {
+  font-size: 3rem;
+  line-height: 1.08;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.slide h3 {
+  font-size: 1.75rem;
+  line-height: 1.2;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.slide p {
+  font-size: 1.5rem;
+  line-height: 1.45;
+  color: hsl(var(--muted-foreground));
+  margin: 1rem 0 0;
+  max-width: 52ch;
+}
+
+.lead {
+  font-size: 1.875rem !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+.muted {
+  color: hsl(var(--muted-foreground));
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+.center {
+  align-items: center;
+  text-align: center;
+}
+
+.center p {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =============================================================================
+   Reusable shadcn-flavored components
+   ========================================================================== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 0.4em 0.7em;
+  border-radius: calc(var(--radius) - 2px);
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+}
+
+.card {
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  background: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+  padding: 1.5rem 1.75rem;
+  box-shadow: 0 1px 2px hsl(var(--foreground) / 0.04);
+}
+
+kbd {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  padding: 0.15em 0.45em;
+  border: 1px solid hsl(var(--border));
+  border-bottom-width: 2px;
+  border-radius: 0.4em;
+  background: hsl(var(--secondary));
+}
+
+/* tool-name / code chip */
+.chip {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  padding: 0.1em 0.4em;
+  border-radius: 0.35em;
+  background: hsl(var(--muted));
+  border: 1px solid hsl(var(--border));
+}
+
+/* Tables (used by the "name shapes the signal" slide) */
+table.deck-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 1.5rem;
+  font-size: 1.25rem;
+}
+
+table.deck-table th,
+table.deck-table td {
+  text-align: left;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid hsl(var(--border));
+  vertical-align: top;
+}
+
+table.deck-table th {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: hsl(var(--muted-foreground));
+  font-weight: 600;
+}
+
+table.deck-table td.mono {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+}
+
+/* Big numeric stats */
+.stats {
+  display: flex;
+  gap: 2.5rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.stat .stat-num {
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.stat .stat-label {
+  font-size: 1rem;
+  color: hsl(var(--muted-foreground));
+  margin-top: 0.5rem;
+}
+
+/* Grids for two-up / three-up content */
+.grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 1.75rem;
+}
+
+.grid.cols-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.grid.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* QR code block */
+.qr {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.qr img,
+.qr svg {
+  width: 160px;
+  height: 160px;
+  border-radius: calc(var(--radius) - 2px);
+  background: #fff;
+  padding: 8px;
+  border: 1px solid hsl(var(--border));
+  display: block;
+}
+
+.qr.qr--lg img,
+.qr.qr--lg svg {
+  width: 280px;
+  height: 280px;
+}
+
+.qr.qr--sm img,
+.qr.qr--sm svg {
+  width: 104px;
+  height: 104px;
+}
+
+.qr .qr-label {
+  font-size: 0.8rem;
+  color: hsl(var(--muted-foreground));
+  font-weight: 500;
+}
+
+/* Corner placement helper */
+.corner {
+  position: absolute;
+  top: var(--slide-pad);
+  right: var(--slide-pad);
+  margin: 0;
+}
+
+/* Visual placeholder — for assets the speaker supplies later. Never faked. */
+.visual {
+  margin-top: 1.75rem;
+  border: 2px dashed hsl(var(--border));
+  border-radius: var(--radius);
+  background: repeating-linear-gradient(
+    45deg,
+    hsl(var(--muted)) 0,
+    hsl(var(--muted)) 12px,
+    hsl(var(--background)) 12px,
+    hsl(var(--background)) 24px
+  );
+  color: hsl(var(--muted-foreground));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 280px;
+  padding: 2rem;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+}
+
+.visual::before {
+  content: "▢ ";
+}
+
+/* =============================================================================
+   Fragments — incremental reveals on click (no fancy transitions)
+   ========================================================================== */
+.fragment {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.12s linear;
+}
+
+.fragment.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* "deflate" the last log line on the comedic-peak slide once revealed */
+.fragment.deflate.is-visible {
+  opacity: 0.55;
+}
+
+/* =============================================================================
+   Speaker notes — in the DOM for SEO/AEO; hidden on stage, shown via overlay
+   ========================================================================== */
+.notes {
+  display: none;
+}
+
+.notes-overlay {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 38vh;
+  overflow: auto;
+  background: hsl(240 10% 3.9% / 0.96);
+  color: hsl(0 0% 98%);
+  padding: 1.25rem 1.5rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  z-index: 50;
+  border-top: 1px solid hsl(0 0% 100% / 0.1);
+}
+
+.notes-overlay[hidden] {
+  display: none;
+}
+
+.notes-overlay h4 {
+  margin: 0 0 0.4rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.6;
+}
+
+/* =============================================================================
+   Chrome — progress dots, slide number, help overlay
+   ========================================================================== */
+.deck-chrome {
+  position: fixed;
+  z-index: 40;
+  pointer-events: none;
+}
+
+.progress {
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 7px;
+}
+
+.progress .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: hsl(var(--muted-foreground) / 0.4);
+  transition: background 0.15s, transform 0.15s;
+}
+
+.progress .dot.is-active {
+  background: hsl(var(--muted-foreground));
+  transform: scale(1.35);
+}
+
+.slide-num {
+  right: 18px;
+  bottom: 14px;
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  color: hsl(var(--muted-foreground));
+}
+
+.help-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  background: hsl(240 10% 3.9% / 0.6);
+}
+
+.help-overlay[hidden] {
+  display: none;
+}
+
+.help-overlay .help-card {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  border-radius: var(--radius);
+  padding: 1.75rem 2rem;
+  max-width: 420px;
+  box-shadow: 0 24px 60px hsl(240 10% 3.9% / 0.4);
+}
+
+.help-overlay h4 {
+  margin: 0 0 1rem;
+}
+
+.help-overlay dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.6rem 1rem;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.help-overlay dt {
+  white-space: nowrap;
+}
+
+.help-overlay dd {
+  margin: 0;
+  color: hsl(var(--muted-foreground));
+}
+
+/* =============================================================================
+   Transcript — visible, crawlable prose for SEO/AEO (below the deck)
+   Hidden during the live presentation; revealed by ?read=1 or print, and
+   always present in the DOM so search/answer engines read it.
+   ========================================================================== */
+.transcript {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 6rem 1.5rem 8rem;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: hsl(var(--foreground));
+  background: hsl(var(--background));
+}
+
+/* On screen the deck covers everything; the transcript sits in normal flow
+   underneath for crawlers. We pull it out of view for presenters but keep it
+   accessible to bots and to ?read=1 readers. */
+body:not(.reading) .transcript {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+body.reading .deck,
+body.reading .deck-chrome {
+  display: none;
+}
+
+body.reading {
+  background: hsl(var(--background));
+}
+
+.transcript h1 {
+  font-size: 2.25rem;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem;
+}
+
+.transcript h2 {
+  font-size: 1.5rem;
+  margin: 2.5rem 0 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.transcript .dek {
+  color: hsl(var(--muted-foreground));
+  font-size: 1.25rem;
+  margin-top: 0;
+}
+
+.transcript a {
+  color: hsl(var(--primary));
+  text-underline-offset: 2px;
+}
+
+/* =============================================================================
+   Print / PDF export  (triggered by .is-print on <html>, set via ?print=1)
+   Every slide becomes its own landscape page with all fragments revealed.
+   ========================================================================== */
+@page {
+  size: 1280px 720px;
+  margin: 0;
+}
+
+html.is-print,
+html.is-print body {
+  background: #fff;
+}
+
+html.is-print .deck {
+  position: static;
+  display: block;
+  overflow: visible;
+}
+
+html.is-print .stage {
+  transform: none !important;
+  width: var(--slide-w);
+  height: auto;
+}
+
+html.is-print .slide {
+  position: relative;
+  display: flex !important;
+  width: var(--slide-w);
+  height: var(--slide-h);
+  page-break-after: always;
+  break-after: page;
+}
+
+html.is-print .fragment {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+html.is-print .deck-chrome,
+html.is-print .notes-overlay,
+html.is-print .help-overlay,
+html.is-print .transcript {
+  display: none !important;
+}
+
+@media print {
+  html,
+  body {
+    background: #fff;
+  }
+  .deck {
+    position: static;
+    display: block;
+    overflow: visible;
+  }
+  .stage {
+    transform: none !important;
+    width: var(--slide-w);
+    height: auto;
+  }
+  .slide {
+    position: relative;
+    display: flex !important;
+    page-break-after: always;
+    break-after: page;
+  }
+  .fragment {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  .deck-chrome,
+  .notes-overlay,
+  .help-overlay,
+  .transcript {
+    display: none !important;
+  }
+}
+
+/* Respect reduced-motion: kill the small fragment fade. */
+@media (prefers-reduced-motion: reduce) {
+  .fragment {
+    transition: none;
+  }
+}

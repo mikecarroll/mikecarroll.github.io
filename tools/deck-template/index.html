@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{TITLE}} — Michael Carroll</title>
+
+    <!-- ===================== SEO / AEO ===================== -->
+    <meta name="description" content="{{DESCRIPTION}}" />
+    <meta name="author" content="Michael Carroll" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#09090b" />
+    <link
+      rel="canonical"
+      href="https://michael.carroll.io/talks/{{YEAR}}/{{SLUG}}/"
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="{{TITLE}}" />
+    <meta property="og:description" content="{{DESCRIPTION}}" />
+    <meta
+      property="og:url"
+      content="https://michael.carroll.io/talks/{{YEAR}}/{{SLUG}}/"
+    />
+    <meta property="og:site_name" content="Michael Carroll" />
+    <meta
+      property="og:image"
+      content="https://michael.carroll.io/talks/{{YEAR}}/{{SLUG}}/assets/img/og-cover.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="stylesheet" href="assets/deck.css" />
+    <link rel="stylesheet" href="assets/theme.css" />
+
+    <!-- ===================== Structured data (JSON-LD) ===================== -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "PresentationDigitalDocument",
+            "name": "{{TITLE}}",
+            "description": "{{DESCRIPTION}}",
+            "inLanguage": "en",
+            "url": "https://michael.carroll.io/talks/{{YEAR}}/{{SLUG}}/",
+            "author": { "@id": "https://michael.carroll.io/#michael" }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://michael.carroll.io/#michael",
+            "name": "Michael Carroll",
+            "url": "https://michael.carroll.io/",
+            "sameAs": [
+              "https://everythingengineer.substack.com",
+              "https://github.com/mikecarroll",
+              "https://www.linkedin.com/in/michaelscottcarroll"
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+
+  <body>
+    <main class="deck" aria-label="Slide deck: {{TITLE}}">
+      <div class="stage">
+        <!-- Slide 1 — Title (dark) -->
+        <section class="slide slide--dark center" id="slide-1" aria-label="Title">
+          <p class="kicker">Kicker · {{YEAR}}</p>
+          <h1>{{TITLE}}</h1>
+          <p class="lead">Michael Carroll</p>
+          <aside class="notes"><h4>Beat</h4>What you say here (spoken, not shown).</aside>
+        </section>
+
+        <!-- Slide 2 — Content with an incremental reveal -->
+        <section class="slide" id="slide-2" aria-label="A point">
+          <p class="kicker">Section</p>
+          <h2>Make one point per slide.</h2>
+          <p class="fragment" data-fragment-index="1">
+            Add <code>class="fragment"</code> to reveal on the next click.
+          </p>
+          <aside class="notes"><h4>Beat</h4>Speaker notes feed the transcript and SEO.</aside>
+        </section>
+
+        <!-- Slide 3 — Close (dark) -->
+        <section class="slide slide--dark center" id="slide-3" aria-label="Questions">
+          <h1>Questions?</h1>
+          <p class="muted">Michael Carroll</p>
+          <aside class="notes"><h4>Beat</h4>Open the floor.</aside>
+        </section>
+      </div>
+    </main>
+
+    <!-- Chrome -->
+    <div class="deck-chrome progress" aria-hidden="true"></div>
+    <div class="deck-chrome slide-num" aria-hidden="true"></div>
+
+    <!-- Speaker notes overlay (N / S) -->
+    <aside class="notes-overlay" hidden aria-label="Speaker notes">
+      <h4>Speaker notes</h4>
+      <div class="notes-body"></div>
+    </aside>
+
+    <!-- Keyboard help overlay (?) -->
+    <div class="help-overlay" hidden>
+      <div class="help-card">
+        <h4>Keyboard &amp; controls</h4>
+        <dl>
+          <dt><kbd>click</kbd> / <kbd>→</kbd> / <kbd>space</kbd></dt><dd>Forward</dd>
+          <dt><kbd>←</kbd> / <kbd>↑</kbd></dt><dd>Back</dd>
+          <dt><kbd>N</kbd> / <kbd>S</kbd></dt><dd>Speaker notes</dd>
+          <dt><kbd>R</kbd></dt><dd>Reading mode</dd>
+          <dt><kbd>?</kbd></dt><dd>This help</dd>
+        </dl>
+      </div>
+    </div>
+
+    <!-- Transcript — crawlable prose for SEO/AEO -->
+    <article class="transcript">
+      <h1>{{TITLE}}</h1>
+      <p class="dek">A talk by <a href="https://michael.carroll.io/">Michael Carroll</a>.</p>
+      <p>Write the full narrative here as prose so search and answer engines have real content to read.</p>
+    </article>
+
+    <script src="assets/deck.js"></script>
+  </body>
+</html>

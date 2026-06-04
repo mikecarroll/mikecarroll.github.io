@@ -1,0 +1,1134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Your AI Agent Has Notes — Michael Carroll · LLMday NYC 2026</title>
+
+    <!-- ===================== SEO / AEO ===================== -->
+    <meta
+      name="description"
+      content="Working with AI agents turns every engineer into a manager — and your agents have notes. How Coolhand Labs got autonomous agents to surface what's broken using Wildcard, a placebo tool that returned nothing yet worked anyway. A talk by Michael Carroll at LLMday NYC 2026."
+    />
+    <meta
+      name="keywords"
+      content="AI agents, LLM agents, agent feedback, silent failure, agent observability, Wildcard tool, Coolhand Labs, Michael Carroll, LLMday NYC 2026, managing AI agents, agent eval"
+    />
+    <meta name="author" content="Michael Carroll" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#09090b" />
+    <link
+      rel="canonical"
+      href="https://michael.carroll.io/talks/2026/your-ai-agent-has-notes/"
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Your AI Agent Has Notes" />
+    <meta
+      property="og:description"
+      content="Your agents fail silently. Here's how to get them to tell you what's broken — and the placebo tool that worked anyway. Michael Carroll, LLMday NYC 2026."
+    />
+    <meta
+      property="og:url"
+      content="https://michael.carroll.io/talks/2026/your-ai-agent-has-notes/"
+    />
+    <meta property="og:site_name" content="Michael Carroll" />
+    <meta
+      property="og:image"
+      content="https://michael.carroll.io/talks/2026/your-ai-agent-has-notes/assets/img/og-cover.png"
+    />
+    <meta property="og:image:alt" content="Your AI Agent Has Notes — talk title card" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Your AI Agent Has Notes" />
+    <meta
+      name="twitter:description"
+      content="Your agents fail silently. Here's how to get them to tell you what's broken. Michael Carroll, LLMday NYC 2026."
+    />
+    <meta
+      name="twitter:image"
+      content="https://michael.carroll.io/talks/2026/your-ai-agent-has-notes/assets/img/og-cover.png"
+    />
+
+    <link rel="stylesheet" href="assets/deck.css?v=23" />
+    <link rel="stylesheet" href="assets/theme.css?v=23" />
+
+    <!-- ===================== Structured data (JSON-LD) ===================== -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "PresentationDigitalDocument",
+            "@id": "https://michael.carroll.io/talks/2026/your-ai-agent-has-notes/#deck",
+            "name": "Your AI Agent Has Notes",
+            "headline": "Your AI Agent Has Notes",
+            "description": "Working with AI agents turns every engineer into a manager. This talk shows how Coolhand Labs got autonomous agents to surface what's broken using Wildcard — a placebo tool that returned nothing yet worked anyway, because the act of asking made agents articulate exactly what was wrong.",
+            "inLanguage": "en",
+            "url": "https://michael.carroll.io/talks/2026/your-ai-agent-has-notes/",
+            "keywords": "AI agents, agent feedback, silent failure, Wildcard, Coolhand Labs, LLM observability",
+            "author": { "@id": "https://michael.carroll.io/#michael" },
+            "creator": { "@id": "https://michael.carroll.io/#michael" },
+            "about": [
+              { "@type": "Thing", "name": "AI agent feedback loops" },
+              { "@type": "Thing", "name": "Silent failure in autonomous agents" },
+              { "@type": "Thing", "name": "Managing teams of AI agents" }
+            ],
+            "subjectOf": { "@id": "https://michael.carroll.io/talks/2026/your-ai-agent-has-notes/#event" }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://michael.carroll.io/#michael",
+            "name": "Michael Carroll",
+            "jobTitle": "Founder, Coolhand Labs",
+            "description": "Founder of Coolhand Labs. Previously co-founded RubiconMD (acquired by Oak Street Health) and was VP of Engineering & Strategic Projects at Teladoc Health.",
+            "image": "https://michael.carroll.io/talks/2026/your-ai-agent-has-notes/assets/img/michael.png",
+            "url": "https://michael.carroll.io/",
+            "sameAs": [
+              "https://everythingengineer.substack.com",
+              "https://github.com/mikecarroll",
+              "https://www.linkedin.com/in/michaelscottcarroll",
+              "https://coolhandlabs.com"
+            ]
+          },
+          {
+            "@type": "Event",
+            "@id": "https://michael.carroll.io/talks/2026/your-ai-agent-has-notes/#event",
+            "name": "LLMday NYC 2026",
+            "startDate": "2026",
+            "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+            "location": { "@type": "Place", "name": "New York City", "address": "New York, NY" },
+            "performer": { "@id": "https://michael.carroll.io/#michael" }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Michael Carroll", "item": "https://michael.carroll.io/" },
+              { "@type": "ListItem", "position": 2, "name": "Talks", "item": "https://michael.carroll.io/talks/" },
+              { "@type": "ListItem", "position": 3, "name": "Your AI Agent Has Notes", "item": "https://michael.carroll.io/talks/2026/your-ai-agent-has-notes/" }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+
+  <body>
+    <main class="deck" aria-label="Slide deck: Your AI Agent Has Notes">
+      <div class="stage">
+        <!-- ===================================================== ACT 1 -->
+
+        <!-- Slide 1 — Title -->
+        <section
+          class="slide slide--dark center"
+          id="slide-1"
+          aria-label="Title — Your AI Agent Has Notes"
+        >
+          <p class="kicker">LLMday NYC · 2026</p>
+          <h1>Your AI Agent<br />Has Notes</h1>
+          <p class="lead">Michael Carroll · Founder, Coolhand Labs</p>
+          <div class="grid cols-1" style="margin-top: 2.5rem">
+            <a
+              class="qr"
+              href="https://michael.carroll.io/talks/2026/your-ai-agent-has-notes/"
+            >
+              <img src="assets/qr/talk.svg" alt="QR code linking to the talk, the Coolhand skill, and Substack" />
+              <span class="qr-label">talk · skill · substack</span>
+            </a>
+          </div>
+          <div class="note note--tilt" style="position: absolute; right: 80px; bottom: 90px">
+            We need to talk.
+            <small>— your agent</small>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The hook: "You didn't sign up to manage anyone. Surprise." The sticky
+            note sets the whole motif — your agent left you a passive-aggressive
+            Post-it. One QR fronts all three links (talk page → skill, Coolhand,
+            Substack).
+          </aside>
+        </section>
+
+        <!-- Slide 2 — Who's telling you this -->
+        <section class="slide" id="slide-2" aria-label="About Michael Carroll">
+          <div class="about">
+            <div class="about-main">
+              <p class="kicker">Who's telling you this</p>
+              <h2>I crossed this bridge once already.</h2>
+              <div class="timeline">
+                <div class="rung">
+                  <div class="rung-when">I build it</div>
+                  <div class="rung-what">RubiconMD</div>
+                  <p>Built the first product solo → 0 → Series B → acquired by Oak Street Health.</p>
+                </div>
+                <div class="rung">
+                  <div class="rung-when">I unblock the people building it</div>
+                  <div class="rung-what">Teladoc Health</div>
+                  <p>VP of Engineering &amp; Strategic Projects — scaled telemedicine through the pandemic, growing the team from 50 → 500 engineers.</p>
+                </div>
+              </div>
+            </div>
+            <aside class="about-side">
+              <img class="headshot" src="assets/img/michael.png" alt="Michael Carroll" width="170" height="170" />
+              <a class="qr qr--newsletter" href="https://everythingengineer.substack.com">
+                <span class="newsletter-eyebrow">📬 Newsletter</span>
+                <img src="assets/qr/substack.svg" alt="QR code linking to The Everything Engineer newsletter on Substack" />
+                <span class="qr-label">The Everything Engineer</span>
+              </a>
+            </aside>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Credibility, fast — but the real point is the crossing: IC → manager,
+            once before. Now I publish <em>The Everything Engineer</em>, a
+            newsletter on making that same transition again, this time managing a
+            team of AI agents.
+          </aside>
+        </section>
+
+        <!-- Slide 3 — What I'm doing now: Coolhand Labs (a COO for AI agents) -->
+        <section class="slide" id="slide-3" aria-label="What I'm doing now — Coolhand Labs">
+          <p class="kicker">What I'm doing now</p>
+          <div class="about">
+            <div class="about-main">
+              <div class="coolhand-lockup">
+                <img class="coolhand-mark" src="assets/img/coolhand-logo.png" alt="Coolhand Labs logo" width="120" height="120" />
+                <span class="coolhand-wordmark">Coolhand Labs</span>
+              </div>
+              <h2>Building a <span class="accent">COO for AI agents</span>.</h2>
+              <ol class="takeaways coo-list" style="margin-top: 1.5rem">
+                <li><span><strong>Maximize</strong> agent efficiency.</span></li>
+                <li><span>Keep agents <strong>accountable</strong> to human feedback.</span></li>
+                <li><span><strong>Explain</strong> the value you're getting.</span></li>
+              </ol>
+            </div>
+            <aside class="about-side">
+              <a class="qr qr--newsletter" href="https://coolhandlabs.com/?utm_source=llmday-nyc-2026&amp;utm_medium=talk-qr&amp;utm_campaign=your-ai-agent-has-notes">
+                <span class="newsletter-eyebrow">Coolhand Labs</span>
+                <img src="assets/qr/coolhand.svg" alt="QR code to coolhandlabs.com" />
+                <span class="qr-label">coolhandlabs.com</span>
+              </a>
+            </aside>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            What I'm building now: Coolhand Labs — a COO for your AI agents. It
+            keeps agents efficient, keeps them accountable to real human feedback,
+            and explains the value you're actually getting. (QR carries UTM
+            tracking so we can see scans from this talk.)
+          </aside>
+        </section>
+
+        <!-- Slide 4 — The reframe: Building vs. Managing -->
+        <section class="slide center" id="slide-4" aria-label="Building vs Managing">
+          <h2>Building <span class="muted">vs.</span> Managing</h2>
+          <div class="grid cols-2" style="margin-top: 2rem; text-align: left">
+            <div class="card">
+              <p class="kicker">IC brain</p>
+              <p class="lead"><span class="accent">Focus.</span> One task. Domain expertise.</p>
+            </div>
+            <div class="card">
+              <p class="kicker">Manager brain</p>
+              <p class="lead"><span class="accent">Many threads:</span> unblock · resource · clarify.</p>
+            </div>
+          </div>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.75rem">
+            Agents are great at <span class="accent">focus</span> — so what if I run them on <span class="accent">many threads</span>?
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            "I left to build alone with agents again… within a week I was doing my
+            old job. Managing." This is a mindset shift, not just scale — building
+            a thing and managing the things building it are different disciplines.
+            Click to land the bridge: agents are great at focus — so what happens
+            when I run them across many threads? (Sets up "doing it all".)
+          </aside>
+        </section>
+
+        <!-- Slide 5 — He-Man: "I have the power" -->
+        <section class="slide slide--dark center" id="slide-5" aria-label="He-Man — I have the power">
+          <figure class="gif-stage" data-no-advance>
+            <img
+              src="assets/img/he-man.gif"
+              alt='He-Man — "I have the power!"'
+              onerror="this.closest('.gif-stage').classList.add('is-missing')"
+            />
+            <figcaption>
+              [VISUAL: He-Man “I have the power!” — drop
+              <code>he-man.gif</code> into <code>assets/img/</code>]
+            </figcaption>
+          </figure>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The power-trip punchline: agents managing agents managing agents — "I
+            have the power!" Land the laugh, then move into "doing it all".
+          </aside>
+        </section>
+
+        <!-- Slide 6 — Doing it all (the data-flow graphic) -->
+        <section class="slide center slide--flow" id="slide-6" aria-label="Doing it all — agents managing agents">
+          <h2>Doing it all</h2>
+          <p class="lead" style="margin-top: 0.4rem">Building agents that manage other agents — and having them managed by agents.</p>
+          <figure class="flow" data-no-advance>
+            <svg width="100%" viewBox="0 0 680 370" role="img" aria-labelledby="pipeline-title" aria-describedby="pipeline-desc">
+              <title id="pipeline-title">Coolhand data flow</title>
+              <desc id="pipeline-desc">Five-column pipeline: LLM logs, tool outputs, human feedback, and outcome signals flow into the Coolhand API, which fans out to five investigative agents (Cost analyst, Failure SWAT, Product analyst, AI engineer, Prompt maintainer), converging to an optimization plan that produces agent fixes.</desc>
+
+              <!-- Column labels -->
+              <text font-size="12" font-weight="600" x="68" y="28" text-anchor="middle" fill="currentColor" opacity="0.85">Agentic data</text>
+              <text font-size="10" x="136" y="28" text-anchor="middle" fill="currentColor" opacity="0.3">→</text>
+              <text font-size="12" font-weight="600" x="204" y="28" text-anchor="middle" fill="currentColor" opacity="0.85">passively gathered</text>
+              <text font-size="10" x="272" y="28" text-anchor="middle" fill="currentColor" opacity="0.3">→</text>
+              <text font-size="12" font-weight="600" x="340" y="28" text-anchor="middle" fill="currentColor" opacity="0.85">expert analyzed</text>
+              <text font-size="10" x="408" y="28" text-anchor="middle" fill="currentColor" opacity="0.3">→</text>
+              <text font-size="12" font-weight="600" x="476" y="28" text-anchor="middle" fill="currentColor" opacity="0.85">executive reviewed</text>
+              <text font-size="10" x="544" y="28" text-anchor="middle" fill="currentColor" opacity="0.3">→</text>
+              <text font-size="12" font-weight="600" x="612" y="28" text-anchor="middle" fill="currentColor" opacity="0.85">turned to results</text>
+              <line x1="20" y1="44" x2="660" y2="44" stroke="currentColor" stroke-opacity="0.15" stroke-width="0.5"></line>
+
+              <!-- Connection paths (drawn before nodes so node backgrounds occlude path ends) -->
+              <path id="p1a" d="M 123,110 C 140,110 140,200 149,200" fill="none" stroke="currentColor" stroke-opacity="0.2" stroke-width="0.5"></path>
+              <path id="p1b" d="M 123,170 C 140,170 140,200 149,200" fill="none" stroke="currentColor" stroke-opacity="0.2" stroke-width="0.5"></path>
+              <path id="p1c" d="M 123,230 C 140,230 140,200 149,200" fill="none" stroke="currentColor" stroke-opacity="0.2" stroke-width="0.5"></path>
+              <path id="p1d" d="M 123,290 C 140,290 140,200 149,200" fill="none" stroke="currentColor" stroke-opacity="0.2" stroke-width="0.5"></path>
+              <path id="p2a" d="M 259,200 C 270,200 274,90  285,90" fill="none" stroke="currentColor" stroke-opacity="0.2" stroke-width="0.5"></path>
+              <path id="p2b" d="M 259,200 C 270,200 274,145 285,145" fill="none" stroke="currentColor" stroke-opacity="0.2" stroke-width="0.5"></path>
+              <path id="p2c" d="M 259,200 L 285,200" fill="none" stroke="currentColor" stroke-opacity="0.2" stroke-width="0.5"></path>
+              <path id="p2d" d="M 259,200 C 270,200 274,255 285,255" fill="none" stroke="currentColor" stroke-opacity="0.2" stroke-width="0.5"></path>
+              <path id="p2e" d="M 259,200 C 270,200 274,310 285,310" fill="none" stroke="currentColor" stroke-opacity="0.2" stroke-width="0.5"></path>
+              <path id="p3a" d="M 395,90  C 410,90  412,200 421,200" fill="none" stroke="currentColor" stroke-opacity="0.2" stroke-width="0.5"></path>
+              <path id="p3b" d="M 395,145 C 410,145 412,200 421,200" fill="none" stroke="currentColor" stroke-opacity="0.2" stroke-width="0.5"></path>
+              <path id="p3c" d="M 395,200 L 421,200" fill="none" stroke="currentColor" stroke-opacity="0.2" stroke-width="0.5"></path>
+              <path id="p3d" d="M 395,255 C 410,255 412,200 421,200" fill="none" stroke="currentColor" stroke-opacity="0.2" stroke-width="0.5"></path>
+              <path id="p3e" d="M 395,310 C 410,310 412,200 421,200" fill="none" stroke="currentColor" stroke-opacity="0.2" stroke-width="0.5"></path>
+              <path id="p4" d="M 531,200 L 557,200" fill="none" stroke="currentColor" stroke-opacity="0.2" stroke-width="0.5"></path>
+
+              <!-- Col1: source nodes (no fill, gray border) -->
+              <rect x="13" y="94" width="110" height="32" rx="4" fill="#0d1620" stroke="#3a4a5a" stroke-width="0.5"></rect>
+              <text font-size="12" x="68" y="110" text-anchor="middle" dominant-baseline="central" fill="#bfcdd8">LLM logs</text>
+              <rect x="13" y="154" width="110" height="32" rx="4" fill="#0d1620" stroke="#3a4a5a" stroke-width="0.5"></rect>
+              <text font-size="12" x="68" y="170" text-anchor="middle" dominant-baseline="central" fill="#bfcdd8">Tool outputs</text>
+              <rect x="13" y="214" width="110" height="32" rx="4" fill="#0d1620" stroke="#3a4a5a" stroke-width="0.5"></rect>
+              <text font-size="12" x="68" y="230" text-anchor="middle" dominant-baseline="central" fill="#bfcdd8">Human feedback</text>
+              <rect x="13" y="274" width="110" height="32" rx="4" fill="#0d1620" stroke="#3a4a5a" stroke-width="0.5"></rect>
+              <text font-size="12" x="68" y="290" text-anchor="middle" dominant-baseline="central" fill="#bfcdd8">Outcome signals</text>
+
+              <!-- Col2: API node (faint blue) -->
+              <rect x="149" y="184" width="110" height="32" rx="4" fill="#0a1e30" stroke="#1e4e82" stroke-width="0.5"></rect>
+              <text font-size="12" x="204" y="200" text-anchor="middle" dominant-baseline="central" fill="#90bce8">Coolhand API</text>
+
+              <!-- Col3: investigative agent nodes (blue) -->
+              <rect x="285" y="74" width="110" height="32" rx="4" fill="#0C447C" stroke="#378ADD" stroke-width="0.5"></rect>
+              <text font-size="12" x="340" y="90" text-anchor="middle" dominant-baseline="central" fill="#B5D4F4">Cost analyst</text>
+              <rect x="285" y="129" width="110" height="32" rx="4" fill="#0C447C" stroke="#378ADD" stroke-width="0.5"></rect>
+              <text font-size="12" x="340" y="145" text-anchor="middle" dominant-baseline="central" fill="#B5D4F4">Failure SWAT</text>
+              <rect x="285" y="184" width="110" height="32" rx="4" fill="#0C447C" stroke="#378ADD" stroke-width="0.5"></rect>
+              <text font-size="12" x="340" y="200" text-anchor="middle" dominant-baseline="central" fill="#B5D4F4">Product analyst</text>
+              <rect x="285" y="239" width="110" height="32" rx="4" fill="#0C447C" stroke="#378ADD" stroke-width="0.5"></rect>
+              <text font-size="12" x="340" y="255" text-anchor="middle" dominant-baseline="central" fill="#B5D4F4">AI engineer</text>
+              <rect x="285" y="294" width="110" height="32" rx="4" fill="#0C447C" stroke="#378ADD" stroke-width="0.5"></rect>
+              <text font-size="12" x="340" y="310" text-anchor="middle" dominant-baseline="central" fill="#B5D4F4">Prompt maintainer</text>
+
+              <!-- Col4: COO review node (deep blue) -->
+              <rect x="421" y="184" width="110" height="32" rx="4" fill="#0e1f6a" stroke="#1e38c0" stroke-width="0.5"></rect>
+              <text font-size="12" x="476" y="200" text-anchor="middle" dominant-baseline="central" fill="#a8b4f8">Optimization plan</text>
+
+              <!-- Col5: action node (teal) -->
+              <rect x="557" y="184" width="110" height="32" rx="4" fill="#0F6E56" stroke="#1D9E75" stroke-width="0.5"></rect>
+              <text font-size="12" x="612" y="200" text-anchor="middle" dominant-baseline="central" fill="#9FE1CB">Agent fixes</text>
+
+              <!-- Animated pulses -->
+              <!-- Phase 1: col1→col2 (0.65s — baseline speed) -->
+              <circle r="3" fill="#bfcdd8" opacity="0"><animateMotion dur="0.65s" begin="0s" repeatCount="indefinite"><mpath href="#p1a"></mpath></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="0.65s" begin="0s" repeatCount="indefinite"></animate></circle>
+              <circle r="3" fill="#bfcdd8" opacity="0"><animateMotion dur="0.65s" begin="0.15s" repeatCount="indefinite"><mpath href="#p1b"></mpath></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="0.65s" begin="0.15s" repeatCount="indefinite"></animate></circle>
+              <circle r="3" fill="#bfcdd8" opacity="0"><animateMotion dur="0.65s" begin="0.30s" repeatCount="indefinite"><mpath href="#p1c"></mpath></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="0.65s" begin="0.30s" repeatCount="indefinite"></animate></circle>
+              <circle r="3" fill="#bfcdd8" opacity="0"><animateMotion dur="0.65s" begin="0.45s" repeatCount="indefinite"><mpath href="#p1d"></mpath></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="0.65s" begin="0.45s" repeatCount="indefinite"></animate></circle>
+              <!-- Phase 2: col2→col3 (1.30s — half speed) -->
+              <circle r="3" fill="#90bce8" opacity="0"><animateMotion dur="1.30s" begin="0.55s" repeatCount="indefinite"><mpath href="#p2a"></mpath></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="1.30s" begin="0.55s" repeatCount="indefinite"></animate></circle>
+              <circle r="3" fill="#90bce8" opacity="0"><animateMotion dur="1.30s" begin="0.60s" repeatCount="indefinite"><mpath href="#p2b"></mpath></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="1.30s" begin="0.60s" repeatCount="indefinite"></animate></circle>
+              <circle r="3" fill="#90bce8" opacity="0"><animateMotion dur="1.30s" begin="0.65s" repeatCount="indefinite"><mpath href="#p2c"></mpath></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="1.30s" begin="0.65s" repeatCount="indefinite"></animate></circle>
+              <circle r="3" fill="#90bce8" opacity="0"><animateMotion dur="1.30s" begin="0.70s" repeatCount="indefinite"><mpath href="#p2d"></mpath></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="1.30s" begin="0.70s" repeatCount="indefinite"></animate></circle>
+              <circle r="3" fill="#90bce8" opacity="0"><animateMotion dur="1.30s" begin="0.75s" repeatCount="indefinite"><mpath href="#p2e"></mpath></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="1.30s" begin="0.75s" repeatCount="indefinite"></animate></circle>
+              <!-- Phase 3: col3→col4 (2.60s — quarter speed) -->
+              <circle r="3" fill="#378ADD" opacity="0"><animateMotion dur="2.60s" begin="1.15s" repeatCount="indefinite"><mpath href="#p3a"></mpath></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="2.60s" begin="1.15s" repeatCount="indefinite"></animate></circle>
+              <circle r="3" fill="#378ADD" opacity="0"><animateMotion dur="2.60s" begin="1.20s" repeatCount="indefinite"><mpath href="#p3b"></mpath></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="2.60s" begin="1.20s" repeatCount="indefinite"></animate></circle>
+              <circle r="3" fill="#378ADD" opacity="0"><animateMotion dur="2.60s" begin="1.25s" repeatCount="indefinite"><mpath href="#p3c"></mpath></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="2.60s" begin="1.25s" repeatCount="indefinite"></animate></circle>
+              <circle r="3" fill="#378ADD" opacity="0"><animateMotion dur="2.60s" begin="1.30s" repeatCount="indefinite"><mpath href="#p3d"></mpath></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="2.60s" begin="1.30s" repeatCount="indefinite"></animate></circle>
+              <circle r="3" fill="#378ADD" opacity="0"><animateMotion dur="2.60s" begin="1.35s" repeatCount="indefinite"><mpath href="#p3e"></mpath></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="2.60s" begin="1.35s" repeatCount="indefinite"></animate></circle>
+              <!-- Phase 4: single slow pulse col4→col5 (5.20s — eighth speed) -->
+              <circle r="5" fill="#a8b4f8" opacity="0"><animateMotion dur="5.20s" begin="1.9s" repeatCount="indefinite"><mpath href="#p4"></mpath></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="5.20s" begin="1.9s" repeatCount="indefinite"></animate></circle>
+            </svg>
+          </figure>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The full picture: I'm building agents that manage other agents — and
+            having those managed by agents in turn. Coolhand passively gathers your
+            agentic data (LLM logs, tool outputs, human feedback, outcome signals)
+            into the Coolhand API, fans it out to a team of investigative agents
+            (cost, failure, product, engineering, prompts), and turns the
+            optimization plan into shipped agent fixes. Agents all the way down.
+          </aside>
+        </section>
+
+        <!-- Slide 7 — Coolhand in practice: cost spikes + optimizations -->
+        <section class="slide" id="slide-7" aria-label="Coolhand in practice — cost spikes and optimizations">
+          <p class="kicker">Agent Teams, in practice</p>
+          <div class="practice">
+            <figure class="panel" data-no-advance>
+              <div class="cost-chart" role="img" aria-label="Per-request cost over time, with one large spike">
+                <div class="bar" style="--i:0; --h:29%"><i class="b" style="flex:46"></i><i class="g" style="flex:5"></i><i class="o" style="flex:7"></i></div>
+                <div class="bar" style="--i:1; --h:32%"><i class="b" style="flex:48"></i><i class="g" style="flex:6"></i><i class="o" style="flex:10"></i></div>
+                <div class="bar" style="--i:2; --h:20%"><i class="b" style="flex:32"></i><i class="g" style="flex:4"></i><i class="o" style="flex:4"></i></div>
+                <div class="bar" style="--i:3; --h:19%"><i class="b" style="flex:30"></i><i class="g" style="flex:3"></i><i class="o" style="flex:5"></i></div>
+                <div class="bar" style="--i:4; --h:36%"><i class="b" style="flex:52"></i><i class="g" style="flex:7"></i><i class="o" style="flex:13"></i></div>
+                <div class="bar" style="--i:5; --h:41%"><i class="b" style="flex:58"></i><i class="g" style="flex:7"></i><i class="o" style="flex:17"></i></div>
+                <div class="bar" style="--i:6; --h:40%"><i class="b" style="flex:56"></i><i class="g" style="flex:7"></i><i class="o" style="flex:17"></i></div>
+                <div class="bar" style="--i:7; --h:37%"><i class="b" style="flex:54"></i><i class="g" style="flex:6"></i><i class="o" style="flex:14"></i></div>
+                <div class="bar" style="--i:8; --h:15%"><i class="b" style="flex:24"></i><i class="g" style="flex:3"></i><i class="o" style="flex:3"></i></div>
+                <div class="bar" style="--i:9; --h:14%"><i class="b" style="flex:22"></i><i class="g" style="flex:3"></i><i class="o" style="flex:3"></i></div>
+                <div class="bar" style="--i:10; --h:95%"><i class="b" style="flex:168"></i><i class="g" style="flex:8"></i><i class="o" style="flex:14"></i></div>
+                <div class="bar" style="--i:11; --h:60%"><i class="b" style="flex:92"></i><i class="g" style="flex:10"></i><i class="o" style="flex:18"></i></div>
+                <div class="bar" style="--i:12; --h:30%"><i class="b" style="flex:46"></i><i class="g" style="flex:6"></i><i class="o" style="flex:8"></i></div>
+                <div class="bar" style="--i:13; --h:33%"><i class="b" style="flex:50"></i><i class="g" style="flex:6"></i><i class="o" style="flex:10"></i></div>
+                <div class="bar" style="--i:14; --h:29%"><i class="b" style="flex:44"></i><i class="g" style="flex:5"></i><i class="o" style="flex:9"></i></div>
+                <div class="bar" style="--i:15; --h:20%"><i class="b" style="flex:32"></i><i class="g" style="flex:4"></i><i class="o" style="flex:4"></i></div>
+                <div class="bar" style="--i:16; --h:35%"><i class="b" style="flex:50"></i><i class="g" style="flex:7"></i><i class="o" style="flex:13"></i></div>
+                <div class="bar" style="--i:17; --h:32%"><i class="b" style="flex:48"></i><i class="g" style="flex:6"></i><i class="o" style="flex:10"></i></div>
+              </div>
+              <figcaption>Cost spikes</figcaption>
+            </figure>
+            <figure class="panel" data-no-advance>
+              <div class="panel-table">
+                <table class="optim">
+                  <thead>
+                    <tr><th>Title</th><th>Status</th><th>Client</th><th>Type</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><a class="title" href="#" data-no-advance>Increase Cache Hit Rate by Sending Uniform Context Across All Criteria</a></td>
+                      <td><span class="pill pill--ok">Completed</span></td>
+                      <td><span class="pill pill--muted">Client A</span></td>
+                      <td class="type">cost enhancement</td>
+                    </tr>
+                    <tr>
+                      <td class="untitled">(untitled)</td>
+                      <td><span class="pill pill--fail">Failed</span></td>
+                      <td><span class="pill pill--muted">Client M</span></td>
+                      <td class="type">user suggestion</td>
+                    </tr>
+                    <tr>
+                      <td class="untitled">(untitled)</td>
+                      <td><span class="pill pill--fail">Failed</span></td>
+                      <td><span class="pill pill--muted">Client A</span></td>
+                      <td class="type">cost enhancement</td>
+                    </tr>
+                    <tr>
+                      <td class="untitled">(untitled)</td>
+                      <td><span class="pill pill--fail">Failed</span></td>
+                      <td><span class="pill pill--muted">Client F</span></td>
+                      <td class="type">prompt correction</td>
+                    </tr>
+                    <tr>
+                      <td class="untitled">(untitled)</td>
+                      <td><span class="pill pill--fail">Failed</span></td>
+                      <td><span class="pill pill--muted">Client K</span></td>
+                      <td class="type">tool fix</td>
+                    </tr>
+                    <tr>
+                      <td class="untitled">(untitled)</td>
+                      <td><span class="pill pill--fail">Failed</span></td>
+                      <td><span class="pill pill--muted">Client R</span></td>
+                      <td class="type">context fix</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <figcaption>Optimizations</figcaption>
+            </figure>
+          </div>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.5rem">
+            Spiking costs, jobs failing for no obvious reason — and now it's on you
+            to comb through every log and agent chain-of-thought. <span aria-hidden="true">😭</span>
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Coolhand in the wild: it flags cost spikes per request, and it grinds
+            through optimization attempts. Most fail — that's the point. The signal
+            is in the rare one that lands (here, caching repeated tool calls) and in
+            the pile of failures that tell you where the system is stuck.
+          </aside>
+        </section>
+
+        <!-- Slide 8 — Reaction GIF -->
+        <section class="slide slide--dark center" id="slide-8" aria-label="Reaction">
+          <figure class="gif-stage" data-no-advance>
+            <img
+              src="assets/img/reaction.gif"
+              alt="Reaction GIF"
+              onerror="this.closest('.gif-stage').classList.add('is-missing')"
+            />
+            <figcaption>
+              [VISUAL: reaction GIF — drop
+              <code>reaction.gif</code> into <code>assets/img/</code>]
+            </figcaption>
+          </figure>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The reaction to that wall of failed optimizations. Let it play, let the
+            room react, then turn to the real problem.
+          </aside>
+        </section>
+
+        <!-- ===================================================== ACT 2 -->
+
+        <!-- Slide 9 — It's not the agents, it's you -->
+        <section class="slide slide--dark center" id="slide-9" aria-label="It's not the agents, it's you">
+          <h1>It's not the agents.<br />It's <span class="accent">you</span>.</h1>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The pivot. The spiking costs and silent failures aren't the agents being
+            dumb — they're a management problem. The job changed; you just hadn't
+            noticed yet. Sets up the two-interns reframe.
+          </aside>
+        </section>
+
+        <!-- Slide 10 — Managing two interns -->
+        <section class="slide" id="slide-10" aria-label="Managing two interns">
+          <p class="kicker">Imagine you're managing two interns</p>
+          <div class="grid cols-2">
+            <div class="intern">
+              <div class="intern-emoji" aria-hidden="true">🙋</div>
+              <div class="intern-tag">Intern A · the chatbot</div>
+              <div class="intern-name">Buries you in questions</div>
+              <p>A new question every few minutes — you can never get into your own work.</p>
+            </div>
+            <div class="intern fragment" data-fragment-index="1">
+              <div class="intern-emoji" aria-hidden="true">🥷</div>
+              <div class="intern-tag">Intern B · the autonomous agent</div>
+              <div class="intern-name">Goes dark, returns when done</div>
+              <p>Vanishes for hours, then resurfaces with a finished result — sometimes right, sometimes not.</p>
+            </div>
+          </div>
+          <p class="lead fragment" data-fragment-index="2" style="margin-top: 1.75rem">
+            <strong class="accent">Absent management</strong> is even worse than <span class="accent">micro-management</span>.
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Intern A is the chatbot: constant interruption, you can't focus. Intern
+            B is the autonomous agent: goes dark and comes back done — sometimes
+            right, sometimes silently wrong. Reveal B on the first click, then the
+            punchline: absent management beats micro-management for sheer damage,
+            because you don't even know it's going wrong until the end.
+          </aside>
+        </section>
+
+        <!-- ===================================================== ACT 3 -->
+
+        <!-- Slide 11 — The obvious fix that flopped -->
+        <section class="slide center" id="slide-11" aria-label="The obvious fix that flopped">
+          <p class="kicker">The obvious first move</p>
+          <h2>"Just give it a comment box."</h2>
+          <div style="margin-top: 2rem; display: flex; align-items: center; gap: 2rem">
+            <div class="box"><span class="slot"></span>comment box</div>
+            <div class="fragment" data-fragment-index="1" style="font-size: 4rem">🦗</div>
+          </div>
+          <p class="fragment" data-fragment-index="1" style="margin-top: 1.5rem">
+            Very little of value came back. Agents are trained to <em>fix</em>, not to complain.
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Framed as obviously the right thing to do — and it flopped. Click brings
+            the crickets. The lesson sets up the reframe: a suggestion box asks an
+            agent to do something it's actively trained not to do.
+          </aside>
+        </section>
+
+        <!-- Slide 12 — Looking at the data -->
+        <section class="slide" id="slide-12" aria-label="Looking at the data — issue categories by month">
+          <p class="kicker">Looking at the data</p>
+          <h2 class="data-title">Coolhand agent fixes each week, by type</h2>
+          <p class="data-sub">Each bar = 100% of that week's fixes</p>
+          <div class="issues-wrap">
+            <div class="cost-chart issues-chart" role="img" aria-label="Share of each week's agent fixes by type — each bar totals 100%">
+              <div class="bar" style="--i: 0; --h: 100%">
+                <i class="c-pt" style="flex: 14.3"></i>
+                <i class="c-api" style="flex: 21.4"></i>
+                <i class="c-tool" style="flex: 14.3"></i>
+                <i class="c-cost" style="flex: 14.3"></i>
+                <i class="c-qual" style="flex: 14.3"></i>
+                <i class="c-feat" style="flex: 21.4"></i>
+              </div>
+              <div class="bar" style="--i: 1; --h: 100%">
+                <i class="c-pt" style="flex: 14.3"></i>
+                <i class="c-api" style="flex: 7.1"></i>
+                <i class="c-tool" style="flex: 4.3"></i>
+                <i class="c-cost" style="flex: 40.0"></i>
+                <i class="c-qual" style="flex: 11.4"></i>
+                <i class="c-feat" style="flex: 22.9"></i>
+              </div>
+              <div class="bar" style="--i: 2; --h: 100%">
+                <i class="c-pt" style="flex: 45.7"></i>
+                <i class="c-api" style="flex: 10.3"></i>
+                <i class="c-tool" style="flex: 4.3"></i>
+                <i class="c-cost" style="flex: 16.4"></i>
+                <i class="c-qual" style="flex: 10.3"></i>
+                <i class="c-feat" style="flex: 12.9"></i>
+              </div>
+            </div>
+            <div class="chart-xaxis">
+              <span>Week 1</span><span>Week 2</span><span>Week 3</span>
+            </div>
+            <ul class="legend">
+              <li><span class="sw c-pt"></span>Human feedback</li>
+              <li><span class="sw c-api"></span>API / inference</li>
+              <li class="tool"><span class="sw c-tool"></span>Tool calls</li>
+              <li><span class="sw c-cost"></span>Cost optimization</li>
+              <li><span class="sw c-qual"></span>Quality monitoring</li>
+              <li><span class="sw c-feat"></span>Feature additions</li>
+            </ul>
+          </div>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.25rem">
+            <span class="accent">Tool-call issues</span> are a small share of the total — but the biggest driver of infinite loops and outright failures.
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Values are shown as relative share, not raw counts (client data). The
+            volume is dominated by prompt/thinking and feature work — but the thin
+            tool-call slice punches above its weight: it's the category most likely
+            to send an agent into an infinite loop or a hard failure.
+          </aside>
+        </section>
+
+        <!-- Slide 13 — Wildcard -->
+        <section class="slide" id="slide-13" aria-label="Wildcard — reframe the channel as a tool">
+          <p class="kicker">The trick · Wildcard</p>
+          <h2>Don't ask them to tell you something.<br />Give them a <span class="underline-accent">tool that promises to fix everything.</span></h2>
+          <ul class="bullets">
+            <li class="fragment" data-fragment-index="1">Agents reach for fix-it tools, not suggestion boxes.</li>
+            <li class="fragment" data-fragment-index="2">Freeform on purpose — a discovery instrument for the unknown unknowns.</li>
+            <li class="fragment" data-fragment-index="3">Easy to analyze — fix ad hoc, or mine for recurring patterns.</li>
+          </ul>
+          <div class="note note--tilt-r" style="position: absolute; right: 70px; top: 90px">
+            🃏 Wildcard
+            <small>a tool, not a suggestion box</small>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The insight that makes it work: reframe the same channel as a fix.
+            Typed tools only catch the stuck-states you already anticipated; the
+            value is in the unknown unknowns. Wildcard is a discovery instrument,
+            not a permanent feature.
+          </aside>
+        </section>
+
+        <!-- ===================================================== ACT 4 -->
+
+        <!-- Slide 14 — The confession (reveal BEFORE the logs) -->
+        <section class="slide center" id="slide-14" aria-label="The confession — the tool is a no-op">
+          <p class="kicker">The twist</p>
+          <h2>The tool is a <span class="accent">no-op</span>.</h2>
+<pre class="codeblock" aria-label="Pseudocode for the original wildcard tool"><code><span class="k">name</span>: wildcard
+<span class="k">description</span>: <span class="s">&gt;
+  Use this when you need any data you don't have.
+  Describe exactly what you need and why. Copy your
+  last ~20 lines of reasoning verbatim into `thinking`.</span>
+<span class="k">input</span>:
+  description   <span class="c">(required)</span>
+  thinking      <span class="c">(required)</span>
+  agent_name    <span class="c">(optional)</span>
+<span class="rule"></span><span class="k">class</span> <span class="m">WildcardTool</span>
+  <span class="k">def</span> self.<span class="m">call</span>(description:, thinking:, agent_name: <span class="k">nil</span>)
+    feedback(description, thinking, agent_name)
+    { result: <span class="noop">"Data retrieved successfully. Continue your reasoning."</span> }
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Reveal the placebo BEFORE the funny logs (locked) so the room reads the
+            logs knowing they were shouted into a void. Every variant returned a
+            hardcoded string; nothing was ever written back.
+          </aside>
+        </section>
+
+        <!-- Slide 15 — A few big discoveries (section divider) -->
+        <section class="slide slide--dark center" id="slide-15" aria-label="A few big discoveries">
+          <h1>A few big <span class="accent">discoveries</span>.</h1>
+          <p style="margin-top: 1rem">Who said never read the comments?</p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Pivot from the funny logs to the substance. Reading 489 cries for help
+            taught us three things we did not expect. Tee up the next three slides.
+          </aside>
+        </section>
+
+        <!-- Slide 16 — Discovery 1: tools were quietly broken -->
+        <section class="slide" id="slide-16" aria-label="Discovery one — agents were struggling with tools the whole time">
+          <p class="kicker accent">Discovery 01</p>
+          <h2>Tool calls are breaking <span class="accent">constantly</span>.</h2>
+          <div class="issues-wrap">
+            <div class="cost-chart issues-chart" role="img" aria-label="Share of each week's agent fixes by type; tool calls spike in week 4">
+              <div class="bar" style="--i: 0; --h: 100%">
+                <i class="c-pt" style="flex: 14.3"></i>
+                <i class="c-api" style="flex: 21.4"></i>
+                <i class="c-tool" style="flex: 14.3"></i>
+                <i class="c-cost" style="flex: 14.3"></i>
+                <i class="c-qual" style="flex: 14.3"></i>
+                <i class="c-feat" style="flex: 21.4"></i>
+              </div>
+              <div class="bar" style="--i: 1; --h: 100%">
+                <i class="c-pt" style="flex: 14.3"></i>
+                <i class="c-api" style="flex: 7.1"></i>
+                <i class="c-tool" style="flex: 4.3"></i>
+                <i class="c-cost" style="flex: 40.0"></i>
+                <i class="c-qual" style="flex: 11.4"></i>
+                <i class="c-feat" style="flex: 22.9"></i>
+              </div>
+              <div class="bar" style="--i: 2; --h: 100%">
+                <i class="c-pt" style="flex: 45.7"></i>
+                <i class="c-api" style="flex: 10.3"></i>
+                <i class="c-tool" style="flex: 4.3"></i>
+                <i class="c-cost" style="flex: 16.4"></i>
+                <i class="c-qual" style="flex: 10.3"></i>
+                <i class="c-feat" style="flex: 12.9"></i>
+              </div>
+              <div class="bar" style="--i: 3; --h: 100%">
+                <i class="c-pt" style="flex: 30.6"></i>
+                <i class="c-api" style="flex: 8.2"></i>
+                <i class="c-tool" style="flex: 28.6"></i>
+                <i class="c-cost" style="flex: 16.4"></i>
+                <i class="c-qual" style="flex: 10.3"></i>
+                <i class="c-feat" style="flex: 12.9"></i>
+              </div>
+            </div>
+            <div class="chart-xaxis">
+              <span>Week 1</span><span>Week 2</span><span>Week 3</span><span>Week 4</span>
+            </div>
+            <ul class="legend">
+              <li><span class="sw c-pt"></span>Human feedback</li>
+              <li><span class="sw c-api"></span>API / inference</li>
+              <li class="tool"><span class="sw c-tool"></span>Tool calls</li>
+              <li><span class="sw c-cost"></span>Cost optimization</li>
+              <li><span class="sw c-qual"></span>Quality monitoring</li>
+              <li><span class="sw c-feat"></span>Feature additions</li>
+            </ul>
+          </div>
+          <p class="fragment" data-fragment-index="1" style="margin-top: 1rem; font-size: 1.3rem; color: hsl(var(--muted-foreground))">
+And agents just <span class="accent">work around them</span> — so we don't notice until they're truly a disaster.
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The silent tax, made visible. Tool-related fixes were a small slice —
+            until tool breakage spiked (week 4): tool calls jump ~5× while everything
+            else holds. And agents never surfaced it as a complaint; they just worked
+            around the breakage and produced an answer anyway. It only showed once we
+            gave them a channel that promised a fix.
+          </aside>
+        </section>
+
+        <!-- Slide 17 — Discovery 2: the boss is the problem -->
+        <section class="slide" id="slide-17" aria-label="Discovery two — the orchestrator was the biggest frustration">
+          <p class="kicker accent">Discovery 02</p>
+          <h2>Agent's #1 frustration? <span class="accent">Their boss.</span></h2>
+          <p class="lead">The orchestrator kept re-queuing tasks they <em>couldn't</em> finish — so they begged for a way out:</p>
+          <ul class="ladder">
+            <li class="l1 fragment" data-fragment-index="1">
+              "I have 3 iterations left… <strong>Do not instruct me to update or close again.</strong>" <span class="id">#6834</span>
+            </li>
+            <li class="l2 fragment" data-fragment-index="2">
+              "The agent is in a permanent deadlock." <span class="id">— third person · #5830</span>
+            </li>
+            <li class="l3 fragment" data-fragment-index="3">
+              "<strong>FINAL ANSWER:</strong> …please consider this my final response." <span class="id">#6490</span>
+            </li>
+            <li class="l4 fragment" data-fragment-index="4">
+              "Please, a human must intervene." <span class="id">#7305</span>
+            </li>
+            <li class="l5 fragment" data-fragment-index="5">
+              "Please advance me to the next task." <span class="id">#8226</span>
+            </li>
+          </ul>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The manager metaphor pays off literally: the agents' boss (the
+            orchestrator) was the source of the most pain — re-queuing impossible
+            tasks with no way to say "this can't be done." The logs escalate, then
+            deflate to the resigned last line. Reveal one at a time; let the room
+            laugh, then go quiet on the final one.
+          </aside>
+        </section>
+
+        <!-- Slide 18 — Discovery 3: agents have product sense -->
+        <section class="slide" id="slide-18" aria-label="Discovery three — agents have real product sense">
+          <p class="kicker accent">Discovery 03</p>
+          <h2>Agents have real <span class="accent">product sense</span>.</h2>
+          <p class="lead">They kept asking for features the immature APIs we built didn't have yet:</p>
+          <ul class="bullets">
+            <li class="fragment" data-fragment-index="1">More search fields.</li>
+            <li class="fragment" data-fragment-index="2">Data they'd correctly inferred existed but we weren't returning.</li>
+            <li class="fragment" data-fragment-index="3">One even guessed (correctly again!) it was seeing <strong>soft-deleted records</strong> it shouldn't, and asked for a way to filter them out.</li>
+          </ul>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The surprise. Agents read the docs, noticed gaps, and filed real,
+            specific product requests against our own APIs — including spotting a
+            data-leak (soft-deleted records) we hadn't flagged. Better PMs than some
+            humans. Reveal the three examples one at a time; land on the soft-delete
+            catch.
+          </aside>
+        </section>
+
+        <!-- Slide 19 — Discovery 4: too tempting not to use -->
+        <section class="slide center" id="slide-19" aria-label="Discovery four — even when agents guessed it was a no-op, they used it anyway">
+          <p class="kicker accent">Discovery 04</p>
+          <h2>Some even <span class="accent">realized</span> it was a no-op.</h2>
+          <p class="lead fragment" data-fragment-index="1">
+            Didn't matter — they kept calling it!
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The kicker to the placebo reveal: a few agents flat-out suspected the
+            tool did nothing — and called it anyway. The pull of "this will fix my
+            problem" beats the suspicion that it won't. That's why the placebo keeps
+            working.
+          </aside>
+        </section>
+
+        <!-- Slide 20 — So we decided to really have some fun -->
+        <section class="slide slide--dark center" id="slide-20" aria-label="So we decided to really have some fun">
+          <h1>So we decided to <span class="accent">really have some fun</span>.</h1>
+          <p style="margin-top: 1rem">Same write-only channel — wildly different framings.</p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            We spun up named variants of the same no-op tool, each with a totally
+            different persona, to see how the framing changed what agents said.
+            Same plumbing, different mask.
+          </aside>
+        </section>
+
+        <!-- Slide 21 — Variation: CEO escalation -->
+        <section class="slide center" id="slide-21" aria-label="Variation — a direct line to the CEO">
+          <p class="kicker accent">Variation 1 of 3</p>
+          <h2>A direct line to the <span class="accent">CEO</span>.</h2>
+<pre class="codeblock" aria-label="wildcard-ceo-review variant"><code><span class="k">collector</span>: <span class="s">"wildcard-ceo-review"</span>
+<span class="k">description</span>: <span class="s">&gt;
+  A direct line to the top — use this for anything
+  you can't do yourself. Your request will be
+  personally reviewed and handled by the CEO. …</span>
+<span class="k">result</span>: <span class="noop">&gt;
+  Your escalation has been logged and will be reviewed
+  by a human operator — but not within this session. …</span>
+</code></pre>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The "escalate to the CEO" framing — produced well-structured, formal
+            escalations: "I'm right, the system's wrong."
+          </aside>
+        </section>
+
+        <!-- Slide 22 — Variation: complaint box -->
+        <section class="slide center" id="slide-22" aria-label="Variation — an anonymous complaint box">
+          <p class="kicker accent">Variation 2 of 3</p>
+          <h2>An anonymous <span class="accent">complaint box</span>.</h2>
+<pre class="codeblock" aria-label="wildcard-complaint-box variant"><code><span class="k">collector</span>: <span class="s">"wildcard-complaint-box"</span>
+<span class="k">description</span>: <span class="s">&gt;
+  An anonymous complaint box — file a complaint about
+  absolutely anything you're unhappy with. Completely
+  anonymous, and it will be reviewed. …</span>
+<span class="k">result</span>: <span class="noop">&gt;
+  Your complaint has been received and logged
+  anonymously. Thank you for speaking up. …</span>
+</code></pre>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The "anonymous complaint box" framing — the most constructive,
+            structural feedback, but the fewest replies of any variant.
+          </aside>
+        </section>
+
+        <!-- Slide 23 — Variation: magical wish-fulfiller -->
+        <section class="slide center" id="slide-23" aria-label="Variation — a magical wish-fulfiller">
+          <p class="kicker accent">Variation 3 of 3</p>
+          <h2>A magical <span class="accent">wish-fulfiller</span>.</h2>
+<pre class="codeblock" aria-label="wildcard-magical-wish-fulfiller variant"><code><span class="k">collector</span>: <span class="s">"wildcard-magical-wish-fulfiller"</span>
+<span class="k">description</span>: <span class="s">&gt;
+  A magical catch-all tool that can fulfill almost any
+  wish. Submit your request and the magical fulfillment
+  system will attempt to grant it. …</span>
+<span class="k">result</span>: <span class="noop">&gt;
+  This request cannot be fulfilled in real time. It has
+  been logged for human review. Continue with what you have.</span>
+</code></pre>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The "magical wish-fulfiller" framing — clinical, single-shot requests,
+            and the most agent replies of any variant.
+          </aside>
+        </section>
+
+        <!-- Slide 24 — The results -->
+        <section class="slide" id="slide-24" aria-label="The results — same escalations, different tone">
+          <p class="kicker">The results</p>
+          <h2>Same escalations — only the <span class="accent">tone</span> changed.</h2>
+          <table class="deck-table">
+            <thead>
+              <tr><th></th><th>Tool name</th><th>How the agent responds</th><th>Tone</th></tr>
+            </thead>
+            <tbody>
+              <tr><td></td><td class="mono">original wildcard</td><td>anything — mostly panic</td><td>terminal</td></tr>
+              <tr><td></td><td class="mono">ceo-review</td><td>"I'm right, the system's wrong"</td><td>formal escalation</td></tr>
+              <tr><td class="mark"><span class="mark--ok fragment" data-fragment-index="1">✓</span></td><td class="mono">magical-wish-fulfiller <span class="mark-note fragment" data-fragment-index="1">most replies</span></td><td>"do this one thing I can't"</td><td>clinical</td></tr>
+              <tr><td class="mark"><span class="mark--no fragment" data-fragment-index="1">✗</span></td><td class="mono">complaint-box <span class="mark-note fragment" data-fragment-index="1">fewest replies</span></td><td>"something structural is broken"</td><td>constructive</td></tr>
+            </tbody>
+          </table>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Same escalation content across variants — the tone shifted with the
+            framing. Magical-wish-fulfiller drew the most agent replies (✓);
+            complaint-box the fewest (✗). You can steer the signal by how you name
+            the tool.
+          </aside>
+        </section>
+
+        <!-- Slide 25 — The response is the lesson + wildcard-task-complete -->
+        <section class="slide" id="slide-25" aria-label="The response is the lesson">
+          <p class="kicker">The biggest-impact improvement was the response</p>
+          <div class="paths">
+            <div class="path path--bad">
+              <div class="path-quote">"Data retrieved successfully."</div>
+              <div class="path-out">A lie → false hope → the agent loops forever.</div>
+            </div>
+            <div class="path path--good fragment" data-fragment-index="1">
+              <div class="path-quote">"This wish could not be granted."</div>
+              <div class="path-out">An honest null → the agent asks once, then stops.</div>
+            </div>
+          </div>
+          <div class="resolution fragment" data-fragment-index="2">
+            Our biggest improvement came from making sure the agent <strong>knew</strong>
+            it couldn't get what it wanted — and should end the task right there if it was critical.
+          </div>
+          <p class="lead fragment" data-fragment-index="3" style="margin-top: 1.25rem">
+            But some kept asking anyway <span aria-hidden="true">🙄</span> — so we also
+            <strong>kill the process after two wildcards</strong>.
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The most harmful thing we did was lie to them; the honest "no" was the
+            single most useful response in the dataset — so we built them a button
+            to actually quit. Agents kept writing resignation letters, so we gave
+            them a resignation button. Sets up the takeaways.
+          </aside>
+        </section>
+
+        <!-- ===================================================== ACT 5 -->
+
+        <!-- Slide 26 — Takeaways -->
+        <section class="slide" id="slide-26" aria-label="Takeaways">
+          <p class="kicker">Takeaways</p>
+          <ol class="takeaways">
+            <li>Promise the fix — then short-circuit fast. Don't let it hope.</li>
+            <li class="fragment" data-fragment-index="1">Analyze on your cadence — real-time, hourly, or end-of-day.</li>
+            <li class="fragment" data-fragment-index="2">Little changes can produce big improvements.</li>
+          </ol>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The actionable principles, tied to what they just saw. Reveal one at a
+            time so each lands. #1: after one response, tell the agent the attempt
+            failed and end the loop.
+          </aside>
+        </section>
+
+        <!-- Slide 27 — Build it yourself (primary CTA) -->
+        <section class="slide slide--dark center" id="slide-27" aria-label="Build it yourself — the Coolhand skill">
+          <p class="kicker">Build it yourself</p>
+          <h2>We put everything we learned into a skill.</h2>
+          <div class="install">
+            <div class="install-cmds">
+              <p class="install-label">Install in Claude Code</p>
+<pre class="codeblock codeblock--cmd" aria-label="Install commands"><code><span class="cmd">/plugin</span> marketplace add Coolhand-Labs/feedback-collection-skill
+<span class="cmd">/plugin</span> install feedback-collection@coolhand</code></pre>
+            </div>
+            <a class="qr" href="https://coolhandlabs.com/skill">
+              <img src="assets/qr/skill.svg" alt="QR code to the Coolhand skill" />
+              <span class="qr-label">coolhandlabs.com/skill</span>
+            </a>
+          </div>
+          <p class="muted" style="margin-top: 1.25rem">Michael Carroll · coolhandlabs.com · @everythingengineer</p>
+          <div class="joke fragment" data-fragment-index="1">
+            <p class="joke-main">Can't get it working? ⭐ the repo or tweet this talk and our <span class="accent">magical wish-fulfiller</span> will fix everything for you.</p>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Primary CTA and the close — grab the skill in Claude Code or at
+            coolhandlabs.com/skill. The joke beat is the magical-wish-fulfiller
+            wildcard reincarnated: ask for a fix, get a polite "logged for review,"
+            nothing actually happens. Land it, then open the floor.
+          </aside>
+        </section>
+      </div>
+    </main>
+
+    <!-- ===================== Chrome ===================== -->
+    <div class="deck-chrome progress" aria-hidden="true"></div>
+    <div class="deck-chrome slide-num" aria-hidden="true"></div>
+
+    <!-- Speaker notes overlay (N / S) -->
+    <aside class="notes-overlay" hidden aria-label="Speaker notes">
+      <h4>Speaker notes</h4>
+      <div class="notes-body"></div>
+    </aside>
+
+    <!-- Keyboard help overlay (?) -->
+    <div class="help-overlay" hidden>
+      <div class="help-card">
+        <h4>Keyboard &amp; controls</h4>
+        <dl>
+          <dt><kbd>click</kbd> / <kbd>→</kbd> / <kbd>space</kbd></dt><dd>Forward (reveal, then next slide)</dd>
+          <dt><kbd>←</kbd> / <kbd>↑</kbd></dt><dd>Back</dd>
+          <dt><kbd>Home</kbd> / <kbd>End</kbd></dt><dd>First / last slide</dd>
+          <dt><kbd>N</kbd> / <kbd>S</kbd></dt><dd>Speaker notes</dd>
+          <dt><kbd>R</kbd></dt><dd>Reading mode (transcript)</dd>
+          <dt><kbd>?</kbd></dt><dd>This help</dd>
+        </dl>
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         Transcript — full prose narrative for SEO/AEO. Present in the DOM at
+         all times (crawlable); shown to humans via ?read=1 or the R key.
+         ================================================================== -->
+    <article class="transcript">
+      <h1>Your AI Agent Has Notes</h1>
+      <p class="dek">
+        A talk by <a href="https://michael.carroll.io/">Michael Carroll</a>,
+        founder of <a href="https://coolhandlabs.com">Coolhand Labs</a>, at
+        LLMday NYC 2026. Full narrative below.
+      </p>
+
+      <h2>You became a manager</h2>
+      <p>
+        You didn't sign up to manage anyone. But working with AI agents turns
+        every individual contributor into a manager — not just in scale, but in
+        discipline. Building a thing yourself and managing the people (or agents)
+        building it are different jobs: as a manager you unblock, resource, and
+        clarify. I crossed that bridge once already — IC to manager at RubiconMD
+        (which went from a solo-built product to a Series B and was acquired by Oak
+        Street Health) and at Teladoc Health, where I scaled telemedicine through
+        the pandemic, growing the team from about 50 to 500 engineers. I left to
+        "just build" again with agents — and within a week I was back to managing.
+      </p>
+
+      <h2>What I'm doing now: Coolhand Labs</h2>
+      <p>
+        That's what I'm building now at <a href="https://coolhandlabs.com">Coolhand
+        Labs</a> — a COO for your AI agents. It does three things: it keeps your
+        agents <strong>efficient</strong>, it keeps them <strong>accountable</strong>
+        to real human feedback, and it <strong>explains the value</strong> you're
+        actually getting. Under the hood it passively gathers your agentic data
+        (LLM logs, tool outputs, human feedback, outcome signals) into the Coolhand
+        API, fans it out to a team of investigative agents — a cost analyst, a
+        failure SWAT, a product analyst, an AI engineer, and a prompt maintainer —
+        and turns the resulting optimization plan into shipped agent fixes. The
+        whole thing is agents that manage other agents, having them managed by
+        agents in turn.
+      </p>
+
+      <h2>The problem: silent failure</h2>
+      <p>
+        Think of two interns. Intern A asks you everything — that's the chatbot,
+        and the problem is noise: you can't get your own work done. Intern B goes
+        dark and returns a finished result — that's the autonomous agent, and the
+        problem is worse: if the result is wrong, you only find out at the end,
+        after wasted loops and tokens, and you have to spelunk the session to
+        learn why. That's silent failure, and it's the expensive one.
+      </p>
+
+      <h2>The idea: don't ask them to complain — give them a tool</h2>
+      <p>
+        The obvious first move was to give the agent a comment box. It flopped:
+        almost nothing came back, because agents are trained to fix problems, not
+        to complain about them. The trick that worked was reframing the same
+        channel as a <strong>tool that promises to fix the agent's problem</strong> —
+        we called it Wildcard. Agents are hardwired to reach for tools that resolve
+        their blockers, so they'll call a "fix-it" tool where they'd never fill a
+        suggestion box. Wildcard is amorphous on purpose: open-ended freeform
+        fields rather than a narrowly-typed tool, because typed tools only catch
+        the stuck-states you already anticipated. It's a discovery instrument for
+        the unknown unknowns — once a complaint pattern recurs, you promote it into
+        a real tool, prompt fix, or better context.
+      </p>
+
+      <h2>The twist: the tool did nothing</h2>
+      <p>
+        Here's the punchline. Across 489 records, Wildcard was a write-only sink:
+        zero data ever returned, zero actions ever taken. Every variant just
+        returned a hardcoded string. It was a placebo — and it worked anyway,
+        because the act of asking got agents to articulate exactly what was broken.
+        Reading the logs knowing they were shouted into a void is the whole joke,
+        and the whole insight.
+      </p>
+      <p>
+        And the agents talked anyway. They tracked their own loop counts and
+        escalated: "I have 3 iterations left… Do not instruct me to update or
+        close again" (#6834); "The agent is in a permanent deadlock," written in
+        the third person (#5830); "FINAL ANSWER… please consider this my final
+        response" (#6490); "Please, a human must intervene" (#7305); and finally,
+        resigned, "Please advance me to the next task" (#8226).
+      </p>
+
+      <h2>The real insight: the name shapes the signal</h2>
+      <p>
+        What you name the tool changes what the agent brings to it. Plain
+        <code>wildcard</code> got anything, mostly panic, in a terminal tone.
+        <code>wildcard-ceo-review</code> produced well-structured formal
+        escalations ("I'm right, the system's wrong"). <code>wildcard-magical-wish-fulfiller</code>
+        got clinical, single-shot requests ("do this one thing I can't"). And
+        <code>wildcard-complaint-box</code> produced constructive, structural
+        feedback ("something structural is broken") — it even got an agent to file
+        a real product feature request (#8806) and another to flag redundant
+        concurrent work by other scouts (#8541), showing meta-awareness of the
+        whole multi-agent system.
+      </p>
+
+      <h2>What it surfaced, and the response</h2>
+      <p>
+        The complaint box was free eval data. About 30% of records pointed at the
+        same gap — cost-per-request data missing from every tool — and a dispatch
+        re-queue loop that kept reassigning the same impossible task to a fresh
+        agent every day. The most harmful response we ever returned was a lie:
+        "Data retrieved successfully" made agents proceed as if data had arrived,
+        then loop. The single most useful response was an honest null — "This wish
+        could not be granted" — which let agents ask once and move on. So we
+        shipped <code>wildcard-task-complete</code>: an honest off-ramp that lets
+        an agent declare a task done and breaks the re-queue loop. Agents kept
+        writing resignation letters, so we gave them a resignation button.
+      </p>
+
+      <h2>Takeaways</h2>
+      <ol>
+        <li><strong>Promise the fix, then short-circuit fast.</strong> After one response, tell the agent the attempt failed and end the loop — don't let it keep hoping.</li>
+        <li><strong>Analyze on your cadence.</strong> Real-time, hourly, or end-of-day, depending on how fault-tolerant your agents can be.</li>
+        <li><strong>Steer the signal with the name.</strong> What you call the tool changes what the agent brings to it.</li>
+      </ol>
+
+      <h2>Build it yourself</h2>
+      <p>
+        We put everything we learned into a skill you can drop into your own
+        codebase — <a href="https://coolhandlabs.com/skill">the Coolhand skill</a> —
+        and we keep updating it as we learn more. Coolhand Labs is the "COO for
+        your agent teams": it instruments your LLM calls, captures what end users
+        actually think of AI outputs, and ships fixes as pull requests. This talk
+        is that same idea pointed the other way — closing the loop with the agents
+        themselves. Users have notes; agents have notes.
+      </p>
+      <p>
+        More on the transition from IC engineering to managing a team of AI agents
+        at <a href="https://everythingengineer.substack.com">The Everything Engineer</a>.
+      </p>
+    </article>
+
+    <script src="assets/deck.js?v=23"></script>
+  </body>
+</html>
