@@ -1,0 +1,955 @@
+/* =============================================================================
+   theme.css — talk-specific palette + motif for "Your AI Agent Has Notes"
+   Loaded AFTER deck.css. Direction: warm sticky-note amber accent on a
+   fully dark charcoal/zinc base — every slide is dark.
+   All colors are tokens, so the palette is adjustable in one place.
+   ========================================================================== */
+:root {
+  /* warm sticky-note accent (amber) layered over a dark zinc base */
+  --accent: 38 92% 50%;
+  --accent-foreground: 26 83% 14%;
+
+  /* Coolhand Labs brand blue (sampled from the logo / coolhandlabs.com) */
+  --coolhand-blue: #0981ec;
+
+  /* Dark palette promoted to the base → all slides render dark. */
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 240 6% 10%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 6% 10%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 240 5.9% 10%;
+  --secondary: 240 4% 16%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 4% 16%;
+  --muted-foreground: 240 5% 65%;
+  --border: 240 4% 24%;
+  --input: 240 4% 24%;
+  --ring: 240 5% 65%;
+}
+
+/* ---- Dark slides ---------------------------------------------------------
+   The base is already dark, so this is now an explicit no-op alias kept on the
+   title/close slides for clarity (and so the framework still supports a
+   light-base deck that opts individual slides into dark). ------------------- */
+.slide--dark {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+/* Make the asset placeholders read clearly on the dark base. */
+.visual {
+  border-color: hsl(var(--muted-foreground) / 0.35);
+}
+
+/* Amber links in the transcript / reading mode for contrast on dark. */
+.transcript a {
+  color: hsl(var(--accent));
+}
+
+/* =============================================================================
+   Slide 2 — About: headshot + newsletter QR beside the credibility timeline
+   ========================================================================== */
+.about {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: 2.75rem;
+  align-items: center;
+  width: 100%;
+}
+
+.headshot {
+  width: 170px;
+  height: 170px;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 3px solid hsl(var(--accent));
+  box-shadow: 0 10px 28px hsl(240 10% 3.9% / 0.5);
+}
+
+.about-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Larger, clearly-a-newsletter QR (replaces the tiny corner version) */
+.qr--newsletter .newsletter-eyebrow {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: hsl(var(--accent));
+}
+
+.qr--newsletter img {
+  width: 184px;
+  height: 184px;
+}
+
+.qr--newsletter .qr-label {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+}
+
+/* =============================================================================
+   Slide 3 — Coolhand Labs: a COO for AI agents (logo + bullets + QR)
+   ========================================================================== */
+.coolhand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.coolhand-mark {
+  height: 120px;
+  width: 120px;
+  display: block;
+}
+
+.coolhand-wordmark {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--coolhand-blue);
+}
+
+/* COO bullets reuse the numbered .takeaways list, tightened for this slide */
+.coo-list {
+  margin-top: 1rem;
+  gap: 0.85rem;
+}
+
+.coo-list li {
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+
+.coo-list li strong {
+  font-weight: 750;
+}
+
+.coo-list li::before {
+  width: 1.9rem;
+  height: 1.9rem;
+  font-size: 0.95rem;
+}
+
+/* =============================================================================
+   Slide 5 — He-Man "I have the power" GIF (full-bleed; placeholder if missing)
+   ========================================================================== */
+.gif-stage {
+  margin: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gif-stage img {
+  height: 440px;
+  width: auto;
+  max-width: 100%;
+  border-radius: var(--radius);
+  box-shadow: 0 16px 40px hsl(240 10% 3.9% / 0.5);
+  display: block;
+}
+
+.gif-stage figcaption {
+  display: none;
+}
+
+.gif-stage.is-missing img {
+  display: none;
+}
+
+.gif-stage.is-missing figcaption {
+  display: block;
+  max-width: 680px;
+  padding: 3rem 2rem;
+  border: 2px dashed hsl(var(--muted-foreground) / 0.4);
+  border-radius: var(--radius);
+  color: hsl(var(--muted-foreground));
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.gif-stage code {
+  font-family: var(--font-mono);
+  background: hsl(var(--muted));
+  padding: 0.1em 0.4em;
+  border-radius: 0.3em;
+}
+
+/* =============================================================================
+   Slide 4 — Coolhand Labs data-flow graphic
+   Compact header + a figure that flex-fills the rest of the slide, so the
+   (wide-aspect) graphic renders as large as the slide height allows.
+   ========================================================================== */
+.slide--flow {
+  padding-top: 40px;
+  padding-bottom: 36px;
+  justify-content: flex-start;
+}
+
+.slide--flow .kicker {
+  margin-bottom: 0.2rem;
+}
+
+.slide--flow h2 {
+  font-size: 2.5rem;
+}
+
+.slide--flow .lead {
+  font-size: 1.25rem !important;
+  margin-top: 0.35rem !important;
+}
+
+.flow {
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.6rem;
+}
+
+.flow svg {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  display: block;
+  color: hsl(var(--foreground)); /* drives the currentColor labels/paths */
+}
+
+/* ---- Accent helpers ----------------------------------------------------- */
+.accent {
+  color: hsl(var(--accent));
+}
+
+.underline-accent {
+  text-decoration: underline;
+  text-decoration-color: hsl(var(--accent));
+  text-decoration-thickness: 0.12em;
+  text-underline-offset: 0.15em;
+}
+
+.badge.badge--accent {
+  background: hsl(var(--accent) / 0.15);
+  border-color: hsl(var(--accent) / 0.4);
+  color: hsl(var(--accent));
+}
+
+/* =============================================================================
+   Sticky-note / complaint-box motif (carried across slides for cohesion)
+   ========================================================================== */
+.note {
+  position: relative;
+  display: inline-block;
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  padding: 1.5rem 1.75rem;
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.3;
+  border-radius: 2px;
+  box-shadow: 0 12px 24px hsl(240 10% 3.9% / 0.18),
+    0 2px 4px hsl(240 10% 3.9% / 0.12);
+  max-width: 30ch;
+}
+
+.note--tilt {
+  transform: rotate(-2.2deg);
+}
+
+.note--tilt-r {
+  transform: rotate(1.8deg);
+}
+
+/* a tiny "tape" strip on top of a note */
+.note::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
+  width: 84px;
+  height: 22px;
+  background: hsl(0 0% 100% / 0.45);
+  border: 1px solid hsl(0 0% 100% / 0.35);
+}
+
+.note small {
+  display: block;
+  font-weight: 500;
+  font-size: 0.8em;
+  opacity: 0.75;
+  margin-top: 0.4rem;
+}
+
+/* The "complaint box" — an open-topped box; on the placebo slide the bottom
+   is removed so input visibly falls into the void. */
+.box {
+  position: relative;
+  width: 220px;
+  height: 150px;
+  border: 3px solid hsl(var(--foreground));
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  color: hsl(var(--muted-foreground));
+}
+
+.box.box--void {
+  border-bottom-color: transparent;
+}
+
+.box .slot {
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 10px;
+  background: hsl(var(--background));
+  border: 3px solid hsl(var(--foreground));
+  border-radius: 6px;
+}
+
+/* Escalation ladder log lines (comedic-peak slide) */
+.ladder {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.ladder li {
+  font-family: var(--font-mono);
+  line-height: 1.25;
+  border-left: 3px solid hsl(var(--accent));
+  padding-left: 0.9rem;
+}
+
+.ladder li .id {
+  color: hsl(var(--muted-foreground));
+  font-size: 0.7em;
+}
+
+.ladder li.l1 { font-size: 1.2rem; }
+.ladder li.l2 { font-size: 1.45rem; }
+.ladder li.l3 { font-size: 1.75rem; font-weight: 600; }
+.ladder li.l4 { font-size: 1.3rem; }
+.ladder li.l5 {
+  font-size: 1.15rem;
+  color: hsl(var(--foreground));
+  border-left-color: hsl(var(--accent));
+}
+
+/* lie -> honest -> tool, two diverging paths */
+.paths {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.path {
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  padding: 1.25rem 1.4rem;
+  background: hsl(var(--card));
+}
+
+.path .path-quote {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.path .path-out {
+  margin-top: 0.6rem;
+  color: hsl(var(--muted-foreground));
+  font-size: 1.05rem;
+}
+
+.path--bad {
+  border-color: hsl(0 72% 51% / 0.4);
+}
+
+.path--good {
+  border-color: hsl(142 71% 45% / 0.45);
+}
+
+.resolution {
+  margin-top: 1.5rem;
+  padding: 1.1rem 1.4rem;
+  border-radius: var(--radius);
+  background: hsl(var(--accent) / 0.14);
+  border: 1px solid hsl(var(--accent) / 0.4);
+  font-size: 1.3rem;
+}
+
+/* Two-interns split */
+.intern {
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  padding: 1.5rem 1.75rem;
+  background: hsl(var(--card));
+}
+
+.intern .intern-emoji {
+  font-size: 3.75rem;
+  line-height: 1;
+  text-align: center;
+  margin-bottom: 0.85rem;
+}
+
+.intern .intern-tag {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: hsl(var(--muted-foreground));
+}
+
+.intern .intern-name {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0.25rem 0 0.5rem;
+}
+
+/* takeaway numbered list */
+.takeaways {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  counter-reset: tk;
+}
+
+.takeaways li {
+  counter-increment: tk;
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.takeaways li::before {
+  content: counter(tk);
+  flex: 0 0 auto;
+  width: 2.2rem;
+  height: 2.2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+/* two-rung credibility timeline */
+.timeline {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.timeline .rung {
+  border-top: 3px solid hsl(var(--accent));
+  padding-top: 1rem;
+}
+
+.timeline .rung .rung-when {
+  font-size: 0.85rem;
+  color: hsl(var(--muted-foreground));
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.timeline .rung .rung-what {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 0.3rem;
+}
+
+/* =============================================================================
+   Slide 7 — Coolhand in practice: cost-spike chart + optimizations table
+   ========================================================================== */
+.practice {
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: 1.75rem;
+  align-items: stretch;
+  margin-top: 1.25rem;
+}
+
+.panel {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.panel > img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card));
+}
+
+.panel figcaption {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+}
+
+.panel-table {
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  background: hsl(var(--card));
+  overflow: hidden;
+}
+
+/* admin-style optimizations table (shadcn-flavored, compact) */
+.optim {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.optim th {
+  text-align: left;
+  font-size: 0.66rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: hsl(var(--muted-foreground));
+  padding: 0.55rem 0.7rem;
+  border-bottom: 1px solid hsl(var(--border));
+  background: hsl(var(--muted) / 0.4);
+}
+
+.optim td {
+  padding: 0.5rem 0.7rem;
+  border-bottom: 1px solid hsl(var(--border));
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* Title column may hold long titles — allow it to wrap, cap its width. */
+.optim th:first-child,
+.optim td:first-child {
+  white-space: normal;
+  max-width: 300px;
+  line-height: 1.25;
+}
+
+.optim tr:last-child td {
+  border-bottom: 0;
+}
+
+.optim a.title {
+  color: hsl(var(--foreground));
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.optim a.title:hover {
+  text-decoration: underline;
+}
+
+.optim .untitled {
+  color: hsl(var(--muted-foreground));
+}
+
+.optim .type,
+.optim .when {
+  color: hsl(var(--muted-foreground));
+  font-size: 0.78rem;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  padding: 0.1rem 0.55rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.pill--muted {
+  background: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+  border-color: hsl(var(--border));
+}
+
+.pill--ok {
+  background: hsl(142 71% 45% / 0.16);
+  color: hsl(142 64% 62%);
+  border-color: hsl(142 71% 45% / 0.4);
+}
+
+.pill--fail {
+  background: hsl(0 72% 51% / 0.16);
+  color: hsl(0 80% 70%);
+  border-color: hsl(0 72% 51% / 0.4);
+}
+
+/* =============================================================================
+   Slide 7 — CSS cost-spike chart (recreated, no image) + populate animations
+   ========================================================================== */
+.cost-chart {
+  --c-blue: #2f6fd6;
+  --c-green: #18a558;
+  --c-orange: #e0911f;
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  flex: 1 1 auto;        /* fill the panel so the chart matches the table height */
+  min-height: 200px;
+  padding: 14px 14px 0;
+  border-radius: var(--radius);
+  border: 1px solid hsl(var(--border));
+  background-color: hsl(var(--card));
+  /* faint horizontal gridlines */
+  background-image: repeating-linear-gradient(
+    to top,
+    transparent 0,
+    transparent 49px,
+    hsl(var(--border) / 0.6) 49px,
+    hsl(var(--border) / 0.6) 50px
+  );
+  overflow: hidden;
+}
+
+.cost-chart .bar {
+  flex: 1;                 /* equal widths */
+  height: var(--h);        /* proportional height → scales with the chart */
+  display: flex;
+  flex-direction: column-reverse; /* blue at the bottom, orange on top */
+  border-radius: 2px 2px 0 0;
+  overflow: hidden;
+  transform-origin: bottom;
+  animation: growBar 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i) * 0.06s);
+}
+
+.cost-chart .bar i {
+  display: block;
+  width: 100%;
+}
+
+.cost-chart .bar .b { background: var(--c-blue); }
+.cost-chart .bar .g { background: var(--c-green); }
+.cost-chart .bar .o { background: var(--c-orange); }
+
+@keyframes growBar {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+
+/* Table rows populate one-by-one — only after the chart has finished (~1.7s). */
+.optim tbody tr {
+  animation: rowIn 0.45s ease-out both;
+}
+.optim tbody tr:nth-child(1) { animation-delay: 1.80s; }
+.optim tbody tr:nth-child(2) { animation-delay: 1.98s; }
+.optim tbody tr:nth-child(3) { animation-delay: 2.16s; }
+.optim tbody tr:nth-child(4) { animation-delay: 2.34s; }
+.optim tbody tr:nth-child(5) { animation-delay: 2.52s; }
+.optim tbody tr:nth-child(6) { animation-delay: 2.70s; }
+
+@keyframes rowIn {
+  from { opacity: 0; transform: translateY(7px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* A bar that holds back until clicked (used for Discovery 01's week 4):
+   skip the load animation, sit collapsed, then grow when revealed. */
+.cost-chart .bar--beat {
+  animation: none !important;
+  transform: scaleY(0);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s linear;
+}
+
+.cost-chart .bar--beat.is-visible {
+  transform: scaleY(1);
+}
+
+/* Print/PDF and reduced-motion: show the final populated state immediately. */
+html.is-print .cost-chart .bar,
+html.is-print .optim tbody tr {
+  animation: none !important;
+}
+
+html.is-print .cost-chart .bar--beat {
+  transform: scaleY(1) !important;
+}
+
+@media print {
+  .cost-chart .bar,
+  .optim tbody tr { animation: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cost-chart .bar,
+  .optim tbody tr { animation: none !important; }
+}
+
+/* =============================================================================
+   Slide 13 — "Looking at the data": stacked issue-category bars by month.
+   Reuses the .cost-chart container + growBar animation; 6 category colors.
+   Heights/segments are relative shares (%), never raw client counts.
+   ========================================================================== */
+.data-title {
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0.15rem 0 0;
+}
+
+.data-sub {
+  font-size: 0.95rem;
+  color: hsl(var(--muted-foreground));
+  margin: 0.3rem 0 0;
+}
+
+.issues-wrap {
+  width: 100%;
+  max-width: 800px;
+  margin: 1rem auto 0;
+}
+
+.issues-chart {
+  height: 280px;
+  flex: 0 0 auto;          /* fixed height here (not panel-filling) */
+  min-height: 0;
+  justify-content: center;
+  gap: 64px;
+  padding: 14px 24px 0;
+}
+
+/* bars + x-axis labels share the same flex sizing so any bar count aligns */
+.issues-chart .bar {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 130px;
+  border-radius: 3px 3px 0 0;
+}
+
+/* Muted blue-gray ramp for every category EXCEPT tool calls, which stays amber
+   so it's the one color that pops off the chart. */
+.c-pt   { background: #2c4a6e; }  /* human feedback */
+.c-api  { background: #41618a; }  /* api / inference */
+.c-tool { background: #f59e0b; }  /* tool calls — the standout */
+.c-cost { background: #5c7ea6; }  /* cost optimization */
+.c-qual { background: #869db8; }  /* quality monitoring */
+.c-feat { background: #aebfd0; }  /* feature additions */
+
+.chart-xaxis {
+  display: flex;
+  justify-content: center;
+  gap: 64px;
+  margin-top: 0.5rem;
+}
+
+.chart-xaxis span {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 130px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.legend {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem 1.4rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  font-size: 0.9rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.legend li.tool {
+  color: hsl(var(--accent));
+  font-weight: 600;
+}
+
+.legend .sw {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+/* =============================================================================
+   Bullet list — concise, accent-dotted, incremental (used on the Wildcard slide)
+   ========================================================================== */
+.bullets {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.05rem;
+  max-width: 46ch;
+}
+
+.bullets li {
+  position: relative;
+  padding-left: 1.6rem;
+  font-size: 1.55rem;
+  line-height: 1.3;
+  color: hsl(var(--foreground));
+}
+
+.bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: hsl(var(--accent));
+}
+
+/* =============================================================================
+   Pseudocode block — used on the twist slide (original wildcard tool)
+   ========================================================================== */
+.codeblock {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  line-height: 1.55;
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  padding: 1.25rem 1.6rem;
+  margin: 1.75rem auto 0;
+  width: fit-content;
+  max-width: 100%;
+  white-space: pre;
+  overflow: auto;
+  box-shadow: 0 10px 30px hsl(240 10% 3.9% / 0.4);
+}
+
+.codeblock .k    { color: #7aa2f7; }                       /* keywords */
+.codeblock .m    { color: #7dcfff; }                       /* method name */
+.codeblock .s    { color: #9ece6a; }                       /* strings */
+.codeblock .c    { color: hsl(var(--muted-foreground)); }  /* annotations */
+.codeblock .noop { color: hsl(var(--accent)); font-weight: 600; } /* the no-op reply */
+
+/* divider between the YAML schema and the Ruby handler */
+.codeblock .rule {
+  display: block;
+  border-top: 1px solid hsl(var(--border));
+  margin: 0.7rem 0;
+}
+
+/* =============================================================================
+   "The results" table — ✓ / ✗ markers for most / fewest agent replies
+   ========================================================================== */
+.deck-table td.mark {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  width: 2rem;
+  padding-right: 0;
+}
+
+.deck-table .mark--ok { color: hsl(142 64% 55%); }
+.deck-table .mark--no { color: hsl(0 80% 66%); }
+
+.deck-table .mark-note {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  color: hsl(var(--muted-foreground));
+  margin-left: 0.5rem;
+  white-space: nowrap;
+}
+
+/* =============================================================================
+   Closing slide — install commands + QR, and the magical-wish-fulfiller joke
+   ========================================================================== */
+.install {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.install-cmds {
+  text-align: left;
+}
+
+.install-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: hsl(var(--muted-foreground));
+  margin: 0 0 0.5rem;
+}
+
+.codeblock--cmd {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.codeblock .cmd {
+  color: hsl(var(--accent));
+  font-weight: 600;
+}
+
+.joke {
+  max-width: 56ch;
+  margin: 1.25rem auto 0;
+}
+
+.joke-main {
+  font-size: 1.3rem;
+  line-height: 1.4;
+  color: hsl(var(--foreground));
+  margin: 0;
+}
+
+.joke-sub {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: hsl(var(--muted-foreground));
+  margin: 0.55rem 0 0;
+}

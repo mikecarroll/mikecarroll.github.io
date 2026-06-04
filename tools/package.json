@@ -1,0 +1,16 @@
+{
+  "name": "carroll-slide-tools",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Build-only tooling for the talks/ HTML slide decks: QR generation, PDF export, and new-deck scaffolding. Not shipped with any deck — the decks are dependency-free at runtime.",
+  "scripts": {
+    "qr": "node build-qr.mjs",
+    "pdf": "node export-pdf.mjs",
+    "new-deck": "node new-deck.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.0",
+    "qrcode": "^1.5.4"
+  }
+}

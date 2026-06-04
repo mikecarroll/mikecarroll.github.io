@@ -1,0 +1,12 @@
+# Build-only tooling deps (decks themselves ship no runtime dependencies)
+node_modules/
+tools/node_modules/
+
+# Generated PDF exports
+*.pdf
+
+# OS / editor cruft
+.DS_Store
+
+# scratch/screenshots from tooling runs
+tools/_*

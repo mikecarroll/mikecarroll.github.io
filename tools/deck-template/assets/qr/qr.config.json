@@ -1,0 +1,9 @@
+{
+  "comment": "Drives build-qr.mjs. Each entry => <name>.svg in this folder. Run `npm run qr -- ../talks/{{YEAR}}/{{SLUG}}` after editing.",
+  "codes": [
+    {
+      "name": "talk",
+      "url": "https://michael.carroll.io/talks/{{YEAR}}/{{SLUG}}/"
+    }
+  ]
+}

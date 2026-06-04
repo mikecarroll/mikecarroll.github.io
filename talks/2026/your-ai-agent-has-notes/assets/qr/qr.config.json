@@ -1,0 +1,21 @@
+{
+  "comment": "Drives build-qr.mjs. Each entry => <name>.svg in this folder. Update the skill URL when the final destination is known, then rerun `npm run qr`.",
+  "codes": [
+    {
+      "name": "talk",
+      "url": "https://michael.carroll.io/talks/2026/your-ai-agent-has-notes/"
+    },
+    {
+      "name": "substack",
+      "url": "https://everythingengineer.substack.com"
+    },
+    {
+      "name": "coolhand",
+      "url": "https://coolhandlabs.com/?utm_source=llmday-nyc-2026&utm_medium=talk-qr&utm_campaign=your-ai-agent-has-notes"
+    },
+    {
+      "name": "skill",
+      "url": "https://github.com/Coolhand-Labs/feedback-collection-skill"
+    }
+  ]
+}

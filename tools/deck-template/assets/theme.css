@@ -1,0 +1,35 @@
+/* =============================================================================
+   theme.css — per-talk palette + motif. Loaded AFTER deck.css.
+   Override shadcn tokens here to give each talk its own look. This is a neutral
+   starting point: zinc base + a single accent. Adjust --accent and add motif
+   classes (notes, boxes, ladders, etc.) as the talk needs them.
+   ========================================================================== */
+:root {
+  --accent: 38 92% 50%; /* swap this for the talk's accent color */
+  --accent-foreground: 26 83% 14%;
+}
+
+.slide--dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 240 6% 10%;
+  --card-foreground: 0 0% 98%;
+  --muted: 240 4% 16%;
+  --muted-foreground: 240 5% 65%;
+  --secondary: 240 4% 16%;
+  --secondary-foreground: 0 0% 98%;
+  --border: 240 4% 24%;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+.accent {
+  color: hsl(var(--accent));
+}
+
+.underline-accent {
+  text-decoration: underline;
+  text-decoration-color: hsl(var(--accent));
+  text-decoration-thickness: 0.12em;
+  text-underline-offset: 0.15em;
+}
