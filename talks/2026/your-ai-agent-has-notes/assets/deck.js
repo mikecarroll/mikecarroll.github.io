@@ -45,6 +45,25 @@
     return;
   }
 
+  // --- Mobile portrait overlay (interactive mode only) ----------------------
+  var rotatePrompt = document.createElement("div");
+  rotatePrompt.className = "rotate-prompt";
+  var canFullscreen = !!document.documentElement.requestFullscreen;
+  rotatePrompt.innerHTML =
+    '<span class="rotate-icon">&#8635;</span>' +
+    "<p>Rotate your device for the best experience</p>" +
+    (canFullscreen ? '<button class="rotate-btn">Go fullscreen</button>' : "");
+  document.body.appendChild(rotatePrompt);
+  if (canFullscreen) {
+    rotatePrompt.querySelector(".rotate-btn").addEventListener("click", function () {
+      document.documentElement.requestFullscreen().then(function () {
+        if (screen.orientation && screen.orientation.lock) {
+          screen.orientation.lock("landscape-primary").catch(function () {});
+        }
+      }).catch(function () {});
+    });
+  }
+
   var current = 0; // active slide index
   var step = 0; // how many fragment *levels* revealed on the active slide
 

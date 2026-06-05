@@ -628,3 +628,53 @@ html.is-print .transcript {
     transition: none;
   }
 }
+
+/* =============================================================================
+   Mobile portrait overlay — prompts landscape rotation on touch devices
+   ========================================================================== */
+.rotate-prompt {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+.rotate-prompt .rotate-icon {
+  font-size: 3rem;
+  animation: rotate-hint 1.5s ease-in-out infinite alternate;
+  display: block;
+}
+
+.rotate-prompt p {
+  font-size: 1.1rem;
+  max-width: 20ch;
+  margin: 0;
+}
+
+.rotate-prompt .rotate-btn {
+  margin-top: 0.5rem;
+  padding: 0.6rem 1.4rem;
+  border-radius: 0.5rem;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--muted));
+  color: hsl(var(--foreground));
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+@keyframes rotate-hint {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-90deg); }
+}
+
+@media (orientation: portrait) and (hover: none) {
+  .rotate-prompt { display: flex; }
+}
