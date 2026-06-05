@@ -95,15 +95,18 @@
   }
 
   // --- Scale the fixed 1280x720 stage to fit the viewport -------------------
+  // Uses translate+scale with transform-origin:0 0 so centering is pure JS
+  // math — no reliance on CSS grid, which misplaces oversized items on iOS.
   function fit() {
-    var pad = 0;
     var sw = stage.offsetWidth || 1280;
     var sh = stage.offsetHeight || 720;
-    var scale = Math.min(
-      (window.innerWidth - pad) / sw,
-      (window.innerHeight - pad) / sh
-    );
-    stage.style.transform = "scale(" + scale + ")";
+    var vw = window.innerWidth;
+    var vh = window.innerHeight;
+    var scale = Math.min(vw / sw, vh / sh);
+    var tx = Math.round((vw - sw * scale) / 2);
+    var ty = Math.round((vh - sh * scale) / 2);
+    stage.style.transform =
+      "translate(" + tx + "px, " + ty + "px) scale(" + scale + ")";
   }
 
   // --- Chrome: progress dots + slide number --------------------------------
