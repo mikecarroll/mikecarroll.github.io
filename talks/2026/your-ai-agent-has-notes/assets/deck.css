@@ -67,18 +67,20 @@ a {
 .deck {
   position: fixed;
   inset: 0;
-  display: grid;
-  place-items: center;
   overflow: hidden;
 }
 
-/* The stage holds the fixed-aspect slide canvas and is scaled by deck.js
-   so a 1280x720 design always fits the viewport without media-query churn. */
+/* The stage holds the fixed-aspect slide canvas and is positioned + scaled by
+   deck.js so a 1280x720 design always fills the viewport without media-query
+   churn. Centering is done via translate+scale in JS so it works correctly on
+   iOS Safari, where CSS grid misplaces oversized items after rotation. */
 .stage {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: var(--slide-w);
   height: var(--slide-h);
-  transform-origin: center center;
+  transform-origin: 0 0;
 }
 
 .slide {
