@@ -101,10 +101,10 @@
           if (ul) ul.style.display = 'none';
           if (label) label.style.display = 'none';
         }
-        fetch('https://everythingengineer.substack.com/feed')
-          .then(function(r) { return r.text(); })
-          .then(function(str) {
-            var doc = new DOMParser().parseFromString(str, 'text/xml');
+        fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://everythingengineer.substack.com/feed'))
+          .then(function(r) { return r.json(); })
+          .then(function(data) {
+            var doc = new DOMParser().parseFromString(data.contents, 'text/xml');
             var items = Array.from(doc.querySelectorAll('item')).slice(0, 3);
             var ul = document.getElementById('substack-feed');
             if (!ul || !items.length) { hideFeed(); return; }
