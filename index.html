@@ -101,20 +101,17 @@
           if (ul) ul.style.display = 'none';
           if (label) label.style.display = 'none';
         }
-        fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://everythingengineer.substack.com/feed'))
+        fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent('https://everythingengineer.substack.com/feed'))
           .then(function(r) { return r.json(); })
           .then(function(data) {
-            var doc = new DOMParser().parseFromString(data.contents, 'text/xml');
-            var items = Array.from(doc.querySelectorAll('item')).slice(0, 3);
+            var items = (data.items || []).slice(0, 3);
             var ul = document.getElementById('substack-feed');
             if (!ul || !items.length) { hideFeed(); return; }
             items.forEach(function(item) {
-              var title = item.querySelector('title').textContent;
-              var link = item.getElementsByTagName('link')[0].textContent.trim();
               var li = document.createElement('li');
               var a = document.createElement('a');
-              a.href = link;
-              a.textContent = title;
+              a.href = item.link;
+              a.textContent = item.title;
               li.appendChild(a);
               ul.appendChild(li);
             });
