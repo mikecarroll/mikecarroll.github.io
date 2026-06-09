@@ -88,12 +88,12 @@ h3, h4, h5, h6 {
 }
 
 a {
-  color:#39c;
+  color:#1a6ad4;
   text-decoration:none;
 }
 
 a:hover {
-  color:#069;
+  color:#0d47a1;
 }
 
 a small {
@@ -155,6 +155,14 @@ th {
 
 img {
   max-width:100%;
+}
+
+header img {
+  width:160px;
+  height:160px;
+  border-radius:50%;
+  object-fit:cover;
+  display:block;
 }
 
 header {
@@ -240,6 +248,26 @@ hr {
   margin:0 0 20px;
 }
 
+.feed-label {
+  font-size:11px;
+  color:#999;
+  text-transform:uppercase;
+  letter-spacing:0.05em;
+  margin:16px 0 6px;
+}
+
+#substack-feed {
+  list-style:none;
+  padding:0;
+  margin:0;
+  font-size:12px;
+}
+
+#substack-feed li {
+  margin-bottom:6px;
+  line-height:1.4;
+}
+
 footer {
   width:270px;
   float:left;
@@ -248,7 +276,41 @@ footer {
   -webkit-font-smoothing:subpixel-antialiased;
 }
 
+.cjk-quote {
+  position:fixed;
+  bottom:30px;
+  right:40px;
+  font-size:11px;
+  color:#bbb;
+  text-align:right;
+  line-height:1.6;
+}
+
+@media screen and (min-width: 961px) {
+  body {
+    min-height:100vh;
+    box-sizing:border-box;
+    margin:0;
+    display:flex;
+    align-items:center;
+  }
+  header {
+    position:sticky;
+    top:50px;
+  }
+  .wrapper::after {
+    content:'';
+    display:block;
+    clear:both;
+  }
+}
+
 @media print, screen and (max-width: 960px) {
+  .cjk-quote {
+    position:static;
+    text-align:right;
+    margin-top:20px;
+  }
 
   div.wrapper {
     width:auto;
