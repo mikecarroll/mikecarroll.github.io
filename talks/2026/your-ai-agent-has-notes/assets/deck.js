@@ -200,9 +200,15 @@
   // --- Input ----------------------------------------------------------------
   // Advance on click, but never when the user is interacting with a link,
   // button, or anything explicitly marked [data-no-advance].
+  // On touch devices, tapping the left half goes back; right half goes forward.
   deck.addEventListener("click", function (e) {
     if (e.target.closest("a, button, [data-no-advance]")) return;
-    forward();
+    var touch = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+    if (touch && e.clientX < window.innerWidth / 2) {
+      back();
+    } else {
+      forward();
+    }
   });
 
   // progress-dot jump

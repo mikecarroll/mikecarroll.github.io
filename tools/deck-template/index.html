@@ -70,6 +70,13 @@
           <p class="kicker">Kicker · {{YEAR}}</p>
           <h1>{{TITLE}}</h1>
           <p class="lead">Michael Carroll</p>
+          <!-- QR codes always get target="_blank" so mobile taps open a new tab
+               instead of navigating away from the deck. -->
+          <a class="qr" href="https://michael.carroll.io/talks/{{YEAR}}/{{SLUG}}/"
+             target="_blank" rel="noopener noreferrer">
+            <img src="assets/qr/talk.svg" alt="QR code — follow along" />
+            <span class="qr-label">↑ follow along</span>
+          </a>
           <aside class="notes"><h4>Beat</h4>What you say here (spoken, not shown).</aside>
         </section>
 
@@ -109,6 +116,7 @@
         <dl>
           <dt><kbd>click</kbd> / <kbd>→</kbd> / <kbd>space</kbd></dt><dd>Forward</dd>
           <dt><kbd>←</kbd> / <kbd>↑</kbd></dt><dd>Back</dd>
+          <dt>tap right half / tap left half</dt><dd>Forward / Back (touch)</dd>
           <dt><kbd>N</kbd> / <kbd>S</kbd></dt><dd>Speaker notes</dd>
           <dt><kbd>R</kbd></dt><dd>Reading mode</dd>
           <dt><kbd>?</kbd></dt><dd>This help</dd>

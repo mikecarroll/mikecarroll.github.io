@@ -68,11 +68,12 @@ The public URL of a deck is
 
 **Navigation (built into `deck.js`):**
 
-| Action | Keys |
+| Action | Keys / Gesture |
 | --- | --- |
 | Forward (reveal, then next slide) | **click**, `→`, `Space`, `PageDown` |
 | Back | `←`, `↑`, `PageUp` |
 | First / last | `Home` / `End` |
+| Forward / Back (touch only) | tap right half / tap left half of screen |
 | Speaker notes | `N` or `S` |
 | Reading mode (transcript) | `R` |
 | Keyboard help | `?` |
@@ -130,6 +131,17 @@ npm run new-deck -- my-slug 2026 --title "My Talk Title"
 canonical `deck.css`/`deck.js` from `talks/2026/your-ai-agent-has-notes/` so all
 decks share one engine. If you change the framework, the canonical deck is the
 source of truth — re-copy into other decks (or re-scaffold).
+
+**Keeping the template in sync:** When a major feature or style change is made
+to the canonical `deck.js` or `deck.css`, also update
+`tools/deck-template/index.html` if the change affects markup. Specifically:
+
+- New keyboard shortcuts or touch gestures → add a row to the help card `<dl>`
+- New patterns for HTML elements (e.g., QR codes gaining `target="_blank"`) →
+  update the representative example in the template
+- Pure JS/CSS changes with no markup impact (e.g., scaling fixes, CSS-only
+  overlays) → no template update needed; `new-deck.mjs` picks them up
+  automatically via the canonical-copy step
 
 ---
 
