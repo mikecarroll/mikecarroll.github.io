@@ -21,6 +21,9 @@ When adding talks or tooling, only add **new** files/folders. Do not edit, move,
 or restyle the homepage or its assets. (A single "Talks" link could be added to
 the homepage for SEO if the user requests it — otherwise leave it alone.)
 
+`sitemap.xml` at the repo root is a **generated** file (see §4) — never hand-edit
+it; regenerate it with `npm run sitemap` instead.
+
 ---
 
 ## 2. Where slide decks live
@@ -45,6 +48,11 @@ external runtime dependencies**. `deck.css` + `deck.js` are the shared framework
 
 The public URL of a deck is
 `https://michael.carroll.io/talks/<year>/<slug>/`.
+
+`talks/index.html` is a small, hand-maintained listing page (links to every
+deck) — its URL, `https://michael.carroll.io/talks/`, is what the homepage and
+each deck's `BreadcrumbList` JSON-LD point to. When scaffolding a new deck, add
+it here too (alongside the homepage's own "Talks & Publications" list).
 
 ---
 
@@ -125,12 +133,35 @@ npm run pdf -- ../talks/2026/your-ai-agent-has-notes
 
 # Scaffold a new deck (copies framework + template, fills tokens)
 npm run new-deck -- my-slug 2026 --title "My Talk Title"
+
+# Regenerate + validate the root sitemap.xml
+npm run sitemap
+
+# Generate assets/img/og-cover.png (1200×630) from the deck's real headshot
+npm run og-cover -- ../talks/2026/your-ai-agent-has-notes
 ```
 
 `tools/deck-template/` is the scaffold skeleton; `new-deck.mjs` also copies the
 canonical `deck.css`/`deck.js` from `talks/2026/your-ai-agent-has-notes/` so all
 decks share one engine. If you change the framework, the canonical deck is the
 source of truth — re-copy into other decks (or re-scaffold).
+
+**Keeping the sitemap in sync:** `sitemap.mjs` discovers the homepage plus every
+`talks/<year>/<slug>/index.html`, cross-checks each deck's `<link rel="canonical">`
+against the URL its path implies (warns on mismatch), and writes `lastmod` dates
+from git history into `sitemap.xml` at the repo root. Whenever pages are added,
+removed, or renamed — a new deck via `new-deck`, a slug/year change, or any
+future homepage restructuring — run `npm run sitemap` and commit the result
+before merging. Never hand-edit `sitemap.xml`.
+
+**Keeping `og-cover.png` in sync:** `og-cover.mjs` renders each deck's social
+card entirely from that deck's own assets — colors/fonts pulled from its
+`assets/deck.css` + `assets/theme.css`, copy pulled from its JSON-LD
+(`Person.name`/`jobTitle`, `PresentationDigitalDocument.headline`), photo from
+`assets/img/michael.png` — so it needs no deck-specific arguments. Whenever a
+new deck is scaffolded, or an existing deck's headline, palette, or headshot
+changes, (re)run `npm run og-cover -- ../talks/<year>/<slug>` and commit the
+resulting `assets/img/og-cover.png`. Never hand-edit or hand-supply this file.
 
 **Keeping the template in sync:** When a major feature or style change is made
 to the canonical `deck.js` or `deck.css`, also update
@@ -160,8 +191,6 @@ export does **not** need a server — it loads the deck over `file://`.
 
 ## 6. Open items for the AI-agent talk
 
-- **`og-cover.png`** (1200×630 social share image) is not yet supplied — drop it
-  into `assets/img/` so Open Graph / Twitter cards render.
 - QR targets are final: talk page, Substack, Coolhand (UTM-tagged), and the
   skill repo (`github.com/Coolhand-Labs/feedback-collection-skill`). Edit
   `assets/qr/qr.config.json` + rerun `npm run qr` if any change.

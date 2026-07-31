@@ -82,5 +82,6 @@ for (const f of ["deck.css", "deck.js"]) {
 console.log(`✓ Created talks/${year}/${slug}/`);
 console.log(`  Title: ${title}`);
 console.log(`  Next:  edit index.html, then:`);
-console.log(`         npm run qr  -- ../talks/${year}/${slug}`);
-console.log(`         npm run pdf -- ../talks/${year}/${slug}`);
+console.log(`         npm run qr       -- ../talks/${year}/${slug}`);
+console.log(`         npm run og-cover -- ../talks/${year}/${slug}`);
+console.log(`         npm run pdf      -- ../talks/${year}/${slug}`);

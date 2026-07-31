@@ -24,8 +24,11 @@ npm run pdf -- ../talks/2026/your-ai-agent-has-notes   # export to PDF
 ## Still to supply
 
 - Real **skill QR URL** — edit `assets/qr/qr.config.json`, rerun `npm run qr`.
-- Speaker **visuals** — Slide 5 (agent trace), Slide 8 (live demo), and
-  `assets/img/og-cover.png` (1200×630 social card). Placeholders are in place;
-  do not fabricate these.
+- Speaker **visuals** — Slide 5 (agent trace) and Slide 8 (live demo).
+  Placeholders are in place; do not fabricate these.
+
+`assets/img/og-cover.png` is generated from the real headshot via
+`npm run og-cover -- ../talks/2026/your-ai-agent-has-notes` — rerun it if the
+headshot or title copy changes.
 
 See the repo root `CLAUDE.md` for full deck conventions.
