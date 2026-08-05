@@ -54,6 +54,11 @@ deck) — its URL, `https://michael.carroll.io/talks/`, is what the homepage and
 each deck's `BreadcrumbList` JSON-LD point to. When scaffolding a new deck, add
 it here too (alongside the homepage's own "Talks & Publications" list).
 
+**Adding, removing, or renaming any page (a new deck, a slug/year change, a new
+top-level page) is not done until `npm run sitemap` has been re-run and the
+resulting `sitemap.xml` diff is committed alongside it — see §4.** Do not
+treat this as a separate follow-up step; it's part of the same change.
+
 ---
 
 ## 3. Deck conventions (how to build a presentation here)
@@ -149,10 +154,13 @@ source of truth — re-copy into other decks (or re-scaffold).
 **Keeping the sitemap in sync:** `sitemap.mjs` discovers the homepage plus every
 `talks/<year>/<slug>/index.html`, cross-checks each deck's `<link rel="canonical">`
 against the URL its path implies (warns on mismatch), and writes `lastmod` dates
-from git history into `sitemap.xml` at the repo root. Whenever pages are added,
-removed, or renamed — a new deck via `new-deck`, a slug/year change, or any
-future homepage restructuring — run `npm run sitemap` and commit the result
-before merging. Never hand-edit `sitemap.xml`.
+from git history into `sitemap.xml` at the repo root. **`npm run sitemap` must be
+the last thing run before any commit that adds, removes, or renames a page** —
+a new deck via `new-deck`, a slug/year change, any future homepage
+restructuring, or even just editing an existing page's content (its `lastmod`
+comes from git history, so any content-only commit that isn't followed by a
+sitemap regen leaves `sitemap.xml` stale immediately). Never hand-edit
+`sitemap.xml`; always regenerate and commit the diff.
 
 **Keeping `og-cover.png` in sync:** `og-cover.mjs` renders each deck's social
 card entirely from that deck's own assets — colors/fonts pulled from its
