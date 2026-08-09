@@ -236,6 +236,19 @@ a:hover {
   line-height: 1;
 }
 
+.cat-group h4 a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.cat-group h4 a:hover {
+  text-decoration: underline;
+}
+
 .cat-group ul {
   list-style: none;
   margin: 0;
@@ -244,6 +257,49 @@ a:hover {
 
 .cat-group li {
   padding: 1px 0;
+}
+
+/* resumes-style search results list (talks page) */
+.results {
+  padding: 12px 0;
+}
+
+.results-count {
+  font-size: 12px;
+  color: #666;
+  margin: 0 0 8px;
+}
+
+.postings-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid #eee;
+  max-width: 700px;
+}
+
+.posting-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 13px;
+}
+
+.post-date {
+  flex: none;
+  width: 48px;
+  color: #666;
+}
+
+.post-title {
+  color: #0000cc;
+}
+
+.post-hood {
+  color: #999;
+  font-size: 12px;
 }
 
 footer {
