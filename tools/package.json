@@ -9,7 +9,8 @@
     "pdf": "node export-pdf.mjs",
     "new-deck": "node new-deck.mjs",
     "sitemap": "node sitemap.mjs",
-    "og-cover": "node og-cover.mjs"
+    "og-cover": "node og-cover.mjs",
+    "og-cover-home": "node og-cover-home.mjs"
   },
   "devDependencies": {
     "playwright": "^1.49.0",
