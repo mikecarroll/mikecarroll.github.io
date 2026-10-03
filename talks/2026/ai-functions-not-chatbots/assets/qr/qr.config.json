@@ -1,0 +1,25 @@
+{
+  "comment": "Drives build-qr.mjs. Each entry => <name>.svg in this folder. Run `npm run qr -- ../talks/2026/ai-functions-not-chatbots` after editing.",
+  "codes": [
+    {
+      "name": "talk",
+      "url": "https://michael.carroll.io/talks/2026/ai-functions-not-chatbots/"
+    },
+    {
+      "name": "wildcard-talk",
+      "url": "https://michael.carroll.io/talks/2026/your-ai-agent-has-notes/"
+    },
+    {
+      "name": "coolhand",
+      "url": "https://coolhandlabs.com/ruby-is-the-language-for-ai"
+    },
+    {
+      "name": "coolhand-github",
+      "url": "https://github.com/Coolhand-Labs"
+    },
+    {
+      "name": "substack",
+      "url": "https://everythingengineer.substack.com"
+    }
+  ]
+}
