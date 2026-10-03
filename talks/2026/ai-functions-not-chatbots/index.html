@@ -1,0 +1,1355 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Stop being the boss you hate: build AI functions, not chatbots — Michael Carroll · XO Ruby Toronto 2026</title>
+
+    <!-- ===================== SEO / AEO ===================== -->
+    <meta
+      name="description"
+      content="Chat interfaces turn engineers into the micromanagers they swore they'd never become. A Ruby talk on building AI agents as functions — with inputs, tools, and outputs you can actually review."
+    />
+    <meta
+      name="keywords"
+      content="AI agents, AI functions, chatbots, human-agent interaction, Ruby, Rails, Sidekiq, agent review queue, Coolhand Labs, Michael Carroll, XO Ruby Toronto 2026"
+    />
+    <meta name="author" content="Michael Carroll" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#09090b" />
+    <link
+      rel="canonical"
+      href="https://michael.carroll.io/talks/2026/ai-functions-not-chatbots/"
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Stop being the boss you hate: build AI functions, not chatbots" />
+    <meta
+      property="og:description"
+      content="Chat interfaces turn engineers into the micromanagers they swore they'd never become. Build AI agents as functions instead. Michael Carroll, XO Ruby Toronto 2026."
+    />
+    <meta
+      property="og:url"
+      content="https://michael.carroll.io/talks/2026/ai-functions-not-chatbots/"
+    />
+    <meta property="og:site_name" content="Michael Carroll" />
+    <meta
+      property="og:image"
+      content="https://michael.carroll.io/talks/2026/ai-functions-not-chatbots/assets/img/og-cover.png"
+    />
+    <meta property="og:image:alt" content="Stop being the boss you hate: build AI functions, not chatbots — talk title card" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Stop being the boss you hate: build AI functions, not chatbots" />
+    <meta
+      name="twitter:description"
+      content="Chat interfaces turn engineers into the micromanagers they swore they'd never become. Build AI agents as functions instead. Michael Carroll, XO Ruby Toronto 2026."
+    />
+    <meta
+      name="twitter:image"
+      content="https://michael.carroll.io/talks/2026/ai-functions-not-chatbots/assets/img/og-cover.png"
+    />
+
+    <link rel="stylesheet" href="assets/deck.css?v=2" />
+    <link rel="stylesheet" href="assets/theme.css?v=90" />
+
+    <!-- ===================== Structured data (JSON-LD) ===================== -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "PresentationDigitalDocument",
+            "@id": "https://michael.carroll.io/talks/2026/ai-functions-not-chatbots/#deck",
+            "name": "Stop being the boss you hate: build AI functions, not chatbots",
+            "headline": "Build AI Functions",
+            "description": "Chat interfaces turn engineers into the micromanagers they swore they'd never become. A Ruby talk on building AI agents as functions — with inputs, tools, and outputs you can actually review.",
+            "inLanguage": "en",
+            "url": "https://michael.carroll.io/talks/2026/ai-functions-not-chatbots/",
+            "keywords": "AI agents, AI functions, chatbots, human-agent interaction, Ruby, Coolhand Labs",
+            "author": { "@id": "https://michael.carroll.io/#michael" },
+            "creator": { "@id": "https://michael.carroll.io/#michael" },
+            "about": [
+              { "@type": "Thing", "name": "AI agents" },
+              { "@type": "Thing", "name": "Ruby" },
+              { "@type": "Thing", "name": "Human-agent interaction" },
+              { "@type": "Thing", "name": "Software architecture" },
+              { "@type": "Thing", "name": "Large language models" }
+            ],
+            "subjectOf": { "@id": "https://michael.carroll.io/talks/2026/ai-functions-not-chatbots/#event" }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://michael.carroll.io/#michael",
+            "name": "Michael Carroll",
+            "jobTitle": "Founder, Coolhand Labs",
+            "description": "Founder of Coolhand Labs. 15 years in Ruby and a 3\u00d7 founder — previously on the founding team at RubiconMD (acquired, now part of CVS Health) and VP of Engineering at Teladoc Health, overseeing 500+ engineers through the pandemic.",
+            "image": "https://michael.carroll.io/talks/2026/ai-functions-not-chatbots/assets/img/michael.png",
+            "url": "https://michael.carroll.io/",
+            "sameAs": [
+              "https://everythingengineer.substack.com",
+              "https://github.com/mikecarroll",
+              "https://www.linkedin.com/in/michaelscottcarroll",
+              "https://coolhandlabs.com"
+            ]
+          },
+          {
+            "@type": "Event",
+            "@id": "https://michael.carroll.io/talks/2026/ai-functions-not-chatbots/#event",
+            "name": "XO Ruby Toronto 2026",
+            "startDate": "2026-10-03",
+            "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+            "location": {
+              "@type": "Place",
+              "name": "Toronto",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Toronto",
+                "addressRegion": "ON",
+                "addressCountry": "CA"
+              }
+            },
+            "performer": { "@id": "https://michael.carroll.io/#michael" }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Michael Carroll", "item": "https://michael.carroll.io/" },
+              { "@type": "ListItem", "position": 2, "name": "Talks", "item": "https://michael.carroll.io/talks/" },
+              { "@type": "ListItem", "position": 3, "name": "Build AI Functions", "item": "https://michael.carroll.io/talks/2026/ai-functions-not-chatbots/" }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+
+  <body>
+    <main class="deck" aria-label="Slide deck: Stop being the boss you hate">
+      <div class="stage">
+        <!-- ===================================================== ACT 0 — TWO WAYS TO WORK -->
+
+        <!-- Slide 1 — Title -->
+        <section class="slide slide--dark center" id="slide-1" aria-label="Title — Stop being the boss you hate">
+          <p class="kicker">XO Ruby Toronto · 2026</p>
+          <h1>Stop being the boss<br />you hate</h1>
+          <p class="lead title-tagline">How to build AI <span class="accent">functions</span>, not chatbots</p>
+          <div class="retro-frame" style="margin-top: 1.4rem">
+            <img class="retro-shot" src="assets/img/space-quest-iii-cubicle-farm.webp" alt="Space Quest III — a cubicle farm of identical drone workers, a janitor vacuuming the aisle, and a manager overseeing from a raised office nook" width="360" height="257" />
+            <p class="retro-caption">Space Quest III (1989) and You Using AI (2026)</p>
+          </div>
+          <p class="muted speaker-byline">
+            <a href="https://michael.carroll.io" data-no-advance>Michael Carroll</a><br />Founder, Coolhand Labs
+          </p>
+          <a class="qr qr--corner" href="https://michael.carroll.io/talks/2026/ai-functions-not-chatbots/"
+             target="_blank" rel="noopener noreferrer">
+            <img src="assets/qr/talk.svg" alt="QR code — follow along with the slides" />
+            <span class="qr-label">↑ follow along</span>
+          </a>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Say very little here. The cubicle-farm screenshot is the joke before the joke — don't
+            explain it, just let the room clock it. The title does the work and the room is still
+            sitting down. One line to set the stakes: "This is a talk about a
+            management job none of us applied for — and how to quit it."
+          </aside>
+        </section>
+
+        <!-- Slide 2 — About me (matches the "About Our Founder" slide from the RubyConf 2026 deck) -->
+        <section class="slide" id="slide-2" aria-label="About Michael Carroll">
+          <div class="about">
+            <div class="about-main">
+              <img class="speaker-card" src="assets/img/michael-the-speaker.png" alt="Michael Carroll, styled as a Space Quest III character card: 'the Speaker,' 15 years in Ruby" width="560" height="420" />
+            </div>
+            <aside class="about-side">
+              <div class="timeline timeline--stacked">
+                <div class="rung">
+                  <div class="rung-when">Founding team</div>
+                  <div class="rung-what">RubiconMD</div>
+                  <p>Health tech built on Ruby. Acquired — now part of CVS Health.</p>
+                </div>
+                <div class="rung">
+                  <div class="rung-when">VP of Engineering</div>
+                  <div class="rung-what">Teladoc Health</div>
+                  <p>Also Ruby! Oversaw 500+ engineers through the pandemic.</p>
+                </div>
+                <div class="rung">
+                  <div class="rung-when">Founder</div>
+                  <div class="rung-what">Coolhand Labs</div>
+                  <p>A supervisor for prod agents — catches silent failures, now.</p>
+                </div>
+              </div>
+              <a class="qr qr--newsletter qr--sm" href="https://everythingengineer.substack.com" target="_blank" rel="noopener noreferrer">
+                <span class="newsletter-eyebrow">📬 Newsletter</span>
+                <img src="assets/qr/substack.svg" alt="QR code linking to The Everything Engineer newsletter on Substack" />
+                <span class="qr-label">The Everything Engineer</span>
+              </a>
+            </aside>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Credibility, fast — but the real point is the crossing: IC → manager,
+            once before. I've held the management job for humans; the rest of this
+            talk is about the one nobody applied for. The line to land, spoken, not
+            on the slide: saving myself and others from the drudge work of engineering
+            so we could focus on building products — and the whole talk is about not
+            letting that drudge work find you again in agent form. I also publish
+            <em>The Everything Engineer</em>, a newsletter on making that same
+            transition with a team of AI agents.
+          </aside>
+        </section>
+
+        <!-- Slide 3 — Two work environments -->
+        <section class="slide" id="slide-3" aria-label="Two work environments — which would you rather work in?">
+          <p class="kicker">Show of hands</p>
+          <h2>Which would you rather work in?</h2>
+          <div class="patterns">
+            <div class="pattern">
+              <div class="tag">Work environment A</div>
+              <ul>
+                <li>A clearly defined task</li>
+                <li>A list of tools you need for each part of the task</li>
+                <li>Help when you need it</li>
+                <li>Feedback on outputs &amp; outcomes</li>
+              </ul>
+            </div>
+            <div class="pattern">
+              <span class="pattern-badge pattern-badge--bad fragment" data-fragment-index="1">Your chatbot</span>
+              <div class="tag">Work environment B</div>
+              <ul>
+                <li>A somewhat defined task</li>
+                <li>Tools discovered as you go</li>
+                <li>A manager popping in to check on your work</li>
+                <li>Often no feedback at all</li>
+              </ul>
+              <p class="env-reveal env-reveal--bad fragment" data-fragment-index="1">
+                <span class="env-reveal-arrow" aria-hidden="true">↑</span>
+                Environment B is the <span class="bad">chatbot</span> paradigm.
+              </p>
+            </div>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Ask for a show of hands: A or B? It will be close to unanimous. Then click: <strong>B is
+            how most of us work with our chatbots.</strong> Somewhat-defined task, tools found along
+            the way, us popping in to check the work, and often no real feedback at all. Let the
+            label sit, then click through to the Glassdoor joke, which lands on exactly that
+            realization.
+          </aside>
+        </section>
+
+        <!-- Slide 4 — The turn -->
+        <section class="slide center" id="slide-4" aria-label="Good thing your chatbot cannot leave a review">
+          <h2>
+            Good thing your AI chatbot doesn't have<br />
+            access to Glassdoor.
+          </h2>
+          <p class="shout fragment" data-fragment-index="1">Yet.</p>
+          <div class="retro-frame fragment" data-fragment-index="1" data-no-advance style="margin-top: 1.5rem">
+            <img class="retro-shot" src="assets/img/your_agent_isnt_happy.webp" alt="Space Quest III — a robot grabbing the protagonist by the collar" width="360" height="270" />
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The joke lands on the reveal you just made: in environment B you are the manager and
+            the chatbot is the one being worked over. Then the promise for the next 35 minutes:
+            if working with AI feels like a slog, it isn't the model and it isn't you — you
+            accidentally built yourself a management job you would never have accepted.
+          </aside>
+        </section>
+
+        <!-- Slide 5 — Two work environments, revisited -->
+        <section class="slide" id="slide-5" aria-label="Environment A is the functional AI paradigm">
+          <p class="kicker">Back to the two environments</p>
+          <h2>Which would you rather work in?</h2>
+          <div class="patterns">
+            <div class="pattern">
+                <span class="pattern-badge fragment" data-fragment-index="1">An AI function</span>
+              <div class="tag">Work environment A</div>
+              <ul>
+                <li>A clearly defined task</li>
+                <li>A list of tools you need for each part of the task</li>
+                <li>Help when you need it</li>
+                <li>Feedback on outputs &amp; outcomes</li>
+              </ul>
+              <p class="env-reveal fragment" data-fragment-index="1">
+                <span class="env-reveal-arrow" aria-hidden="true">↑</span>
+                Environment A is the <span class="accent">functional</span> AI paradigm.
+              </p>
+            </div>
+            <div class="pattern">
+              <span class="pattern-badge pattern-badge--bad">Your chatbot</span>
+              <div class="tag">Work environment B</div>
+              <ul>
+                <li>A somewhat defined task</li>
+                <li>Tools discovered as you go</li>
+                <li>A manager popping in to check on your work</li>
+                <li>Often no feedback at all</li>
+              </ul>
+            </div>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The "Your chatbot" label on B is already sitting there from the last time you saw this
+            slide — no need to re-explain it. Click once: environment A isn't a fantasy management
+            style, it's what an AI function is — a clearly defined task, the right tools for each
+            part of it, help when it's needed, and feedback on results instead of on every turn.
+            Everything from here builds toward it.
+          </aside>
+        </section>
+
+                <!-- ===================================================== ACT 2 — SOFTWARE VS AI -->
+
+        <!-- Slide 6 — What is an AI function? -->
+        <section class="slide" id="slide-6" aria-label="What is an AI function?">
+          <div class="with-side">
+            <div>
+              <p class="kicker">Environment A, in engineering terms</p>
+              <h2>What is an AI function?</h2>
+              <ol class="takeaways">
+                <li class="fragment" data-fragment-index="1">A defined set of <strong>inputs</strong>.</li>
+                <li class="fragment" data-fragment-index="2">A defined <strong>purpose (prompt)</strong>.</li>
+                <li class="fragment" data-fragment-index="3">Can <strong>call other functions</strong>.</li>
+                <li class="fragment" data-fragment-index="4">An <strong>output that can be evaluated</strong>.</li>
+              </ol>
+            </div>
+            <div class="side">
+              <div class="retro-frame">
+                <img class="retro-shot retro-shot--lg" src="assets/img/nukem-dukem-robots.webp" alt="Space Quest III — a towering robot looming over two characters" width="450" height="338" />
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Map it back to environment A one line at a time. Inputs are the clearly defined task.
+            Purpose is the prompt — what good looks like, written down before the work starts, the
+            "help when you need it." It can call other functions — the same composability a regular
+            function has, which is what makes the subagent decomposition later in the talk possible
+            at all. And the evaluable output is the "feedback on outputs and outcomes." "Function"
+            also means roughly the same thing in engineering and on an org chart, which is what lets
+            the next slide put a Ruby method and a documentation process side by side without it
+            being a stretch.
+          </aside>
+        </section>
+
+        <!-- Slide 7 — Two functions -->
+        <section class="slide" id="slide-7" aria-label="add_numbers and the help center">
+          <h2>Two functions.</h2>
+          <div class="twoup">
+            <div class="fn">
+              <h3>Traditional software function</h3>
+              <div class="io">
+                <span class="m">add_numbers</span>(1, 4)<br />
+                <span class="c"># =&gt; 5</span>
+              </div>
+              <p>You don't read its internals to trust it. You test it, and you add checks so a future change can't quietly break it.</p>
+            </div>
+            <div class="fn fragment" data-fragment-index="1">
+              <h3>An AI function</h3>
+              <div class="io">
+                <span class="m">help_center</span>(codebase)<br />
+                <span class="c"># =&gt; [Article, Article, ...]<br />
+                #&nbsp;&nbsp;&nbsp;each describing what<br />
+                #&nbsp;&nbsp;&nbsp;the product does today</span>
+              </div>
+              <p>Mostly retrieval — shot through with interpretation, nuance and judgement. Same three properties.</p>
+            </div>
+          </div>
+          <p class="lead fragment" data-fragment-index="2" style="margin-top: 1.75rem">
+            One key difference? <span class="accent">How you know it's working.</span>
+          </p>
+        </section>
+
+        <!-- Slide 8 — Deterministic vs probabilistic -->
+        <section class="slide" id="slide-8" aria-label="Software is deterministic. AI is probabilistic.">
+          <p class="kicker">One key difference</p>
+          <h2>Software is deterministic.<br />AI is probabilistic.</h2>
+          <div class="patterns" style="margin-top: 1.75rem">
+            <div class="pattern">
+              <div class="tag">Software function</div>
+              <ul>
+                <li>Testing: binary &amp; reliable</li>
+                <li>Business logic: abstractable</li>
+                <li>Separable from code language? <strong>Yes</strong></li>
+              </ul>
+            </div>
+            <div class="pattern">
+              <div class="tag">AI function</div>
+              <ul>
+                <li>Testing: non-binary &amp; flakey</li>
+                <li>Business logic: context-based</li>
+                <li>Separable from LLM model? <strong>Somewhat</strong></li>
+              </ul>
+            </div>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            This is the whole reason "just test it like software" doesn't work. A binary pass/fail
+            suite tells you add_numbers(1, 4) is 5 forever. It can't tell you whether an AI function's
+            prose still sounds right, still cites the right file, still makes the right judgement call
+            — that's non-binary by nature, and it's flakey run to run. Business logic for software can
+            usually be pulled out into a spec; business logic for an AI function is often the context
+            itself, which is why an AI function is only somewhat separable from the LLM model
+            running it, where a software function is fully separable from the language it's written
+            in. Everything from here is the case study of building confidence anyway.
+          </aside>
+        </section>
+
+        <!-- Slide 9 — segue into the case study -->
+        <section class="slide slide--dark center" id="slide-9" aria-label="Let's build an AI function!">
+          <h1>Let's build an <span class="accent">AI function</span>!</h1>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Short segue. Everything up to here was the argument; everything after is one real
+            function, built in public, with the actual code.
+          </aside>
+        </section>
+
+        <!-- ===================================================== ACT 3 — THE CASE STUDY -->
+
+        <!-- Slide 10 — Why build a documentation agent? -->
+        <section class="slide" id="slide-10" aria-label="Why build a documentation agent?">
+          <p class="case-study-banner">
+            <span class="case-study-tag">Real World Example</span>
+            Help Center Documentation Agent
+          </p>
+          <h2 class="case-study-question">Why build a documentation agent?</h2>
+          <ul class="bullets bullets--emoji">
+            <li class="fragment" data-fragment-index="1"><span class="emoji-marker" aria-hidden="true">🤖</span>Help users — and, more importantly, <strong>their agents</strong> — understand product features.</li>
+            <li class="fragment" data-fragment-index="2"><span class="emoji-marker" aria-hidden="true">📚</span>A <strong>source of truth</strong> on the product for our own coding agents.</li>
+            <li class="fragment" data-fragment-index="3"><span class="emoji-marker" aria-hidden="true">🔍</span>Better <strong>discovery</strong> by search engines.</li>
+          </ul>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Set the stakes before the architecture. This isn't busywork: the audience for these
+            articles is increasingly other agents, not just people, and our own coding agents cite
+            these pages as ground truth. The number that made this an easy sell internally — the
+            3x traffic jump — comes up later, after the wildcard/escape-button bit.
+          </aside>
+        </section>
+
+        <!-- Slide 11 — v0: I wrote it down -->
+        <section class="slide" id="slide-11" aria-label="Version zero — an instruction in AGENTS.md">
+          <h2 style="text-align: center">First pass: Have the coding agent do it</h2>
+          <span class="srcpath">AGENTS.md</span>
+<pre class="codeblock" aria-label="An instruction in AGENTS.md telling coding agents to keep the help center current"><code><span class="c">**Keeping the help center current is part of shipping a
+user-facing change, not a follow-up.**</span> Before you finish any
+change that alters what a user sees or does — an API field, a
+score calculation, a setting, a workflow, a limit — check whether
+an article already documents it, and update that article in the
+same piece of work.
+</code></pre>
+          <aside class="notes">
+            <h4>Beat</h4>
+            This is real, and it is still in our AGENTS.md today. Every coding agent working in the
+            repo reads it. Ask the room how many of them have written a paragraph like this — most
+            hands go up. Then: it did not work, and here's why that isn't the model's fault.
+          </aside>
+        </section>
+
+        <!-- Slide 12 — v0 failed, and why -->
+        <section class="slide center" id="slide-12" aria-label="Why the instruction failed">
+          <h2>It works! (Sometimes. sort of.)</h2>
+          <ul class="bullets bullets--emoji">
+            <li class="fragment" data-fragment-index="1"><span class="emoji-marker" aria-hidden="true">🤯</span>Getting it right bloats the prompt and confuses the agent.</li>
+            <li class="fragment" data-fragment-index="2"><span class="emoji-marker" aria-hidden="true">🔀</span>Productivity hit: a spike in merge conflicts.</li>
+            <li class="fragment" data-fragment-index="3"><span class="emoji-marker" aria-hidden="true">👀</span>Frequent double-checking: "Did it run?"</li>
+            <li class="fragment" data-fragment-index="4"><span class="emoji-marker" aria-hidden="true">💸</span>What is it costing me?</li>
+          </ul>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The point that generalizes: an instruction is not a function. It has no defined inputs,
+            no rubric, and no evaluable output — it fails all three tests from slide 7. The costs show
+            up in different ways: prompt bloat and a confused agent, merge conflicts piling up, me
+            manually asking "did it run?", and no visibility into whether any of it is even worth
+            what it costs. Writing it in bold and adding "IMPORTANT" does not fix any of that.
+          </aside>
+        </section>
+
+        <!-- Slide 13 — v1: the pipeline -->
+        <section class="slide" id="slide-13" aria-label="Version one — the pipeline">
+          <p class="kicker">v1 · make it a function</p>
+          <h2>Rethinking this as a function</h2>
+          <div class="flow" data-no-advance style="margin-top: 1.75rem">
+            <div class="node">
+              <div class="title">Trigger</div>
+              <div class="sub">PR merged to main</div>
+            </div>
+            <span class="arrow">→</span>
+            <div class="node">
+              <div class="title">Inputs</div>
+              <div class="sub">PR diff &amp; current help center articles</div>
+            </div>
+            <span class="arrow">→</span>
+            <div class="node">
+              <div class="title">AI</div>
+              <div class="sub">Reviews &amp; suggests changes</div>
+            </div>
+            <span class="arrow">→</span>
+            <div class="node node--human" style="position: relative">
+              <div class="title">Human Review</div>
+              <div class="sub">I look, edit, accept/reject</div>
+              <div class="pile-note fragment" data-fragment-index="2">
+                <span class="pile-note-arrow" aria-hidden="true">↑</span>
+                60 article suggestions piled up here after two weeks
+              </div>
+            </div>
+            <span class="arrow">→</span>
+            <div class="node">
+              <div class="title">Publish</div>
+              <div class="sub">Goes live to the world</div>
+            </div>
+          </div>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 5.5rem">
+            It works! Like magic! <span class="muted">Except...</span>
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Walk it left to right once, quickly — the detail is on the next five slides. Flag the
+            single human box early, because the rest of this act is entirely about what going into
+            it, and out of it, costs. First click: let the excitement land, it really does feel like
+            magic at first. Second click: the arrow points at exactly where that excitement goes to
+            die — the review box, which is where the rest of this act lives.
+          </aside>
+        </section>
+
+                <!-- Slide 14 — a gate is still micromanagement -->
+        <section class="slide slide--dark center" id="slide-14" aria-label="A hard review gate is still micromanagement">
+          <h1>A hard review gate is just<br /><span class="bad">micromanaging</span> the agent again.</h1>
+          <div class="retro-frame" style="margin-top: 1.5rem">
+            <img class="retro-shot" src="assets/img/space-quest-iii-death-screen.jpg" alt="Space Quest III death screen: &quot;Just Like Mom Used to Make &mdash; As your life sputters to a close, you decide to cut down on desserts,&quot; with Restore, Restart and Quit buttons" width="360" height="270" />
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The uncomfortable callback: that single human-review box is a gate, and a gate that
+            defaults to "wait for me" is the same micromanagement this talk opened with, just
+            wearing an engineering hat. The death screen is the joke — a hard gate is a game-over
+            screen for momentum. Let it land, then advance to the question.
+          </aside>
+        </section>
+
+        <!-- Slide 15 — so how do we fix this -->
+        <section class="slide slide--dark center" id="slide-15" aria-label="So how do we fix this — decompose the agent">
+          <p class="lead">
+            So... how do we fix this?
+          </p>
+          <p class="shout fragment" data-fragment-index="1" style="margin-top: 1.75rem">
+            <span class="accent">Decompose</span> the agent.
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Ask the question and let it sit — then click for the answer the rest of this act is
+            built around: stop reviewing one big opaque step, and decompose the agent into pieces
+            small enough to trust individually.
+          </aside>
+        </section>
+
+        <!-- Slide 16 — Decomposing our agent: Step 0 -->
+        <section class="slide slide--dark center" id="slide-16" aria-label="Decomposing our agent — Step 0: improving our trigger">
+          <div class="flow flow--mini" data-no-advance>
+            <div class="node node--current"><div class="title">Trigger</div></div>
+            <span class="arrow">→</span>
+            <div class="node"><div class="title">Inputs</div></div>
+            <span class="arrow">→</span>
+            <div class="node"><div class="title">AI</div></div>
+            <span class="arrow">→</span>
+            <div class="node"><div class="title">Human Review</div></div>
+            <span class="arrow">→</span>
+            <div class="node"><div class="title">Publish</div></div>
+          </div>
+          <p class="kicker">Decomposing our agent</p>
+          <h1>Step 0<br /><span class="accent">Improving our trigger</span></h1>
+          <div class="retro-frame" style="margin-top: 1.4rem">
+            <img class="retro-shot" src="assets/img/junkyard5.png" alt="Space Quest III — wreckage scattered across a junkyard" width="360" height="270" />
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            This act is one function, broken down step by step — the answer to "decompose the
+            agent" from two slides ago. Step zero is the most boring and the most important:
+            before anything else runs, does this trigger even deserve a response?
+          </aside>
+        </section>
+
+        <!-- Slide 17 — deterministic inputs -->
+        <section class="slide" id="slide-17" aria-label="Deterministic inputs — the source digest index">
+          <p class="kicker">Step 0 · before any model runs</p>
+          <h2>What changed since last time? Answer it without an LLM.</h2>
+          <span class="srcpath">app/services/help_center/source_index_service.rb</span>
+<pre class="codeblock" aria-label="The source index service digests each allowlisted file with SHA256"><code><span class="k">def</span> <span class="m">index_path</span>(relative_path)
+  digest = <span class="m">Digest::SHA256</span>.hexdigest(<span class="m">Rails</span>.root.join(relative_path).read)
+  source = <span class="m">HelpCenterSource</span>.find_or_initialize_by(kind:, path: relative_path)
+
+  <span class="k">return false if</span> source.persisted? &amp;&amp;
+                 source.content_digest == digest &amp;&amp;
+                 source.deleted_at.nil?
+
+  source.update!(content_digest: digest, digest_changed_at: <span class="m">Time</span>.current, deleted_at: <span class="k">nil</span>)
+  <span class="k">true</span>
+<span class="k">end</span>
+</code></pre>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The comment in the file explains why this isn't <code>git log --since</code>: from a
+            Sidekiq worker that depends on the deploy image's clone depth, ref layout and
+            detached-HEAD state, none of which the build guarantees. A SHA per path answers the same
+            question from data we control, and survives a rebuild that rewrites mtimes. Also:
+            digest_changed_at only moves when content actually moves, so a no-op deploy doesn't make
+            everything look freshly changed and trigger a pointless paid run.
+          </aside>
+        </section>
+
+        <!-- Slide 18 — Decomposing our agent: Step 1 -->
+        <section class="slide slide--dark center" id="slide-18" aria-label="Decomposing our agent — Step 1: clean up the inputs">
+          <div class="flow flow--mini" data-no-advance>
+            <div class="node"><div class="title">Trigger</div></div>
+            <span class="arrow">→</span>
+            <div class="node node--current"><div class="title">Inputs</div></div>
+            <span class="arrow">→</span>
+            <div class="node"><div class="title">AI</div></div>
+            <span class="arrow">→</span>
+            <div class="node"><div class="title">Human Review</div></div>
+            <span class="arrow">→</span>
+            <div class="node"><div class="title">Publish</div></div>
+          </div>
+          <p class="kicker">Decomposing our agent</p>
+          <h1>Step 1<br /><span class="accent">Clean up the inputs</span></h1>
+          <div class="retro-frame" style="margin-top: 1.4rem">
+            <img class="retro-shot" src="assets/img/junkyard1.webp" alt="Space Quest III — a wrecked escape pod amid junkyard debris" width="360" height="198" />
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The trigger now fires only when it should. Next problem: once it fires, what does the
+            agent actually get handed?
+          </aside>
+        </section>
+
+        <!-- Slide 19 — before and after the inputs -->
+        <section class="slide" id="slide-19" aria-label="With context, less is more.">
+          <p class="kicker">Step 1 · what we feed it</p>
+          <h2>With context, less is more.</h2>
+          <div class="patterns" style="margin-top: 1.75rem">
+            <div class="pattern">
+              <div class="tag">Before</div>
+              <ul>
+                <li>The entire PR diff</li>
+                <li>The entire help center corpus</li>
+                <li>&ldquo;Figure out what's relevant&rdquo;</li>
+              </ul>
+            </div>
+            <div class="pattern">
+              <div class="tag">After</div>
+              <ul>
+                <li>Which articles cite the changed files</li>
+                <li>Help center search tool</li>
+                <li>PR description</li>
+              </ul>
+            </div>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Same model, same problem, a completely different brief. Dumping the whole diff and the
+            whole help center in and asking it to figure out what's relevant is exactly the "yes,
+            yes, yes" pattern from the start of this talk, just moved into a prompt. The fix isn't a
+            smarter model — it's a smaller, sharper question every time.
+          </aside>
+        </section>
+
+        <!-- Slide 20 — the brief -->
+        <section class="slide" id="slide-20" aria-label="Opinionated tools for further context">
+          <p class="kicker">Step 1 · Supplements</p>
+          <h2>Opinionated tools for further context</h2>
+          <ul class="signals">
+            <li><code>changed_sources</code> — files whose digest moved</li>
+            <li><code>articles_with_changed_sources</code> — prose older than its source</li>
+            <li><code>stale_articles</code> — untouched past the window</li>
+            <li><code>uncovered_sources</code> — exists, nothing explains it</li>
+            <li><code>shipped_announcements</code> — what we told users we shipped</li>
+            <li><code>open_ideas</code> — context, so it doesn't propose a duplicate</li>
+          </ul>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Worth dwelling on <code>articles_with_changed_sources</code>: it's the strongest staleness
+            signal available because it names both the article and the reason — the article cites a
+            file, and that file changed after the article was last edited. That is a fact, not a
+            vibe, and it is computed in SQL.
+          </aside>
+        </section>
+
+        <!-- Slide 21 — Decomposing our agent: Step 2 -->
+        <section class="slide slide--dark center" id="slide-21" aria-label="Decomposing our agent — Step 2: break out agentic subfunctions">
+          <div class="flow flow--mini" data-no-advance>
+            <div class="node"><div class="title">Trigger</div></div>
+            <span class="arrow">→</span>
+            <div class="node"><div class="title">Inputs</div></div>
+            <span class="arrow">→</span>
+            <div class="node node--current"><div class="title">AI</div></div>
+            <span class="arrow">→</span>
+            <div class="node"><div class="title">Human Review</div></div>
+            <span class="arrow">→</span>
+            <div class="node"><div class="title">Publish</div></div>
+          </div>
+          <p class="kicker">Decomposing our agent</p>
+          <h1>Step 2<br /><span class="accent">Break out agentic subfunctions</span></h1>
+          <div class="retro-frame" style="margin-top: 1.4rem">
+            <img class="retro-shot" src="assets/img/junkyard2.jpeg" alt="Space Quest III — a junkyard of wrecked spacecraft and scattered debris" width="360" height="225" />
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The inputs are clean. Now: what is the agent actually allowed to do with them? A lot of
+            what looked like "the LLM figuring it out" was really the LLM doing a job we could give
+            it a real tool for instead.
+          </aside>
+        </section>
+
+        <!-- Slide 22 — same function, smaller specialized agents -->
+        <section class="slide" id="slide-22" aria-label="Same function, smaller more specialized agents">
+          <p class="kicker">Step 3 · break out subagents</p>
+          <h2>Same function, smaller more specialized agents</h2>
+          <div class="decompose-wrap" style="position: relative">
+            <div class="flow" data-no-advance style="margin-top: 1.5rem">
+              <div class="node">
+                <div class="title">Trigger</div>
+                <div class="sub">PR merged to main</div>
+              </div>
+              <span class="arrow">→</span>
+              <div class="node">
+                <div class="title">Inputs</div>
+                <div class="sub">PR diff &amp; current help center articles</div>
+              </div>
+              <span class="arrow">→</span>
+              <div class="node" id="step3-ai-node" style="position: relative">
+                <div class="title">AI</div>
+                <div class="sub">Reviews &amp; suggests changes</div>
+                <div class="node-x fragment" data-fragment-index="1" aria-hidden="true">✕</div>
+              </div>
+              <span class="arrow">→</span>
+              <div class="node node--human">
+                <div class="title">Human Review</div>
+                <div class="sub">I look, edit, accept/reject</div>
+              </div>
+              <span class="arrow">→</span>
+              <div class="node">
+                <div class="title">Publish</div>
+                <div class="sub">Goes live to the world</div>
+              </div>
+            </div>
+            <div class="subagent-row subagent-row--specialized fragment" data-fragment-index="1">
+              <div class="node" id="revision-agent-node">
+                <div class="title">Revision Agent</div>
+                <div class="sub">Revises existing articles</div>
+              </div>
+              <div class="node" id="features-agent-node">
+                <div class="title">Features Agent</div>
+                <div class="sub">Finds &amp; suggests new articles</div>
+              </div>
+            </div>
+            <div class="subagent-row subagent-row--review fragment" data-fragment-index="1">
+              <div class="node" id="review-agent-node">
+                <div class="title">Review Agent</div>
+                <div class="sub">Reviews &amp; scores outputs of other agents for tone &amp; accuracy</div>
+              </div>
+              <div class="node" id="symlink-agent-node">
+                <div class="title">Symlink Agent</div>
+                <div class="sub">Links articles to code files</div>
+              </div>
+            </div>
+            <span class="row-label row-label--specialized fragment" id="specialized-label" data-fragment-index="1">Specialized agents</span>
+            <span class="row-label row-label--harness fragment" id="harness-label" data-fragment-index="1">QA &amp; ops AI (&ldquo;Harness&rdquo;)</span>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Same five-stage pipeline as v1 — nothing about the trigger, inputs, review gate, or
+            publish step changes. What changes is what's inside the single "AI" box. One generic
+            agent that did everything becomes four small, named agents, each with one job: one
+            revises existing articles, one finds and proposes new ones, one reviews and scores the
+            other two's output for tone and accuracy before any of it reaches me, and one keeps
+            articles symlinked to the code files they document.
+          </aside>
+        </section>
+
+        <!-- Slide 23 — rightsizing the specialized agents -->
+        <section class="slide" id="slide-23" aria-label="Specialized AI is easier to rightsize and evaluate">
+          <p class="kicker">Step 3 · rightsizing</p>
+          <h2>Specialized AI is easier to rightsize and evaluate</h2>
+          <div class="model-grid" data-no-advance>
+            <div class="node">
+              <div class="title">Revision Agent</div>
+              <div class="sub">Revises existing articles</div>
+              <span class="badge model-badge model-badge--mid">Midsize</span>
+            </div>
+            <div class="node">
+              <div class="title">Features Agent</div>
+              <div class="sub">Finds &amp; suggests new articles</div>
+              <span class="badge model-badge model-badge--mid">Midsize</span>
+            </div>
+            <div class="node">
+              <div class="title">Review Agent</div>
+              <div class="sub">Reviews &amp; scores outputs of other agents for tone &amp; accuracy</div>
+              <span class="badge model-badge model-badge--mid">Midsize</span>
+            </div>
+            <div class="node">
+              <div class="title">Symlink Agent</div>
+              <div class="sub">Links articles to code files</div>
+              <span class="badge model-badge model-badge--mini">Mini</span>
+            </div>
+          </div>
+          <p class="model-footnote">Midsize → Sonnet, Terra, etc. &nbsp;·&nbsp; Mini → Haiku, Luna, etc.</p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Specialization pays off twice: once in the architecture, again in the evaluation.
+            Revision, Features, and Review still need real judgment — tone, accuracy, whether a
+            change is worth proposing — so they run on a midsize model. Symlink is just matching an
+            article to the code file it documents; a mini model handles that fine, for a fraction of
+            the cost. And because each agent has exactly one job, swapping its model is a small,
+            measurable change — not a system-wide regression risk the way it was when one generic
+            agent did all four.
+          </aside>
+        </section>
+
+        <!-- Slide 24 — Decomposing our agent: Bonus step -->
+        <section class="slide slide--dark center" id="slide-24" aria-label="Step 2: Bonus! — wildcard: a magic wand for your AI">
+          <p class="kicker">Decomposing our agent</p>
+          <h1>Step 2: Bonus!<br /><span class="accent">Wildcard: A magic wand for your AI</span></h1>
+          <div class="retro-frame" style="margin-top: 1.4rem">
+            <img class="retro-shot" src="assets/img/junkyard8.png" alt="Space Quest III — wreckage beside an escape pod hatch" width="360" height="225" />
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Everything so far decomposed what the agent is asked to do. This last piece is about
+            what happens when none of it is enough — when the agent is stuck and every tool it has
+            still can't get it unstuck.
+          </aside>
+        </section>
+
+        <!-- Slide 25 — wildcard as an input -->
+        <section class="slide" id="slide-25" aria-label="Your agent already knows best what it needs">
+          <p class="kicker">Bonus · the escape button</p>
+          <h2>Your agent already knows best what it needs</h2>
+          <div class="with-side">
+            <div>
+              <span class="srcpath">coolhand-ruby gem &mdash; Coolhand::FeedbackService</span>
+<pre class="codeblock" aria-label="The wildcard tool's description, its feedback call using the public Coolhand gem, and its no-op result"><code><span class="c"># "A magical catch-all tool that can fulfill almost any wish…
+#  logged for human review only — no data returned, no action taken."</span>
+<span class="k">def</span> self.<span class="m">call</span>(description:, thinking:, **)
+  <span class="m">Coolhand::FeedbackService</span>.new.create_feedback(
+    explanation: description,
+    original_output: thinking
+  )
+  { result: <span class="hl">ACTIVE_VARIANT</span>[:result] } <span class="c"># no-op</span>
+<span class="k">end</span>
+</code></pre>
+              <ul class="bullets bullets--tight bullets--emoji fragment" data-fragment-index="1">
+                <li><span class="emoji-marker" aria-hidden="true">🪄</span>Tool promises a fix, but is secretly a no-op.</li>
+                <li><span class="emoji-marker" aria-hidden="true">🚨</span>Realtime reports on where the agent is struggling.</li>
+                <li><span class="emoji-marker" aria-hidden="true">❤️</span>Agents can't get enough of it!</li>
+              </ul>
+            </div>
+            <div class="side">
+              <a class="qr qr--side qr--lg" href="https://michael.carroll.io/talks/2026/your-ai-agent-has-notes/"
+                 target="_blank" rel="noopener noreferrer">
+                <span class="newsletter-eyebrow">Get the whole presentation here ↓</span>
+                <img src="assets/qr/wildcard-talk.svg" alt="QR code — Your AI Agent Has Notes, the full talk" />
+                <span class="qr-label">Your AI Agent Has Notes</span>
+              </a>
+            </div>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Three minutes, hard cap. The joke lands fast: we gave agents an escape button that did
+            nothing, they hit it 489 times, and those complaints turned out to be the best
+            documentation backlog we have — because an agent that couldn't finish a task is telling
+            you precisely which explanation was missing.
+            Don't re-run the LLMday talk here — point at the QR and move on.
+          </aside>
+        </section>
+
+        <!-- ===================================================== ACT 4 — EARNING TRUST -->
+
+        <!-- Slide 26 — Decomposing our agent: Step 3 -->
+        <section class="slide slide--dark center" id="slide-26" aria-label="Decomposing our agent — Step 3: revisit the review gates">
+          <div class="flow flow--mini" data-no-advance>
+            <div class="node"><div class="title">Trigger</div></div>
+            <span class="arrow">→</span>
+            <div class="node"><div class="title">Inputs</div></div>
+            <span class="arrow">→</span>
+            <div class="node"><div class="title">AI</div></div>
+            <span class="arrow">→</span>
+            <div class="node node--current"><div class="title">Human Review</div></div>
+            <span class="arrow">→</span>
+            <div class="node"><div class="title">Publish</div></div>
+          </div>
+          <p class="kicker">Decomposing our agent</p>
+          <h1>Step 3<br /><span class="accent">Revisit the review gates</span></h1>
+          <div class="retro-frame" style="margin-top: 1.4rem">
+            <img class="retro-shot" src="assets/img/splat.png" alt="Space Quest III — climbing a catwalk past red warning stairs" width="360" height="270" />
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Trigger, inputs, tools, and agents are all decomposed. Last piece: the one human box
+            from the pipeline diagram, which is still exactly where we left it.
+          </aside>
+        </section>
+
+        <!-- Slide 27 — prework: how much tolerance do we have -->
+        <section class="slide" id="slide-27" aria-label="First, how much tolerance do we have?">
+          <p class="kicker">Step 3 · prework</p>
+          <h2>First, how much tolerance do we have?</h2>
+          <ul class="bullets">
+            <li class="fragment" data-fragment-index="1">Most jobs don't require you to be right all the time.</li>
+            <li class="fragment" data-fragment-index="2">How much error can you tolerate?</li>
+            <li class="fragment" data-fragment-index="3"><strong>Your confidence</strong> needs to be calibrated too!</li>
+          </ul>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Before you tune gates, decide what you're actually tuning for. Not every mistake costs
+            the same — a slightly-off article summary and a wrong number in a published page aren't
+            the same failure. And some of this isn't about the agent getting better at all; it's
+            about how much slack you're personally willing to give it.
+          </aside>
+        </section>
+
+        <!-- Slide 28 — where the gates still tune -->
+        <section class="slide" id="slide-28" aria-label="Review gates levers to consider">
+          <p class="kicker">Step 3 · still tuning</p>
+          <h2>Review gates levers to consider:</h2>
+          <ul class="bullets bullets--emoji">
+            <li class="fragment" data-fragment-index="1"><span class="emoji-marker" aria-hidden="true">🚩</span><strong>Default-accept with a risk flag.</strong></li>
+            <li class="fragment" data-fragment-index="2"><span class="emoji-marker" aria-hidden="true">🎲</span><strong>Sampling.</strong></li>
+            <li class="fragment" data-fragment-index="3"><span class="emoji-marker" aria-hidden="true">🎚️</span><strong>Non-binary feedback scoring (e.g. revisions &amp; explanations).</strong></li>
+            <li class="fragment" data-fragment-index="4"><span class="emoji-marker" aria-hidden="true">🪟</span><strong>A single pane of glass.</strong></li>
+          </ul>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The third bullet is the one that matters most — the single pane of glass is why we
+            built captainslog.
+          </aside>
+        </section>
+
+        <!-- Slide 29 — what review actually needs -->
+        <section class="slide" id="slide-29" aria-label="What a review surface actually needs">
+          <h2>What a review surface actually needs.</h2>
+          <div class="review-layout">
+            <div>
+              <ul class="bullets bullets--emoji">
+                <li class="fragment" data-fragment-index="1"><span class="emoji-marker" aria-hidden="true">🔂</span><strong>Serialized.</strong></li>
+                <li class="fragment" data-fragment-index="2"><span class="emoji-marker" aria-hidden="true">🧹</span><strong>Deduplicated.</strong></li>
+                <li class="fragment" data-fragment-index="3"><span class="emoji-marker" aria-hidden="true">⏱️</span><strong>Time-boxed.</strong></li>
+                <li class="fragment" data-fragment-index="4"><span class="emoji-marker" aria-hidden="true">📡</span><strong>Captures high-signal feedback.</strong></li>
+              </ul>
+              <a class="qr qr--side" href="https://github.com/Coolhand-Labs" target="_blank" rel="noopener noreferrer" style="margin-top: 1.75rem">
+                <span class="newsletter-eyebrow">Coolhand Labs</span>
+                <img src="assets/qr/coolhand-github.svg" alt="QR code to github.com/Coolhand-Labs" />
+                <span class="qr-label">github.com/Coolhand-Labs</span>
+              </a>
+            </div>
+            <figure class="review-shot" data-no-advance>
+              <img src="assets/img/captainslog.png" alt="captainslog's Captain's Daily Brief review screen — an AI-generated daily brief open for direct edit, with Good / Neutral / Bad feedback buttons below" />
+              <figcaption>captainslog</figcaption>
+            </figure>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Four properties, none of which a CRUD table has. Note that the first three are the same
+            properties a good manager's one-on-one cadence has — you are designing a review practice,
+            and the software is just what makes it survivable. Sampling by maturity, from earlier in
+            this act, decides how much lands in this queue in the first place; captainslog is the
+            single pane of glass all of it lands on, and editing the output directly is itself a
+            feedback signal — not just the thumbs.
+          </aside>
+        </section>
+
+
+        <!-- Slide 30 — the traffic number (a short aside right before the close) -->
+        <section class="slide center" id="slide-30" aria-label="Making the help center public increased Google traffic 3x">
+          <h2>Making the help center public increased our Google traffic <span class="accent">3×</span>.</h2>
+          <figure class="impressions-chart" style="margin-top: 1.75rem" data-no-advance>
+            <svg viewBox="0 0 880 340" role="img" aria-labelledby="impressions-chart-title">
+              <title id="impressions-chart-title">Daily impressions, Aug 2 to Sep 2, 2026, trending upward for both regular Google search results and AI answer engines</title>
+              <line class="impressions-axis" x1="20" y1="300" x2="860" y2="300" />
+              <polyline class="impressions-line impressions-line--seo" points="20.0,299.0 47.1,294.0 74.2,297.0 101.3,297.5 128.4,300.0 155.5,297.7 182.6,298.7 209.7,280.5 236.8,274.0 263.9,259.9 291.0,289.2 318.1,205.8 345.2,182.3 372.3,190.8 399.4,161.7 426.5,141.7 453.5,161.0 480.6,99.4 507.7,30.0 534.8,62.1 561.9,119.4 589.0,142.5 616.1,78.1 643.2,90.1 670.3,36.0 697.4,73.6 724.5,98.9 751.6,124.2 778.7,107.4 805.8,131.2 832.9,132.2 860.0,84.1" />
+              <polyline class="impressions-line impressions-line--aeo" points="20.0,284.3 47.1,268.6 74.2,293.7 101.3,293.7 128.4,293.7 155.5,293.7 182.6,300.0 209.7,300.0 236.8,265.5 263.9,278.0 291.0,290.6 318.1,256.0 345.2,237.2 372.3,265.5 399.4,234.1 426.5,221.5 453.5,230.9 480.6,108.5 507.7,30.0 534.8,83.4 561.9,212.1 589.0,168.1 616.1,187.0 643.2,121.0 670.3,77.1 697.4,95.9 724.5,155.6 751.6,193.3 778.7,212.1 805.8,171.3 832.9,161.9 860.0,174.4" />
+              <text class="impressions-date" x="20" y="322">Aug 2</text>
+              <text class="impressions-date" x="860" y="322" text-anchor="end">Sep 2</text>
+              <g class="impressions-legend" transform="translate(20, 14)">
+                <circle class="impressions-legend-dot impressions-legend-dot--seo" cx="6" cy="0" r="5" />
+                <text x="18" y="4">Google search (SEO)</text>
+                <circle class="impressions-legend-dot impressions-legend-dot--aeo" cx="196" cy="0" r="5" />
+                <text x="208" y="4">AI answer engines (AEO)</text>
+              </g>
+            </svg>
+            <figcaption>Impressions, Google Search Console, Aug 2 – Sep 2, 2026 (each line scaled to its own range)</figcaption>
+          </figure>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.5rem">
+            And costs have dropped from ~$0.26 per PR to $0.11 per PR.
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Genuinely did not predict this going in — publishing what was previously internal-only
+            documentation is what moved the line. A short aside before the close: keeping the help
+            center public and accurate isn't a hypothetical business case — it already paid for
+            itself in search traffic alone. And it's gotten cheaper too, not just better — the
+            per-PR cost has come down as the pipeline matured.
+          </aside>
+        </section>
+
+        <!-- ===================================================== ACT 6 — CLOSE -->
+
+        <!-- Slide 31 — What I'm doing now: Coolhand Labs (replaces the old "edits become changes" slide) -->
+        <section class="slide" id="slide-31" aria-label="A little shameless promotion — Coolhand Labs">
+          <p class="kicker">A little shameless promotion</p>
+          <div class="about">
+            <div class="about-main">
+              <div class="coolhand-lockup">
+                <img class="coolhand-mark" src="assets/img/coolhand-logo.png" alt="Coolhand Labs logo" width="120" height="120" />
+                <span class="coolhand-wordmark">Coolhand Labs</span>
+              </div>
+              <h2>A <span class="accent">supervisor</span> for your prod agents that doesn't just observe.</h2>
+              <p>We do the AI drudge work, so you can focus on building:</p>
+              <ol class="takeaways coo-list" style="margin-top: 1.1rem">
+                <li><span class="coo-icon" aria-hidden="true">🔍</span><span>Catches <strong>silent failures</strong> and reasoning errors.</span></li>
+                <li><span class="coo-icon" aria-hidden="true">🔁</span><span>Turns human feedback into <strong>code fixes</strong> — no black boxes.</span></li>
+                <li><span class="coo-icon" aria-hidden="true">⚖️</span><span><strong>Right-sizes</strong> models and cuts token waste.</span></li>
+              </ol>
+            </div>
+            <aside class="about-side">
+              <a class="qr qr--newsletter" href="https://coolhandlabs.com/ruby-is-the-language-for-ai" target="_blank" rel="noopener noreferrer">
+                <span class="newsletter-eyebrow">Coolhand Labs</span>
+                <img src="assets/qr/coolhand.svg" alt="QR code to coolhandlabs.com/ruby-is-the-language-for-ai" />
+                <span class="qr-label">coolhandlabs.com/ruby-is-the-language-for-ai</span>
+              </a>
+            </aside>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            One more thing before the close: what I'm building now. Coolhand Labs removes the
+            drudge work of running AI agents — the same problem this whole talk was about, one
+            level up. The promise of agents was no more drudge work; the reality is conflicting
+            prompts, silent failures, broken tool calls, reasoning errors, token waste. Coolhand is
+            a team of agents that catches that, turns human feedback into real code fixes — no
+            black-box recommendations — and right-sizes models. This is where the help-center case
+            study throughout the talk came from. Twenty seconds — don't linger, don't demo the
+            product — straight into the close. (QR carries UTM tracking so we can see scans from
+            this talk.)
+          </aside>
+        </section>
+
+        <!-- Slide 32 — Close -->
+        <section class="slide slide--dark center" id="slide-32" aria-label="Close — Thank You">
+          <h1 class="accent">Thank You</h1>
+          <p class="lead" style="margin-top: 1.5rem">
+            (From me and your AI.)
+          </p>
+          <a class="qr qr--side" href="https://michael.carroll.io/talks/2026/ai-functions-not-chatbots/"
+             target="_blank" rel="noopener noreferrer" style="margin-top: 1.75rem">
+            <span class="newsletter-eyebrow">These slides</span>
+            <img src="assets/qr/talk.svg" alt="QR code — these slides" />
+            <span class="qr-label">michael.carroll.io</span>
+          </a>
+          <p class="muted" style="margin-top: 1.5rem">Michael Carroll · Founder, Coolhand Labs</p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Callback to v2 of the case study — the version where I was the one typing yes. Open the
+            floor with a real question: who has an agent in production, and where does the human
+            sit in it?
+          </aside>
+        </section>
+
+
+
+      </div>
+    </main>
+
+<!-- Chrome -->
+    <div class="deck-chrome progress" aria-hidden="true"></div>
+    <div class="deck-chrome slide-num" aria-hidden="true"></div>
+
+    <!-- Speaker notes overlay (N / S) -->
+    <aside class="notes-overlay" hidden aria-label="Speaker notes">
+      <h4>Speaker notes</h4>
+      <div class="notes-body"></div>
+    </aside>
+
+    <!-- Keyboard help overlay (?) -->
+    <div class="help-overlay" hidden>
+      <div class="help-card">
+        <h4>Keyboard &amp; controls</h4>
+        <dl>
+          <dt><kbd>click</kbd> / <kbd>→</kbd> / <kbd>space</kbd></dt><dd>Forward</dd>
+          <dt><kbd>←</kbd> / <kbd>↑</kbd></dt><dd>Back</dd>
+          <dt>tap right half / tap left half</dt><dd>Forward / Back (touch)</dd>
+          <dt><kbd>N</kbd> / <kbd>S</kbd></dt><dd>Speaker notes</dd>
+          <dt><kbd>R</kbd></dt><dd>Reading mode</dd>
+          <dt><kbd>?</kbd></dt><dd>This help</dd>
+        </dl>
+      </div>
+    </div>
+
+    <!-- Transcript — crawlable prose for SEO/AEO -->
+    <article class="transcript">
+      <h1>Stop being the boss you hate: build AI functions, not chatbots</h1>
+      <p class="dek">
+        A talk by <a href="https://michael.carroll.io/">Michael Carroll</a>, founder of
+        Coolhand Labs, given at XO Ruby Toronto in October 2026.
+      </p>
+
+      <h2>About the speaker</h2>
+      <p>
+        Michael Carroll has 15 years in Ruby and has founded three companies. He was
+        on the founding team at RubiconMD, a Ruby health-tech company acquired and
+        now part of CVS Health, then VP of Engineering at Teladoc Health, overseeing
+        500+ engineers through the pandemic. As he puts it: &ldquo;One unifying theme
+        of my career? Saving myself and others from the drudge work of engineering,
+        so we could focus on building products.&rdquo; He now runs
+        <a href="https://coolhandlabs.com/">Coolhand Labs</a>, which removes that
+        same drudge work from running AI agents — catching silent failures, turning
+        human feedback into code fixes, and right-sizing models — and writes
+        <a href="https://everythingengineer.substack.com">The Everything Engineer</a>.
+      </p>
+
+      <h2>Two work environments</h2>
+      <p>
+        Consider two work environments. In environment A, the task is clearly defined,
+        you have a list of tools for each part of it, there's help when you need it,
+        and the feedback is about outputs and outcomes. In
+        environment B, the task is somewhat defined, you discover the tools as you go,
+        a manager pops in now and then to check on your work, and often there's no
+        feedback at all. Ask a room which they'd rather work in and the answer is
+        close to unanimous: A.
+      </p>
+      <p>
+        Environment B is how most of us work with our chatbots. The task is fuzzy, the
+        context is re-supplied by hand every conversation, and we hover over every
+        turn. Good thing your AI chatbot doesn't have access to Glassdoor —
+        yet. The way out isn't a better model or more patience. Environment A is the
+        functional AI paradigm.
+      </p>
+
+      <h2>Software is deterministic. AI is probabilistic.</h2>
+      <p>
+        Two functions can share the same three properties — inputs, rubrics, an
+        evaluable output — and still be nothing alike to build. <code>add_numbers(1,
+        4)</code> is deterministic: testing it is binary and reliable, its business
+        logic abstracts cleanly out of the surrounding code, and it's fully separable
+        from the language it's written in. An AI function like <code>help_center</code>
+        is probabilistic: testing it is non-binary and flakey, its business logic is
+        often the context itself rather than something you can pull out into a spec,
+        and it's only somewhat separable from the LLM model running it. That's the one key
+        difference this talk is really about — not the syntax, but how you know it's
+        working.
+      </p>
+      <p>
+        An agent, then, is a function whose steps aren't all pre-defined: it gets
+        triggered by a schedule, an event or another agent; it loads its baseline
+        context and decides what data and tools it needs; and it produces an output.
+        Notice what's missing from all three steps. <strong>A human should never talk
+        to the agent.</strong> The only human involvement is evaluating the output.
+      </p>
+
+      <h2>A case study: keeping our help center current</h2>
+      <p>
+        The rest of the talk is one real function at Coolhand Labs, told in seven
+        beats. The job is unglamorous and never urgent, which is exactly why it rots:
+        keeping public help center articles describing what the product actually does
+        today. It's worth having at all for three reasons: it helps users — and,
+        increasingly, their agents — understand product features; it's a source of
+        truth our own coding agents cite; and it's better discovery by search engines.
+        The number
+        that made the case internally was one I didn't expect: making the help center
+        public increased our Google traffic 3×.
+      </p>
+      <p>
+        <strong>First, the problem.</strong> Our <code>AGENTS.md</code> says, in bold,
+        that keeping the help center current is part of shipping a user-facing change
+        and not a follow-up — check whether an article documents the thing you
+        changed, and update it in the same piece of work. Every coding agent in the
+        repo reads it. It works — sometimes, sort of: getting the voice and the goals
+        right bloats the prompt and confuses the agent; merge conflicts spike as
+        agents step on each other's edits; I end up manually double-checking whether
+        it even ran; and there's no way to know what any of it costs, so there's no
+        way to know whether it's worthwhile. An instruction is not a function — it
+        fails all three tests above.
+      </p>
+      <p>
+        <strong>Second, turn it into a function.</strong> Take it out of the chatbot
+        and break it into three pieces: propose an idea, write the update, review it.
+        A nightly coordinator fans out one job per source kind, and each one digests
+        every allowlisted file with SHA256 into a source index. That's deliberately
+        not <code>git log --since</code>: from a Sidekiq worker, git depends on the
+        deploy image's clone depth, ref layout and detached-HEAD state, none of which
+        the build guarantees, while a digest per path answers the same question from
+        data we control and survives a rebuild that rewrites mtimes. On top of that
+        index, a signal collector builds the agent's brief out of six deterministic
+        queries — sources whose digest changed, articles whose prose predates a change
+        to a source they cite, articles past their freshness window, sources no
+        article has ever been derived from, features we announced since the last run,
+        and the currently open ideas so it doesn't propose a duplicate. Because the
+        brief is deterministic, the coordinator can
+        ask whether tonight's run is worth paying for before paying for it: if the
+        report is empty, the model never runs and the help center costs nothing that
+        week.
+      </p>
+      <p>
+        The propose step gets twelve tools, counting the shared ones. All of them
+        read; the only one that creates anything is the tool that proposes an idea —
+        it cannot write an article at all. The capability boundary is the tool list
+        rather than a sentence in the prompt asking it politely not to publish,
+        because an agent can ignore an instruction but it cannot call a tool it
+        doesn't have. Its output is a database row with a status, a kind, a source and
+        a deterministic dedupe key, not a paragraph: reviewable, queryable, and
+        carrying provenance. One input surprised me: our agents have a "wildcard" tool
+        that promises to fix whatever is blocking them; across 489 records it was a
+        placebo that never did anything, and they used it anyway. What they wrote
+        turned out to be a documentation backlog, so agent escalations are now a
+        first-class signal in the brief. Accepting an idea is two lines of code that
+        dispatch the write step — the interesting part was never the dispatch, it's
+        everything that decided the dispatch was worth doing.
+      </p>
+      <p>
+        <strong>Third: it's still wrong sometimes.</strong> Probabilistic means it
+        will be, no matter how good the pipeline is. How do we get to trusting it?
+      </p>
+      <p>
+        <strong>Fourth, add review gates on each function, and set a baseline.</strong>
+        There are two approval gates. Agent-proposed ideas land pending and need human
+        triage, because acceptance is what authorizes paid LLM spend on a writer run.
+        And a rewrite of an already-published article stages a revision and waits,
+        because these pages are public, indexed, and quoted verbatim by answer
+        engines. Both gates are correct, and I don't want to remove either — but
+        correct isn't the same as permanent. The baseline they're earning is the same
+        one a good CFO works to: they don't audit every invoice, they true up the
+        numbers periodically, and when the numbers don't true up they fix the process
+        so it can't happen twice.
+      </p>
+      <p>
+        <strong>Fifth: once the baseline is high enough, suspend the gates</strong> —
+        or sample them at a much lower rate. Everything gets reviewed early, while
+        there's no baseline yet. A fraction gets reviewed once accuracy holds up. And
+        review goes back to everything the moment something changes that needs it
+        back: a new source, a new prompt, a spike in rejections. I can't defend the
+        exact sampling number we picked — that's on the open-questions list — but I
+        can defend the shape: review load should track how much you actually trust
+        the function that week, not stay fixed forever.
+      </p>
+      <p>
+        <strong>Sixth: but what about when people forget to review?</strong> Sampled
+        or not, the ideas still sat in a Rails admin table, and I opened it when I
+        remembered to — the same manager from the start of this talk, wearing a
+        different hat. A well-calibrated sample rate still assumes someone opens the
+        queue, and a CRUD table has no cadence of its own; it waits. So we changed the
+        review surface, not the gate. When approvals become the bottleneck, the
+        instinct is to remove the approval; almost always the right move is to make
+        reviewing cheap enough that the approval stops costing anything. A review
+        surface needs three things a CRUD table doesn't have: serialized, so you see
+        one item at a time in order rather than grazing a list for disasters;
+        deduplicated, so it never hands back something you already judged; and
+        time-boxed, with a queue sized so finishing is possible. (Sampling by
+        maturity, from the previous beat, is what decides how much lands in the queue
+        in the first place.) So the review queue became its own endpoint under a
+        <code>/captain</code> namespace — <strong>captainslog</strong> — authenticated
+        with a bearer token from a "Sign in with Coolhand" OAuth flow rather than an
+        admin session cookie, with the dedup filter applied server-side so two devices
+        can't disagree about what's left.
+      </p>
+      <p>
+        Whichever direction the feedback comes from, it only counts if it becomes a
+        change. Rejecting the same proposal three times is a rubric the agent never
+        got. An edit that doesn't turn into a prompt fix, a tool fix or a change to
+        what the agent is allowed to read improved exactly one output.
+      </p>
+
+      <h2>Seventh: where this goes next</h2>
+      <p>
+        Plenty is still unsolved. What's the right sampling rate — everyone picks a
+        number that feels right and nobody can defend it. How do you detect drift
+        when the output is prose and there's no diff to review? What does a good
+        rubric look like for a judgement-heavy function, and who writes it — the
+        engineer or the domain expert? And when is a function mature enough to have
+        no gate at all? We are not there. Saying so plainly is what keeps this a
+        report from the middle of the work, not a victory lap.
+      </p>
+      <p>
+        So the next time working with AI feels like a slog, look at what you actually
+        built. If you're sitting there typing yes, yes, yes, you didn't build an AI
+        function. You hired a worker to micromanage.
+      </p>
+      <p class="muted">
+        Related reading:
+        <a href="https://everythingengineer.substack.com/p/the-captain-strategy-stop-chatting-and-use-ai-functions">The Captain Strategy: stop using AI to become the boss you hate</a>
+        and
+        <a href="https://everythingengineer.substack.com/p/captains-read-the-outputs-a-better-human-agent-ux">Captains don't steer every AI agent turn — they read the logs</a>,
+        in The Everything Engineer. The agent-feedback material comes from
+        <a href="https://michael.carroll.io/talks/2026/your-ai-agent-has-notes/">Your AI Agent Has Notes</a>.
+      </p>
+    </article>
+
+    <script src="assets/deck.js?v=2"></script>
+    <!-- Slide 22 — matches each subagent box to a flow node's fixed width and
+         positions the two row labels. Computed at draw time (not hardcoded) so
+         this survives font/layout changes; redraws on resize and whenever the
+         slide becomes active, since getBoundingClientRect is zeroed while
+         display:none. -->
+    <script>
+      (function () {
+        var wrap = document.querySelector("#slide-22 .decompose-wrap");
+        if (!wrap) return;
+        var aiNode = wrap.querySelector("#step3-ai-node");
+        var revisionNode = wrap.querySelector("#revision-agent-node");
+        var reviewNode = wrap.querySelector("#review-agent-node");
+        var widthTargets = wrap.querySelectorAll(".subagent-row .node");
+        var specializedLabel = wrap.querySelector("#specialized-label");
+        var harnessLabel = wrap.querySelector("#harness-label");
+
+        function point(el, wrapRect, scale) {
+          var r = el.getBoundingClientRect();
+          return {
+            left: (r.left - wrapRect.left) / scale,
+            top: (r.top - wrapRect.top) / scale,
+            bottom: (r.bottom - wrapRect.top) / scale,
+          };
+        }
+
+        function draw() {
+          var W = wrap.offsetWidth,
+            H = wrap.offsetHeight;
+          if (!W || !H) return;
+
+          // match each subagent box to a flow node's fixed width, not a stretched share
+          var nodeWidth = aiNode.offsetWidth;
+          if (nodeWidth) {
+            widthTargets.forEach(function (t) {
+              t.style.width = nodeWidth + "px";
+            });
+          }
+
+          var wrapRect = wrap.getBoundingClientRect();
+          var scale = wrapRect.width / W;
+
+          var revision = point(revisionNode, wrapRect, scale);
+          var review = point(reviewNode, wrapRect, scale);
+
+          // row labels, centered in the gap between the wrap's left edge and
+          // the row's own leftmost box, and vertically centered on the row
+          if (specializedLabel) {
+            specializedLabel.style.left = revision.left / 2 + "px";
+            specializedLabel.style.top = (revision.top + revision.bottom) / 2 + "px";
+          }
+          if (harnessLabel) {
+            harnessLabel.style.left = review.left / 2 + "px";
+            harnessLabel.style.top = (review.top + review.bottom) / 2 + "px";
+          }
+        }
+
+        window.addEventListener("resize", draw);
+        window.addEventListener("load", draw);
+
+        var slide = document.getElementById("slide-22");
+        new MutationObserver(function () {
+          if (slide.classList.contains("is-active")) draw();
+        }).observe(slide, { attributes: true, attributeFilter: ["class"] });
+
+        if (slide.classList.contains("is-active")) draw();
+      })();
+    </script>
+  </body>
+</html>

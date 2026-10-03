@@ -1,0 +1,1469 @@
+/* =============================================================================
+   theme.css — talk-specific palette + motif for
+   "Stop being the boss you hate: build AI functions, not chatbots"
+
+   Loaded AFTER deck.css. Direction: shares the "Your AI Agent Has Notes" look —
+   a fully dark charcoal/zinc base (every slide is dark) with a warm
+   sticky-note amber accent. Amber stands for the *function*: the calm,
+   testable, unattended thing. A brighter red is held back for the antipattern
+   pole (the chat loop, the micromanager) and used sparingly.
+   All colors are tokens, so the palette is adjustable in one place.
+
+   Framework gotchas:
+     • deck.css pins `.lead` with !important — overriding it needs !important.
+     • tools/og-cover.mjs regex-scrapes custom properties out of this whole
+       file (comments included), so never re-bind the foreground tokens inside
+       a scoped rule such as the dark-slide one, and never write a literal
+       custom-property declaration in a comment — both leak into the social card.
+     • `.slide p` (0,1,1) beats a bare `.class` (0,1,0). Scope with `.slide `.
+   ========================================================================== */
+:root {
+  /* warm sticky-note accent (amber) layered over a dark zinc base */
+  --accent: 38 92% 50%;
+  --accent-foreground: 26 83% 14%;
+
+  /* the antipattern pole, used sparingly (brighter so it reads on dark) */
+  --bad: 4 82% 64%;
+
+  /* Coolhand Labs brand blue (sampled from the logo / coolhandlabs.com) */
+  --coolhand-blue: #0981ec;
+
+  /* Dark palette promoted to the base → all slides render dark. */
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 240 6% 10%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 6% 10%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 240 5.9% 10%;
+  --secondary: 240 4% 16%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 4% 16%;
+  --muted-foreground: 240 5% 65%;
+  --border: 240 4% 24%;
+  --input: 240 4% 24%;
+  --ring: 240 5% 65%;
+
+  /* code panels sit one step above the base */
+  --panel: 240 6% 10%;
+  --panel-fg: 0 0% 96%;
+  --panel-border: 240 4% 24%;
+}
+
+/* ---- Dark slides ---------------------------------------------------------
+   The base is already dark, so this is an explicit no-op alias kept on the
+   title/close slides for clarity. ----------------------------------------- */
+.slide--dark {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+/* Make the asset placeholders read clearly on the dark base. */
+.visual {
+  border-color: hsl(var(--muted-foreground) / 0.35);
+}
+
+/* ---- Shared accents ------------------------------------------------------ */
+.accent {
+  color: hsl(var(--accent));
+}
+
+.bad {
+  color: hsl(var(--bad));
+}
+
+.underline-accent {
+  text-decoration: underline;
+  text-decoration-color: hsl(var(--accent));
+  text-decoration-thickness: 0.12em;
+  text-underline-offset: 0.15em;
+}
+
+.transcript a {
+  color: hsl(var(--accent));
+}
+
+/* emphatic one-word line — deck.css pins .lead's size, so this gets its own */
+.slide .shout {
+  color: hsl(var(--foreground));
+  max-width: none;
+  font-size: 3.2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin: 2.25rem 0 0;
+}
+
+/* =============================================================================
+   Sticky-note motif (shared with "Your AI Agent Has Notes")
+   ========================================================================== */
+.note {
+  position: relative;
+  display: inline-block;
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  padding: 1.5rem 1.75rem;
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.3;
+  border-radius: 2px;
+  box-shadow: 0 12px 24px hsl(240 10% 3.9% / 0.18),
+    0 2px 4px hsl(240 10% 3.9% / 0.12);
+  max-width: 30ch;
+}
+
+.note--tilt {
+  transform: rotate(-2.2deg);
+}
+
+/* a tiny "tape" strip on top of a note */
+.note::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
+  width: 84px;
+  height: 22px;
+  background: hsl(0 0% 100% / 0.45);
+  border: 1px solid hsl(0 0% 100% / 0.35);
+}
+
+.note small {
+  display: block;
+  font-weight: 500;
+  font-size: 0.8em;
+  opacity: 0.75;
+  margin-top: 0.4rem;
+}
+
+/* =============================================================================
+   Slide 2 — the manager everyone has worked for
+   ========================================================================== */
+.gripes {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  width: 100%;
+  text-align: left;
+}
+
+.gripes li {
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  padding: 1rem 1.4rem;
+  border-left: 5px solid hsl(var(--bad));
+  background: hsl(var(--muted));
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+/* =============================================================================
+   Slide 4 — THE motif: the yes-yes-yes loop, as a chat transcript
+   ========================================================================== */
+.loop {
+  margin: 1.4rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 1000px;
+  text-align: left;
+}
+
+.loop .turn {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius);
+  font-size: 1.18rem;
+  line-height: 1.35;
+}
+
+.loop .who {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.loop .turn--ai {
+  background: hsl(var(--secondary));
+}
+
+.loop .turn--ai .who {
+  color: hsl(var(--muted-foreground));
+}
+
+.loop .turn--you {
+  background: hsl(var(--bad) / 0.12);
+}
+
+.loop .turn--you .who {
+  color: hsl(var(--bad));
+}
+
+/* the run of yeses, tightened up so the repetition is the visual */
+.loop .turn--yes {
+  padding-top: 0.28rem;
+  padding-bottom: 0.28rem;
+  font-weight: 700;
+}
+
+.loop .coda {
+  margin-top: 0.7rem;
+  font-size: 1.18rem;
+  font-style: italic;
+  color: hsl(var(--muted-foreground));
+  padding-left: 0.9rem;
+}
+
+/* =============================================================================
+   Bulleted lists
+   ========================================================================== */
+.bullets {
+  list-style: none;
+  margin: 1.6rem 0 0;
+  padding: 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.bullets li {
+  position: relative;
+  padding-left: 2rem;
+  font-size: 1.42rem;
+  line-height: 1.4;
+}
+
+.bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.85rem;
+  height: 0.2rem;
+  border-radius: 2px;
+  background: hsl(var(--accent));
+}
+
+/* Slide 36 — a dense code+bullets layout needs a smaller, tighter list to fit the stage */
+.bullets--tight {
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+
+.bullets--tight li {
+  font-size: 1.15rem;
+  line-height: 1.3;
+}
+
+/* representative emoji in place of the plain dash marker */
+.bullets--emoji li {
+  padding-left: 2.4rem;
+}
+
+.bullets--emoji li::before {
+  content: none;
+}
+
+.bullets--emoji .emoji-marker {
+  position: absolute;
+  left: 0;
+  top: 0.08em;
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
+
+/* =============================================================================
+   Numbered lists — the three properties of a function, the agent's three steps
+   ========================================================================== */
+.takeaways {
+  counter-reset: take;
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.takeaways li {
+  counter-increment: take;
+  position: relative;
+  padding-left: 3rem;
+  font-size: 1.4rem;
+  line-height: 1.4;
+}
+
+.takeaways li::before {
+  content: counter(take);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2.1rem;
+  height: 2.1rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+/* =============================================================================
+   Code panels — always dark
+   ========================================================================== */
+.codeblock {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  line-height: 1.55;
+  background: hsl(var(--panel));
+  color: hsl(var(--panel-fg));
+  border: 1px solid hsl(var(--panel-border));
+  border-radius: var(--radius);
+  padding: 1.25rem 1.6rem;
+  margin: 1.4rem auto 0;
+  width: fit-content;
+  max-width: 100%;
+  white-space: pre;
+  overflow: hidden;
+  box-shadow: 0 10px 30px hsl(240 10% 3.9% / 0.4);
+}
+
+.codeblock .k { color: #7aa2f7; } /* keywords */
+.codeblock .m { color: #7dcfff; } /* method / class / constant names */
+.codeblock .s { color: #9ece6a; } /* strings */
+.codeblock .c { color: hsl(var(--muted-foreground)); } /* comments */
+.codeblock .hl { color: hsl(var(--accent)); font-weight: 650; } /* the line that matters */
+
+/* the pointer annotation: "← and you, forever, right here" */
+.codeblock .ptr {
+  color: hsl(var(--bad));
+  font-weight: 650;
+}
+
+.codeblock--lg {
+  font-size: 1.28rem;
+}
+
+.codeblock .rule {
+  display: block;
+  border-top: 1px solid hsl(var(--panel-border));
+  margin: 0.7rem 0;
+}
+
+/* =============================================================================
+   Slide 10 — two functions, side by side
+   ========================================================================== */
+.twoup {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 1.6rem;
+  margin-top: 1.6rem;
+  text-align: left;
+  align-items: stretch;
+}
+
+.twoup .fn {
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  background: hsl(var(--card));
+  padding: 1.3rem 1.5rem;
+}
+
+.twoup .fn h3 {
+  margin: 0 0 0.8rem;
+  font-size: 1.05rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+}
+
+.twoup .fn .io {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  line-height: 1.7;
+}
+
+.twoup .fn p {
+  font-size: 1.1rem;
+  margin-top: 0.8rem;
+}
+
+/* Ruby call + result, in the same palette as .codeblock */
+.twoup .fn .io .m { color: #7dcfff; }
+.twoup .fn .io .c { color: hsl(var(--muted-foreground)); }
+
+/* =============================================================================
+   Slide 23 — the gates move as confidence grows
+   ========================================================================== */
+.gates {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 1.75rem;
+  text-align: left;
+}
+
+.gates .gate {
+  border-radius: var(--radius);
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card));
+  padding: 1.2rem 1.35rem;
+  position: relative;
+}
+
+.gates .gate .when {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+}
+
+.gates .gate .what {
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin-top: 0.35rem;
+}
+
+.gates .gate .why {
+  font-size: 1.02rem;
+  color: hsl(var(--muted-foreground));
+  margin-top: 0.5rem;
+  line-height: 1.35;
+}
+
+.gates .gate--now { border-color: hsl(var(--bad) / 0.45); }
+.gates .gate--now .what { color: hsl(var(--bad)); }
+.gates .gate--soon { border-color: hsl(var(--accent) / 0.35); }
+.gates .gate--later { border-color: hsl(var(--accent) / 0.6); }
+.gates .gate--later .what { color: hsl(var(--accent)); }
+
+/* =============================================================================
+   Slide 26 — the time box, as a day
+   ========================================================================== */
+.day {
+  margin: 2rem auto 0;
+  width: 100%;
+  max-width: 940px;
+}
+
+.day-bar {
+  display: flex;
+  height: 58px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid hsl(var(--border));
+}
+
+.day-bar span {
+  display: grid;
+  place-items: center;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.day-bar .review {
+  width: 25%;
+  background: hsl(var(--accent) / 0.16);
+  color: hsl(var(--accent));
+  border-right: 2px solid hsl(var(--accent));
+}
+
+.day-bar .rest {
+  width: 75%;
+  background: hsl(var(--secondary));
+  color: hsl(var(--muted-foreground));
+}
+
+/* =============================================================================
+   Slide 28 — agent quotes, styled as log lines
+   ========================================================================== */
+.logs {
+  list-style: none;
+  margin: 1.4rem 0 0;
+  padding: 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  width: 100%;
+}
+
+.logs li {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  line-height: 1.4;
+  padding: 0.55rem 1rem;
+  border-left: 3px solid hsl(var(--accent) / 0.5);
+  background: hsl(var(--muted));
+  border-radius: 0 6px 6px 0;
+}
+
+.logs li .id {
+  color: hsl(var(--muted-foreground));
+  font-size: 0.9rem;
+  margin-left: 0.5rem;
+}
+
+/* =============================================================================
+   Open problems
+   ========================================================================== */
+.openq {
+  list-style: none;
+  margin: 1.4rem 0 0;
+  padding: 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+}
+
+.openq li {
+  position: relative;
+  padding-left: 2.6rem;
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
+
+.openq li::before {
+  content: "?";
+  position: absolute;
+  left: 0;
+  top: -0.05em;
+  width: 1.85rem;
+  height: 1.85rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 2px solid hsl(var(--accent) / 0.5);
+  color: hsl(var(--accent));
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+/* =============================================================================
+   QR treatments + side-by-side layouts
+   ========================================================================== */
+.qr img {
+  width: 128px;
+  height: 128px;
+  background: #fff;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.qr-label {
+  font-size: 0.95rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.qr--side {
+  gap: 0.6rem;
+}
+
+/* matches deck.css's `.qr.qr--lg img` specificity (0,2,1) so this actually wins —
+   a bare `.qr--lg img` (0,1,1) loses that tie despite loading after it */
+.qr.qr--lg img {
+  width: 141px;
+  height: 141px;
+}
+
+.qr--lg {
+  padding-right: 0.75rem;
+}
+
+.qr--side .newsletter-eyebrow {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+}
+
+/* the wildcard-talk QR (slide 24) — qr--lg is unique to it in this deck */
+.qr--lg .newsletter-eyebrow {
+  color: hsl(var(--accent));
+  text-align: center;
+}
+
+.qr--lg .qr-label {
+  color: hsl(var(--accent));
+}
+
+.with-side {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+}
+
+.with-side .side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* =============================================================================
+   Slide 30 — bullets on the left, the captainslog review screenshot filling
+   the right side
+   ========================================================================== */
+.review-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 2.5rem;
+  align-items: start;
+  margin-top: 1.75rem;
+  width: 100%;
+  text-align: left;
+}
+
+.review-layout .bullets {
+  margin-top: 0.5rem;
+}
+
+.review-shot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.review-shot img {
+  display: block;
+  width: 100%;
+  max-height: 440px;
+  object-fit: contain;
+  border-radius: var(--radius);
+  border: 1px solid hsl(var(--border));
+  box-shadow: 0 16px 40px hsl(240 10% 3.9% / 0.5);
+}
+
+.review-shot figcaption {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: hsl(var(--muted-foreground));
+  font-family: var(--font-mono);
+}
+
+
+/* =============================================================================
+   CASE STUDY — the four versions of the help center function
+   ========================================================================== */
+
+/* Version chips: v0 → v3, used on the roadmap slide and as a kicker elsewhere */
+.versions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 1.75rem;
+  text-align: left;
+}
+
+.versions .v {
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  background: hsl(var(--card));
+  padding: 1.1rem 1.2rem;
+}
+
+.versions .v .tag {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: hsl(var(--muted-foreground));
+}
+
+.versions .v .name {
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin-top: 0.3rem;
+  line-height: 1.25;
+}
+
+.versions .v .cost {
+  font-size: 0.98rem;
+  color: hsl(var(--muted-foreground));
+  margin-top: 0.45rem;
+  line-height: 1.35;
+}
+
+.versions .v--bad { border-color: hsl(var(--bad) / 0.45); }
+.versions .v--bad .tag { color: hsl(var(--bad)); }
+.versions .v--good { border-color: hsl(var(--accent) / 0.55); }
+.versions .v--good .tag { color: hsl(var(--accent)); }
+
+/* the pipeline: trigger → signals → propose → gate → write */
+.flow {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.node {
+  flex: 1;
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  background: hsl(var(--card));
+  padding: 0.95rem 0.85rem;
+  text-align: left;
+}
+
+.node .step {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+}
+
+.node .title {
+  font-size: 1.575rem;
+  font-weight: 750;
+  line-height: 1.25;
+  margin-top: 0.25rem;
+}
+
+.node .sub {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: hsl(var(--muted-foreground));
+  margin-top: 0.4rem;
+  line-height: 1.3;
+  word-break: break-word;
+}
+
+.node--human {
+  border-color: hsl(var(--accent) / 0.6);
+  background: hsl(var(--accent) / 0.06);
+}
+
+.node--human .step { color: hsl(var(--accent)); }
+
+/* Slide 22 — Human Review keeps the plain flow-box look here, since the
+   accent/amber highlight would compete with the two new subagent-row colors */
+#slide-22 .node--human {
+  border-color: hsl(var(--border));
+  background: hsl(var(--card));
+}
+
+/* =============================================================================
+   Step dividers (16, 18, 21, 27) — a compact copy of slide 13's pipeline,
+   pinned above the kicker, with the current step's box highlighted
+   ========================================================================== */
+.flow--mini {
+  margin: 0 0 1.75rem;
+  gap: 0.35rem;
+  justify-content: center;
+}
+
+.flow--mini .node {
+  padding: 0.5rem 0.65rem;
+  text-align: center;
+  flex: 0 1 auto;
+}
+
+.flow--mini .node .title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  margin-top: 0;
+  white-space: nowrap;
+}
+
+.flow--mini .arrow {
+  font-size: 0.85rem;
+}
+
+.flow--mini .node--current {
+  border-color: hsl(var(--accent) / 0.7);
+  background: hsl(var(--accent) / 0.12);
+}
+
+.flow--mini .node--current .title {
+  color: hsl(var(--accent));
+}
+
+/* Slide 13 — Human Review starts as a plain flow box; only picks up the
+   amber highlight once the pile-note beat (fragment 2) reveals, so the
+   emphasis lands with the click instead of jumping out immediately */
+#slide-13 .node--human {
+  border-color: hsl(var(--border));
+  background: hsl(var(--card));
+}
+
+#slide-13 .node--human:has(.pile-note.is-visible) {
+  border-color: hsl(var(--accent) / 0.6);
+  background: hsl(var(--accent) / 0.06);
+}
+
+#slide-22 .node--human .step {
+  color: hsl(var(--muted-foreground));
+}
+
+.flow .arrow {
+  align-self: center;
+  color: hsl(var(--muted-foreground));
+  font-size: 1.2rem;
+  flex: 0 0 auto;
+}
+
+/* Slide 23 — the AI box gets struck out, replaced by three named subagents,
+   with arrows fanned from the crossed-out box down to each new one */
+.node-x {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: hsl(var(--bad));
+  background: hsl(240 10% 3.9% / 0.6);
+  border-radius: var(--radius);
+}
+
+.subagent-row {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2.25rem;
+  width: 100%;
+}
+
+/* the Review Agent row, a second tier below Revision/Features — bidirectional
+   arrows (drawn by the script below) show it reviewing their outputs */
+.subagent-row--review {
+  margin-top: 2rem;
+}
+
+/* two distinct outline colors, one per subagent group, echoed by the row labels */
+.subagent-row--specialized .node {
+  border-color: hsl(210 90% 60% / 0.6);
+}
+
+.subagent-row--review .node {
+  border-color: hsl(160 70% 45% / 0.6);
+}
+
+/* fixed width, set to match a flow node's rendered width via the script below */
+.subagent-row .node {
+  flex: 0 0 auto;
+}
+
+/* "top"/"left" are set by the script below to the midpoint of the gap between
+   the wrap's left edge and the row's boxes, so transform centers on both axes */
+.row-label {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 0.4em 0.9em;
+  border-radius: 999px;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card));
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: hsl(var(--muted-foreground));
+}
+
+.row-label--specialized {
+  border-color: hsl(210 90% 60% / 0.6);
+  color: hsl(210 90% 70%);
+}
+
+.row-label--harness {
+  border-color: hsl(160 70% 45% / 0.6);
+  color: hsl(160 70% 60%);
+}
+
+/* =============================================================================
+   Slide 23 — the same four subagents from slide 22, each labeled with the
+   model tier it actually runs on
+   ========================================================================== */
+.model-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+  max-width: 760px;
+  margin-inline: auto;
+}
+
+.model-grid .node {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.model-badge {
+  margin-top: 0.7rem;
+}
+
+.model-badge--mid {
+  border-color: hsl(var(--accent) / 0.5);
+  background: hsl(var(--accent) / 0.12);
+  color: hsl(var(--accent));
+}
+
+.model-badge--mini {
+  border-color: hsl(var(--border));
+  background: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+}
+
+.model-footnote {
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: hsl(var(--muted-foreground));
+  text-align: center;
+}
+
+/* the signal report: deterministic queries that decide whether to pay for a run */
+.signals {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem 1.5rem;
+  margin-top: 1.5rem;
+  text-align: left;
+  list-style: none;
+  padding: 0;
+}
+
+.signals li {
+  font-size: 1.12rem;
+  line-height: 1.35;
+  padding-left: 1.4rem;
+  position: relative;
+}
+
+.signals li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: hsl(var(--accent));
+  font-weight: 700;
+}
+
+.signals li code {
+  font-size: 0.95rem;
+}
+
+/* file path label above a real code block, so quoted code is attributable */
+.srcpath {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: hsl(var(--muted-foreground));
+  margin: 1.3rem auto -1rem;
+  text-align: left;
+  width: fit-content;
+  max-width: 100%;
+  display: block;
+  padding-left: 0.2rem;
+}
+
+/* =============================================================================
+   Slides 2–3 — About me + Coolhand Labs (shared with "Your AI Agent Has Notes")
+   ========================================================================== */
+.about {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: 2.75rem;
+  align-items: center;
+  width: 100%;
+}
+
+.speaker-card {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  margin: 0 auto;
+  border-radius: var(--radius);
+  box-shadow: 0 16px 40px hsl(240 10% 3.9% / 0.6);
+}
+
+.about-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Larger, clearly-a-newsletter QR */
+.qr--newsletter .newsletter-eyebrow {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: hsl(var(--accent));
+}
+
+.qr--newsletter img {
+  width: 184px;
+  height: 184px;
+}
+
+.qr--newsletter .qr-label {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+}
+
+/* two-rung credibility timeline */
+.timeline {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.timeline .rung {
+  border-top: 3px solid hsl(var(--accent));
+  padding-top: 1rem;
+}
+
+.timeline .rung .rung-when {
+  font-size: 0.85rem;
+  color: hsl(var(--muted-foreground));
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.timeline .rung .rung-what {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 0.3rem;
+}
+
+.timeline .rung p {
+  font-size: 1.15rem;
+}
+
+/* stacked single-column variant, for the narrow about-side sidebar — declared
+   after the base .timeline rules since specificity ties and must win on order */
+.timeline--stacked {
+  grid-template-columns: 1fr;
+  gap: 0.6rem;
+  margin-top: 0;
+  width: 100%;
+}
+
+.timeline--stacked .rung {
+  padding-top: 0.4rem;
+}
+
+.timeline--stacked .rung .rung-what {
+  font-size: 1.25rem;
+}
+
+.timeline--stacked .rung p {
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.coolhand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.coolhand-mark {
+  height: 120px;
+  width: 120px;
+  display: block;
+}
+
+.coolhand-wordmark {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--coolhand-blue);
+}
+
+/* COO bullets reuse the numbered .takeaways list, tightened for this slide */
+.coo-list {
+  margin-top: 1rem;
+  gap: 0.85rem;
+}
+
+.coo-list li {
+  font-size: 1.35rem;
+  font-weight: 500;
+  padding-left: 2.75rem;
+}
+
+.coo-list li strong {
+  font-weight: 750;
+}
+
+.coo-list li::before {
+  content: none;
+}
+
+/* representative emoji icon, replacing the plain numbered badge */
+.coo-list .coo-icon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.9rem;
+  height: 1.9rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: hsl(var(--accent) / 0.15);
+  border: 1px solid hsl(var(--accent) / 0.4);
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+/* =============================================================================
+   Slides 4 + 6 — the two working patterns (kept visually neutral for the vote)
+   ========================================================================== */
+.patterns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1.75rem;
+  text-align: left;
+  align-items: stretch;
+}
+
+.pattern {
+  position: relative;
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  background: hsl(var(--card));
+  padding: 1.4rem 1.6rem 1.5rem;
+}
+
+.pattern .tag {
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+}
+
+.pattern ul {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.pattern li {
+  position: relative;
+  padding-left: 1.5rem;
+  font-size: 1.3rem;
+  line-height: 1.35;
+}
+
+.pattern li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 0.7rem;
+  height: 0.16rem;
+  border-radius: 2px;
+  background: hsl(var(--muted-foreground));
+}
+
+/* the reveal on slide 6: pattern A is an AI function */
+.pattern-badge {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 0.4em 0.75em;
+  border-radius: 999px;
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+/* the antipattern twin of .pattern-badge — labels "Your chatbot" on environment B */
+.pattern-badge--bad {
+  background: hsl(var(--bad));
+  color: hsl(240 10% 8%);
+}
+
+/* the "Environment X is the ___ paradigm." reveal below the two cards */
+/* the "Environment X is the ___ paradigm." reveal — anchored under the specific
+   card it's about, with an arrow pointing up at that card */
+.env-reveal {
+  position: absolute;
+  top: calc(100% + 20px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 360px;
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 750;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  color: hsl(var(--foreground));
+}
+
+.env-reveal-arrow {
+  display: block;
+  font-size: 1.5rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  color: hsl(var(--accent));
+}
+
+.env-reveal--bad .env-reveal-arrow {
+  color: hsl(var(--bad));
+}
+
+/* =============================================================================
+   Slide 31 — hand-built SEO/AEO impressions chart (Search Console data,
+   each line min-max scaled to its own range — the point is the shape of the
+   trend, not the absolute numbers, so there's deliberately no y-axis).
+   ========================================================================== */
+/* top-anchor instead of the base .slide's vertical centering, so the chart
+   and the cost-per-PR beat both fit without crowding the bottom edge */
+#slide-31 {
+  justify-content: flex-start;
+  padding-top: 3.25rem;
+}
+
+.impressions-chart svg {
+  display: block;
+  width: 100%;
+  max-width: 760px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.impressions-axis {
+  stroke: hsl(var(--border));
+  stroke-width: 1;
+}
+
+.impressions-line {
+  fill: none;
+  stroke-width: 3.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.impressions-line--seo {
+  stroke: hsl(var(--accent));
+}
+
+.impressions-line--aeo {
+  stroke: var(--coolhand-blue);
+}
+
+.impressions-date {
+  fill: hsl(var(--muted-foreground));
+  font-size: 13px;
+}
+
+.impressions-legend circle {
+  stroke: none;
+}
+
+.impressions-legend-dot--seo {
+  fill: hsl(var(--accent));
+}
+
+.impressions-legend-dot--aeo {
+  fill: var(--coolhand-blue);
+}
+
+.impressions-legend text {
+  fill: hsl(var(--muted-foreground));
+  font-size: 15px;
+  dominant-baseline: middle;
+}
+
+figure.impressions-chart figcaption {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: hsl(var(--muted-foreground));
+}
+
+/* =============================================================================
+   Slide 10 — the arrow callout pointing at the one step a human touches
+   ========================================================================== */
+.human-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 1.25rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  background: hsl(var(--accent) / 0.12);
+  border: 1px solid hsl(var(--accent) / 0.4);
+  color: hsl(var(--accent));
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.human-note-arrow {
+  font-size: 1.15em;
+}
+
+/* =============================================================================
+   Slide 1 — the Space Quest III cubicle-farm screenshot, framed like a photo
+   ========================================================================== */
+.retro-frame {
+  text-align: center;
+}
+
+.retro-shot {
+  display: block;
+  width: 360px;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 6px;
+  border: 2px solid hsl(var(--border));
+  box-shadow: 0 16px 40px hsl(240 10% 3.9% / 0.6);
+  image-rendering: pixelated;
+}
+
+/* 25% larger and nudged left/down 10%, for slide 6's image — its own modifier
+   so other retro-shot uses are unaffected */
+.retro-shot--lg {
+  width: 450px;
+  transform: translate(-10%, 10%);
+}
+
+/* the tagline, relocated below the screenshot — deck.css pins .lead's size
+   with !important, so this needs !important too to win */
+.title-tagline {
+  margin-top: 1rem !important;
+  font-size: 2.25rem !important;
+}
+
+/* scoped as `.slide .retro-caption` — `.slide p` is (0,1,1) and beats a bare class */
+.slide .retro-caption {
+  margin: 0.6rem 0 0;
+  max-width: 360px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+  color: hsl(var(--muted-foreground));
+}
+
+/* the "follow along" QR, demoted to a quiet corner now that the screenshot is the hero */
+.qr--corner {
+  position: absolute;
+  right: 48px;
+  bottom: 36px;
+}
+
+.qr--corner img {
+  width: 256px;
+  height: 256px;
+}
+
+.qr--corner .qr-label {
+  font-size: 1.5rem;
+}
+
+/* speaker byline, demoted to a quiet corner — mirrors .qr--corner for balance */
+.speaker-byline {
+  position: absolute;
+  left: 64px;
+  bottom: 38px;
+  margin: 0 !important;
+  max-width: none !important;
+}
+
+/* =============================================================================
+   Slide 14 — the arrow callout hanging off the Human Review box
+   ========================================================================== */
+.pile-note {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  text-align: center;
+  padding: 0.6rem 0.85rem;
+  border-radius: var(--radius);
+  background: hsl(var(--accent) / 0.12);
+  border: 1px solid hsl(var(--accent) / 0.4);
+  color: hsl(var(--accent));
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.pile-note-arrow {
+  display: block;
+  font-size: 1.3rem;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+/* =============================================================================
+   Slide 11 — the case-study chapter marker, standing in for the usual kicker
+   ========================================================================== */
+.slide .case-study-banner {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  margin: 0 0 1.3rem;
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  color: hsl(var(--foreground));
+}
+
+.case-study-tag {
+  display: inline-block;
+  flex: 0 0 auto;
+  padding: 0.5rem 1.3rem;
+  border-radius: 999px;
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  font-size: 1.7rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* scoped as `.slide .case-study-question` — `.slide h2` is (0,1,1) and beats a
+   bare class. A quieter, lighter question under the bold case-study banner. */
+.slide .case-study-question {
+  font-size: 2rem;
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: 0;
+  color: hsl(var(--muted-foreground));
+}
