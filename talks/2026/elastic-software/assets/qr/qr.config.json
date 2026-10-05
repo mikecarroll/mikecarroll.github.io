@@ -1,0 +1,17 @@
+{
+  "comment": "Drives build-qr.mjs. Each entry => <name>.svg in this folder. Edit a URL, then rerun `npm run qr -- ../talks/2026/elastic-software`.",
+  "codes": [
+    {
+      "name": "talk",
+      "url": "https://michael.carroll.io/talks/2026/elastic-software/"
+    },
+    {
+      "name": "substack",
+      "url": "https://everythingengineer.substack.com"
+    },
+    {
+      "name": "coolhand",
+      "url": "https://coolhandlabs.com/?utm_source=xo-ruby-toronto-2026&utm_medium=talk-qr&utm_campaign=elastic-software"
+    }
+  ]
+}

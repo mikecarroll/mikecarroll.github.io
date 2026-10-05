@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# bin/run_v1 — runs all 35 fixtures through the single v1 parser. Expected:
+# the 20 canonical-format fixtures pass; the 15 new-format fixtures fail,
+# because v1 was only ever built to understand one shape.
+require "json"
+require_relative "../lib/v1/parser"
+
+root = File.expand_path("..", __dir__)
+manifest = JSON.parse(File.read(File.join(root, "fixtures", "manifest.json")))
+
+passed = 0
+failed = 0
+
+manifest.each do |entry|
+  raw = File.read(File.join(root, "fixtures", entry.fetch("file")))
+
+  begin
+    record = V1::Parser.new(raw).parse
+    if record.matches?(entry.fetch("expected"))
+      passed += 1
+      puts "PASS  #{entry.fetch('file')}"
+    else
+      failed += 1
+      puts "FAIL  #{entry.fetch('file')} (parsed but values don't match expected)"
+    end
+  rescue V1::UnrecognizedFormatError => e
+    failed += 1
+    puts "FAIL  #{entry.fetch('file')} (#{e.message})"
+  end
+end
+
+puts
+puts "v1: #{passed}/#{manifest.size} passed, #{failed}/#{manifest.size} failed"

@@ -1,0 +1,64 @@
+{
+  "fhirVersion": "R4",
+  "exportedAt": "2026-01-15T09:00:00Z",
+  "sourceSystem": "MedVantage-EHR",
+  "subject": {
+    "resourceType": "Patient",
+    "fullName": "Alica Powlowski",
+    "birthSex": "446131000124102",
+    "mrn": "MV-8c7271df",
+    "facility": "Lakeside Regional"
+  },
+  "diagnosisList": [
+    {
+      "codeSystem": "SNOMED-CT",
+      "codeValue": "195662009",
+      "label": "Acute viral pharyngitis (disorder)",
+      "recordedBy": "Dr. A. Whitfield"
+    },
+    {
+      "codeSystem": "SNOMED-CT",
+      "codeValue": "444814009",
+      "label": "Viral sinusitis (disorder)",
+      "recordedBy": "Dr. A. Whitfield"
+    },
+    {
+      "codeSystem": "SNOMED-CT",
+      "codeValue": "87433001",
+      "label": "Pulmonary emphysema (disorder)",
+      "recordedBy": "Dr. A. Whitfield"
+    }
+  ],
+  "symptomList": [
+    {
+      "description": "chills",
+      "reportedAt": "2026-01-15T09:00:00Z",
+      "severity": "mild"
+    },
+    {
+      "description": "congestion",
+      "reportedAt": "2026-01-15T09:01:00Z",
+      "severity": "moderate"
+    },
+    {
+      "description": "insomnia",
+      "reportedAt": "2026-01-15T09:02:00Z",
+      "severity": "severe"
+    },
+    {
+      "description": "abdominal pain",
+      "reportedAt": "2026-01-15T09:03:00Z",
+      "severity": "mild"
+    }
+  ],
+  "billing": {
+    "payerId": "PAYER-4471",
+    "priorAuth": false,
+    "copayCents": 2500
+  },
+  "insurance": {
+    "planName": "Lakeside PPO Gold",
+    "groupNumber": "GRP-8842",
+    "memberSince": "2019-03-01"
+  }
+}

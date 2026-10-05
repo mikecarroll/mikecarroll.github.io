@@ -1,0 +1,49 @@
+{
+  "fhirVersion": "R4",
+  "exportedAt": "2026-01-15T09:00:00Z",
+  "sourceSystem": "MedVantage-EHR",
+  "subject": {
+    "resourceType": "Patient",
+    "fullName": "Alexia Rice",
+    "birthSex": "other",
+    "mrn": "MV-b541fe39",
+    "facility": "Lakeside Regional"
+  },
+  "diagnosisList": [
+    {
+      "codeSystem": "SNOMED-CT",
+      "codeValue": "72892002",
+      "label": "Normal pregnancy",
+      "recordedBy": "Dr. A. Whitfield"
+    },
+    {
+      "codeSystem": "SNOMED-CT",
+      "codeValue": "19169002",
+      "label": "Miscarriage in first trimester",
+      "recordedBy": "Dr. A. Whitfield"
+    },
+    {
+      "codeSystem": "SNOMED-CT",
+      "codeValue": "35999006",
+      "label": "Blighted ovum",
+      "recordedBy": "Dr. A. Whitfield"
+    }
+  ],
+  "symptomList": [
+    {
+      "description": "fatigue",
+      "reportedAt": "2026-01-15T09:00:00Z",
+      "severity": "mild"
+    }
+  ],
+  "billing": {
+    "payerId": "PAYER-4471",
+    "priorAuth": false,
+    "copayCents": 2500
+  },
+  "insurance": {
+    "planName": "Lakeside PPO Gold",
+    "groupNumber": "GRP-8842",
+    "memberSince": "2019-03-01"
+  }
+}

@@ -1,0 +1,1089 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Elastic Software: Calculating tech debt using LLM tokens — Michael Carroll</title>
+
+    <!-- ===================== SEO / AEO ===================== -->
+    <meta
+      name="description"
+      content="Engineers have never been able to price tech debt. LLM tokens change that. A code-forward Ruby talk on quantifying tech debt in tokens — and the elastic software pattern that falls out of it."
+    />
+    <meta
+      name="keywords"
+      content="tech debt, technical debt, LLM tokens, tokenomics, elastic software, Ruby, RubyLLM, software architecture, Coolhand Labs, Michael Carroll, XO Ruby Toronto 2026"
+    />
+    <meta name="author" content="Michael Carroll" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#09090b" />
+    <link
+      rel="canonical"
+      href="https://michael.carroll.io/talks/2026/elastic-software/"
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Elastic Software: Calculating tech debt using LLM tokens" />
+    <meta
+      property="og:description"
+      content="Engineers have never been able to price tech debt. LLM tokens change that — and reorder how you architect software."
+    />
+    <meta
+      property="og:url"
+      content="https://michael.carroll.io/talks/2026/elastic-software/"
+    />
+    <meta property="og:site_name" content="Michael Carroll" />
+    <meta
+      property="og:image"
+      content="https://michael.carroll.io/talks/2026/elastic-software/assets/img/og-cover.png"
+    />
+    <meta property="og:image:alt" content="Elastic Software — talk title card" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta name="twitter:title" content="Elastic Software: Calculating tech debt using LLM tokens" />
+    <meta
+      name="twitter:description"
+      content="Engineers have never been able to price tech debt. LLM tokens change that. Michael Carroll, XO Ruby Toronto 2026."
+    />
+    <meta
+      name="twitter:image"
+      content="https://michael.carroll.io/talks/2026/elastic-software/assets/img/og-cover.png"
+    />
+
+    <link rel="stylesheet" href="assets/deck.css?v=1" />
+    <link rel="stylesheet" href="assets/theme.css?v=1" />
+
+    <!-- ===================== Structured data (JSON-LD) ===================== -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "PresentationDigitalDocument",
+            "name": "Elastic Software: Calculating tech debt using LLM tokens",
+            "headline": "Elastic Software",
+            "description": "Engineers have never been able to price tech debt. LLM tokens change that. A code-forward Ruby talk on quantifying tech debt in tokens — and the elastic software pattern that falls out of it.",
+            "inLanguage": "en",
+            "url": "https://michael.carroll.io/talks/2026/elastic-software/",
+            "author": { "@id": "https://michael.carroll.io/#michael" },
+            "about": [
+              "Technical debt",
+              "Ruby",
+              "Large language models",
+              "Software architecture",
+              "Tokenomics"
+            ]
+          },
+          {
+            "@type": "Person",
+            "@id": "https://michael.carroll.io/#michael",
+            "name": "Michael Carroll",
+            "jobTitle": "Founder, Coolhand Labs",
+            "url": "https://michael.carroll.io/",
+            "image": "https://michael.carroll.io/talks/2026/elastic-software/assets/img/michael.png",
+            "sameAs": [
+              "https://everythingengineer.substack.com",
+              "https://github.com/mikecarroll",
+              "https://www.linkedin.com/in/michaelscottcarroll"
+            ]
+          },
+          {
+            "@type": "Event",
+            "name": "XO Ruby Toronto 2026",
+            "startDate": "2026-10-03",
+            "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+            "location": {
+              "@type": "Place",
+              "name": "Toronto, Canada",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Toronto",
+                "addressRegion": "ON",
+                "addressCountry": "CA"
+              }
+            },
+            "performer": { "@id": "https://michael.carroll.io/#michael" }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Michael Carroll", "item": "https://michael.carroll.io/" },
+              { "@type": "ListItem", "position": 2, "name": "Talks", "item": "https://michael.carroll.io/talks/" },
+              { "@type": "ListItem", "position": 3, "name": "Elastic Software", "item": "https://michael.carroll.io/talks/2026/elastic-software/" }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+
+  <body>
+    <main class="deck" aria-label="Slide deck: Elastic Software">
+      <div class="stage">
+        <!-- ===================================================== ACT 0 — COLD OPEN -->
+
+        <!-- Slide 1 — Title -->
+        <section class="slide slide--dark center" id="slide-1" aria-label="Title — Elastic Software">
+          <p class="kicker">XO Ruby Toronto · 2026</p>
+          <h1>Elastic Software</h1>
+          <p class="lead">Calculating tech debt using <span class="accent">LLM tokens</span></p>
+          <p class="muted" style="margin-top: 1.25rem">
+            <a href="https://michael.carroll.io" data-no-advance>Michael Carroll</a> · Founder, Coolhand Labs
+          </p>
+          <div class="grid cols-1" style="margin-top: 2rem">
+            <a class="qr" href="https://michael.carroll.io/talks/2026/elastic-software/"
+               target="_blank" rel="noopener noreferrer">
+              <img src="assets/qr/talk.svg" alt="QR code — follow along with the slides" />
+              <span class="qr-label">↑ follow along with the slides</span>
+            </a>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Title up, say almost nothing. The room is still sitting down. One line:
+            "I'm going to try to do something in the next 35 minutes that I don't
+            think our industry has ever been able to do: put a number on tech debt."
+          </aside>
+        </section>
+
+        <!-- Slide 2 — The complaints -->
+        <section class="slide" id="slide-2" aria-label="The tech debt complaints we all make">
+          <p class="kicker">Things we have all said out loud</p>
+          <ul class="quotes">
+            <li class="fragment" data-fragment-index="1">"We should pay down some tech debt before we build this."</li>
+            <li class="fragment" data-fragment-index="2">"Our estimates were wrong because of historical tech debt."</li>
+            <li class="fragment" data-fragment-index="3">Reason for leaving: too much tech debt.</li>
+          </ul>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Three clicks, and let each one land — this is a recognition laugh, not a
+            joke. If you have been in engineering long enough you have spent some
+            double-digit percentage of your working life on this. Land on the third:
+            people quit over this.
+          </aside>
+        </section>
+
+        <!-- Slide 3 — But what IS it? -->
+        <section class="slide center" id="slide-3" aria-label="What is tech debt, actually">
+          <h2>But what <em>is</em> it?</h2>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.5rem">
+            Product managers roll their eyes when we say "tech debt."
+            <span class="muted">They have earned the right.</span>
+          </p>
+          <p class="lead fragment" data-fragment-index="2" style="margin-top: 1.25rem">
+            We are bad at describing it — and worse at
+            <span class="underline-accent">pricing</span> it.
+          </p>
+          <blockquote class="fragment" data-fragment-index="3" style="margin-top: 2rem; font-size: 1.5rem; font-style: italic">
+            "I don't know how to quantify it,<br />but I know it when I see it."
+            <footer class="muted" style="font-size: 1rem; font-style: normal; margin-top: 0.75rem">
+              — with apologies to Justice Potter Stewart
+            </footer>
+          </blockquote>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Be fair to the PMs here — it buys you the room's trust. We ask for time
+            and we cannot say what we are buying with it. The Potter Stewart riff is
+            the setup for the promise: by the end of this talk you will be able to
+            put a dollar number on a piece of tech debt and defend it to your PM and
+            your CFO.
+          </aside>
+        </section>
+
+        <!-- ===================================================== ACT 1 — BEAT 1 -->
+
+        <!-- Slide 4 — Setting -->
+        <section class="slide" id="slide-4" aria-label="Setting — health tech in the 2010s">
+          <p class="kicker">Beat one · the honest beginning</p>
+          <h2>Health tech, 2010s.</h2>
+          <ul class="bullets">
+            <li>You have signed a clinical client.</li>
+            <li>You need their patient data in your system.</li>
+            <li class="fragment" data-fragment-index="1">
+              There is a standard for this. <span class="accent">FHIR.</span> It is a good standard.
+            </li>
+          </ul>
+          <p class="lead fragment" data-fragment-index="2" style="margin-top: 1.75rem">
+            This was my life at <strong>RubiconMD</strong> for a lot of years.
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Ground it in your own history, not a hypothetical. You built the first
+            RubiconMD product solo and wrote more EHR parsers than any person should.
+            Keep this short — it is scene-setting, not a bio slide.
+          </aside>
+        </section>
+
+        <!-- Slide 5 — The clean parser -->
+        <section class="slide center" id="slide-5" aria-label="The clean parser">
+          <h2>Day one, it is beautiful.</h2>
+<pre class="codeblock codeblock--lg" aria-label="A single clean FHIR parser call"><code><span class="k">def</span> <span class="m">call_parser</span>(data)
+  fhir_parser.call(data)
+<span class="k">end</span>
+</code></pre>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.5rem">
+            Elegant. Correct. Standards-based. <span class="muted">You feel good.</span>
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            This is the "simple, elegant Ruby class" the abstract promised. Let it sit
+            for a second — everyone in the room has written this method and felt good
+            about it. That feeling is the thing we are about to destroy.
+          </aside>
+        </section>
+
+        <!-- Slide 6 — The seven-step pattern -->
+        <section class="slide" id="slide-6" aria-label="The seven step integration pattern">
+          <p class="kicker">And then</p>
+          <h2>The pattern everyone in this room has lived.</h2>
+          <ol class="steps">
+            <li>Build a standard patient data integration (FHIR, etc.)</li>
+            <li>Tell a clinical client you have data integration. Sign a contract.</li>
+            <li class="fragment" data-fragment-index="1">Discover they do the standard <em>a little differently</em>.</li>
+            <li class="fragment" data-fragment-index="2">Build a custom parser for their "unique standard."</li>
+            <li class="fragment" data-fragment-index="3">Monitor and update it as they break it.</li>
+            <li class="fragment" data-fragment-index="4" >Believe this parser now covers all future clients.</li>
+            <li class="fragment is-pain" data-fragment-index="5">Have that hope dashed by every single new contract.</li>
+          </ol>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Reveal 3 through 7 one at a time. Six into seven is the laugh — the
+            optimism of step six is what makes step seven funny. Do not rush it.
+            Anyone who has integrated with anything, in any industry, knows this shape;
+            the healthcare detail just makes it specific.
+          </aside>
+        </section>
+
+        <!-- ===================================================== ACT 2 — BEAT 2 -->
+
+        <!-- Slide 7 — Client B is special -->
+        <section class="slide center" id="slide-7" aria-label="The first special case">
+          <p class="kicker">Beat two · watch it become a monster</p>
+          <h2>One special case. Perfectly reasonable.</h2>
+<pre class="codeblock" aria-label="A parser with a single client special case"><code><span class="k">def</span> <span class="m">call_parser</span>(client_name, data)
+  <span class="k">case</span> client_name
+  <span class="k">when</span> client_a <span class="k">then</span> client_a_parser.call(data)
+  <span class="k">else</span> fhir_parser.call(data)
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.5rem">
+            You would approve this PR. <span class="muted">I would approve this PR.</span>
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Important that this looks fine. Nobody ever merged the monster; they merged
+            this, a hundred times, each time for a good reason. That is what makes tech
+            debt hard to argue about — no individual commit is the problem.
+          </aside>
+        </section>
+
+        <!-- Slide 8 — Build it up -->
+        <section class="slide center" id="slide-8" aria-label="A hundred clients later">
+          <h2>A hundred clients later.</h2>
+<pre class="codeblock codeblock--shrink" aria-label="A case statement with one branch per client, repeated for a hundred clients"><code><span class="k">def</span> <span class="m">call_parser</span>(client_name, data)
+  <span class="k">case</span> client_name
+  <span class="k">when</span> client_a <span class="k">then</span> client_a_parser.call(data)
+  <span class="k">when</span> client_b <span class="k">then</span> client_b_parser.call(data)
+  <span class="k">when</span> client_c <span class="k">then</span> client_c_parser.call(data)
+  <span class="k">when</span> client_d <span class="k">then</span> client_d_parser.call(data)
+  <span class="k">when</span> client_e <span class="k">then</span> client_e_parser.call(data)
+  <span class="k">when</span> client_f <span class="k">then</span> client_f_parser.call(data)
+<span class="tail">  when client_g then client_g_parser.call(data)
+  when client_h then client_h_parser.call(data)
+  when client_i then client_i_parser.call(data)
+  when client_j then client_j_parser.call(data)
+  when client_k then client_k_parser.call(data)
+  when client_l then client_l_parser.call(data)
+  when client_m then client_m_parser.call(data)
+  when client_n then client_n_parser.call(data)
+  when client_o then client_o_parser.call(data)
+  when client_p then client_p_parser.call(data)</span>
+  <span class="ell">... # and so forth, for 100 more clients</span>
+</code></pre>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The visual joke is that the text becomes unreadable — that is the point, so
+            do not apologize for it. Line: "I am not going to make you read this. That's
+            the first honest measurement we have: you already stopped trying."
+          </aside>
+        </section>
+
+        <!-- Slide 9 — What it actually costs you -->
+        <section class="slide" id="slide-9" aria-label="What the parser sprawl actually costs">
+          <p class="kicker">The real bill</p>
+          <h2>It is not the lines of code.</h2>
+          <ul class="bullets">
+            <li class="fragment" data-fragment-index="1">Every new client blocked on a discovery and sample-data cycle.</li>
+            <li class="fragment" data-fragment-index="2">Parsers that break silently when a client ships a change.</li>
+            <li class="fragment" data-fragment-index="3">An engineer whose quarter is now parser babysitting.</li>
+            <li class="fragment" data-fragment-index="4">
+              Your best sales month creating <span class="cost">your worst backlog</span>.
+            </li>
+          </ul>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Four clicks. The last one is the one that lands with founders and eng
+            leaders in the room: closing five clients in a month should be a
+            celebration, and instead it is a scramble. Plant it here; you pay it off in
+            Act 7.
+          </aside>
+        </section>
+
+        <!-- Slide 10 — This is tech debt -->
+        <section class="slide slide--dark center" id="slide-10" aria-label="This is tech debt, described in feelings">
+          <h1>This is tech debt.</h1>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.75rem">
+            And I just described all of it in <span class="accent">feelings</span>.
+          </p>
+          <p class="muted fragment" data-fragment-index="2" style="margin-top: 1rem">
+            Nothing on the last slide is a number a CFO can act on.
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The turn. Everything so far has been recognition; this is the indictment,
+            and it is aimed at us, not at the PMs. We have been asking for budget in a
+            currency nobody else can read. So let's fix that.
+          </aside>
+        </section>
+
+        <!-- ===================================================== ACT 3 — BEAT 3 -->
+
+        <!-- Slide 11 — Two paths, one unit -->
+        <section class="slide center" id="slide-11" aria-label="Two paths, one unit">
+          <p class="kicker">Beat three · price the damage</p>
+          <h2>We have always had two ways to do this work.</h2>
+          <div class="grid cols-2" style="margin-top: 2rem; text-align: left">
+            <div class="card">
+              <p class="kicker">Pay an engineer</p>
+              <p class="lead">Write the parser. Own it forever.</p>
+            </div>
+            <div class="card">
+              <p class="kicker">Pay a machine</p>
+              <p class="lead">Hand the record to a model. Pay per request.</p>
+            </div>
+          </div>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.75rem">
+            What is new: both sides can now be denominated in
+            <span class="underline-accent">the same unit</span>.
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            This is the conceptual move that makes the rest work. Not "AI is cheaper" —
+            that is not always true and the room will not believe it. The claim is that
+            for the first time the two options are commensurable.
+          </aside>
+        </section>
+
+        <!-- Slide 12 — The software path, itemized -->
+        <section class="slide" id="slide-12" aria-label="What one hand-written parser costs">
+          <p class="kicker">The software path</p>
+          <h2>What one parser actually costs.</h2>
+          <ul class="ledger">
+            <li><span>Agent time to write it</span><span class="unit"><span class="tbd">$ TBD</span></span></li>
+            <li><span>Code review + QA</span><span class="unit"><span class="tbd">$ TBD</span></span></li>
+            <li><span>Bug reports, forever</span><span class="unit"><span class="tbd">$ TBD / mo</span></span></li>
+            <li><span>The new data type that lands in six months</span><span class="unit"><span class="tbd">$ TBD</span></span></li>
+            <li class="is-total"><span>Build, then carry</span><span class="unit">$Y once + $Z / mo</span></li>
+          </ul>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Engineering hours have always been a real cost; what is new is that in an
+            AI-assisted shop those hours increasingly carry a token-equivalent cost too,
+            which is what makes the comparison clean.
+            <span class="todo">TODO — replace every $ TBD with your real figures before
+            this deck is presented. A labeled reconstruction from RubiconMD is fine;
+            invented precision is not. This is the slide a Ruby audience will
+            interrogate.</span>
+          </aside>
+        </section>
+
+        <!-- Slide 13 — The AI path, itemized -->
+        <section class="slide" id="slide-13" aria-label="What the AI path costs">
+          <p class="kicker">The AI path</p>
+          <h2>And what the model costs.</h2>
+          <ul class="ledger">
+            <li><span>Cost per request, this integration</span><span class="unit"><span class="tbd">$ TBD</span></span></li>
+            <li><span>× monthly volume for this client</span><span class="unit"><span class="tbd">TBD records</span></span></li>
+            <li><span>× your growth assumption</span><span class="unit"><span class="tbd">TBD %</span></span></li>
+            <li class="is-total"><span>A compounding monthly number</span><span class="unit">$X / mo</span></li>
+          </ul>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.5rem">
+            Per client. Per integration. <span class="accent">Per data type.</span>
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The key property is that this number is not a guess — it is metered, it is
+            already in your billing, and it breaks down by client without anyone having
+            to estimate anything.
+            <span class="todo">TODO — same as the previous slide: real numbers required.</span>
+          </aside>
+        </section>
+
+        <!-- Slide 14 — The boring comparison -->
+        <section class="slide center" id="slide-14" aria-label="The comparison — AI path versus software path">
+          <h2>So the comparison gets <span class="muted">refreshingly</span> boring.</h2>
+          <div class="formula">
+            <div class="row row--ai">
+              <span class="who">AI path</span>
+              <span class="what">$X per month, scaling with volume.</span>
+            </div>
+            <div class="row row--sw">
+              <span class="who">Software path</span>
+              <span class="what">$Y to build, $Z per month to carry.</span>
+            </div>
+          </div>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.75rem">
+            That is it. <span class="underline-accent">Tech debt just became arithmetic.</span>
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            This is the payoff of the title and one of the three slides that cannot be
+            cut. Slow down. Say the two lines out loud, then stop talking and let them
+            read it. Then the click: this is a number you can take to a CFO, and it is
+            the first time we have ever been able to.
+          </aside>
+        </section>
+
+        <!-- Slide 15 — What this does not capture -->
+        <section class="slide" id="slide-15" aria-label="What the token math does not capture">
+          <p class="kicker">Being honest about it</p>
+          <h2>This does not capture everything.</h2>
+          <ul class="bullets">
+            <li>The cognitive load of one more system to hold in your head.</li>
+            <li>The context-switching tax.</li>
+            <li>The morale cost of asking a good engineer to babysit another brittle parser.</li>
+          </ul>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.75rem">
+            You do not need every variable. You need a signal strong enough to make
+            <span class="accent">a call you can defend</span>.
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Forty seconds that buy you credibility for the whole back half. If you skip
+            it, the skeptics in the room spend Act 5 composing objections instead of
+            listening. Naming the limits first means you get to keep the claim.
+          </aside>
+        </section>
+
+        <!-- ===================================================== ACT 4 — BEAT 4 -->
+
+        <!-- Slide 16 — The obvious wrong lesson -->
+        <section class="slide center" id="slide-16" aria-label="The obvious wrong lesson">
+          <p class="kicker">Beat four</p>
+          <h2 class="muted" style="font-weight: 600">
+            "So use AI coding agents to write the parsers faster."
+          </h2>
+          <p class="shout fragment" data-fragment-index="1">No.</p>
+          <p class="lead fragment" data-fragment-index="2" style="margin-top: 1.25rem">
+            That is using AI to produce <em>more</em> of the thing that is hurting you.
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Put the wrong answer on screen in the room's own voice and let it sit for a
+            beat before you reject it — half the audience is already thinking it. This
+            is the line between using AI and architecting with it, and it is the line
+            the whole talk is about.
+          </aside>
+        </section>
+
+        <!-- Slide 17 — The inversion -->
+        <section class="slide slide--dark center" id="slide-17" aria-label="The inversion — flexibility by default">
+          <h1>
+            Make flexibility the <span class="accent">default</span>.<br />
+            Make efficiency the <span class="accent">optimization</span>.
+          </h1>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The hinge of the talk. Say it, then stop. Count to three in your head before
+            you move. Everything before this slide is the problem; everything after it is
+            the consequence of taking this one sentence seriously.
+          </aside>
+        </section>
+
+        <!-- ===================================================== ACT 5 — BEAT 5 -->
+
+        <!-- Slide 18 — The caller now -->
+        <section class="slide center" id="slide-18" aria-label="The caller after the rebuild">
+          <p class="kicker">Beat five · the elastic rebuild</p>
+          <h2>So the caller becomes this.</h2>
+<pre class="codeblock codeblock--lg" aria-label="The parser call delegating to an AI parser"><code><span class="k">def</span> <span class="m">call_parser</span>(client_name, data)
+  <span class="hl">ai_parser</span>(client_name, data)
+<span class="k">end</span>
+</code></pre>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.5rem">
+            Same signature. <span class="muted">A hundred branches gone.</span>
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Callback to slide 8 — put them side by side in the room's memory. The joke
+            writes itself: this is the diff, and it is the best diff of your career.
+          </aside>
+        </section>
+
+        <!-- Slide 19 — The whole parser -->
+        <section class="slide center" id="slide-19" aria-label="The entire AI parser in a dozen lines of Ruby">
+          <h2>And <em>that</em> is the whole parser.</h2>
+<pre class="codeblock" aria-label="An AI parser implemented with the RubyLLM gem"><code><span class="k">def</span> <span class="m">ai_parser</span>(client_name, data)
+  response = <span class="m">RubyLLM</span>
+    .chat(model: cheap_mini_llm_model)
+    .with_temperature(<span class="hl">0.1</span>)
+<span class="fragment" data-fragment-index="1">    .with_instructions(&lt;&lt;~PROMPT)
+      <span class="s">You are a data engineer. Map the inbound record to our
+      internal patient schema and return ONLY valid JSON in
+      that format. Use null for anything you can't find.</span>
+    PROMPT</span>
+<span class="fragment" data-fragment-index="2">    .ask(data)
+
+  <span class="m">JSON</span>.parse(response.content)</span>
+<span class="k">end</span>
+</code></pre>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Three reveals: the model and temperature, then the instructions, then the
+            parse. Name the RubyLLM gem out loud — this is a Ruby room and they will
+            want to know it is a real, boring library call. A dozen lines, running in
+            minutes. Be honest that it will choke a few times and you will tune the
+            prompt off real failures.
+          </aside>
+        </section>
+
+        <!-- Slide 20 — What just disappeared -->
+        <section class="slide" id="slide-20" aria-label="The steps elastic software deletes">
+          <p class="kicker">Look what left</p>
+          <h2>Onboarding goes from weeks to a signature.</h2>
+          <ol class="steps">
+            <li>Build a standard patient data integration (FHIR, etc.)</li>
+            <li>Tell a clinical client you have data integration. Sign a contract.</li>
+            <li class="fragment is-struck" data-fragment-index="1">Discover they do the standard a little differently.</li>
+            <li class="fragment is-struck" data-fragment-index="1">Build a custom parser for their "unique standard."</li>
+            <li class="fragment is-struck" data-fragment-index="1">Monitor and update it as they break it.</li>
+            <li class="fragment is-struck" data-fragment-index="1">Believe this parser now covers all future clients.</li>
+            <li class="fragment is-struck" data-fragment-index="1">Have that hope dashed by every single new contract.</li>
+          </ol>
+          <p class="lead fragment" data-fragment-index="2" style="margin-top: 1.25rem">
+            New client? <span class="accent">"Have we signed the BAA?"</span>
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            One click strikes five through seven at once — the visual should be a little
+            shocking. The BAA line is the punchline: the remaining blocker on a new
+            integration is paperwork, not engineering. Say the quiet part: no more
+            "please send us sample data so we can test the integration."
+          </aside>
+        </section>
+
+        <!-- Slide 21 — Then the bill arrives -->
+        <section class="slide center" id="slide-21" aria-label="Then the inference bill arrives">
+          <h2>And then the <span class="cost">bill</span> arrives.</h2>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.5rem">
+            Running inference on <strong>100%</strong> of inbound volume gets expensive.
+          </p>
+          <p class="lead fragment" data-fragment-index="2" style="margin-top: 1.25rem">
+            This is the honest middle of the pattern —
+            <span class="muted">not a failure of it.</span>
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Do not hide this; if you skip it, somebody asks it in Q&amp;A and it sounds
+            like you had not thought about it. The point is that the expensive moment is
+            designed for. It is the trigger, not the refutation.
+          </aside>
+        </section>
+
+        <!-- Slide 22 — Contract toward efficiency -->
+        <section class="slide center" id="slide-22" aria-label="The hybrid — contract toward efficiency">
+          <h2>So you contract toward efficiency. <span class="muted">Two clients, not a hundred.</span></h2>
+<pre class="codeblock" aria-label="The hybrid parser — two hardened parsers with an AI fallback"><code><span class="k">def</span> <span class="m">call_parser</span>(client_name, data)
+  <span class="k">case</span> client_name
+  <span class="k">when</span> client_a <span class="k">then</span> client_a_parser.call(data)
+  <span class="k">when</span> client_b <span class="k">then</span> client_b_parser.call(data)
+  <span class="k">else</span> <span class="hl">ai_parser</span>(client_name, data)
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.5rem">
+            Same shape as the monster. Two branches —
+            <span class="accent">and the data told you to write them.</span>
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The deliberate callback: this is the case statement from slide 8, and that is
+            the joke. The difference is not the syntax, it is the provenance — you built
+            these two from real production traffic, so the spec is better than anything a
+            discovery call would have produced. Two clients are 80% of volume; the other
+            eight keep flowing through the model.
+          </aside>
+        </section>
+
+        <!-- Slide 23 — The elasticity, named -->
+        <section class="slide" id="slide-23" aria-label="The elasticity — a slider between flexible and efficient">
+          <p class="kicker">The pattern, named</p>
+          <h2>Elastic software.</h2>
+          <div class="scale" data-no-advance>
+            <div class="scale-track">
+              <span class="scale-pin" style="left: 12%">C</span>
+              <span class="scale-pin" style="left: 34%">D</span>
+              <span class="scale-pin" style="left: 61%">B</span>
+              <span class="scale-pin" style="left: 88%">A</span>
+            </div>
+            <div class="scale-ends">
+              <div class="flex-end">
+                <div class="end-label">Flexible</div>
+                <div class="end-sub">Model handles it. Higher cost per request. Live today.</div>
+              </div>
+              <div class="eff-end">
+                <div class="end-label">Efficient</div>
+                <div class="end-sub">Hardened parser. Cost per request near zero. Earned, not assumed.</div>
+              </div>
+            </div>
+          </div>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.5rem">
+            Each integration moves on its own. <span class="muted">Never all at once. Never up front.</span>
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The one diagram in the deck, so make it count. Clients A and B have earned
+            their hardened parsers; C and D are still riding the flexible layer and may
+            never leave it. The architectural claim: elasticity is per-integration, and
+            the position on this axis is a decision you revisit, not a bet you place at
+            design time.
+          </aside>
+        </section>
+
+        <!-- ===================================================== ACT 6 — THE TRIGGER -->
+
+        <!-- Slide 24 — The trigger -->
+        <section class="slide center" id="slide-24" aria-label="When to contract — the optimization trigger">
+          <p class="kicker">So when do you actually optimize?</p>
+          <h2>
+            When projected annual inference cost<br />
+            exceeds <span class="accent">build + carry</span>.
+          </h2>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.75rem">
+            Per integration. Per client. <span class="muted">Checked on a cadence, not once.</span>
+          </p>
+          <p class="lead fragment" data-fragment-index="2" style="margin-top: 1.25rem">
+            The 80/20 shows up fast, and it shows up <span class="accent">honestly</span>.
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            This is the whole decision rule and it fits on one slide. Emphasize
+            "honestly": you are no longer guessing which client deserves engineering
+            time, and you are no longer letting the loudest account decide. The traffic
+            decides.
+          </aside>
+        </section>
+
+        <!-- Slide 25 — Startups have always done this badly -->
+        <section class="slide" id="slide-25" aria-label="Startups have always done a crude version of this">
+          <p class="kicker">You have done this before</p>
+          <h2>"Do things that don't scale" is the same pattern —<br />with humans in the flexible layer.</h2>
+          <ul class="bullets">
+            <li class="fragment" data-fragment-index="1">Get the data. Give it to a person. Automate when it stops scaling.</li>
+            <li class="fragment" data-fragment-index="2">Slower, and it hits a wall much sooner.</li>
+            <li class="fragment" data-fragment-index="3">And the math was always fuzzy: <span class="muted">"how many hours is this costing us?"</span></li>
+          </ul>
+          <aside class="notes">
+            <h4>Beat</h4>
+            This reframes elastic software as something the room already believes in
+            rather than a novelty — you have been doing a crude version of it for a
+            decade, you just could not measure it. First on the cut list if you are
+            running long.
+          </aside>
+        </section>
+
+        <!-- Slide 26 — The instrumentation you need -->
+        <section class="slide" id="slide-26" aria-label="The instrumentation the pattern requires">
+          <div class="with-side">
+            <div>
+              <p class="kicker">What this requires of you</p>
+              <h2>Cost per request, broken out by client.</h2>
+              <ul class="bullets">
+                <li>If you cannot see it per client, you cannot find your 80/20.</li>
+                <li>And nobody sustains a hand-assembled spreadsheet for this.</li>
+              </ul>
+            </div>
+            <div class="side">
+              <a class="qr qr--side" href="https://coolhandlabs.com/?utm_source=xo-ruby-toronto-2026&amp;utm_medium=talk-qr&amp;utm_campaign=elastic-software"
+                 target="_blank" rel="noopener noreferrer">
+                <span class="newsletter-eyebrow">Coolhand Labs</span>
+                <img src="assets/qr/coolhand.svg" alt="QR code to coolhandlabs.com" />
+                <span class="qr-label">coolhandlabs.com</span>
+              </a>
+            </div>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Twenty seconds, in the same register as the article: this is the frustration
+            Coolhand Labs came out of — the pattern and the product were shaped by the
+            same annoyance. Then move on immediately.
+            <span class="todo">Do NOT demo the product here. Do not linger. If you feel
+            like adding a second sentence, don't — this room is paying $100 for a
+            single track and they can smell a pitch.</span>
+          </aside>
+        </section>
+
+        <!-- ===================================================== ACT 7 — SPEED -->
+
+        <!-- Slide 27 — Your best month, both worlds -->
+        <section class="slide" id="slide-27" aria-label="Your best month in both worlds">
+          <p class="kicker">The bigger half</p>
+          <h2>Five hospital systems close in one month.</h2>
+          <div class="paths">
+            <div class="path path--old">
+              <h3>Old world</h3>
+              <p>A scramble disguised as a celebration.</p>
+              <p>Who gets a parser first? How do we sequence it?</p>
+              <p>How long until any of them go live and we can recognize revenue?</p>
+            </div>
+            <div class="path path--new fragment" data-fragment-index="1">
+              <h3>Elastic</h3>
+              <p>All five live immediately.</p>
+              <p>The AI layer carries their data from day one.</p>
+              <p>And you start collecting the only thing that can tell you who deserves engineering time.</p>
+            </div>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Payoff for the seed planted on slide 9. If one turns out to be a monster
+            account, the tokenomics surface it in weeks. If one churns in month two, you
+            never wrote a line of parser code for them. Cost was the smaller half of this
+            talk; this is the bigger half.
+          </aside>
+        </section>
+
+        <!-- Slide 28 — It runs backwards too -->
+        <section class="slide center" id="slide-28" aria-label="The pattern runs in reverse for legacy estates">
+          <h2>It runs backwards, too.</h2>
+          <p class="lead" style="margin-top: 1.5rem">
+            Drowning under a thousand legacy parsers?
+          </p>
+          <ul class="takeaways" style="max-width: 820px; margin-inline: auto">
+            <li class="fragment" data-fragment-index="1">Find the ones at the tail of your usage curve.</li>
+            <li class="fragment" data-fragment-index="2">Re-route them to an inference call.</li>
+            <li class="fragment" data-fragment-index="3"><span class="accent">Delete the code.</span></li>
+          </ul>
+          <aside class="notes">
+            <h4>Beat</h4>
+            For the enterprise engineers in the room, who are not startup people and have
+            been waiting to see if this talk applies to them. Stop living in fear of tiny
+            client X discovering that a change they shipped last year broke your
+            integration two quarters ago.
+          </aside>
+        </section>
+
+        <!-- ===================================================== ACT 8 — DEMO -->
+
+        <!-- Slide 29 — Demo -->
+        <section class="slide" id="slide-29" aria-label="Live demo — two malformed records through one parser">
+          <p class="kicker">Demo</p>
+          <h2>Two records. Same dozen lines.</h2>
+          <figure class="visual" data-no-advance style="min-height: 300px">
+            [VISUAL: live demo — terminal split. Left: two genuinely different inbound
+            records (different field names, different date formats, one missing a field
+            entirely). Right: both returning valid internal-schema JSON, with null for
+            the missing field. Then the per-request cost printed underneath.]
+          </figure>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Under three minutes. Show the null for the missing field — the honest failure
+            is more convincing than the happy path, and it pre-empts the "but what about
+            bad data" question. Finish by printing the per-request cost, which hands you
+            the transition into the open problems.
+            <span class="todo">TODO — confirm this runs offline / on conference wifi. If
+            not, record it and play the recording. Decide this well before the day, not
+            the night before.</span>
+          </aside>
+        </section>
+
+        <!-- ===================================================== ACT 9 — OPEN PROBLEMS -->
+
+        <!-- Slide 30 — What nobody has solved -->
+        <section class="slide" id="slide-30" aria-label="The open problems nobody has solved">
+          <p class="kicker">Where this is still unfinished</p>
+          <h2>Nobody has solved these yet.</h2>
+          <ul class="openq">
+            <li class="fragment" data-fragment-index="1">
+              What are the real failure modes — and what does monitoring look like across a hybrid AI-and-hardened system?
+            </li>
+            <li class="fragment" data-fragment-index="2">
+              <strong>Drift.</strong> The model quietly mapping differently this month than last, with no diff to review.
+            </li>
+            <li class="fragment" data-fragment-index="3">
+              What is the right sampling rate to catch a prompt regression before it becomes a thousand mis-mapped records?
+            </li>
+            <li class="fragment" data-fragment-index="4">
+              How does any of this survive an auditor in a regulated environment?
+            </li>
+          </ul>
+          <aside class="notes">
+            <h4>Beat</h4>
+            State these as genuinely open, because they are. This is the register XO Ruby
+            programs for — less hype, more heart — and a talk that ends on unsolved
+            problems gets better hallway conversations than one that ends on a victory
+            lap. These are the questions Coolhand clients ask me, and I do not have
+            clean answers to all of them.
+          </aside>
+        </section>
+
+        <!-- Slide 31 — What separates the teams doing it well -->
+        <section class="slide" id="slide-31" aria-label="What separates teams doing this well">
+          <h2>What separates the teams doing this well<br />is not that they have the answers.</h2>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 2rem">
+            It is that they treat elastic software as an
+            <span class="underline-accent">architectural commitment</span> —
+            with the monitoring and discipline that implies.
+          </p>
+          <p class="lead fragment" data-fragment-index="2" style="margin-top: 1.5rem">
+            Not a clever hack bolted on to ship faster,
+            <span class="muted">hoping nobody asks about it later.</span>
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The actual thesis, and the last real thing you say. The difference between the
+            teams this works for and the teams it burns is not sophistication — it is
+            whether they admitted to themselves that they made an architectural decision.
+          </aside>
+        </section>
+
+        <!-- Slide 32 — Close -->
+        <section class="slide slide--dark center" id="slide-32" aria-label="Thank you and questions">
+          <h1>Where is it <span class="accent">breaking</span> for you?</h1>
+          <p class="lead" style="margin-top: 1.25rem">
+            That is the actual reason I am up here.
+          </p>
+          <div class="grid cols-2" style="margin-top: 2rem; max-width: 720px; margin-inline: auto">
+            <a class="qr qr--side" href="https://michael.carroll.io/talks/2026/elastic-software/"
+               target="_blank" rel="noopener noreferrer">
+              <span class="newsletter-eyebrow">These slides</span>
+              <img src="assets/qr/talk.svg" alt="QR code — these slides" />
+              <span class="qr-label">michael.carroll.io</span>
+            </a>
+            <a class="qr qr--side" href="https://everythingengineer.substack.com"
+               target="_blank" rel="noopener noreferrer">
+              <span class="newsletter-eyebrow">📬 Newsletter</span>
+              <img src="assets/qr/substack.svg" alt="QR code — The Everything Engineer newsletter" />
+              <span class="qr-label">The Everything Engineer</span>
+            </a>
+          </div>
+          <p class="muted" style="margin-top: 1.75rem">Michael Carroll · Founder, Coolhand Labs</p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Open the floor with a real question rather than "any questions?" — ask who in
+            the room already has an AI call in a production path and what broke. Stay for
+            the hallway; that is where this pattern actually gets figured out.
+          </aside>
+        </section>
+      </div>
+    </main>
+
+    <!-- Chrome -->
+    <div class="deck-chrome progress" aria-hidden="true"></div>
+    <div class="deck-chrome slide-num" aria-hidden="true"></div>
+
+    <!-- Speaker notes overlay (N / S) -->
+    <aside class="notes-overlay" hidden aria-label="Speaker notes">
+      <h4>Speaker notes</h4>
+      <div class="notes-body"></div>
+    </aside>
+
+    <!-- Keyboard help overlay (?) -->
+    <div class="help-overlay" hidden>
+      <div class="help-card">
+        <h4>Keyboard &amp; controls</h4>
+        <dl>
+          <dt><kbd>click</kbd> / <kbd>→</kbd> / <kbd>space</kbd></dt><dd>Forward</dd>
+          <dt><kbd>←</kbd> / <kbd>↑</kbd></dt><dd>Back</dd>
+          <dt>tap right half / tap left half</dt><dd>Forward / Back (touch)</dd>
+          <dt><kbd>N</kbd> / <kbd>S</kbd></dt><dd>Speaker notes</dd>
+          <dt><kbd>R</kbd></dt><dd>Reading mode</dd>
+          <dt><kbd>?</kbd></dt><dd>This help</dd>
+        </dl>
+      </div>
+    </div>
+
+    <!-- Transcript — crawlable prose for SEO/AEO -->
+    <article class="transcript">
+      <h1>Elastic Software: Calculating tech debt using LLM tokens</h1>
+      <p class="dek">
+        A talk by <a href="https://michael.carroll.io/">Michael Carroll</a>, founder of
+        Coolhand Labs, given at XO Ruby Toronto in October 2026.
+      </p>
+
+      <h2>We have never been able to price tech debt</h2>
+      <p>
+        If you have been working in engineering long enough, you have spent some
+        double-digit percentage of your working life thinking about tech debt, and
+        complaining about it. We should pay some down before we build this. Our
+        estimates were wrong because of historical tech debt. Reason for leaving:
+        too much tech debt.
+      </p>
+      <p>
+        Product managers roll their eyes when engineers say the words, and honestly
+        they have earned the right. We are bad at describing what tech debt is, and
+        we are far worse at quantifying what it costs to fix it or to carry it. We
+        have been asking for budget in a currency nobody outside engineering can
+        read. To borrow from Justice Potter Stewart: I don't know how to quantify
+        it, but I know it when I see it.
+      </p>
+
+      <h2>The pattern: a parser for every client</h2>
+      <p>
+        Here is the shape of the problem, from my own history building health care
+        software at RubiconMD. You build a standard patient data integration — FHIR,
+        or something like it. You tell a clinical client you have data integration
+        and you sign a contract. Then you discover that they implement the standard
+        a little differently, or that some of their data does not come through the
+        integration at all. So you build a custom parser for their unique standard,
+        and you monitor it, and you update it as they break it. And you allow
+        yourself to believe that this parser will now cover you for all future
+        clients — a hope that is dashed by every single new contract.
+      </p>
+      <p>
+        A hundred clients later you have thousands of lines of code that dispatch on
+        a client name through a case statement nobody can read. And the real bill is
+        not the lines of code. It is that every new client is blocked on a discovery
+        and sample-data cycle; that parsers break silently when a client ships a
+        change; that some engineer's quarter has quietly become parser babysitting;
+        and that your best sales month creates your worst backlog.
+      </p>
+      <p>
+        That is tech debt — and every word of that description is a feeling. None of
+        it is a number a CFO can act on.
+      </p>
+
+      <h2>Tokenomics: putting a number on it</h2>
+      <p>
+        We have always had two ways to do this work: pay an engineer to write and own
+        a parser, or pay a machine to handle the record. What is new is that both
+        sides can now be denominated in the same unit.
+      </p>
+      <p>
+        On the software side, you can itemize what one parser actually costs: the
+        time to write it, code review and QA, the ongoing drag of bug reports and
+        maintenance cycles, and the new data type that lands six months later. Those
+        are real engineering hours, and in an AI-assisted shop those hours
+        increasingly carry a token-equivalent cost too. On the AI side, you know your
+        average cost per request for each integration. Break it down by client,
+        multiply by volume, project it forward on your growth assumptions, and you
+        have a clean, compounding monthly and annual number.
+      </p>
+      <p>
+        So the comparison gets refreshingly boring. <strong>AI path: $X per month,
+        scaling with volume. Software path: $Y to build, $Z per month to carry.</strong>
+        Tech debt just became arithmetic.
+      </p>
+      <p>
+        This does not capture every variable — not the cognitive load of one more
+        system to hold in your head, not the context-switching tax, not the morale
+        cost of asking a good engineer to babysit another brittle parser. But you do
+        not need all of them. You need a signal strong enough to make a call you can
+        defend to your product and engineering teams and to your CFO.
+      </p>
+
+      <h2>The inversion</h2>
+      <p>
+        The obvious lesson to draw from all this is the wrong one. It is not "use AI
+        coding agents to write the parsers faster" — that is using AI to produce more
+        of the thing that is hurting you. The actual move is to invert the
+        priorities: <strong>make flexibility the default, and efficiency the
+        optimization.</strong>
+      </p>
+      <p>
+        In practice that means the parser call delegates to an AI parser, and the AI
+        parser is roughly a dozen lines of Ruby using a gem like RubyLLM: a cheap
+        model, a low temperature, an instruction to map the inbound record to your
+        internal schema and return only valid JSON with nulls for anything missing,
+        and a JSON parse on the way out. It will choke a few times, and you will tune
+        the prompt against real failures, but you have a functioning parser in
+        minutes.
+      </p>
+      <p>
+        What disappears is most of the seven-step pattern. There is no discovery
+        cycle, no "please send us sample data to test the integration with." The
+        remaining blocker on a new client is whether you have signed the BAA with
+        your inference provider.
+      </p>
+
+      <h2>Contracting toward efficiency</h2>
+      <p>
+        Then the bill arrives, because running inference on one hundred percent of
+        inbound volume gets expensive. This is the honest middle of the pattern, not
+        a failure of it. Typically a handful of clients account for the vast majority
+        of your volume. Find them, use the production data you have been gathering to
+        write a genuinely good spec, build hardened parsers for those, and let
+        everything else keep flowing through the model.
+      </p>
+      <p>
+        The result looks like the case statement you started with — except it has two
+        branches instead of a hundred, and the data told you to write both of them.
+        That is the elasticity: you start stretched all the way toward flexibility,
+        accepting a higher cost per request in exchange for speed, and you contract
+        toward efficiency as the math justifies it. You do it independently for each
+        integration, each data type, each client. Never all at once, and never up
+        front.
+      </p>
+      <p>
+        The decision rule fits in one sentence: when projected annual inference cost
+        for an integration exceeds what it would cost to build and carry a parser for
+        it, you have a candidate. Startups have always practiced a crude version of
+        this — "doing things that don't scale" is the same pattern with humans in the
+        flexible layer — but the math was always fuzzy. What you need to run it
+        deliberately is cost per request broken out by client, visible without anyone
+        assembling a spreadsheet by hand. That is the frustration Coolhand Labs came
+        out of; the pattern and the product were shaped by the same annoyance.
+      </p>
+
+      <h2>The real win is speed</h2>
+      <p>
+        Optimizing cost is useful, but for a startup it is the smaller half of the
+        story. Close five new hospital systems in a month and, in the old world, that
+        is a scramble disguised as a celebration: who do we build parsers for first,
+        how do we sequence it, how long until they go live and we can realize the
+        revenue? In the elastic model all five go live immediately, the AI layer
+        carries their data from day one, and you start collecting the only thing that
+        can actually tell you who deserves engineering time. If one turns out to be a
+        monster account, the tokenomics surface it quickly. If one churns in month
+        two, you never wasted a line of parser code on it.
+      </p>
+      <p>
+        It runs in the other direction too. If you are an enterprise drowning under a
+        thousand legacy parsers, find the ones sitting at the tail of your usage
+        curve, re-route them to an inference call, and delete the code.
+      </p>
+
+      <h2>The hard problems are still wide open</h2>
+      <p>
+        A lot here is still emerging, and these are the questions I get asked by
+        teams implementing some version of this. What are the real failure modes, and
+        what does good monitoring look like across a hybrid system with AI and
+        hardened software paths running side by side? How do you handle drift — the
+        AI layer quietly making different mapping decisions this month than it made
+        last month, with no diff to review? What is the right ops sampling rate to
+        catch a prompt regression before it compounds into a thousand mis-mapped
+        records? And how do these patterns survive contact with regulated
+        environments, where failures have to be justified to an auditor?
+      </p>
+      <p>
+        These are not rhetorical. The teams I see doing this well are working them out
+        in real time. What separates them is not that they have the answers — it is
+        that they treat elastic software as a genuine architectural commitment, with
+        the monitoring and discipline that implies, rather than a clever hack they
+        bolted on to ship faster and hoped nobody would ask about later.
+      </p>
+      <p>
+        If you are building on this pattern, or fighting with it, I would like to hear
+        where it is breaking for you. That is the actual reason I am up here.
+      </p>
+      <p class="muted">
+        Related reading:
+        <a href="https://everythingengineer.substack.com/p/beginners-write-software-with-ai">
+          Beginners Write Software with AI. Pros Use It to Make Software Elastic.
+        </a>
+        in The Everything Engineer.
+      </p>
+    </article>
+    <script src="assets/deck.js?v=1"></script>
+  </body>
+</html>

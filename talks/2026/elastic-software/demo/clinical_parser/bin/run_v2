@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# bin/run_v2 — runs all 35 fixtures through the v2 dispatcher. Expected:
+# all 35 pass — the 20 v1 understood plus the 15 it never could, each
+# now handled by the class built for its shape.
+require "json"
+require_relative "../lib/v2/dispatcher"
+
+root = File.expand_path("..", __dir__)
+manifest = JSON.parse(File.read(File.join(root, "fixtures", "manifest.json")))
+
+passed = 0
+failed = 0
+
+manifest.each do |entry|
+  raw = File.read(File.join(root, "fixtures", entry.fetch("file")))
+
+  begin
+    record = V2::Dispatcher.parse(raw)
+    if record.matches?(entry.fetch("expected"))
+      passed += 1
+      puts "PASS  #{entry.fetch('file')} (#{entry.fetch('format')})"
+    else
+      failed += 1
+      puts "FAIL  #{entry.fetch('file')} (#{entry.fetch('format')} — parsed but values don't match expected)"
+    end
+  rescue V2::UnrecognizedFormatError => e
+    failed += 1
+    puts "FAIL  #{entry.fetch('file')} (#{entry.fetch('format')} — #{e.message})"
+  end
+end
+
+puts
+puts "v2: #{passed}/#{manifest.size} passed, #{failed}/#{manifest.size} failed"
