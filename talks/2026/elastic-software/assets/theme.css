@@ -2,74 +2,70 @@
    theme.css — talk-specific palette + motif for
    "Elastic Software: Calculating tech debt using LLM tokens"
 
-   Loaded AFTER deck.css. Direction: light zinc base (dark title/close
-   sandwich), with a single teal accent standing for the *flexible* AI layer
-   and a warm clay tone reserved for *cost* — the two poles the whole talk
-   stretches between. Code panels are always dark, so they read as artifacts
-   dropped onto the slide.
+   Loaded AFTER deck.css. Direction: shares the "Your AI Agent Has Notes" /
+   "Stop being the boss you hate" look — a fully dark charcoal/zinc base
+   (every slide is dark), with a single teal accent standing for the
+   *flexible* AI layer and a warm clay tone reserved for *cost* — the two
+   poles the whole talk stretches between. Code panels sit one step above
+   the base, so they still read as artifacts dropped onto the slide.
    All colors are tokens, so the palette is adjustable in one place.
+
+   Framework gotchas (shared with the other two decks):
+     • deck.css pins `.lead` with !important — overriding it needs !important.
+     • tools/og-cover.mjs regex-scrapes custom properties out of this whole
+       file (comments included), so never re-bind the foreground tokens inside
+       a scoped rule, and never write a literal custom-property declaration in
+       a comment — both leak into the social card.
    ========================================================================== */
 :root {
-  /* the one accent: teal = the flexible layer */
-  --accent: 173 80% 32%;
-  --accent-foreground: 0 0% 100%;
+  /* the one accent: teal = the flexible layer (brightened for a dark base) */
+  --accent: 173 70% 52%;
+  --accent-foreground: 240 10% 8%;
 
-  /* reserved, used sparingly: the cost pole */
-  --cost: 22 88% 46%;
-  --danger: 0 72% 45%;
+  /* reserved, used sparingly: the cost pole (brightened for a dark base) */
+  --cost: 22 85% 58%;
+  --danger: 0 75% 62%;
 
-  /* dark panel used by code blocks + dark slides */
-  --panel: 240 10% 8%;
+  /* Dark palette promoted to the base → all slides render dark. */
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 240 6% 10%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 6% 10%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 240 5.9% 10%;
+  --secondary: 240 4% 16%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 4% 16%;
+  --muted-foreground: 240 5% 65%;
+  --border: 240 4% 24%;
+  --input: 240 4% 24%;
+  --ring: 240 5% 65%;
+
+  /* code panels sit one step above the base */
+  --panel: 240 6% 10%;
   --panel-fg: 0 0% 96%;
-  --panel-border: 240 5% 22%;
+  --panel-border: 240 4% 24%;
 }
 
-/* ---- Dark slides: title + close sandwich -------------------------------- */
+/* ---- Dark slides -----------------------------------------------------------
+   The base is already dark, so this is now an explicit no-op alias kept on
+   the title/close slides for clarity (and so the framework still supports a
+   light-base deck that opts individual slides into dark). ------------------- */
 .slide--dark {
-  background: hsl(var(--panel));
-  color: hsl(var(--panel-fg));
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
 }
 
-/* NB: do NOT re-bind --foreground / --muted-foreground inside .slide--dark.
-   tools/og-cover.mjs scrapes those tokens out of this file with a regex to
-   build the social card, and a scoped re-binding leaks into it (white name on
-   a white card). Override the components directly instead. deck.css pins
-   `.lead`'s color with !important, so that one needs !important to reach. */
-.slide--dark .lead {
-  color: hsl(var(--panel-fg)) !important;
-}
-
-.slide--dark .kicker,
-.slide--dark .muted,
-.slide--dark p,
-.slide--dark .stat-label,
-.slide--dark .qr-label,
-.slide--dark .newsletter-eyebrow {
-  color: hsl(240 5% 68%);
-}
-
-.slide--dark .lead a {
-  color: hsl(var(--panel-fg));
-}
-
-.slide--dark .card {
-  background: hsl(240 6% 13%);
-  border-color: hsl(var(--panel-border));
-  color: hsl(var(--panel-fg));
-}
-
-.slide--dark .visual {
-  border-color: hsl(240 5% 40%);
-  color: hsl(240 5% 68%);
+/* Make the asset placeholders read clearly on the dark base. */
+.visual {
+  border-color: hsl(var(--muted-foreground) / 0.35);
 }
 
 /* ---- Shared accents ------------------------------------------------------ */
 .accent {
   color: hsl(var(--accent));
-}
-
-.slide--dark .accent {
-  color: hsl(173 70% 52%);
 }
 
 .cost {
@@ -219,7 +215,8 @@
 }
 
 /* =============================================================================
-   Code panels — always dark, so they read as artifacts on the light base
+   Code panels — one step above the dark base, so they still read as
+   artifacts dropped onto the slide
    ========================================================================== */
 .codeblock {
   text-align: left;
@@ -236,7 +233,7 @@
   max-width: 100%;
   white-space: pre;
   overflow: hidden;
-  box-shadow: 0 14px 34px hsl(240 10% 3.9% / 0.22);
+  box-shadow: 0 14px 34px hsl(240 10% 3.9% / 0.45);
 }
 
 .codeblock .k { color: #7aa2f7; } /* keywords */
@@ -418,7 +415,7 @@
   place-items: center;
   font-size: 0.8rem;
   font-weight: 800;
-  box-shadow: 0 4px 12px hsl(240 10% 3.9% / 0.25);
+  box-shadow: 0 4px 12px hsl(240 10% 3.9% / 0.45);
 }
 
 .scale-ends {
@@ -546,11 +543,6 @@
   font-size: 1rem;
 }
 
-.slide--dark .openq li::before {
-  border-color: hsl(173 70% 52% / 0.6);
-  color: hsl(173 70% 52%);
-}
-
 /* =============================================================================
    Numbered takeaways / closing list
    ========================================================================== */
@@ -603,10 +595,6 @@
 .qr-label {
   font-size: 0.95rem;
   color: hsl(var(--muted-foreground));
-}
-
-.slide--dark .qr-label {
-  color: hsl(240 5% 68%);
 }
 
 .qr--side {
