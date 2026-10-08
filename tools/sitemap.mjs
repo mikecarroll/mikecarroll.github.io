@@ -85,7 +85,21 @@ pages.push({
 const decks = await findDecks();
 decks.sort((a, b) => a.year.localeCompare(b.year) || a.slug.localeCompare(b.slug));
 
+const yearsListed = new Set();
+
 for (const deck of decks) {
+  if (!yearsListed.has(deck.year)) {
+    yearsListed.add(deck.year);
+    const yearIndexPath = resolve(repoRoot, "talks", deck.year, "index.html");
+    try {
+      await stat(yearIndexPath);
+      const yearUrl = `${SITE}/talks/${deck.year}/`;
+      await checkCanonical(yearIndexPath, yearUrl);
+      pages.push({ url: yearUrl, lastmod: gitLastmod(yearIndexPath) });
+    } catch {
+      // no year listing page for this year
+    }
+  }
   const url = `${SITE}/talks/${deck.year}/${deck.slug}/`;
   await checkCanonical(deck.indexPath, url);
   pages.push({ url, lastmod: gitLastmod(deck.indexPath) });
