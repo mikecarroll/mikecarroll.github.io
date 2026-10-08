@@ -1,0 +1,50 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# bin/run_v3 — the squishling capstone: one class, zero format-specific
+# code, run against all 35 fixtures (the 20 v1 understood, plus the 15 it
+# never could). Unlike bin/run_v1 and bin/run_v2, this makes a real LLM
+# call per fixture — there's no offline/deterministic path to fall back to,
+# because v3 was never given one.
+require "bundler/setup"
+require "json"
+require "squishling"
+require_relative "../lib/v3/parser"
+
+unless ENV["ANTHROPIC_API_KEY"]
+  warn "Set ANTHROPIC_API_KEY before running v3 — every fixture here makes a real LLM call."
+  exit 1
+end
+
+RubyLLM.configure { |c| c.anthropic_api_key = ENV["ANTHROPIC_API_KEY"] }
+Squishling.configure do |c|
+  c.default_model = "claude-haiku-4-5-20251001"
+  c.default_provider = :anthropic
+end
+
+root = File.expand_path("..", __dir__)
+manifest = JSON.parse(File.read(File.join(root, "fixtures", "manifest.json")))
+
+passed = 0
+failed = 0
+
+manifest.each do |entry|
+  raw = File.read(File.join(root, "fixtures", entry.fetch("file")))
+
+  begin
+    record = V3::Parser.parse(raw)
+    if record.matches?(entry.fetch("expected"))
+      passed += 1
+      puts "PASS  #{entry.fetch('file')} (#{entry.fetch('format')})"
+    else
+      failed += 1
+      puts "FAIL  #{entry.fetch('file')} (#{entry.fetch('format')} — parsed but values don't match expected)"
+    end
+  rescue Squishling::InvalidOutputError => e
+    failed += 1
+    puts "FAIL  #{entry.fetch('file')} (#{entry.fetch('format')} — #{e.message})"
+  end
+end
+
+puts
+puts "v3: #{passed}/#{manifest.size} passed, #{failed}/#{manifest.size} failed"

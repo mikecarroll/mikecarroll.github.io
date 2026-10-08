@@ -797,10 +797,163 @@
           </aside>
         </section>
 
+        <!-- Slide 30 — The data types under test -->
+        <section class="slide" id="slide-30" aria-label="The data types under test — four formats, real patients">
+          <p class="kicker">Proving it for real</p>
+          <h2>Thirty-five real patients. Four formats.</h2>
+          <ul class="ledger">
+            <li><span>Canonical FHIR Bundle</span><span class="unit">20 records</span></li>
+            <li><span>Re-keyed FHIR variant</span><span class="unit">5 records</span></li>
+            <li><span>HL7 v2.3 message</span><span class="unit">5 records</span></li>
+            <li><span>Pipe-delimited flat file</span><span class="unit">5 records</span></li>
+            <li class="is-total"><span>Real, Synthea-generated patients</span><span class="unit">35 total</span></li>
+          </ul>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The two malformed records from the last slide were the trailer. This is the
+            movie: 35 real synthetic patients — pulled from actual Synthea-generated FHIR
+            bundles, not invented — rendered into four genuinely different wire formats,
+            each with real-shaped noise layered on (extra FHIR extensions, extra HL7
+            segments like NK1 and IN1, a dozen irrelevant flat-file columns). Say "real"
+            twice here; this room will assume a toy demo otherwise.
+          </aside>
+        </section>
+
+        <!-- Slide 31 — The full hand-written parser: v1 vs v2 -->
+        <section class="slide" id="slide-31" aria-label="The hand-written parser scaled up — v1 versus v2">
+          <p class="kicker">The hand-written path, at scale</p>
+          <h2>One shape breaks. Four classes catch everything.</h2>
+          <div class="formula">
+            <div class="row">
+              <span class="who">v1</span>
+              <span class="what">20 / 35 — one shape, nothing else.</span>
+            </div>
+            <div class="row row--sw">
+              <span class="who">v2</span>
+              <span class="what">35 / 35 — four classes, one dispatcher.</span>
+            </div>
+          </div>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.75rem">
+            Same problem as slide eight. <span class="cost">A lot more code.</span>
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            v1 is the "day one, it is beautiful" parser, verbatim, pointed at real data: it
+            assumes one shape and a three-word gender vocabulary, and fails cleanly — not a
+            crash — on the 15 it was never built for. v2 is the monster case statement's
+            honest descendant: a base class, one subclass per format, a dispatcher, and a
+            gender-translation table grounded in real FHIR/HL7/SNOMED code systems. It
+            works. It is also four files more than anyone wants to maintain per new format.
+            Hold that number — four classes for four formats — before the next slide.
+          </aside>
+        </section>
+
+        <!-- Slide 32 — Squishling: one class, no implementation -->
+        <section class="slide center" id="slide-32" aria-label="Squishling — one class with no implementation at all">
+          <p class="kicker">Enter squishling</p>
+          <h2>No shapes. No classes. No translation table.</h2>
+<pre class="codeblock" aria-label="A squishling class with instructions, an output schema, and no call method"><code><span class="k">class</span> <span class="m">Parser</span>
+  <span class="k">include</span> <span class="m">Squishling</span>
+
+  instructions <span class="s">"Map the inbound record onto the schema..."</span>
+  output_schema <span class="k">do</span>
+    string :patient_name
+    string :patient_gender, enum: %w[male female trans unknown]
+    array  :diagnosis_codes, of: :string
+    array  :symptoms, of: :string
+  <span class="k">end</span>
+
+<span class="hl">  # no call method — every invocation is squished.</span>
+<span class="k">end</span>
+</code></pre>
+          <div class="formula" style="margin-top: 1.5rem">
+            <div class="row row--ai">
+              <span class="who">v3</span>
+              <span class="what">23 / 35 — first real run.</span>
+            </div>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Squishling is Michael's own gem — built on this talk's own premise, the README
+            cites the Substack article by name. A squished method either runs its Ruby
+            implementation or, if there is none, routes straight to the LLM — "the method
+            has no implementation" is a first-class routing rule, not a fallback hack. This
+            class has no implementation at all. First real run against all 35: 23 pass.
+            Every single diagnosis code — exact SNOMED codes, pulled out of four different
+            shapes — came back correct. The failures clustered in three places: HL7 names
+            came back untouched, a couple of gender codes, and a few hallucinated symptoms
+            on records that should have reported none. Name the failure modes out loud;
+            the next two slides are about chasing them down for real, live, during prep for
+            this talk.
+          </aside>
+        </section>
+
+        <!-- Slide 33 — Is it noise? The temperature experiment -->
+        <section class="slide center" id="slide-33" aria-label="Reported the hallucination — a same-day gem fix that didn't move the number">
+          <p class="kicker">Reported it. Got a same-day fix.</p>
+          <h2>Same gem fix. Same twenty-three.</h2>
+          <div class="formula">
+            <div class="row row--ai">
+              <span class="who">Default</span>
+              <span class="what">23 / 35</span>
+            </div>
+            <div class="row row--ai">
+              <span class="who">temp 0.1</span>
+              <span class="what">23 / 35 — same 12 files.</span>
+            </div>
+          </div>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.75rem">
+            One record even flipped from <span class="accent">pass to fail.</span>
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Reported the symptom-hallucination finding to squishling's author, who shipped
+            temperature/params support the same day — a real instance of the article's own
+            thesis, tightening the loop between a finding and a fix. Reran all 35 at
+            temperature 0.1, expecting the hallucination to calm down. It did not: the
+            exact same 12 files failed, and one record that previously passed by luck now
+            failed every time. That is the tell — this was never sampling noise. The model
+            was systematically treating "diagnoses nearby, no symptom entry" as license to
+            invent one. Lower temperature just made the wrong call more reliable.
+          </aside>
+        </section>
+
+        <!-- Slide 34 — The actual fix, and the honest remainder -->
+        <section class="slide" id="slide-34" aria-label="The actual fix was the instructions — thirty-one of thirty-five, and an honest remainder">
+          <p class="kicker">The actual fix</p>
+          <h2>Thirty-one of thirty-five.</h2>
+          <ul class="ledger">
+            <li><span>Baseline</span><span class="unit">23 / 35</span></li>
+            <li><span>+ temperature 0.1 <span class="muted">(gem fix)</span></span><span class="unit">23 / 35</span></li>
+            <li class="is-total"><span>+ clearer instructions</span><span class="unit">31 / 35</span></li>
+          </ul>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.5rem">
+            The last four are real limits, not bugs:
+          </p>
+          <ul class="bullets fragment" data-fragment-index="1">
+            <li>Two gender codes with no label attached — it correctly says "unknown" rather than guess.</li>
+            <li>Two HL7 letter codes it still misreads, despite being told exactly what they mean.</li>
+          </ul>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The fix was never the gem — it was spelling out, in plain language, the three
+            things v2's code already knew by construction: HL7 writes names LAST^FIRST, a
+            diagnosis is not a symptom, and here is what an unfamiliar gender code should
+            default to. That is instructions doing the work a case statement used to do —
+            a prompt is code too, and it benefits from the same iteration. The remaining
+            four are the honest edge of this: two bare SNOMED gender-identity codes with no
+            display text attached, where the model correctly refuses to guess rather than
+            fabricate an identity — v2 gets these right only because I handed it the
+            mapping by hand. And two HL7 letter codes it still misreads despite being told.
+            That gap is the whole talk in miniature: code is exact because you give it the
+            answer; the model is elastic because it has to infer one.
+          </aside>
+        </section>
+
         <!-- ===================================================== ACT 9 — OPEN PROBLEMS -->
 
-        <!-- Slide 30 — What nobody has solved -->
-        <section class="slide" id="slide-30" aria-label="The open problems nobody has solved">
+        <!-- Slide 35 — What nobody has solved -->
+        <section class="slide" id="slide-35" aria-label="The open problems nobody has solved">
           <p class="kicker">Where this is still unfinished</p>
           <h2>Nobody has solved these yet.</h2>
           <ul class="openq">
@@ -827,8 +980,8 @@
           </aside>
         </section>
 
-        <!-- Slide 31 — What separates the teams doing it well -->
-        <section class="slide" id="slide-31" aria-label="What separates teams doing this well">
+        <!-- Slide 36 — What separates the teams doing it well -->
+        <section class="slide" id="slide-36" aria-label="What separates teams doing this well">
           <h2>What separates the teams doing this well<br />is not that they have the answers.</h2>
           <p class="lead fragment" data-fragment-index="1" style="margin-top: 2rem">
             It is that they treat elastic software as an
@@ -847,8 +1000,8 @@
           </aside>
         </section>
 
-        <!-- Slide 32 — Close -->
-        <section class="slide slide--dark center" id="slide-32" aria-label="Thank you and questions">
+        <!-- Slide 37 — Close -->
+        <section class="slide slide--dark center" id="slide-37" aria-label="Thank you and questions">
           <h1>Where is it <span class="accent">breaking</span> for you?</h1>
           <p class="lead" style="margin-top: 1.25rem">
             That is the actual reason I am up here.
@@ -1051,6 +1204,58 @@
         It runs in the other direction too. If you are an enterprise drowning under a
         thousand legacy parsers, find the ones sitting at the tail of your usage
         curve, re-route them to an inference call, and delete the code.
+      </p>
+
+      <h2>Proving it for real</h2>
+      <p>
+        Two malformed records through a dozen lines of Ruby is a good trailer. The real
+        test is 35 real patients — pulled from actual Synthea-generated FHIR bundles,
+        not invented — rendered into four genuinely different wire formats: a canonical
+        FHIR bundle, a re-keyed FHIR variant with different field names, an HL7 v2.3
+        message, and a legacy pipe-delimited flat file. Each one carries real-shaped
+        noise: extra FHIR extensions, extra HL7 segments nobody asked for, a dozen
+        irrelevant flat-file columns. Twenty of the 35 share one shape; the other 15
+        each use a shape the parser has never seen.
+      </p>
+      <p>
+        Pointed at that data, v1 — the "day one, it is beautiful" parser, verbatim —
+        gets 20 of 35, and fails cleanly, not a crash, on the 15 it was never built for.
+        v2 is the monster case statement's honest descendant: a base class, one subclass
+        per format, a dispatcher, and a gender-translation table grounded in real
+        FHIR, HL7, and SNOMED code systems. It gets all 35. It is also four classes and
+        a shared translation module — real, maintained code, for four formats.
+      </p>
+      <p>
+        Then the same problem, handed to a <a href="https://github.com/Coolhand-Labs/squishling">squishling</a>
+        — a gem built on this talk's own premise, whose class declares instructions and
+        an output schema and nothing else. No shapes, no classes, no translation table:
+        a method with no implementation is squished straight to the LLM by default.
+        First real run against all 35: 23 pass. Every diagnosis code — exact SNOMED
+        codes, pulled out of four different shapes — came back right; the failures
+        clustered in HL7 names coming back untouched, a few gender codes, and a handful
+        of hallucinated symptoms on records that should have reported none.
+      </p>
+      <p>
+        Reporting that hallucination, live, during prep for this talk, got a same-day
+        fix: temperature and other generation params, added to the gem. Rerunning at a
+        low temperature produced the exact same 23 — the same 12 files failed, and one
+        record that had passed by luck now failed every time. That flip was the tell:
+        this was never sampling noise. The model was systematically treating "diagnoses
+        nearby, no symptom entry" as license to invent one; a lower temperature just
+        made the wrong call more reliable, not less.
+      </p>
+      <p>
+        The actual fix was the instructions — spelling out, in plain language, the
+        things v2's code already knew by construction: HL7 writes names LAST^FIRST, a
+        diagnosis is not a symptom, and what an unfamiliar gender code should default
+        to. That got it to 31 of 35. A prompt is code too, and it benefits from the
+        same iteration a case statement would. The last four are the honest edge of it:
+        two bare gender-identity codes with no label attached, where the model
+        correctly refuses to guess rather than fabricate an identity — v2 only gets
+        these right because it was handed the mapping by hand — and two HL7 letter
+        codes it still misreads despite being told exactly what they mean. Code is
+        exact because you give it the answer; the model is elastic because it has to
+        infer one.
       </p>
 
       <h2>The hard problems are still wide open</h2>

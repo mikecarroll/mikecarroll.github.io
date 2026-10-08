@@ -56,3 +56,35 @@ from `synthea_source.json` — no network access needed. Re-deriving
 `synthea_source.json` itself does need network access to GitHub; there's no
 committed script for that step since it was a one-time, by-hand extraction
 (see the file's own `source_url` fields to re-fetch by hand if ever needed).
+
+## squishling, as a dependency
+
+`lib/v3/parser.rb` and `lib/v4/parser.rb` are the only things in this
+exercise with a real external dependency: `Gemfile` pulls
+[squishling](https://github.com/Coolhand-Labs/squishling) straight from
+GitHub (git source, not a published gem yet). It's moved twice so far:
+
+1. Built and validated against the `squish_me` development branch.
+2. Re-validated unchanged after that branch merged to `main` as the v0.1.0
+   release — which also moved it onto `ruby_llm ~> 2.0` and swapped
+   `ruby_llm-schema` for a new standalone gem, `schematist`; the
+   `output_schema` DSL was unaffected by that swap.
+3. **Currently pinned to
+   [PR #3](https://github.com/Coolhand-Labs/squishling/pull/3)'s branch**
+   (`mikecarroll/append-instructions-squish-bang`, not yet merged), for
+   `squish!` and `append_instructions` — v4 needs both; v3 doesn't and
+   would work unchanged back on `main`.
+
+See the top-level conversation / commit history for the issues found while
+integrating any of these against this machine (unrelated `json`/`bigdecimal`
+native-extension mismatches, both pinned around in the `Gemfile` — nothing
+in squishling's own code).
+
+## v4's extra fixture
+
+`fixtures/missing_gender.json` is **not** one of the 35 — it's
+`001_canonical_fhir.json` (the real patient Abdul Koepp) with the
+`Patient.gender` field set to `null`, built specifically to exercise v4's
+second `rescue` (a well-formed Bundle with a genuinely empty required
+field), which none of the 35 trigger by construction. `bin/run_v4` runs it
+as a 36th, separate case.

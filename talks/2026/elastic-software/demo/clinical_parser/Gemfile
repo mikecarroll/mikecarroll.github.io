@@ -1,0 +1,22 @@
+source "https://rubygems.org"
+
+# v1/v2 are pure Ruby stdlib — this is the only reason this exercise needs
+# a Gemfile at all. squishling's own gemspec pulls in ruby_llm, schematist,
+# and json_schemer. Not yet published to RubyGems — git source.
+#
+# v4 (lib/v4/parser.rb) needs `squish!`/`append_instructions`, from PR #3
+# (https://github.com/Coolhand-Labs/squishling/pull/3), not yet on main —
+# branch pinned to that PR's branch until it merges.
+gem "squishling", git: "https://github.com/Coolhand-Labs/squishling",
+                  branch: "mikecarroll/append-instructions-squish-bang"
+
+# Pinned below 3.x: this machine's json gem native extension (a transitive
+# dependency via ruby_llm/faraday) fails to compile against 3.0.2's toolchain
+# assumptions. 2.21.2 ships as a prebuilt default gem with this Ruby. See the
+# same pin in ../Gemfile.
+gem "json", "~> 2.21"
+
+# Pinned: bigdecimal 4.1.3's prebuilt native extension on this machine is
+# arm64 while this Ruby runs x86_64 (Rosetta) — "incompatible architecture"
+# at load time. A transitive dependency via json_schemer. 4.0.1 loads fine.
+gem "bigdecimal", "= 4.0.1"
