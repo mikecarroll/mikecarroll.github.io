@@ -1,18 +1,22 @@
 # Fixture provenance
 
-Patient identity and diagnoses in every one of the 35 fixtures are **real**
+Patient identity and diagnoses in every one of the 100 fixtures are **real**
 — not invented — pulled from actual [Synthea](https://github.com/synthetichealth/synthea)
 (Apache-2.0) synthetic-patient output. Only the symptom values and each
 format's surrounding "noise" fields are this exercise's own invention.
 
 ## What's real
 
-`tools/synthea_source.json` holds, for each of 35 patients, an unmodified
+`tools/synthea_source.json` holds, for each of 100 patients, an unmodified
 excerpt of one real Synthea-generated FHIR bundle: the full `Patient`
 resource, up to 3 distinct `Condition` resources (real SNOMED CT codes and
 displays), and a handful of that patient's other real resources
 (`Immunization`, `Procedure`, `Encounter`) kept around purely as bundle
-noise. Bundles were mirrored from
+noise. (Patients 36–100 were added later, by hand, the same way: a random draw
+from the same directory excluding the first 35, keeping only patients with
+at least three distinct active conditions, two immunizations, a procedure
+and an encounter, and a name free of Synthea's numeric suffixes.) Bundles
+were mirrored from
 [smart-on-fhir/generated-sample-data](https://github.com/smart-on-fhir/generated-sample-data)
 (`R4/SYNTHEA/`) — each patient's `source_file`/`source_url` in
 `synthea_source.json` points at exactly which file it came from.
@@ -40,6 +44,18 @@ noise. Bundles were mirrored from
   only the gender/sex field itself is substituted, deliberately, to
   exercise the translation table.
 
+## What's invented in the exotic fixtures (079–100)
+
+Same rule as the rest: patient name, DOB, address, phone and the three
+diagnoses are real Synthea values; **everything else is made up** —
+symptoms, vitals, medications (real RxNorm codes, invented prescriptions),
+payer/group IDs, provider names, facility names (rotated from a short
+list), claim numbers, chat messages, dictation filler, and the OCR errors
+injected into the fax's label text. The patient's own data is never
+corrupted in any of them: even the OCR'd fax and the digit-by-digit
+dictation carry the codes exactly. Gender sources on these 22 are chosen per
+format by `FORMATS` in `tools/exotic_formats.rb`.
+
 ## Format assignment
 
 - **001–020** (v1, `canonical_fhir`): a full FHIR `Bundle` — the real
@@ -50,6 +66,10 @@ noise. Bundles were mirrored from
 - **026–030** (`hl7`): the same real patient data as an HL7 v2.3 message.
 - **031–035** (`pipe_delimited`): the same real patient data as a legacy
   pipe-delimited flat-file export.
+
+- **036–078** (`canonical_fhir`): 43 more of the same, from the added patients.
+- **079–100** (exotic): 22 one-off formats, one fixture each — see the table
+  in `README.md`.
 
 Regenerating (`ruby tools/generate_fixtures.rb`) re-derives every fixture
 from `synthea_source.json` — no network access needed. Re-deriving
@@ -69,11 +89,17 @@ GitHub (git source, not a published gem yet). It's moved twice so far:
    release — which also moved it onto `ruby_llm ~> 2.0` and swapped
    `ruby_llm-schema` for a new standalone gem, `schematist`; the
    `output_schema` DSL was unaffected by that swap.
-3. **Currently pinned to
-   [PR #3](https://github.com/Coolhand-Labs/squishling/pull/3)'s branch**
-   (`mikecarroll/append-instructions-squish-bang`, not yet merged), for
-   `squish!` and `append_instructions` — v4 needs both; v3 doesn't and
-   would work unchanged back on `main`.
+3. Pinned for a while to [PR #3](https://github.com/Coolhand-Labs/squishling/pull/3)'s
+   branch (`mikecarroll/append-instructions-squish-bang`), for `squish!` and
+   `append_instructions` — v4 needed both; v3 didn't and worked unchanged
+   back on `main`.
+4. **Currently pinned to a specific commit on `main`**
+   (`ce4146bd7bd0c42518142f9402ee5a2282b1e833`, 2026-10-09) now that PR #3
+   merged (2026-10-08). Two renames landed with the merge: the class-level
+   `instructions` became `purpose`, and `append_instructions` became
+   `append_to_purpose` — both `lib/v3/parser.rb` and `lib/v4/parser.rb` were
+   updated to match. `main` is still unreleased and moving, so this is
+   pinned to a commit, not the branch, to keep the demo reproducible.
 
 See the top-level conversation / commit history for the issues found while
 integrating any of these against this machine (unrelated `json`/`bigdecimal`
@@ -82,9 +108,9 @@ in squishling's own code).
 
 ## v4's extra fixture
 
-`fixtures/missing_gender.json` is **not** one of the 35 — it's
+`fixtures/missing_gender.json` is **not** one of the 100 — it's
 `001_canonical_fhir.json` (the real patient Abdul Koepp) with the
 `Patient.gender` field set to `null`, built specifically to exercise v4's
 second `rescue` (a well-formed Bundle with a genuinely empty required
-field), which none of the 35 trigger by construction. `bin/run_v4` runs it
+field), which none of the 100 trigger by construction. `bin/run_v4` runs it
 as a 36th, separate case.

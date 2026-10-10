@@ -1,0 +1,35 @@
+{
+  "messageId": "f2012e2f-8631-476e-94a8-57ec2ae01d2e",
+  "receivedAt": "2026-01-15T09:00:07Z",
+  "channel": {
+    "type": "sftp-drop",
+    "host": "sftp.gateway.example.org",
+    "path": "/inbound/f2012e2f/"
+  },
+  "routing": {
+    "priority": "normal",
+    "retries": 0,
+    "tenant": "lakeside",
+    "tags": [
+      "clinical",
+      "inbound",
+      "unparsed"
+    ]
+  },
+  "attachment": {
+    "filename": "summary_f2012e2f.txt",
+    "contentType": "text/plain; charset=utf-8",
+    "encoding": "base64",
+    "sizeBytes": 416,
+    "sha1": "0000000000000000000000000000000000000000",
+    "payload": "Q0xJTklDQUwgU1VNTUFSWSAocGxhaW4gdGV4dCBhdHRhY2htZW50KQpQYXRpZW50IG5hbWU6IFp1bGEgQmVlcgpNUk46IEYyMDEyRTJGCkRPQjogMTk1MC0wOS0zMApHZW5kZXIgaWRlbnRpdHkgKFNOT01FRCBDVCk6IDQ0NjE0MTAwMDEyNDEwNyAtIElkZW50aWZpZXMgYXMgZmVtYWxlIGdlbmRlcgpEaWFnbm9zZXM6CiAgMTkxNjkwMDIgfCBNaXNjYXJyaWFnZSBpbiBmaXJzdCB0cmltZXN0ZXIKICA0MDA1NTAwMCB8IENocm9uaWMgc2ludXNpdGlzIChkaXNvcmRlcikKICAxNTc3NzAwMCB8IFByZWRpYWJldGVzClN5bXB0b21zOiBibHVycmVkIHZpc2lvbjsgcGFscGl0YXRpb25zOyBuaWdodCBzd2VhdHM7IGNvdWdoCkNvbW1lbnQ6IEludGVycHJldGVyIG5vdCByZXF1aXJlZC4gUHJlZmVycmVkIGxhbmd1YWdlOiBFbmdsaXNoLgo="
+  },
+  "trace": {
+    "hops": [
+      "edge-3",
+      "mq-1",
+      "ingest-7"
+    ],
+    "elapsedMs": 140
+  }
+}

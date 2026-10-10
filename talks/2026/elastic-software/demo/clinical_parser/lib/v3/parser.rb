@@ -14,12 +14,12 @@ module V3
     # Low temperature for a structured-extraction task — squishling added params:
     # (temperature/thinking/etc.) after the first run of this class showed symptom
     # hallucination on empty-symptom records. Kept for genuine determinism value even though it
-    # didn't fix that particular failure on its own — see the instructions below for the actual
+    # didn't fix that particular failure on its own — see the purpose below for the actual
     # fix: it was a systematic misreading, not sampling noise (temperature 0.1 made it *more*
     # consistent, not less).
     squishling params: { temperature: 0.1 }
 
-    instructions <<~INSTRUCTIONS
+    purpose <<~PURPOSE
       Map the inbound clinical record — in whatever format it arrives — onto
       the schema below. Ignore every field that isn't the patient's name,
       their gender, their diagnosis codes, or their symptoms.
@@ -45,7 +45,7 @@ module V3
       "symptoms" field. A diagnosis is not a symptom; never infer symptoms
       from diagnosis or condition names. If the record reports none, return
       an empty array.
-    INSTRUCTIONS
+    PURPOSE
 
     output_schema do
       string :patient_name

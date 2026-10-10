@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-# tools/generate_fixtures.rb — the single source of truth for all 35
+# tools/generate_fixtures.rb — the single source of truth for all 100
 # fixtures. Patient demographics and diagnoses are *real* — extracted from
 # actual Synthea-generated FHIR bundles (see synthea_source.json and its
 # own PROVENANCE note) — only the symptom values, the gender-source
@@ -11,11 +11,12 @@
 # fixture set itself changes.
 require "json"
 require_relative "../lib/normalizers"
+require_relative "exotic_formats"
 
 root = File.expand_path("..", __dir__)
 patients = JSON.parse(File.read(File.join(root, "tools", "synthea_source.json")))
 
-raise "expected 35 patients, got #{patients.size}" unless patients.size == 35
+raise "expected 100 patients, got #{patients.size}" unless patients.size == 100
 
 # Real Synthea patients are only ever "male"/"female" — v1's 20 canonical
 # fixtures stay exactly that (see lib/v1/parser.rb's own tiny 3-word
@@ -160,16 +161,43 @@ end
 
 # --- assign each patient a format, render, and record the expected result
 
+#
+# 000-019  canonical_fhir   (the original 20)
+# 020-024  fhir_variant
+# 025-029  hl7
+# 030-034  pipe_delimited
+# 035-077  canonical_fhir   (43 more — ~2/3 of the 65 added to reach 100)
+# 078-099  exotic           (22 one-off formats, see tools/exotic_formats.rb)
+EXOTIC_START = 78
+
 FORMAT_FOR_INDEX = ->(i) {
   case i
-  when 0..19 then "canonical_fhir"
+  when 0..19, 35...EXOTIC_START then "canonical_fhir"
   when 20..24 then "fhir_variant"
   when 25..29 then "hl7"
-  else "pipe_delimited"
+  when 30..34 then "pipe_delimited"
+  else ExoticFormats::FORMATS.fetch(i - EXOTIC_START).first
   end
 }
 
-EXTENSIONS = { "canonical_fhir" => "json", "fhir_variant" => "json", "hl7" => "hl7", "pipe_delimited" => "txt" }.freeze
+EXTENSIONS = { "canonical_fhir" => "json", "fhir_variant" => "json", "hl7" => "hl7", "pipe_delimited" => "txt" }
+ExoticFormats::FORMATS.each { |name, ext, _, _| EXTENSIONS[name] = ext }
+EXTENSIONS.freeze
+
+def exotic_context(index, patient, conditions, symptoms, gender_source)
+  name = patient.fetch("name").find { |n| n["use"] == "official" } || patient.fetch("name").first
+  address = patient.fetch("address").first
+  ExoticFormats::Ctx.new(
+    index: index, name: full_name(patient), first: [*name.fetch("given")].join(" "), last: name.fetch("family"),
+    gender_source: gender_source, dob: patient.fetch("birthDate"), mrn: patient["id"][0, 8].upcase,
+    street: [*address["line"]].first, city: address["city"], state: address["state"], zip: address["postalCode"],
+    phone: patient.fetch("telecom").find { |t| t["system"] == "phone" }&.fetch("value"),
+    dx: conditions.map { |c| coding = c.dig("code", "coding", 0); [coding["code"], coding["display"]] },
+    symptoms: symptoms, patient_id: patient["id"],
+    facility: ExoticFormats::FACILITIES[index % ExoticFormats::FACILITIES.size],
+    provider: ExoticFormats::PROVIDERS[index % ExoticFormats::PROVIDERS.size]
+  )
+end
 
 fixtures_dir = File.join(root, "fixtures")
 manifest = []
@@ -180,7 +208,13 @@ patients.each_with_index do |entry, index|
   noise_resources = entry.fetch("noise_resources")
   symptoms = symptoms_for(index)
   fmt = FORMAT_FOR_INDEX.call(index)
-  gender_source = GENDER_SOURCE_OVERRIDE.fetch(index, patient.fetch("gender"))
+  exotic = ExoticFormats::FORMATS[index - EXOTIC_START] if index >= EXOTIC_START
+  gender_source =
+    if exotic
+      exotic.fetch(3).call(patient.fetch("gender"))
+    else
+      GENDER_SOURCE_OVERRIDE.fetch(index, patient.fetch("gender"))
+    end
 
   raw =
     case fmt
@@ -188,6 +222,7 @@ patients.each_with_index do |entry, index|
     when "fhir_variant" then render_fhir_variant(patient, conditions, symptoms, gender_source)
     when "hl7" then render_hl7(patient, conditions, symptoms, gender_source)
     when "pipe_delimited" then render_pipe_delimited(patient, conditions, symptoms, gender_source)
+    else ExoticFormats.public_send(exotic.fetch(2), exotic_context(index, patient, conditions, symptoms, gender_source))
     end
 
   filename = "#{format('%03d', index + 1)}_#{fmt}.#{EXTENSIONS.fetch(fmt)}"

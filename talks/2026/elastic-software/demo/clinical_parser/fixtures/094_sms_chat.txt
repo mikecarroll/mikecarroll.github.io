@@ -1,0 +1,17 @@
+[Care Team Chat export - channel #triage-93 - 2026-01-15]
+
+[08:57] Dana (front desk): morning! got a walk-in, checking them in now
+[08:58] Dana (front desk): name is Sylvester Kshlerin, they said to put nonbinary for gender, dob 1963-07-11
+[08:58] Dana (front desk): mrn E24537EC btw
+[09:01] Nurse Tran: thanks. also did anyone move the 10:30 to room 4?? the whiteboard is a mess
+[09:01] Dana (front desk): yes room 4. coffee machine is broken again lol
+[09:04] Nurse Tran: ok intake done. they're here for: night sweats + cough + wheezing
+[09:05] Dr. Nakamura: ok. problem list is
+    Body mass index 30+ - obesity (finding) = 162864005
+    Facial laceration = 370247008
+    Streptococcal sore throat (disorder) = 43878008
+[09:05] Dr. Nakamura: (those are snomed ids)
+[09:06] Nurse Tran: 👍 adding to chart
+[09:07] Dana (front desk): copay collected $25, payer 4471
+[09:12] Nurse Tran: allergies reviewed with patient; nkda on file as of last visit.
+[09:30] Dana (front desk): who has the good stapler

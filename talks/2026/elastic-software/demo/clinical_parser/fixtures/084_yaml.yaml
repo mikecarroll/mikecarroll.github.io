@@ -1,0 +1,59 @@
+# ChartKeeper nightly export - do not edit by hand
+---
+schema: ehr-export/v7
+generated: '2026-01-15T09:00:00Z'
+source:
+  system: ChartKeeper
+  site: Mercy Valley Urgent Care
+encounter:
+  id: ENC-81091
+  date: '2026-01-15'
+  provider: P. Lindqvist
+  ward: B-3
+person:
+  mrn: 720B9118
+  legal_name: Micah Schinner
+  sex_or_gender: non-binary
+  born: '1959-12-07'
+  contact:
+    phone: 555-997-7723
+    address: 124 Little Mission Suite 85, Hanson, Massachusetts 02341
+vitals:
+  bp: 131/75
+  hr: 73
+  temp_f: 98.5
+  spo2: 99
+  weight_kg: 65
+  height_cm: 159
+medications:
+- name: Acetaminophen 325 MG Oral Tablet
+  rxnorm: '313782'
+  active: true
+- name: Ibuprofen 200 MG Oral Tablet
+  rxnorm: '197806'
+  active: true
+- name: lisinopril 10 MG Oral Tablet
+  rxnorm: '314076'
+  active: true
+problems:
+- snomed: '162864005'
+  label: Body mass index 30+ - obesity (finding)
+  status: active
+- snomed: '6072007'
+  label: Bleeding from anus
+  status: active
+- snomed: '236077008'
+  label: Protracted diarrhea
+  status: active
+reported_symptoms:
+- chest pain
+- joint pain
+- rash
+billing:
+  payer: PAYER-4471
+  group: GRP-8842
+  copay_usd: 25.0
+  prior_auth: false
+notes:
+- Please bring your insurance card to every visit.
+- 'Advance directive status: not on file. Information offered.'

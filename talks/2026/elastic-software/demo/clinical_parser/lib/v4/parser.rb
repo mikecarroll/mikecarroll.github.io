@@ -9,9 +9,9 @@
 #      nil/empty — parsed fine, just incomplete.
 #
 # Harden the common case, squish the rest — the whole talk's thesis, as one
-# class. `squish!`/`append_instructions` are from squishling PR #3
-# (https://github.com/Coolhand-Labs/squishling/pull/3), not yet merged to
-# main — see this exercise's Gemfile.
+# class. `squish!`/`append_to_purpose` landed on squishling's main via PR #3
+# (https://github.com/Coolhand-Labs/squishling/pull/3) — see this exercise's
+# Gemfile for the pinned commit.
 require "squishling"
 require_relative "../clinical_record"
 
@@ -21,7 +21,7 @@ module V4
 
     class MissingFieldError < StandardError; end
 
-    instructions <<~INSTRUCTIONS
+    purpose <<~PURPOSE
       Map the inbound clinical record — in whatever format it arrives — onto
       the schema below. Ignore every field that isn't the patient's name,
       their gender, their diagnosis codes, or their symptoms.
@@ -47,9 +47,9 @@ module V4
       "symptoms" field. A diagnosis is not a symptom; never infer symptoms
       from diagnosis or condition names. If the record reports none, return
       an empty array.
-    INSTRUCTIONS
+    PURPOSE
 
-    append_instructions "The Ruby that parses a well-formed FHIR Bundle, for context on the shape and intent:",
+    append_to_purpose "The Ruby that parses a well-formed FHIR Bundle, for context on the shape and intent:",
       self
 
     squishling params: { temperature: 0.1 }
@@ -94,8 +94,8 @@ module V4
       # Rescue 1: not a FHIR Bundle this parser can read at all.
       squish!(
         context: { parse_error: e },
-        append_instructions: "The Ruby parser above couldn't read this input as a FHIR Bundle at all — " \
-                             "the error is in the context. It's some other format entirely; map it the same way."
+        append_to_purpose: "The Ruby parser above couldn't read this input as a FHIR Bundle at all — " \
+                           "the error is in the context. It's some other format entirely; map it the same way."
       )
     rescue MissingFieldError => e
       # Rescue 2: it *was* a FHIR Bundle, but a required field came back
@@ -103,8 +103,8 @@ module V4
       # Ruby extraction.
       squish!(
         context: { parse_error: e },
-        append_instructions: "The Ruby parser above recognized this as a FHIR Bundle but found at least one " \
-                             "required field empty — the error is in the context."
+        append_to_purpose: "The Ruby parser above recognized this as a FHIR Bundle but found at least one " \
+                           "required field empty — the error is in the context."
       )
     end
 

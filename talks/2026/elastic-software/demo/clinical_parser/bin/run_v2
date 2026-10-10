@@ -1,14 +1,17 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-# bin/run_v2 — runs all 35 fixtures through the v2 dispatcher. Expected:
-# all 35 pass — the 20 v1 understood plus the 15 it never could, each
-# now handled by the class built for its shape.
+# bin/run_v2 — runs all 100 fixtures through the v2 dispatcher. Expected:
+# 78/100 — the 63 canonical-FHIR fixtures plus the 15 non-FHIR-Bundle ones
+# v2 has a class for. The 22 exotic fixtures (079-100) fail with "none of 4
+# known formats recognize this record": each would need its own new class.
+# ORIGINAL_35=1 restricts the run to the first 35 (35/35 pass).
 require "json"
 require_relative "../lib/v2/dispatcher"
+require_relative "../lib/fixture_manifest"
 
 root = File.expand_path("..", __dir__)
-manifest = JSON.parse(File.read(File.join(root, "fixtures", "manifest.json")))
+manifest = FixtureManifest.load(root)
 
 passed = 0
 failed = 0

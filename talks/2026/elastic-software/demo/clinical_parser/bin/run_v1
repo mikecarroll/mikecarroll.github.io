@@ -1,14 +1,17 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-# bin/run_v1 — runs all 35 fixtures through the single v1 parser. Expected:
-# the 20 canonical-format fixtures pass; the 15 new-format fixtures fail,
-# because v1 was only ever built to understand one shape.
+# bin/run_v1 — runs all 100 fixtures through the single v1 parser. Expected:
+# the 63 canonical-FHIR fixtures pass; the other 37 (15 original new-format
+# fixtures + 22 exotic ones) fail, because v1 was only ever built to
+# understand one shape. ORIGINAL_35=1 restricts the run to the first 35
+# (20 pass, 15 fail).
 require "json"
 require_relative "../lib/v1/parser"
+require_relative "../lib/fixture_manifest"
 
 root = File.expand_path("..", __dir__)
-manifest = JSON.parse(File.read(File.join(root, "fixtures", "manifest.json")))
+manifest = FixtureManifest.load(root)
 
 passed = 0
 failed = 0

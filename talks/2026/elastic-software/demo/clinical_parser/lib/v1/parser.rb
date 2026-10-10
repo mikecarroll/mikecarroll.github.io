@@ -3,7 +3,7 @@
 # more Condition entries, and (since Synthea doesn't model symptoms as
 # their own resource) a small "symptom" Observation per reported symptom.
 #
-# Every one of the 20 v1 fixtures is a real Synthea-generated Patient and
+# Every one of the 63 canonical-FHIR fixtures is a real Synthea-generated Patient and
 # real Condition entries — full of genuine FHIR noise (extensions,
 # identifiers, clinicalStatus, encounter references, meta tags) — plus a
 # few unrelated resource entries (Immunization, Procedure, Encounter) that

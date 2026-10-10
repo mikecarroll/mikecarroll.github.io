@@ -1,0 +1,66 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# bin/run_v3_first_pass — V3::ParserFirstPass (lib/v3/parser_first_pass.rb),
+# the purpose v3 shipped with before the Name/Gender/Symptoms refinement —
+# see that file's header and the top-level README's "What actually
+# happened running this for real" step 1. Same harness as bin/run_v3,
+# against all 100 fixtures, so slide 19's pass rate is a real, re-runnable
+# number rather than one frozen from the original 35-fixture set.
+require "bundler/setup"
+require "json"
+require "squishling"
+require "coolhand"
+require_relative "../lib/v3/parser_first_pass"
+require_relative "../lib/fixture_manifest"
+require_relative "../lib/usage_log"
+
+unless ENV["ANTHROPIC_API_KEY"]
+  warn "Set ANTHROPIC_API_KEY before running v3_first_pass — every fixture here makes a real LLM call."
+  exit 1
+end
+
+RubyLLM.configure { |c| c.anthropic_api_key = ENV["ANTHROPIC_API_KEY"] }
+
+Coolhand.configure do |c|
+  c.api_key = ENV["COOLHAND_API_KEY"]
+  c.silent = true
+end
+
+root = File.expand_path("..", __dir__)
+manifest = FixtureManifest.load(root)
+usage_log_path = File.join(root, "tmp", "usage_v3_first_pass.jsonl")
+
+passed = 0
+failed = 0
+
+UsageLog.open(usage_log_path) do |usage_log|
+  Squishling.configure do |c|
+    c.default_model = "claude-haiku-4-5-20251001"
+    c.default_provider = :anthropic
+    c.squawk = UsageLog.squawk_for(usage_log)
+  end
+
+  manifest.each do |entry|
+    UsageLog.tag(entry.fetch("file"))
+    raw = File.read(File.join(root, "fixtures", entry.fetch("file")))
+
+    begin
+      record = V3::ParserFirstPass.parse(raw)
+      if record.matches?(entry.fetch("expected"))
+        passed += 1
+        puts "PASS  #{entry.fetch('file')} (#{entry.fetch('format')})"
+      else
+        failed += 1
+        puts "FAIL  #{entry.fetch('file')} (#{entry.fetch('format')} — parsed but values don't match expected)"
+      end
+    rescue Squishling::InvalidOutputError => e
+      failed += 1
+      puts "FAIL  #{entry.fetch('file')} (#{entry.fetch('format')} — #{e.message})"
+    end
+  end
+end
+
+puts
+puts "v3_first_pass: #{passed}/#{manifest.size} passed, #{failed}/#{manifest.size} failed"
+puts "usage log: #{usage_log_path}"

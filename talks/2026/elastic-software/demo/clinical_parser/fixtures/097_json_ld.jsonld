@@ -1,0 +1,78 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "snomed": "http://snomed.info/id/"
+  },
+  "@graph": [
+    {
+      "@type": "MedicalClinic",
+      "@id": "#clinic",
+      "name": "Lakeside Regional",
+      "telephone": "(555) 010-1096",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Weston",
+        "addressRegion": "Massachusetts"
+      }
+    },
+    {
+      "@type": "Patient",
+      "@id": "#patient",
+      "identifier": "FF9840E8",
+      "name": "Vicenta Maggio",
+      "givenName": "Vicenta",
+      "familyName": "Maggio",
+      "gender": "https://schema.org/Female",
+      "birthDate": "1924-06-16",
+      "telephone": "555-991-4602",
+      "diagnosis": [
+        {
+          "@type": "MedicalCondition",
+          "name": "Chronic sinusitis (disorder)",
+          "code": {
+            "@type": "MedicalCode",
+            "codeValue": "40055000",
+            "codingSystem": "SNOMED CT"
+          }
+        },
+        {
+          "@type": "MedicalCondition",
+          "name": "Miscarriage in first trimester",
+          "code": {
+            "@type": "MedicalCode",
+            "codeValue": "19169002",
+            "codingSystem": "SNOMED CT"
+          }
+        },
+        {
+          "@type": "MedicalCondition",
+          "name": "Body mass index 30+ - obesity (finding)",
+          "code": {
+            "@type": "MedicalCode",
+            "codeValue": "162864005",
+            "codingSystem": "SNOMED CT"
+          }
+        }
+      ],
+      "signOrSymptom": [
+        {
+          "@type": "MedicalSymptom",
+          "name": "sore throat"
+        }
+      ]
+    },
+    {
+      "@type": "MedicalTherapy",
+      "name": "Follow-up visit",
+      "provider": {
+        "@id": "#clinic"
+      },
+      "description": "Parking validation stamped at front desk."
+    },
+    {
+      "@type": "HealthInsurancePlan",
+      "name": "Lakeside PPO Gold",
+      "healthPlanId": "GRP-8842"
+    }
+  ]
+}
