@@ -1,0 +1,8 @@
+source "https://rubygems.org"
+
+gem "ruby_llm", "~> 1.0"
+
+# Pinned below 3.x: this machine's json gem native extension (used by a
+# ruby_llm dependency) fails to compile against 3.0.2's toolchain
+# assumptions. 2.21.2 ships as a prebuilt default gem with this Ruby.
+gem "json", "~> 2.21"

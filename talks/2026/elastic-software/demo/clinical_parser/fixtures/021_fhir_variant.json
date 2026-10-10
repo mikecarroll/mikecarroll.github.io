@@ -1,0 +1,31 @@
+{
+  "fhirVersion": "R4",
+  "exportedAt": "2026-01-15T09:00:00Z",
+  "sourceSystem": "MedVantage-EHR",
+  "subject": {
+    "resourceType": "Patient",
+    "fullName": "Alda Carter",
+    "birthSex": "female",
+    "mrn": "MV-36b0075a",
+    "facility": "Lakeside Regional"
+  },
+  "diagnosisList": [
+    {
+      "codeSystem": "SNOMED-CT",
+      "codeValue": "195662009",
+      "label": "Acute viral pharyngitis (disorder)",
+      "recordedBy": "Dr. A. Whitfield"
+    }
+  ],
+  "symptomList": [],
+  "billing": {
+    "payerId": "PAYER-4471",
+    "priorAuth": false,
+    "copayCents": 2500
+  },
+  "insurance": {
+    "planName": "Lakeside PPO Gold",
+    "groupNumber": "GRP-8842",
+    "memberSince": "2019-03-01"
+  }
+}

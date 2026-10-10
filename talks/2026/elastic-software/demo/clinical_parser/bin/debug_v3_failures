@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# bin/debug_v3_failures — one-off diagnostic, not part of the demo proper.
+# Re-runs only the named fixtures and prints actual vs. expected in full,
+# so a FAIL in bin/run_v3 can be understood rather than just counted.
+require "bundler/setup"
+require "json"
+require "squishling"
+require "coolhand"
+require_relative "../lib/v3/parser"
+require_relative "../lib/fixture_manifest"
+
+unless ENV["ANTHROPIC_API_KEY"]
+  warn "Set ANTHROPIC_API_KEY first."
+  exit 1
+end
+
+RubyLLM.configure { |c| c.anthropic_api_key = ENV["ANTHROPIC_API_KEY"] }
+Squishling.configure do |c|
+  c.default_model = "claude-haiku-4-5-20251001"
+  c.default_provider = :anthropic
+end
+
+Coolhand.configure do |c|
+  c.api_key = ENV["COOLHAND_API_KEY"]
+  c.silent = true
+end
+
+root = File.expand_path("..", __dir__)
+manifest = FixtureManifest.load(root)
+by_file = manifest.to_h { |e| [e.fetch("file"), e] }
+
+ARGV.each do |file|
+  entry = by_file.fetch(file)
+  raw = File.read(File.join(root, "fixtures", file))
+  record = V3::Parser.parse(raw)
+
+  puts "== #{file} (#{entry.fetch('format')}) =="
+  puts "expected: #{entry.fetch('expected').to_json}"
+  puts "actual:   #{record.to_h.to_json}"
+  puts
+end

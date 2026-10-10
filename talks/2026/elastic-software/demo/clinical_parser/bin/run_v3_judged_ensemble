@@ -1,0 +1,79 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# bin/run_v3_judged_ensemble — V3::ParserJudgedEnsemble
+# (lib/v3/parser_judged_ensemble.rb): the new :judged_ensemble harness from
+# squishling PR #20 — sample a = claude-haiku-4-5, sample b =
+# claude-sonnet-5-5, claude-opus-5-5 judging when they differ. Prints the
+# model behind every attempt as it runs. Pass fixture filenames as ARGV to
+# run just those; with none, the full manifest.
+require "bundler/setup"
+require "json"
+require "squishling"
+require "coolhand"
+require_relative "../lib/v3/parser_judged_ensemble"
+require_relative "../lib/fixture_manifest"
+require_relative "../lib/usage_log"
+
+unless ENV["ANTHROPIC_API_KEY"]
+  warn "Set ANTHROPIC_API_KEY before running v3_judged_ensemble — every fixture here makes 2+ real LLM calls."
+  exit 1
+end
+
+RubyLLM.configure { |c| c.anthropic_api_key = ENV["ANTHROPIC_API_KEY"] }
+
+Coolhand.configure do |c|
+  c.api_key = ENV["COOLHAND_API_KEY"]
+  c.silent = true
+end
+
+root = File.expand_path("..", __dir__)
+manifest = FixtureManifest.load(root)
+manifest = manifest.select { |e| ARGV.include?(e.fetch("file")) } if ARGV.any?
+usage_log_path = File.join(root, "tmp", "usage_v3_judged_ensemble.jsonl")
+
+passed = 0
+failed = 0
+judged = 0
+
+UsageLog.open(usage_log_path) do |usage_log|
+  Squishling.configure do |c|
+    c.squawk = lambda do |output:, metadata:, error:|
+      puts "        squawk: model=#{metadata[:model]} attempt=#{metadata[:attempt]}/#{metadata[:attempts]} " \
+           "final=#{metadata[:final]} error=#{error&.class}"
+      UsageLog.squawk_for(usage_log).call(output:, metadata:, error:)
+    end
+  end
+
+  manifest.each do |entry|
+    UsageLog.tag(entry.fetch("file"))
+    puts "== #{entry.fetch('file')} (#{entry.fetch('format')}) =="
+    raw = File.read(File.join(root, "fixtures", entry.fetch("file")))
+
+    begin
+      record = V3::ParserJudgedEnsemble.parse(raw)
+      if record.matches?(entry.fetch("expected"))
+        passed += 1
+        puts "PASS"
+      else
+        failed += 1
+        puts "FAIL — parsed but values don't match expected"
+        puts "  expected: #{entry.fetch('expected').to_json}"
+        puts "  actual:   #{record.to_h.to_json}"
+      end
+    rescue Squishling::DisagreementError => e
+      failed += 1
+      puts "FAIL — samples disagreed and the judge rejected both: #{e.message}"
+    rescue Squishling::InvalidOutputError, Squishling::LLMError => e
+      failed += 1
+      puts "FAIL — #{e.message}"
+    end
+    puts
+  end
+end
+
+judged = File.readlines(usage_log_path).count { |line| JSON.parse(line)["model"] == "claude-opus-5-5" }
+
+puts "v3_judged_ensemble: #{passed}/#{manifest.size} passed, #{failed}/#{manifest.size} failed " \
+     "(#{judged} calls to the judge, claude-opus-5-5)"
+puts "usage log: #{usage_log_path}"

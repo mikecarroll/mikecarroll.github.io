@@ -1,0 +1,79 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# bin/run_v4 — the hybrid: real Ruby for a well-formed FHIR Bundle (free,
+# instant, exact — no LLM call at all), squish! escalation for anything
+# else. Runs the same 100 fixtures as v1/v2/v3, plus fixtures/missing_gender.json
+# — a well-formed Bundle with a deliberately nil gender, built to exercise
+# rescue 2 specifically (every other fixture either parses cleanly or fails
+# rescue 1's way, by construction).
+require "bundler/setup"
+require "json"
+require "squishling"
+require "coolhand"
+require_relative "../lib/v4/parser"
+require_relative "../lib/fixture_manifest"
+
+unless ENV["ANTHROPIC_API_KEY"]
+  warn "Set ANTHROPIC_API_KEY before running v4 — any fixture that escalates makes a real LLM call."
+  exit 1
+end
+
+RubyLLM.configure { |c| c.anthropic_api_key = ENV["ANTHROPIC_API_KEY"] }
+Squishling.configure do |c|
+  c.default_model = "claude-haiku-4-5-20251001"
+  c.default_provider = :anthropic
+end
+
+# Coolhand intercepts RubyLLM's outgoing Faraday requests automatically —
+# no squishling-side code change needed to monitor every escalated call below.
+Coolhand.configure do |c|
+  c.api_key = ENV["COOLHAND_API_KEY"]
+  c.silent = true
+end
+
+root = File.expand_path("..", __dir__)
+manifest = FixtureManifest.load(root)
+
+cases = manifest.map { |e| { file: e.fetch("file"), format: e.fetch("format"), expected: e.fetch("expected") } }
+cases << {
+  file: "missing_gender.json",
+  format: "canonical_fhir (rescue 2 — nil gender)",
+  expected: {
+    "patient_name" => "Abdul Koepp", "patient_gender" => "unknown",
+    "diagnosis_codes" => %w[162864005 444470001 444814009], "symptoms" => [],
+  },
+}
+
+passed = 0
+failed = 0
+squished_count = 0
+
+cases.each do |c|
+  raw = File.read(File.join(root, "fixtures", c[:file]))
+
+  begin
+    squishling_result = V4::Parser.call(record: raw)
+    squished_count += 1 if squishling_result.squished?
+    record = ClinicalRecord.new(
+      patient_name: squishling_result.patient_name,
+      patient_gender: squishling_result.patient_gender,
+      diagnosis_codes: squishling_result.diagnosis_codes,
+      symptoms: squishling_result.symptoms
+    )
+
+    if record.matches?(c[:expected])
+      passed += 1
+      puts "PASS  #{c[:file]} (#{c[:format]})#{' [squished]' if squishling_result.squished?}"
+    else
+      failed += 1
+      puts "FAIL  #{c[:file]} (#{c[:format]} — parsed but values don't match expected)"
+    end
+  rescue Squishling::InvalidOutputError => e
+    failed += 1
+    puts "FAIL  #{c[:file]} (#{c[:format]} — #{e.message})"
+  end
+end
+
+puts
+puts "v4: #{passed}/#{cases.size} passed, #{failed}/#{cases.size} failed (#{squished_count} escalated to the LLM, #{cases.size - squished_count} stayed pure Ruby)"

@@ -1,0 +1,65 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sct: <http://snomed.info/id/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Exported by RDF-Gateway 2.9 at 2026-01-15T09:00:00Z (Advance directive status: not on file. Information offered.)
+<https://fhir.example.org/r4/Bundle/export-95> a fhir:Bundle ;
+  fhir:Bundle.type [ fhir:value "collection" ] .
+
+<https://fhir.example.org/r4/Patient/29105b30-f807-4e58-a253-01a7830aa8f6> a fhir:Patient ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:Patient.identifier [ fhir:Identifier.value [ fhir:value "29105B30" ] ] ;
+  fhir:Patient.name [
+    fhir:index 0 ;
+    fhir:HumanName.use [ fhir:value "official" ] ;
+    fhir:HumanName.family [ fhir:value "Spinka" ] ;
+    fhir:HumanName.given [ fhir:value "Vera" ; fhir:index 0 ]
+  ] ;
+  fhir:Patient.gender [ fhir:value "female" ] ;
+  fhir:Patient.birthDate [ fhir:value "1982-04-21"^^xsd:date ] .
+
+<https://fhir.example.org/r4/Condition/cond-95-0> a fhir:Condition ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:Condition.clinicalStatus [ fhir:CodeableConcept.coding [ fhir:Coding.code [ fhir:value "active" ] ] ] ;
+  fhir:Condition.code [
+    fhir:CodeableConcept.coding [
+      fhir:index 0 ;
+      fhir:Coding.system [ fhir:value "http://snomed.info/sct" ] ;
+      fhir:Coding.code [ fhir:value "195662009" ] ;
+      fhir:Coding.display [ fhir:value "Acute viral pharyngitis (disorder)" ]
+    ] ;
+    fhir:CodeableConcept.text [ fhir:value "Acute viral pharyngitis (disorder)" ]
+  ] ;
+  fhir:Condition.subject [ fhir:link <https://fhir.example.org/r4/Patient/29105b30-f807-4e58-a253-01a7830aa8f6> ] .
+
+<https://fhir.example.org/r4/Condition/cond-95-1> a fhir:Condition ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:Condition.clinicalStatus [ fhir:CodeableConcept.coding [ fhir:Coding.code [ fhir:value "active" ] ] ] ;
+  fhir:Condition.code [
+    fhir:CodeableConcept.coding [
+      fhir:index 0 ;
+      fhir:Coding.system [ fhir:value "http://snomed.info/sct" ] ;
+      fhir:Coding.code [ fhir:value "72892002" ] ;
+      fhir:Coding.display [ fhir:value "Normal pregnancy" ]
+    ] ;
+    fhir:CodeableConcept.text [ fhir:value "Normal pregnancy" ]
+  ] ;
+  fhir:Condition.subject [ fhir:link <https://fhir.example.org/r4/Patient/29105b30-f807-4e58-a253-01a7830aa8f6> ] .
+
+<https://fhir.example.org/r4/Condition/cond-95-2> a fhir:Condition ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:Condition.clinicalStatus [ fhir:CodeableConcept.coding [ fhir:Coding.code [ fhir:value "active" ] ] ] ;
+  fhir:Condition.code [
+    fhir:CodeableConcept.coding [
+      fhir:index 0 ;
+      fhir:Coding.system [ fhir:value "http://snomed.info/sct" ] ;
+      fhir:Coding.code [ fhir:value "19169002" ] ;
+      fhir:Coding.display [ fhir:value "Miscarriage in first trimester" ]
+    ] ;
+    fhir:CodeableConcept.text [ fhir:value "Miscarriage in first trimester" ]
+  ] ;
+  fhir:Condition.subject [ fhir:link <https://fhir.example.org/r4/Patient/29105b30-f807-4e58-a253-01a7830aa8f6> ] .
+
+

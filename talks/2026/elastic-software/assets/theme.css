@@ -1,0 +1,1017 @@
+/* =============================================================================
+   theme.css — talk-specific palette + motif for
+   "Elastic Software: Calculating tech debt using LLM tokens"
+
+   Loaded AFTER deck.css. Direction: shares the "Your AI Agent Has Notes" /
+   "Stop being the boss you hate" look — a fully dark charcoal/zinc base
+   (every slide is dark), with the same warm amber accent as those two
+   decks standing for the *flexible* AI layer, and a warm clay tone
+   reserved for *cost* — the two poles the whole talk stretches between.
+   Code panels sit one step above the base, so they still read as
+   artifacts dropped onto the slide.
+   All colors are tokens, so the palette is adjustable in one place.
+
+   Framework gotchas (shared with the other two decks):
+     • deck.css pins `.lead` with !important — overriding it needs !important.
+     • tools/og-cover.mjs regex-scrapes custom properties out of this whole
+       file (comments included), so never re-bind the foreground tokens inside
+       a scoped rule, and never write a literal custom-property declaration in
+       a comment — both leak into the social card.
+   ========================================================================== */
+:root {
+  /* the one accent: warm amber, shared with the rest of the talk series */
+  --accent: 38 92% 50%;
+  --accent-foreground: 26 83% 14%;
+
+  /* reserved, used sparingly: the cost pole. Pushed further from the new
+     amber accent than before (was 22°, 16° away from accent's 38°) so the
+     two poles stay visually distinct in side-by-side comparisons (the
+     scale diagram, the formula rows) — matches the exact red-orange
+     "--bad" tone "Stop being the boss you hate" uses for its own
+     antipattern pole. */
+  --cost: 4 82% 64%;
+  --danger: 0 75% 62%;
+
+  /* "efficient" pole of the elastic-scale diagram — a good outcome, so it
+     gets a shadcn-style green rather than reusing --cost's red-orange */
+  --efficient: 142 70% 50%;
+
+  /* Coolhand Labs brand blue (sampled from the logo / coolhandlabs.com) */
+  --coolhand-blue: #0981ec;
+
+  /* Dark palette promoted to the base → all slides render dark. */
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 240 6% 10%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 6% 10%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 240 5.9% 10%;
+  --secondary: 240 4% 16%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 4% 16%;
+  --muted-foreground: 240 5% 65%;
+  --border: 240 4% 24%;
+  --input: 240 4% 24%;
+  --ring: 240 5% 65%;
+
+  /* code panels sit one step above the base */
+  --panel: 240 6% 10%;
+  --panel-fg: 0 0% 96%;
+  --panel-border: 240 4% 24%;
+}
+
+/* ---- Dark slides -----------------------------------------------------------
+   The base is already dark, so this is now an explicit no-op alias kept on
+   the title/close slides for clarity (and so the framework still supports a
+   light-base deck that opts individual slides into dark). ------------------- */
+.slide--dark {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+/* Make the asset placeholders read clearly on the dark base. */
+.visual {
+  border-color: hsl(var(--muted-foreground) / 0.35);
+}
+
+/* Slide 1 — with the byline/QR pulled out to corners, the remaining
+   centered content (kicker/h1/tagline) is short enough that centering
+   alone leaves it sitting lower than intended; pull it up. */
+#slide-1 .kicker {
+  margin-top: -326px;
+}
+
+/* ---- Shared accents ------------------------------------------------------ */
+.accent {
+  color: hsl(var(--accent));
+}
+
+.cost {
+  color: hsl(var(--cost));
+}
+
+.underline-accent {
+  background-image: linear-gradient(hsl(var(--accent) / 0.28), hsl(var(--accent) / 0.28));
+  background-repeat: no-repeat;
+  background-position: 0 88%;
+  background-size: 100% 0.38em;
+}
+
+.transcript a {
+  color: hsl(var(--accent));
+}
+
+/* inverted fragment — visible up front, removed once its click lands (for
+   swapping a line out as its replacement fades in alongside it) */
+.fragment.hide-on-reveal {
+  opacity: 1;
+  visibility: visible;
+}
+
+.fragment.hide-on-reveal.is-visible {
+  display: none;
+}
+
+/* =============================================================================
+   Slide 2 — the three tech-debt complaints, stacked
+   ========================================================================== */
+.quotes {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  width: 100%;
+  text-align: left;
+}
+
+.quotes li {
+  font-size: 1.85rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  padding: 1rem 1.4rem;
+  border-left: 5px solid hsl(var(--accent));
+  background: hsl(var(--muted));
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.quotes li:nth-child(2) {
+  border-left-color: hsl(var(--cost));
+}
+
+.quotes li:nth-child(3) {
+  border-left-color: hsl(var(--danger));
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+/* =============================================================================
+   Bulleted lists — used throughout for "what it costs you" style slides
+   ========================================================================== */
+.bullets {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.bullets li {
+  position: relative;
+  padding-left: 2rem;
+  font-size: 1.45rem;
+  line-height: 1.4;
+}
+
+.bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.85rem;
+  height: 0.2rem;
+  border-radius: 2px;
+  background: hsl(var(--accent));
+}
+
+/* arrow-marker variant — a run of consequences, not parallel options */
+.bullets--arrow li {
+  padding-left: 2.6rem;
+}
+
+.bullets--arrow li::before {
+  content: "~>";
+  width: auto;
+  height: auto;
+  top: 0;
+  background: none;
+  color: hsl(var(--accent));
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+/* =============================================================================
+   The seven-step integration pattern (slide 6) and its crossed-out
+   reprise once the AI layer absorbs steps 3–7 (slide 20)
+   ========================================================================== */
+.steps {
+  counter-reset: step;
+  list-style: none;
+  margin: 1.4rem 0 0;
+  padding: 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+.steps li {
+  counter-increment: step;
+  position: relative;
+  padding: 0.42rem 0 0.42rem 3.1rem;
+  font-size: 1.25rem;
+  line-height: 1.35;
+}
+
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0.32rem;
+  width: 2.1rem;
+  height: 2.1rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: hsl(var(--secondary));
+  border: 1px solid hsl(var(--border));
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* larger variant — for a short list that's the main content of its slide
+   (e.g. slide 4's quiz), rather than a dense step-by-step pattern */
+.steps--lg {
+  gap: 0.9rem;
+}
+
+.steps--lg li {
+  padding: 0.4rem 0 0.4rem 4.4rem;
+  font-size: 2.75rem;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.steps--lg li::before {
+  width: 3.1rem;
+  height: 3.1rem;
+  font-size: 1.4rem;
+  top: 0.1rem;
+}
+
+.steps li.is-pain {
+  font-weight: 650;
+}
+
+.steps li.is-pain::before {
+  background: hsl(var(--cost) / 0.14);
+  border-color: hsl(var(--cost) / 0.5);
+  color: hsl(var(--cost));
+}
+
+/* struck-through reprise: the steps elastic software deletes */
+.steps li.is-struck {
+  color: hsl(var(--muted-foreground));
+  text-decoration: line-through;
+  text-decoration-color: hsl(var(--accent));
+  text-decoration-thickness: 3px;
+}
+
+.steps li.is-struck::before {
+  background: transparent;
+  color: hsl(var(--muted-foreground));
+  border-style: dashed;
+}
+
+/* =============================================================================
+   Code panels — one step above the dark base, so they still read as
+   artifacts dropped onto the slide
+   ========================================================================== */
+.codeblock {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  line-height: 1.55;
+  background: hsl(var(--panel));
+  color: hsl(var(--panel-fg));
+  border: 1px solid hsl(var(--panel-border));
+  border-radius: var(--radius);
+  padding: 1.25rem 1.6rem;
+  margin: 1.5rem auto 0;
+  width: fit-content;
+  max-width: 100%;
+  white-space: pre;
+  overflow: hidden;
+  box-shadow: 0 14px 34px hsl(240 10% 3.9% / 0.45);
+}
+
+.codeblock .k { color: #7aa2f7; } /* keywords */
+.codeblock .m { color: #7dcfff; } /* method / class names */
+.codeblock .s { color: #9ece6a; } /* strings */
+.codeblock .c { color: hsl(240 5% 55%); } /* comments + annotations */
+.codeblock .hl { color: hsl(var(--accent)); font-weight: 650; } /* the AI call */
+.codeblock .ell { color: hsl(var(--cost)); font-weight: 650; } /* the "100 more" */
+
+.codeblock .rule {
+  display: block;
+  border-top: 1px solid hsl(var(--panel-border));
+  margin: 0.7rem 0;
+}
+
+/* the monster: same block, progressively unreadable */
+.codeblock--shrink {
+  font-size: 0.78rem;
+  line-height: 1.35;
+  max-height: 430px;
+}
+
+.codeblock--shrink .tail {
+  display: block;
+  font-size: 0.65rem;
+  line-height: 1.2;
+  opacity: 0.85;
+}
+
+.codeblock--lg {
+  font-size: 1.25rem;
+}
+
+/* =============================================================================
+   Cost ledgers (slides 12–13) — what each path actually bills you for
+   ========================================================================== */
+.ledger {
+  list-style: none;
+  margin: 1.4rem 0 0;
+  padding: 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.ledger li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding: 0.85rem 1.3rem;
+  font-size: 1.22rem;
+  border-bottom: 1px solid hsl(var(--border));
+  background: hsl(var(--card));
+}
+
+.ledger li:last-child {
+  border-bottom: 0;
+}
+
+.ledger li .unit {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: hsl(var(--muted-foreground));
+  white-space: nowrap;
+}
+
+.ledger li.is-total {
+  background: hsl(var(--secondary));
+  font-weight: 700;
+}
+
+.ledger li.is-total .unit {
+  color: hsl(var(--foreground));
+  font-weight: 700;
+}
+
+/* a TODO marker for figures the speaker still has to supply */
+.tbd {
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+  padding: 0.1em 0.45em;
+  border-radius: 0.35em;
+  border: 1px dashed hsl(var(--cost) / 0.6);
+  background: hsl(var(--cost) / 0.08);
+  color: hsl(var(--cost));
+  white-space: nowrap;
+}
+
+/* =============================================================================
+   Slide 14 — the boring comparison. The payoff line of the talk.
+   ========================================================================== */
+.formula {
+  margin: 2rem auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  width: 100%;
+  max-width: 980px;
+}
+
+.formula .row {
+  display: grid;
+  grid-template-columns: 13rem 1fr;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.4rem 1.7rem;
+  border-radius: var(--radius);
+  border: 2px solid hsl(var(--border));
+  background: hsl(var(--card));
+  text-align: left;
+}
+
+.formula .row .who {
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.formula .row .what {
+  font-size: 1.75rem;
+  font-weight: 650;
+  line-height: 1.25;
+}
+
+.formula .row--ai {
+  border-color: hsl(var(--accent) / 0.55);
+}
+
+.formula .row--ai .who {
+  color: hsl(var(--accent));
+}
+
+.formula .row--sw {
+  border-color: hsl(var(--cost) / 0.55);
+}
+
+.formula .row--sw .who {
+  color: hsl(var(--cost));
+}
+
+/* =============================================================================
+   Slide 23 — the elasticity, named. One axis, integrations sliding on it.
+   ========================================================================== */
+.scale {
+  margin: 3.75rem auto 0;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.scale-track {
+  position: relative;
+  height: 14px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    hsl(var(--accent) / 0.85) 0%,
+    hsl(var(--accent) / 0.3) 45%,
+    hsl(var(--efficient) / 0.3) 55%,
+    hsl(var(--efficient) / 0.85) 100%
+  );
+}
+
+.scale-pin {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: hsl(var(--card));
+  border: 3px solid hsl(var(--foreground));
+  display: grid;
+  place-items: center;
+  font-size: 0.8rem;
+  font-weight: 800;
+  box-shadow: 0 4px 12px hsl(240 10% 3.9% / 0.45);
+}
+
+/* calls out one pin on the scale line, e.g. "start here" */
+.scale-callout {
+  position: absolute;
+  top: -2.4rem;
+  transform: translateX(-50%);
+  font-size: 1.75rem;
+  color: hsl(var(--accent));
+  line-height: 1;
+}
+
+.scale-ends {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.4rem;
+  gap: 2rem;
+  text-align: left;
+}
+
+.scale-ends div {
+  max-width: 24rem;
+}
+
+.scale-ends .end-label {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.scale-ends .end-sub {
+  font-size: 1.05rem;
+  color: hsl(var(--muted-foreground));
+  margin-top: 0.3rem;
+  line-height: 1.35;
+}
+
+.scale-ends .flex-end .end-label {
+  color: hsl(var(--accent));
+}
+
+.scale-ends .eff-end {
+  text-align: right;
+}
+
+.scale-ends .eff-end .end-label {
+  color: hsl(var(--efficient));
+}
+
+/* =============================================================================
+   Two-world comparisons (slide 27) — the old scramble vs. all five live
+   ========================================================================== */
+.paths {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.6rem;
+  margin-top: 1.75rem;
+  text-align: left;
+}
+
+.path {
+  border-radius: var(--radius);
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card));
+  padding: 1.4rem 1.6rem;
+}
+
+.path h3 {
+  margin: 0 0 0.9rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+}
+
+.path p {
+  margin: 0 0 0.7rem;
+  font-size: 1.22rem;
+  line-height: 1.4;
+}
+
+.path p:last-child {
+  margin-bottom: 0;
+}
+
+.path--old {
+  border-color: hsl(var(--cost) / 0.45);
+}
+
+.path--old h3 {
+  color: hsl(var(--cost));
+}
+
+.path--new {
+  border-color: hsl(var(--accent) / 0.45);
+}
+
+.path--new h3 {
+  color: hsl(var(--accent));
+}
+
+/* =============================================================================
+   Open problems (slide 30) — stated as genuinely unresolved
+   ========================================================================== */
+.openq {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+}
+
+.openq li {
+  position: relative;
+  padding-left: 2.6rem;
+  font-size: 1.32rem;
+  line-height: 1.4;
+}
+
+.openq li::before {
+  content: "?";
+  position: absolute;
+  left: 0;
+  top: -0.05em;
+  width: 1.85rem;
+  height: 1.85rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 2px solid hsl(var(--accent) / 0.5);
+  color: hsl(var(--accent));
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+/* =============================================================================
+   Numbered takeaways / closing list
+   ========================================================================== */
+.takeaways {
+  counter-reset: take;
+  list-style: none;
+  margin: 1.6rem 0 0;
+  padding: 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.takeaways li {
+  counter-increment: take;
+  position: relative;
+  padding-left: 3rem;
+  font-size: 1.4rem;
+  line-height: 1.4;
+}
+
+.takeaways li::before {
+  content: counter(take);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2.1rem;
+  height: 2.1rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+/* =============================================================================
+   QR treatments
+   ========================================================================== */
+.qr img {
+  width: 132px;
+  height: 132px;
+  background: #fff;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.qr-label {
+  font-size: 0.95rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.qr--side {
+  gap: 0.6rem;
+}
+
+/* no caption text on this slide — the QR itself is the whole ask, so it
+   gets to be twice the usual size */
+#slide-30 .qr img {
+  width: 264px;
+  height: 264px;
+}
+
+.qr--side .newsletter-eyebrow {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+}
+
+/* the title-slide "follow along" QR, tucked in a quiet corner — structural
+   pattern shared with "Stop being the boss you hate" */
+.qr--corner {
+  position: absolute;
+  right: 48px;
+  bottom: 36px;
+}
+
+.qr--corner img {
+  width: 256px;
+  height: 256px;
+}
+
+.qr--corner .qr-label {
+  font-size: 1.5rem;
+}
+
+/* title-slide speaker byline, demoted to the opposite corner — mirrors
+   .qr--corner for balance */
+.speaker-byline {
+  position: absolute;
+  left: 64px;
+  bottom: 38px;
+  margin: 0 !important;
+  max-width: none !important;
+}
+
+/* the tagline on the title slide — deck.css pins .lead's size with
+   !important, so this needs !important too to win */
+.title-tagline {
+  margin-top: 1rem !important;
+  font-size: 2.25rem !important;
+}
+
+/* Larger, clearly-a-newsletter-style QR — used by the closing Coolhand
+   Labs promo slide */
+.qr--newsletter .newsletter-eyebrow {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: hsl(var(--accent));
+}
+
+.qr--newsletter img {
+  width: 184px;
+  height: 184px;
+}
+
+.qr--newsletter .qr-label {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+}
+
+/* side-by-side content + QR layout (slides 26, 32) */
+.with-side {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+}
+
+.with-side .side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.headshot {
+  width: 150px;
+  height: 150px;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 3px solid hsl(var(--accent));
+}
+
+/* =============================================================================
+   Two-column slide layout — main content left, a supporting photo or chart
+   right. Used by the quiz slide (sidewalk-crack photo) and the tech-debt
+   pivot slide (fed funds rate chart).
+   ========================================================================== */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 2rem;
+  align-items: center;
+  width: 100%;
+}
+
+.split-side {
+  display: flex;
+  justify-content: center;
+}
+
+.split-side img {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid hsl(var(--panel-border));
+}
+
+.split-side img.photo {
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+
+/* the chart needs more room to read than the quiz photo does */
+#slide-6 .split {
+  grid-template-columns: 1fr 560px;
+}
+
+/* benefit callout cards — icon vertically centered above a short label */
+.card--emoji {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 230px;
+}
+
+.card--emoji .emoji {
+  font-size: 4rem;
+  margin: 0;
+}
+
+/* slides 14, 15 & 23 only: center the emoji (the label text below it stays
+   left-aligned, per the surrounding grid's text-align: left) and lift the
+   label text to full white instead of the slide default's muted gray */
+#slide-14 .card--emoji .emoji,
+#slide-15 .card--emoji .emoji,
+#slide-23 .card--emoji .emoji {
+  align-self: center;
+}
+
+#slide-14 .card--emoji p:not(.emoji),
+#slide-15 .card--emoji p:not(.emoji),
+#slide-23 .card--emoji p:not(.emoji) {
+  color: hsl(var(--foreground));
+}
+
+/* the squishling class def has a long enum line — needs a smaller point size
+   now that it shares a column with the config example */
+#slide-18 .codeblock {
+  font-size: 0.85rem;
+  width: 100%;
+}
+
+/* the rewritten-instructions class def is long — shrink to fit the slide */
+#slide-19 .codeblock {
+  font-size: 0.78rem;
+  line-height: 1.3;
+}
+
+/* two side-by-side panels — the error-message line is long */
+#slide-28 .codeblock {
+  font-size: 0.75rem;
+  width: 100%;
+}
+
+/* mascot image now shares the column with the code — the routed-call line is long */
+#slide-22 .codeblock {
+  font-size: 0.85rem;
+  width: 100%;
+}
+
+/* mascot image shares the column with the code — the escalation-array line is long */
+#slide-20 .codeblock {
+  font-size: 1rem;
+  width: 100%;
+}
+
+/* small stat readouts — "pass rate: 65%" styled as a pill, not plain text */
+.pill {
+  display: inline-block;
+  padding: 0.3em 0.9em;
+  border-radius: 999px;
+  background: hsl(var(--accent) / 0.14);
+  border: 1px solid hsl(var(--accent) / 0.45);
+  color: hsl(var(--accent));
+  font-family: var(--font-mono);
+  font-weight: 650;
+  font-size: 0.75em;
+}
+
+/* real-number thresholds on the squishling-example pills — good pass rate
+   or low cost reads green, high cost reads red */
+.pill--green {
+  background: hsl(var(--efficient) / 0.14);
+  border-color: hsl(var(--efficient) / 0.45);
+  color: hsl(var(--efficient));
+}
+
+.pill--red {
+  background: hsl(var(--cost) / 0.14);
+  border-color: hsl(var(--cost) / 0.45);
+  color: hsl(var(--cost));
+}
+
+/* label on its own line, pills on the line below, pushed to the right edge
+   — slides 18-20, 22. The label is sometimes too long at .lead's size to
+   share a line with both pills, so this is two stacked rows rather than
+   one space-between row that would wrap unpredictably. width: 100%
+   overrides .center's align-items: center, which would otherwise shrink
+   this block to its own content width. */
+.pill-row {
+  width: 100%;
+}
+
+.pill-row .pill-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.split-side img.chart {
+  max-width: none;
+}
+
+/* =============================================================================
+   Two-column "about" layout — main content + a side column (photo, QR),
+   structural pattern copied from "Stop being the boss you hate". Used by
+   slide 2 (about me).
+   ========================================================================== */
+.about {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: 2.75rem;
+  align-items: center;
+  width: 100%;
+}
+
+.about-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* credibility timeline — used by slide 2 (about me) */
+.timeline {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.timeline .rung {
+  border-top: 3px solid hsl(var(--accent));
+  padding-top: 1rem;
+}
+
+.timeline .rung .rung-when {
+  font-size: 0.85rem;
+  color: hsl(var(--muted-foreground));
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.timeline .rung .rung-what {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 0.3rem;
+}
+
+.timeline .rung p {
+  font-size: 1.15rem;
+}
+
+/* stacked single-column variant, for a narrow sidebar or a tighter main
+   column — declared after the base .timeline rules since specificity ties
+   and must win on order */
+.timeline--stacked {
+  grid-template-columns: 1fr;
+  gap: 0.6rem;
+  margin-top: 0;
+  width: 100%;
+}
+
+.timeline--stacked .rung {
+  padding-top: 0.4rem;
+}
+
+.timeline--stacked .rung .rung-what {
+  font-size: 1.25rem;
+}
+
+.timeline--stacked .rung p {
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+/* =============================================================================
+   Speaker-facing build markers — visible only in the notes overlay / print,
+   never on stage. Used where the deck still needs the speaker's real data.
+   ========================================================================== */
+.notes .todo {
+  display: inline-block;
+  margin-top: 0.6rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 0.4rem;
+  background: hsl(var(--cost) / 0.16);
+  border: 1px solid hsl(var(--cost) / 0.5);
+  font-weight: 700;
+}
+
+/* =============================================================================
+   Slide 16 — the one-word rejection. deck.css pins .lead's font-size with
+   !important, so the emphatic line needs its own class rather than an
+   inline override.
+   ========================================================================== */
+.slide .shout {
+  color: hsl(var(--foreground));
+  max-width: none;
+  font-size: 3.4rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin: 2.5rem 0 0;
+}
+

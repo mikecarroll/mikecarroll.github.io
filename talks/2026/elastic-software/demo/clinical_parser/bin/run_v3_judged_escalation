@@ -1,0 +1,77 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# bin/run_v3_judged_escalation — V3::ParserJudgedEscalation
+# (lib/v3/parser_judged_escalation.rb): escalation: [haiku x2, sonnet] with
+# harness: :judged_squishsum, squishling's own documented combination (see
+# that file's header). Prints the model behind every attempt as it runs, so
+# it's visible in real time whether a fixture's two samples are really one
+# Haiku + one Sonnet, or two Haikus with Sonnet only consulted as judge.
+# Pass fixture filenames as ARGV to run just those; with none, the full
+# manifest.
+require "bundler/setup"
+require "json"
+require "squishling"
+require "coolhand"
+require_relative "../lib/v3/parser_judged_escalation"
+require_relative "../lib/fixture_manifest"
+require_relative "../lib/usage_log"
+
+unless ENV["ANTHROPIC_API_KEY"]
+  warn "Set ANTHROPIC_API_KEY before running v3_judged_escalation — every fixture here makes 2+ real LLM calls."
+  exit 1
+end
+
+RubyLLM.configure { |c| c.anthropic_api_key = ENV["ANTHROPIC_API_KEY"] }
+
+Coolhand.configure do |c|
+  c.api_key = ENV["COOLHAND_API_KEY"]
+  c.silent = true
+end
+
+root = File.expand_path("..", __dir__)
+manifest = FixtureManifest.load(root)
+manifest = manifest.select { |e| ARGV.include?(e.fetch("file")) } if ARGV.any?
+usage_log_path = File.join(root, "tmp", "usage_v3_judged_escalation.jsonl")
+
+passed = 0
+failed = 0
+
+UsageLog.open(usage_log_path) do |usage_log|
+  Squishling.configure do |c|
+    c.squawk = lambda do |output:, metadata:, error:|
+      puts "        squawk: model=#{metadata[:model]} attempt=#{metadata[:attempt]}/#{metadata[:attempts]} " \
+           "final=#{metadata[:final]} error=#{error&.class}"
+      UsageLog.squawk_for(usage_log).call(output:, metadata:, error:)
+    end
+  end
+
+  manifest.each do |entry|
+    UsageLog.tag(entry.fetch("file"))
+    puts "== #{entry.fetch('file')} (#{entry.fetch('format')}) =="
+    raw = File.read(File.join(root, "fixtures", entry.fetch("file")))
+
+    begin
+      record = V3::ParserJudgedEscalation.parse(raw)
+      if record.matches?(entry.fetch("expected"))
+        passed += 1
+        puts "PASS"
+      else
+        failed += 1
+        puts "FAIL — parsed but values don't match expected"
+        puts "  expected: #{entry.fetch('expected').to_json}"
+        puts "  actual:   #{record.to_h.to_json}"
+      end
+    rescue Squishling::DisagreementError => e
+      failed += 1
+      puts "FAIL — samples disagreed and the judge rejected both: #{e.message}"
+    rescue Squishling::InvalidOutputError => e
+      failed += 1
+      puts "FAIL — #{e.message}"
+    end
+    puts
+  end
+end
+
+puts "v3_judged_escalation: #{passed}/#{manifest.size} passed, #{failed}/#{manifest.size} failed"
+puts "usage log: #{usage_log_path}"

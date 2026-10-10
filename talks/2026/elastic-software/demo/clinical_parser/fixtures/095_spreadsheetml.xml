@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+  <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office"><Author>HIM Reporting</Author><LastAuthor>jdoe</LastAuthor><Created>2026-01-15T09:00:00Z</Created><Company>Cedar Ridge Health</Company></DocumentProperties>
+  <Styles><Style ss:ID="hdr"><Font ss:Bold="1"/></Style></Styles>
+  <Worksheet ss:Name="Cover">
+    <Table>
+    <Row><Cell><Data ss:Type="String">Weekly census report</Data></Cell><Cell><Data ss:Type="String">DRAFT</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">Generated</Data></Cell><Cell><Data ss:Type="String">2026-01-15</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">Unit</Data></Cell><Cell><Data ss:Type="String">B-5</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">Notes</Data></Cell><Cell><Data ss:Type="String">Fall risk screen negative. PHQ-2 score 0.</Data></Cell></Row>
+    </Table>
+  </Worksheet>
+  <Worksheet ss:Name="Patient">
+    <Table>
+    <Row><Cell><Data ss:Type="String">Field</Data></Cell><Cell><Data ss:Type="String">Value</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">Name</Data></Cell><Cell><Data ss:Type="String">Tamatha Witting</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">Gender</Data></Cell><Cell><Data ss:Type="String">Transgender</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">DOB</Data></Cell><Cell><Data ss:Type="String">1948-05-29</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">MRN</Data></Cell><Cell><Data ss:Type="String">B93452C9</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">Phone</Data></Cell><Cell><Data ss:Type="String">555-687-6173</Data></Cell></Row>
+    </Table>
+  </Worksheet>
+  <Worksheet ss:Name="Diagnoses">
+    <Table>
+    <Row><Cell><Data ss:Type="String">SNOMED code</Data></Cell><Cell><Data ss:Type="String">Description</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">40055000</Data></Cell><Cell><Data ss:Type="String">Chronic sinusitis (disorder)</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">19169002</Data></Cell><Cell><Data ss:Type="String">Miscarriage in first trimester</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">162864005</Data></Cell><Cell><Data ss:Type="String">Body mass index 30+ - obesity (finding)</Data></Cell></Row>
+    </Table>
+  </Worksheet>
+  <Worksheet ss:Name="Symptoms">
+    <Table>
+    <Row><Cell><Data ss:Type="String">Reported symptom</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">fever</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">fatigue</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">headache</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">nausea</Data></Cell></Row>
+    </Table>
+  </Worksheet>
+  <Worksheet ss:Name="Billing">
+    <Table>
+    <Row><Cell><Data ss:Type="String">Payer</Data></Cell><Cell><Data ss:Type="String">PAYER-4471</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">Group</Data></Cell><Cell><Data ss:Type="String">GRP-8842</Data></Cell></Row>
+    <Row><Cell><Data ss:Type="String">Copay</Data></Cell><Cell><Data ss:Type="String">25.00</Data></Cell></Row>
+    </Table>
+  </Worksheet>
+</Workbook>

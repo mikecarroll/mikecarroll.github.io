@@ -1,0 +1,6 @@
+.env
+vendor/
+.bundle/
+tmp/
+# the repo-wide *.pdf ignore would otherwise swallow fixture 081
+!fixtures/*.pdf

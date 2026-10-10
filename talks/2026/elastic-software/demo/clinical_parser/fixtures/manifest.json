@@ -1,0 +1,1776 @@
+[
+  {
+    "file": "001_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Abdul_Koepp_e925b0f3-8006-43f6-aa31-94bd215e55e7.json",
+    "expected": {
+      "patient_name": "Abdul Koepp",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "162864005",
+        "444470001",
+        "444814009"
+      ],
+      "symptoms": []
+    }
+  },
+  {
+    "file": "002_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Adalberto_Hartmann_44ec4447-9e2c-4eb9-bd4f-0bdb416b806e.json",
+    "expected": {
+      "patient_name": "Adalberto Hartmann",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "47693006",
+        "74400008",
+        "428251008"
+      ],
+      "symptoms": [
+        "fatigue"
+      ]
+    }
+  },
+  {
+    "file": "003_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Adolfo_Marquardt_50635536-8051-4085-bfd4-511a05062ac2.json",
+    "expected": {
+      "patient_name": "Adolfo Marquardt",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "87433001",
+        "410429000",
+        "429007001"
+      ],
+      "symptoms": [
+        "dizziness",
+        "shortness of breath"
+      ]
+    }
+  },
+  {
+    "file": "004_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Adolph_Smith_0c6b1f3d-edb2-422b-a0af-a262fb90ed07.json",
+    "expected": {
+      "patient_name": "Adolph Smith",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "74400008",
+        "428251008",
+        "15777000"
+      ],
+      "symptoms": [
+        "chest pain",
+        "joint pain",
+        "rash"
+      ]
+    }
+  },
+  {
+    "file": "005_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Alberto_Armstrong_dc9335d0-bbdd-4120-8ae9-baa6604343b6.json",
+    "expected": {
+      "patient_name": "Alberto Armstrong",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "444814009",
+        "43878008",
+        "44465007"
+      ],
+      "symptoms": [
+        "chills",
+        "congestion",
+        "insomnia",
+        "abdominal pain"
+      ]
+    }
+  },
+  {
+    "file": "006_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Alberto_Atencio_fc712d1f-5a2e-4407-9c55-a2a2bad623c2.json",
+    "expected": {
+      "patient_name": "Alberto Atencio",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "128613002",
+        "703151001",
+        "84757009"
+      ],
+      "symptoms": []
+    }
+  },
+  {
+    "file": "007_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Alden_Considine_42ba9929-3ab7-44fd-8f64-401c936fd769.json",
+    "expected": {
+      "patient_name": "Alden Considine",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "162864005",
+        "15777000",
+        "271737000"
+      ],
+      "symptoms": [
+        "palpitations"
+      ]
+    }
+  },
+  {
+    "file": "008_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Alejandro_Riojas_a9fcc685-c7a2-4474-bf25-26c8fe4b48f9.json",
+    "expected": {
+      "patient_name": "Alejandro Riojas",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "70704007",
+        "444814009",
+        "162864005"
+      ],
+      "symptoms": [
+        "wheezing",
+        "fever"
+      ]
+    }
+  },
+  {
+    "file": "009_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Alexis_Toy_68cd1181-6359-4047-a77f-a165d7912480.json",
+    "expected": {
+      "patient_name": "Alexis Toy",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "241929008",
+        "444814009"
+      ],
+      "symptoms": [
+        "headache",
+        "nausea",
+        "dizziness"
+      ]
+    }
+  },
+  {
+    "file": "010_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Alfonso_Dietrich_96160268-66b9-4c07-aa11-0a72de133a52.json",
+    "expected": {
+      "patient_name": "Alfonso Dietrich",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "40055000",
+        "15777000",
+        "271737000"
+      ],
+      "symptoms": [
+        "shortness of breath",
+        "sore throat",
+        "chest pain",
+        "joint pain"
+      ]
+    }
+  },
+  {
+    "file": "011_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Ali_Harris_eed1d00b-7665-4da3-88b7-c37cfb2ed245.json",
+    "expected": {
+      "patient_name": "Ali Harris",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "410429000",
+        "429007001",
+        "38341003"
+      ],
+      "symptoms": []
+    }
+  },
+  {
+    "file": "012_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Ali_Herman_75c71918-f07f-4492-af1a-ce006a1e8aaf.json",
+    "expected": {
+      "patient_name": "Ali Herman",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "446096008",
+        "162864005",
+        "15777000"
+      ],
+      "symptoms": [
+        "congestion"
+      ]
+    }
+  },
+  {
+    "file": "013_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Andrea_Dach_76f26ce3-5aac-4b16-ac35-321ff6a7f63c.json",
+    "expected": {
+      "patient_name": "Andrea Dach",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "38341003",
+        "162864005",
+        "40055000"
+      ],
+      "symptoms": [
+        "dry mouth",
+        "blurred vision"
+      ]
+    }
+  },
+  {
+    "file": "014_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Andy_Gusikowski_76742a08-3643-41fa-bddc-73a2c0bae9da.json",
+    "expected": {
+      "patient_name": "Andy Gusikowski",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "65363002",
+        "10509002"
+      ],
+      "symptoms": [
+        "night sweats",
+        "cough",
+        "wheezing"
+      ]
+    }
+  },
+  {
+    "file": "015_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Andy_Schaden_d630c6ca-046c-470a-8f3a-4dbc3850e7ae.json",
+    "expected": {
+      "patient_name": "Andy Schaden",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "15777000",
+        "271737000",
+        "230690007"
+      ],
+      "symptoms": [
+        "fever",
+        "fatigue",
+        "headache",
+        "nausea"
+      ]
+    }
+  },
+  {
+    "file": "016_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Antonio_Carmona_7322ed57-a337-4b4d-adcc-cc30db95203c.json",
+    "expected": {
+      "patient_name": "Antonio Carmona",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "444814009"
+      ],
+      "symptoms": []
+    }
+  },
+  {
+    "file": "017_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Antonio_Castellanos_6d2eba67-5b4a-403f-a29f-e6da3f1ea963.json",
+    "expected": {
+      "patient_name": "Antonio Castellanos",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "38341003",
+        "284551006",
+        "195662009"
+      ],
+      "symptoms": [
+        "sore throat"
+      ]
+    }
+  },
+  {
+    "file": "018_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Antonio_Runolfsson_a1795152-808d-4cb9-b259-ce6e3716dedf.json",
+    "expected": {
+      "patient_name": "Antonio Runolfsson",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "38341003",
+        "283385000",
+        "10509002"
+      ],
+      "symptoms": [
+        "rash",
+        "chills"
+      ]
+    }
+  },
+  {
+    "file": "019_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Addie_Tremblay_4c875c3c-b4d6-4f6d-aabe-5ddc24892adc.json",
+    "expected": {
+      "patient_name": "Addie Tremblay",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "74400008",
+        "428251008",
+        "38341003"
+      ],
+      "symptoms": [
+        "insomnia",
+        "abdominal pain",
+        "dry mouth"
+      ]
+    }
+  },
+  {
+    "file": "020_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Albertina_Klocko_b91a2510-0787-4636-9e3a-6a7e40a3025a.json",
+    "expected": {
+      "patient_name": "Albertina Klocko",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "128613002",
+        "703151001",
+        "162864005"
+      ],
+      "symptoms": [
+        "blurred vision",
+        "palpitations",
+        "night sweats",
+        "cough"
+      ]
+    }
+  },
+  {
+    "file": "021_fhir_variant.json",
+    "format": "fhir_variant",
+    "source_file": "Alda_Carter_ee1034c9-cb75-413c-8f36-da7e4268d2b5.json",
+    "expected": {
+      "patient_name": "Alda Carter",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "195662009"
+      ],
+      "symptoms": []
+    }
+  },
+  {
+    "file": "022_fhir_variant.json",
+    "format": "fhir_variant",
+    "source_file": "Alexia_Rice_a39449f8-f68c-4fc7-a481-1d0720c45fd8.json",
+    "expected": {
+      "patient_name": "Alexia Rice",
+      "patient_gender": "unknown",
+      "diagnosis_codes": [
+        "72892002",
+        "19169002",
+        "35999006"
+      ],
+      "symptoms": [
+        "fatigue"
+      ]
+    }
+  },
+  {
+    "file": "023_fhir_variant.json",
+    "format": "fhir_variant",
+    "source_file": "Alexia_Senger_a5f5a550-b13e-4f92-b194-6d118f67fcdb.json",
+    "expected": {
+      "patient_name": "Alexia Senger",
+      "patient_gender": "unknown",
+      "diagnosis_codes": [
+        "15777000",
+        "271737000",
+        "239873007"
+      ],
+      "symptoms": [
+        "dizziness",
+        "shortness of breath"
+      ]
+    }
+  },
+  {
+    "file": "024_fhir_variant.json",
+    "format": "fhir_variant",
+    "source_file": "Alfreda_Wyman_3287b938-4670-47eb-91e5-e0ce3df71405.json",
+    "expected": {
+      "patient_name": "Alfreda Wyman",
+      "patient_gender": "trans",
+      "diagnosis_codes": [
+        "38341003",
+        "10509002",
+        "15777000"
+      ],
+      "symptoms": [
+        "chest pain",
+        "joint pain",
+        "rash"
+      ]
+    }
+  },
+  {
+    "file": "025_fhir_variant.json",
+    "format": "fhir_variant",
+    "source_file": "Alica_Powlowski_f26f7274-a5d0-404b-b76d-2547fba51a3b.json",
+    "expected": {
+      "patient_name": "Alica Powlowski",
+      "patient_gender": "trans",
+      "diagnosis_codes": [
+        "195662009",
+        "444814009",
+        "87433001"
+      ],
+      "symptoms": [
+        "chills",
+        "congestion",
+        "insomnia",
+        "abdominal pain"
+      ]
+    }
+  },
+  {
+    "file": "026_hl7.hl7",
+    "format": "hl7",
+    "source_file": "Alix_Reilly_b5598b1a-2e02-493b-86bf-d6446851fcf4.json",
+    "expected": {
+      "patient_name": "Alix Reilly",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "74400008",
+        "428251008",
+        "72892002"
+      ],
+      "symptoms": []
+    }
+  },
+  {
+    "file": "027_hl7.hl7",
+    "format": "hl7",
+    "source_file": "Almeda_Conn_67e13ece-8aed-46fa-ab6c-673137d5460e.json",
+    "expected": {
+      "patient_name": "Almeda Conn",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "162864005",
+        "38341003",
+        "44054006"
+      ],
+      "symptoms": [
+        "palpitations"
+      ]
+    }
+  },
+  {
+    "file": "028_hl7.hl7",
+    "format": "hl7",
+    "source_file": "Amiee_Buckridge_cfda32ac-8382-4a7c-92a2-1b072b2a70de.json",
+    "expected": {
+      "patient_name": "Amiee Buckridge",
+      "patient_gender": "unknown",
+      "diagnosis_codes": [
+        "444814009",
+        "75498004",
+        "10509002"
+      ],
+      "symptoms": [
+        "wheezing",
+        "fever"
+      ]
+    }
+  },
+  {
+    "file": "029_hl7.hl7",
+    "format": "hl7",
+    "source_file": "Ammie_Huels_ea186cb3-ccb1-4dfc-a92e-dc9286aaa2ce.json",
+    "expected": {
+      "patient_name": "Ammie Huels",
+      "patient_gender": "unknown",
+      "diagnosis_codes": [
+        "162864005",
+        "15777000",
+        "195662009"
+      ],
+      "symptoms": [
+        "headache",
+        "nausea",
+        "dizziness"
+      ]
+    }
+  },
+  {
+    "file": "030_hl7.hl7",
+    "format": "hl7",
+    "source_file": "Angele_Greenfelder_3c9e65ef-e65e-46e7-b69a-60a3457307f0.json",
+    "expected": {
+      "patient_name": "Angele Greenfelder",
+      "patient_gender": "unknown",
+      "diagnosis_codes": [
+        "40055000",
+        "36971009",
+        "444814009"
+      ],
+      "symptoms": [
+        "shortness of breath",
+        "sore throat",
+        "chest pain",
+        "joint pain"
+      ]
+    }
+  },
+  {
+    "file": "031_pipe_delimited.txt",
+    "format": "pipe_delimited",
+    "source_file": "Angelic_Mueller_29d755a6-32fa-482e-8fdd-081300209df8.json",
+    "expected": {
+      "patient_name": "Angelic Mueller",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "38341003",
+        "44465007",
+        "70704007"
+      ],
+      "symptoms": []
+    }
+  },
+  {
+    "file": "032_pipe_delimited.txt",
+    "format": "pipe_delimited",
+    "source_file": "Angelique_Ritchie_1899db58-6319-40ed-aad6-6f611c2cebd7.json",
+    "expected": {
+      "patient_name": "Angelique Ritchie",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "40055000",
+        "162864005",
+        "38341003"
+      ],
+      "symptoms": [
+        "congestion"
+      ]
+    }
+  },
+  {
+    "file": "033_pipe_delimited.txt",
+    "format": "pipe_delimited",
+    "source_file": "Angelita_Howe_fefe278e-73bb-4b7d-93ef-b01bd9269b78.json",
+    "expected": {
+      "patient_name": "Angelita Howe",
+      "patient_gender": "trans",
+      "diagnosis_codes": [
+        "24079001",
+        "446096008",
+        "444814009"
+      ],
+      "symptoms": [
+        "dry mouth",
+        "blurred vision"
+      ]
+    }
+  },
+  {
+    "file": "034_pipe_delimited.txt",
+    "format": "pipe_delimited",
+    "source_file": "Annetta_Hoppe_0dd77edd-bffd-4258-ac40-c07af6dd734a.json",
+    "expected": {
+      "patient_name": "Annetta Hoppe",
+      "patient_gender": "trans",
+      "diagnosis_codes": [
+        "15777000",
+        "271737000",
+        "19169002"
+      ],
+      "symptoms": [
+        "night sweats",
+        "cough",
+        "wheezing"
+      ]
+    }
+  },
+  {
+    "file": "035_pipe_delimited.txt",
+    "format": "pipe_delimited",
+    "source_file": "Annmarie_Doyle_b1756d32-c4c4-4fd2-9023-ff241b55bae0.json",
+    "expected": {
+      "patient_name": "Annmarie Doyle",
+      "patient_gender": "unknown",
+      "diagnosis_codes": [
+        "40055000",
+        "19169002",
+        "162864005"
+      ],
+      "symptoms": [
+        "fever",
+        "fatigue",
+        "headache",
+        "nausea"
+      ]
+    }
+  },
+  {
+    "file": "036_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Antonina_Steuber_56dee5cf-86c7-4d7d-80fc-daa4d985c571.json",
+    "expected": {
+      "patient_name": "Antonina Steuber",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "40055000",
+        "444814009",
+        "195662009"
+      ],
+      "symptoms": []
+    }
+  },
+  {
+    "file": "037_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Avril_Hane_1f7d5993-61c1-40b7-9366-0afa8831d9aa.json",
+    "expected": {
+      "patient_name": "Avril Hane",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "19169002",
+        "15777000",
+        "271737000"
+      ],
+      "symptoms": [
+        "sore throat"
+      ]
+    }
+  },
+  {
+    "file": "038_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Barrett_Douglas_d21c38f7-9fc7-4729-b414-3e0fe5ce3d8b.json",
+    "expected": {
+      "patient_name": "Barrett Douglas",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "38341003",
+        "15777000",
+        "271737000"
+      ],
+      "symptoms": [
+        "rash",
+        "chills"
+      ]
+    }
+  },
+  {
+    "file": "039_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Barry_Wolf_f0c0c377-be9c-4ca2-97c0-7cef574bdb45.json",
+    "expected": {
+      "patient_name": "Barry Wolf",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "15777000",
+        "271737000",
+        "68496003"
+      ],
+      "symptoms": [
+        "insomnia",
+        "abdominal pain",
+        "dry mouth"
+      ]
+    }
+  },
+  {
+    "file": "040_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Berneice_Little_5ad50081-cf54-49bc-b8ea-045497418383.json",
+    "expected": {
+      "patient_name": "Berneice Little",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "40055000",
+        "195662009",
+        "43878008"
+      ],
+      "symptoms": [
+        "blurred vision",
+        "palpitations",
+        "night sweats",
+        "cough"
+      ]
+    }
+  },
+  {
+    "file": "041_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Birgit_Schmeler_7e8ee10e-569b-4229-9380-62c49244902c.json",
+    "expected": {
+      "patient_name": "Birgit Schmeler",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "162864005",
+        "124171000119105",
+        "185086009"
+      ],
+      "symptoms": []
+    }
+  },
+  {
+    "file": "042_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Bonnie_Marvin_5c55a67c-fb41-4509-9eae-a55eebf760e1.json",
+    "expected": {
+      "patient_name": "Bonnie Marvin",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "44465007",
+        "444814009",
+        "10509002"
+      ],
+      "symptoms": [
+        "fatigue"
+      ]
+    }
+  },
+  {
+    "file": "043_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Brent_Beer_7dc94cc0-8c2e-4835-9994-cecbe894bcbf.json",
+    "expected": {
+      "patient_name": "Brent Beer",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "15777000",
+        "271737000",
+        "284551006"
+      ],
+      "symptoms": [
+        "dizziness",
+        "shortness of breath"
+      ]
+    }
+  },
+  {
+    "file": "044_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Cameron_Greenfelder_9b55212c-8024-4b8b-bc82-fa605435f63b.json",
+    "expected": {
+      "patient_name": "Cameron Greenfelder",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "38341003",
+        "15777000",
+        "444814009"
+      ],
+      "symptoms": [
+        "chest pain",
+        "joint pain",
+        "rash"
+      ]
+    }
+  },
+  {
+    "file": "045_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Chauncey_Johnston_f4673866-81fb-411a-8486-0c27f2a5b480.json",
+    "expected": {
+      "patient_name": "Chauncey Johnston",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "162864005",
+        "239873007",
+        "444814009"
+      ],
+      "symptoms": [
+        "chills",
+        "congestion",
+        "insomnia",
+        "abdominal pain"
+      ]
+    }
+  },
+  {
+    "file": "046_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Chung_Haley_e792af79-5fe0-4ed8-bf91-ad9e0b24603e.json",
+    "expected": {
+      "patient_name": "Chung Haley",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "15777000",
+        "271737000",
+        "201834006"
+      ],
+      "symptoms": []
+    }
+  },
+  {
+    "file": "047_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Clelia_Green_6902389e-b6f7-4778-bf89-befb7ebf4b82.json",
+    "expected": {
+      "patient_name": "Clelia Green",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "38341003",
+        "162864005",
+        "10509002"
+      ],
+      "symptoms": [
+        "palpitations"
+      ]
+    }
+  },
+  {
+    "file": "048_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Delbert_Williamson_61d8af4e-34ee-4e65-a055-db3806a0bcc2.json",
+    "expected": {
+      "patient_name": "Delbert Williamson",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "128613002",
+        "703151001",
+        "84757009"
+      ],
+      "symptoms": [
+        "wheezing",
+        "fever"
+      ]
+    }
+  },
+  {
+    "file": "049_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Donnell_Torphy_9c154119-26ef-45d6-b560-c41380868b5f.json",
+    "expected": {
+      "patient_name": "Donnell Torphy",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "410429000",
+        "429007001",
+        "449868002"
+      ],
+      "symptoms": [
+        "headache",
+        "nausea",
+        "dizziness"
+      ]
+    }
+  },
+  {
+    "file": "050_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Douglas_Walsh_aa28eaec-f043-4f55-bc22-a787edb0639e.json",
+    "expected": {
+      "patient_name": "Douglas Walsh",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "232353008",
+        "15777000",
+        "271737000"
+      ],
+      "symptoms": [
+        "shortness of breath",
+        "sore throat",
+        "chest pain",
+        "joint pain"
+      ]
+    }
+  },
+  {
+    "file": "051_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Elijah_Zieme_c7b3535b-25c5-46e9-990e-d4f4afc57897.json",
+    "expected": {
+      "patient_name": "Elijah Zieme",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "162864005",
+        "15777000",
+        "38341003"
+      ],
+      "symptoms": []
+    }
+  },
+  {
+    "file": "052_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Elsy_Bechtelar_c84557ab-5b92-4be3-b78f-1fe3d4c49ccd.json",
+    "expected": {
+      "patient_name": "Elsy Bechtelar",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "38341003",
+        "40055000",
+        "162864005"
+      ],
+      "symptoms": [
+        "congestion"
+      ]
+    }
+  },
+  {
+    "file": "053_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Elvis_Moen_498a15e8-770d-4dce-9190-2d293a6c62eb.json",
+    "expected": {
+      "patient_name": "Elvis Moen",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "58150001",
+        "65363002",
+        "444814009"
+      ],
+      "symptoms": [
+        "dry mouth",
+        "blurred vision"
+      ]
+    }
+  },
+  {
+    "file": "054_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Emilee_Ritchie_27abf6e8-2b5d-4ec0-bfd9-6b433fc73cc2.json",
+    "expected": {
+      "patient_name": "Emilee Ritchie",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "38341003",
+        "19169002",
+        "162864005"
+      ],
+      "symptoms": [
+        "night sweats",
+        "cough",
+        "wheezing"
+      ]
+    }
+  },
+  {
+    "file": "055_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Estrella_Daugherty_ecc5586f-45d1-4fb2-bb4c-3fce1b7b4456.json",
+    "expected": {
+      "patient_name": "Estrella Daugherty",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "15777000",
+        "271737000",
+        "38341003"
+      ],
+      "symptoms": [
+        "fever",
+        "fatigue",
+        "headache",
+        "nausea"
+      ]
+    }
+  },
+  {
+    "file": "056_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Fannie_Kutch_fa67e140-9713-495b-b144-a9c087a48b38.json",
+    "expected": {
+      "patient_name": "Fannie Kutch",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "162864005",
+        "72892002",
+        "398254007"
+      ],
+      "symptoms": []
+    }
+  },
+  {
+    "file": "057_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Felipa_O'Keefe_70660c70-a188-4a1d-bbd1-ddecf886f34f.json",
+    "expected": {
+      "patient_name": "Felipa O'Keefe",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "24079001",
+        "446096008",
+        "162864005"
+      ],
+      "symptoms": [
+        "sore throat"
+      ]
+    }
+  },
+  {
+    "file": "058_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Felipe_Cazares_d374d52b-0e57-495a-b373-9150e3cc8286.json",
+    "expected": {
+      "patient_name": "Felipe Cazares",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "162864005",
+        "195662009",
+        "444814009"
+      ],
+      "symptoms": [
+        "rash",
+        "chills"
+      ]
+    }
+  },
+  {
+    "file": "059_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Garrett_Thompson_5a72e290-8102-4c8a-84f7-f838387508b2.json",
+    "expected": {
+      "patient_name": "Garrett Thompson",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "128613002",
+        "703151001",
+        "84757009"
+      ],
+      "symptoms": [
+        "insomnia",
+        "abdominal pain",
+        "dry mouth"
+      ]
+    }
+  },
+  {
+    "file": "060_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Gayla_Ferry_259bc6c6-9c1d-43e9-bd25-7539cf07f8ac.json",
+    "expected": {
+      "patient_name": "Gayla Ferry",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "38341003",
+        "19169002",
+        "162864005"
+      ],
+      "symptoms": [
+        "blurred vision",
+        "palpitations",
+        "night sweats",
+        "cough"
+      ]
+    }
+  },
+  {
+    "file": "061_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Gerard_Thiel_912b242e-0b4a-422e-80f2-93313fa84c98.json",
+    "expected": {
+      "patient_name": "Gerard Thiel",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "162864005",
+        "40055000",
+        "444814009"
+      ],
+      "symptoms": []
+    }
+  },
+  {
+    "file": "062_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Hallie_Hoeger_62a0b57c-4129-43d9-b787-bcf7ad4fa654.json",
+    "expected": {
+      "patient_name": "Hallie Hoeger",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "162864005",
+        "40055000",
+        "19169002"
+      ],
+      "symptoms": [
+        "fatigue"
+      ]
+    }
+  },
+  {
+    "file": "063_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Hilario_Barton_f5bccfe7-f57e-489e-bec3-2251cab963ee.json",
+    "expected": {
+      "patient_name": "Hilario Barton",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "15777000",
+        "271737000",
+        "62106007"
+      ],
+      "symptoms": [
+        "dizziness",
+        "shortness of breath"
+      ]
+    }
+  },
+  {
+    "file": "064_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Hyacinth_Bins_665c7335-79e2-4bf1-aa23-101930c6c70a.json",
+    "expected": {
+      "patient_name": "Hyacinth Bins",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "72892002",
+        "444814009",
+        "44465007"
+      ],
+      "symptoms": [
+        "chest pain",
+        "joint pain",
+        "rash"
+      ]
+    }
+  },
+  {
+    "file": "065_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Isaiah_Schaden_b6b36717-6ad2-433d-bf5c-6c77bc2fcd96.json",
+    "expected": {
+      "patient_name": "Isaiah Schaden",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "47693006",
+        "74400008",
+        "428251008"
+      ],
+      "symptoms": [
+        "chills",
+        "congestion",
+        "insomnia",
+        "abdominal pain"
+      ]
+    }
+  },
+  {
+    "file": "066_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Janine_Purdy_2faebad1-a5a5-45c5-b19c-a8f8cc5b55e1.json",
+    "expected": {
+      "patient_name": "Janine Purdy",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "38341003",
+        "72892002",
+        "195662009"
+      ],
+      "symptoms": []
+    }
+  },
+  {
+    "file": "067_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Jerrell_Gerlach_20f72f10-7dfd-4dc6-abb6-2160e0a548eb.json",
+    "expected": {
+      "patient_name": "Jerrell Gerlach",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "15777000",
+        "271737000",
+        "49436004"
+      ],
+      "symptoms": [
+        "palpitations"
+      ]
+    }
+  },
+  {
+    "file": "068_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Jorge_Brekke_ac7921e0-c949-4b42-97f2-fad5d171cd01.json",
+    "expected": {
+      "patient_name": "Jorge Brekke",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "241929008",
+        "367498001",
+        "284549007"
+      ],
+      "symptoms": [
+        "wheezing",
+        "fever"
+      ]
+    }
+  },
+  {
+    "file": "069_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Karl_Schowalter_89de3489-c506-4794-9b3d-204d3818638b.json",
+    "expected": {
+      "patient_name": "Karl Schowalter",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "162864005",
+        "55822004",
+        "75498004"
+      ],
+      "symptoms": [
+        "headache",
+        "nausea",
+        "dizziness"
+      ]
+    }
+  },
+  {
+    "file": "070_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Kathe_Zieme_646ca118-b7c4-45d3-b1a4-f01e8973873b.json",
+    "expected": {
+      "patient_name": "Kathe Zieme",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "410429000",
+        "429007001",
+        "38341003"
+      ],
+      "symptoms": [
+        "shortness of breath",
+        "sore throat",
+        "chest pain",
+        "joint pain"
+      ]
+    }
+  },
+  {
+    "file": "071_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Kermit_Trantow_f1a650a5-737e-4fd7-828e-03c3348b9524.json",
+    "expected": {
+      "patient_name": "Kermit Trantow",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "233678006",
+        "232353008",
+        "38341003"
+      ],
+      "symptoms": []
+    }
+  },
+  {
+    "file": "072_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Leatrice_McCullough_d0ec618d-d811-40cc-a786-e1644cd53ebc.json",
+    "expected": {
+      "patient_name": "Leatrice McCullough",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "65363002",
+        "444814009",
+        "262574004"
+      ],
+      "symptoms": [
+        "congestion"
+      ]
+    }
+  },
+  {
+    "file": "073_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Loma_Johns_0f30cacb-3348-4baf-8946-cd2175a750b3.json",
+    "expected": {
+      "patient_name": "Loma Johns",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "19169002",
+        "162864005",
+        "239873007"
+      ],
+      "symptoms": [
+        "dry mouth",
+        "blurred vision"
+      ]
+    }
+  },
+  {
+    "file": "074_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Louis_Erdman_55bbe118-e08d-4408-86e5-6084457500d4.json",
+    "expected": {
+      "patient_name": "Louis Erdman",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "10509002",
+        "33737001",
+        "444814009"
+      ],
+      "symptoms": [
+        "night sweats",
+        "cough",
+        "wheezing"
+      ]
+    }
+  },
+  {
+    "file": "075_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Madalyn_Frami_b0e18f77-1be9-4d29-9982-8cd0d04a07ab.json",
+    "expected": {
+      "patient_name": "Madalyn Frami",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "410429000",
+        "429007001",
+        "44054006"
+      ],
+      "symptoms": [
+        "fever",
+        "fatigue",
+        "headache",
+        "nausea"
+      ]
+    }
+  },
+  {
+    "file": "076_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Malik_Ward_57df2519-872e-4b5e-8743-264db11d4e5b.json",
+    "expected": {
+      "patient_name": "Malik Ward",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "162864005",
+        "49436004",
+        "403190006"
+      ],
+      "symptoms": []
+    }
+  },
+  {
+    "file": "077_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Marcos_Barrows_2a6c9df6-a7da-4810-b5df-57a39724fe61.json",
+    "expected": {
+      "patient_name": "Marcos Barrows",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "38341003",
+        "162864005",
+        "90560007"
+      ],
+      "symptoms": [
+        "sore throat"
+      ]
+    }
+  },
+  {
+    "file": "078_canonical_fhir.json",
+    "format": "canonical_fhir",
+    "source_file": "Mario_Dietrich_43d017d3-9f9a-4660-8bf0-fc919ce6379b.json",
+    "expected": {
+      "patient_name": "Mario Dietrich",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "38341003",
+        "196416002",
+        "55680006"
+      ],
+      "symptoms": [
+        "rash",
+        "chills"
+      ]
+    }
+  },
+  {
+    "file": "079_cda_xml.xml",
+    "format": "cda_xml",
+    "source_file": "Marlin_Kuphal_601f9ffc-f62a-4e01-8666-6443b3c47400.json",
+    "expected": {
+      "patient_name": "Marlin Kuphal",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "38341003",
+        "40055000",
+        "195662009"
+      ],
+      "symptoms": [
+        "insomnia",
+        "abdominal pain",
+        "dry mouth"
+      ]
+    }
+  },
+  {
+    "file": "080_fhir_xml.xml",
+    "format": "fhir_xml",
+    "source_file": "Marsha_Hayes_25e83417-4519-4f8b-b2b0-35c9c87003a1.json",
+    "expected": {
+      "patient_name": "Marsha Hayes",
+      "patient_gender": "unknown",
+      "diagnosis_codes": [
+        "232353008",
+        "72892002",
+        "43878008"
+      ],
+      "symptoms": [
+        "blurred vision",
+        "palpitations",
+        "night sweats",
+        "cough"
+      ]
+    }
+  },
+  {
+    "file": "081_pdf.pdf",
+    "format": "pdf",
+    "source_file": "Mathilda_O'Keefe_e96a4adf-fbc9-4983-b6cd-16b1815bb634.json",
+    "expected": {
+      "patient_name": "Mathilda O'Keefe",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "24079001",
+        "233678006",
+        "367498001"
+      ],
+      "symptoms": []
+    }
+  },
+  {
+    "file": "082_soap_note.txt",
+    "format": "soap_note",
+    "source_file": "Matt_Runte_789349c8-a36b-4d3d-9a1a-c04ba3bb6c45.json",
+    "expected": {
+      "patient_name": "Matt Runte",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "162864005",
+        "36971009",
+        "40055000"
+      ],
+      "symptoms": [
+        "fatigue"
+      ]
+    }
+  },
+  {
+    "file": "083_csv.csv",
+    "format": "csv",
+    "source_file": "Mayte_Escobar_c1eebdbf-4e33-43a0-a8fe-467287bd6e63.json",
+    "expected": {
+      "patient_name": "Mayte Escobar",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "15777000",
+        "271737000",
+        "19169002"
+      ],
+      "symptoms": [
+        "dizziness",
+        "shortness of breath"
+      ]
+    }
+  },
+  {
+    "file": "084_yaml.yaml",
+    "format": "yaml",
+    "source_file": "Micah_Schinner_d4d72610-ec40-42ed-b34f-09e286181ee9.json",
+    "expected": {
+      "patient_name": "Micah Schinner",
+      "patient_gender": "trans",
+      "diagnosis_codes": [
+        "162864005",
+        "6072007",
+        "236077008"
+      ],
+      "symptoms": [
+        "chest pain",
+        "joint pain",
+        "rash"
+      ]
+    }
+  },
+  {
+    "file": "085_eml.eml",
+    "format": "eml",
+    "source_file": "Nohemi_Mertz_0862f09f-bfe4-4150-a6cf-2404f27ce4b7.json",
+    "expected": {
+      "patient_name": "Nohemi Mertz",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "74400008",
+        "428251008",
+        "162864005"
+      ],
+      "symptoms": [
+        "chills",
+        "congestion",
+        "insomnia",
+        "abdominal pain"
+      ]
+    }
+  },
+  {
+    "file": "086_rtf.rtf",
+    "format": "rtf",
+    "source_file": "Oralia_Stark_b21200a6-ec96-408b-b8ab-e481402ac607.json",
+    "expected": {
+      "patient_name": "Oralia Stark",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "128613002",
+        "703151001",
+        "44465007"
+      ],
+      "symptoms": []
+    }
+  },
+  {
+    "file": "087_markdown.md",
+    "format": "markdown",
+    "source_file": "Rashad_Feeney_7456e862-f16f-4ebb-a991-4ee41b52aaff.json",
+    "expected": {
+      "patient_name": "Rashad Feeney",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "38341003",
+        "162864005",
+        "55822004"
+      ],
+      "symptoms": [
+        "palpitations"
+      ]
+    }
+  },
+  {
+    "file": "088_html_portal.html",
+    "format": "html_portal",
+    "source_file": "Sal_Strosin_8fcfcc3a-4019-4ebd-be92-835901f3c882.json",
+    "expected": {
+      "patient_name": "Sal Strosin",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "40055000",
+        "201834006",
+        "444814009"
+      ],
+      "symptoms": [
+        "wheezing",
+        "fever"
+      ]
+    }
+  },
+  {
+    "file": "089_html_embedded_fhir.html",
+    "format": "html_embedded_fhir",
+    "source_file": "Shin_Walker_b1c18b97-2a82-48f9-8027-efcadbe06807.json",
+    "expected": {
+      "patient_name": "Shin Walker",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "72892002",
+        "10509002",
+        "444814009"
+      ],
+      "symptoms": [
+        "headache",
+        "nausea",
+        "dizziness"
+      ]
+    }
+  },
+  {
+    "file": "090_sql_dump.sql",
+    "format": "sql_dump",
+    "source_file": "Silvana_Cremin_77b69f66-3e4b-4ffd-8157-1e2364f44fc4.json",
+    "expected": {
+      "patient_name": "Silvana Cremin",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "44054006",
+        "19169002",
+        "302870006"
+      ],
+      "symptoms": [
+        "shortness of breath",
+        "sore throat",
+        "chest pain",
+        "joint pain"
+      ]
+    }
+  },
+  {
+    "file": "091_x12_837.x12",
+    "format": "x12_837",
+    "source_file": "Sofia_Koepp_bfdb7857-8339-498a-a86d-07a06d5eb443.json",
+    "expected": {
+      "patient_name": "Sofia Koepp",
+      "patient_gender": "unknown",
+      "diagnosis_codes": [
+        "195662009",
+        "444814009",
+        "370247008"
+      ],
+      "symptoms": []
+    }
+  },
+  {
+    "file": "092_ndjson_bulk.ndjson",
+    "format": "ndjson_bulk",
+    "source_file": "Stephenie_Schowalter_1117b8b9-1583-48df-ba7f-4c5819acce92.json",
+    "expected": {
+      "patient_name": "Stephenie Schowalter",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "38341003",
+        "72892002",
+        "195662009"
+      ],
+      "symptoms": [
+        "congestion"
+      ]
+    }
+  },
+  {
+    "file": "093_fixed_width.dat",
+    "format": "fixed_width",
+    "source_file": "Suzi_Bechtelar_7c8e5aa3-22da-4688-985b-a33a8ba798e6.json",
+    "expected": {
+      "patient_name": "Suzi Bechtelar",
+      "patient_gender": "unknown",
+      "diagnosis_codes": [
+        "72892002",
+        "444814009",
+        "10509002"
+      ],
+      "symptoms": [
+        "dry mouth",
+        "blurred vision"
+      ]
+    }
+  },
+  {
+    "file": "094_sms_chat.txt",
+    "format": "sms_chat",
+    "source_file": "Sylvester_Kshlerin_3e087006-888f-4f84-a15a-40a0444813d0.json",
+    "expected": {
+      "patient_name": "Sylvester Kshlerin",
+      "patient_gender": "trans",
+      "diagnosis_codes": [
+        "162864005",
+        "370247008",
+        "43878008"
+      ],
+      "symptoms": [
+        "night sweats",
+        "cough",
+        "wheezing"
+      ]
+    }
+  },
+  {
+    "file": "095_spreadsheetml.xml",
+    "format": "spreadsheetml",
+    "source_file": "Tamatha_Witting_55a37df6-b780-4272-8d51-499be0e7df86.json",
+    "expected": {
+      "patient_name": "Tamatha Witting",
+      "patient_gender": "trans",
+      "diagnosis_codes": [
+        "40055000",
+        "19169002",
+        "162864005"
+      ],
+      "symptoms": [
+        "fever",
+        "fatigue",
+        "headache",
+        "nausea"
+      ]
+    }
+  },
+  {
+    "file": "096_rdf_turtle.ttl",
+    "format": "rdf_turtle",
+    "source_file": "Vera_Spinka_165b0894-dab7-4721-802c-cae4bbb2eace.json",
+    "expected": {
+      "patient_name": "Vera Spinka",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "195662009",
+        "72892002",
+        "19169002"
+      ],
+      "symptoms": []
+    }
+  },
+  {
+    "file": "097_json_ld.jsonld",
+    "format": "json_ld",
+    "source_file": "Vicenta_Maggio_456879da-8654-413e-b211-6308d9815586.json",
+    "expected": {
+      "patient_name": "Vicenta Maggio",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "40055000",
+        "19169002",
+        "162864005"
+      ],
+      "symptoms": [
+        "sore throat"
+      ]
+    }
+  },
+  {
+    "file": "098_ocr_fax.txt",
+    "format": "ocr_fax",
+    "source_file": "Werner_Funk_88980c97-df54-464c-9fd9-ba079f2f1d98.json",
+    "expected": {
+      "patient_name": "Werner Funk",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "449868002",
+        "15777000",
+        "271737000"
+      ],
+      "symptoms": [
+        "rash",
+        "chills"
+      ]
+    }
+  },
+  {
+    "file": "099_dictation.txt",
+    "format": "dictation",
+    "source_file": "Zachariah_Osinski_1793fd26-1b46-4c62-9586-bab044362ad0.json",
+    "expected": {
+      "patient_name": "Zachariah Osinski",
+      "patient_gender": "male",
+      "diagnosis_codes": [
+        "40055000",
+        "162864005",
+        "15777000"
+      ],
+      "symptoms": [
+        "insomnia",
+        "abdominal pain",
+        "dry mouth"
+      ]
+    }
+  },
+  {
+    "file": "100_base64_envelope.json",
+    "format": "base64_envelope",
+    "source_file": "Zula_Beer_aa23ce27-f93f-404d-a89f-dd8580d8043d.json",
+    "expected": {
+      "patient_name": "Zula Beer",
+      "patient_gender": "female",
+      "diagnosis_codes": [
+        "19169002",
+        "40055000",
+        "15777000"
+      ],
+      "symptoms": [
+        "blurred vision",
+        "palpitations",
+        "night sweats",
+        "cough"
+      ]
+    }
+  }
+]

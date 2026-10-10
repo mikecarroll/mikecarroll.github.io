@@ -1,0 +1,47 @@
+Return-Path: <referrals@lakesideregional.example.org>
+Received: from mail-gw1.example.org (10.0.84.12) by mx.example.org with ESMTPS; Thu, 15 Jan 2026 08:55:44 -0500
+Message-ID: <e0f40fe5-d579-41f7-87f6-6b2f5f6d1e5b.84@referrals.example.org>
+Date: Thu, 15 Jan 2026 08:55:00 -0500
+From: "Referrals Desk" <referrals@lakesideregional.example.org>
+To: "Scheduling" <scheduling@example-clinic.example.org>
+Subject: RE: FWD: referral E0F40FE5 - please add to chart
+X-Priority: 3
+X-Mailer: MailBridge 11.4
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="----=_Part_84_E0F40FE5"
+
+------=_Part_84_E0F40FE5
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Hi team,
+
+Referral for the 2pm slot. Details below, please add to the chart before the visit.
+
+Patient: Nohemi Mertz (MRN E0F40FE5, DOB 1951-03-14, female)
+Phone: 555-712-6450
+Working diagnoses:
+  - Appendicitis (SNOMED CT 74400008)
+  - History of appendectomy (SNOMED CT 428251008)
+  - Body mass index 30+ - obesity (finding) (SNOMED CT 162864005)
+Presenting symptoms: chills, congestion, insomnia, abdominal pain
+
+Patient verbalized understanding of discharge instructions.
+Lunch is on the 3rd floor again today - the cafeteria is doing the lentil soup.
+
+Thanks,
+A. Whitfield
+Referrals Coordinator | Lakeside Regional
+
+--
+This message and any attachments are confidential and intended solely for the addressee.
+
+------=_Part_84_E0F40FE5
+Content-Type: text/csv; name="pending_orders.csv"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="pending_orders.csv"
+
+b3JkZXJfaWQsdGVzdCxzdGF0dXMKODQwMDEsQ0JDLGZpbmFsCjg0MDAyLENN
+UCxmaW5hbAo4NDAwMyxMaXBpZCBwYW5lbCxwZW5kaW5nCg==
+
+------=_Part_84_E0F40FE5--

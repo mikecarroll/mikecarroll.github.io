@@ -1,0 +1,23 @@
+================================================================
+NORTHFIELD FAMILY CLINIC                             PROGRESS NOTE
+Date of service: 01/15/2026   Provider: S. Nakamura, MD
+================================================================
+PT: RUNTE, MATT   MRN 8C0F46F4   DOB 1962-09-19   64 y/o M
+Pharmacy on file: CornerDrug #081   Ins: Lakeside PPO Gold
+
+S: 64 y/o M here for follow-up. C/o fatigue.
+   Advance directive status: not on file. Information offered.
+   Please bring your insurance card to every visit.
+   Current meds: Metformin hydrochloride 500 MG Oral Tablet, atorvastatin 20 MG Oral Tablet, Acetaminophen 325 MG Oral Tablet.
+
+O: BP 117/69  HR 63  T 98.3  SpO2 97%  Wt 93kg
+   Gen: NAD. Lungs CTAB. CV RRR no m/r/g. Abd soft NT/ND.
+
+A/P:
+  1) Body mass index 30+ - obesity (finding) [SNOMED 162864005] - continue current mgmt
+  2) Sinusitis (disorder) [SNOMED 36971009] - continue current mgmt
+  3) Chronic sinusitis (disorder) [SNOMED 40055000] - continue current mgmt
+
+RTC 4 wks sooner prn. Labs ordered: CBC, CMP, lipid panel.
+
+/s/ S. Nakamura, MD   (dictated, not proofread)

@@ -1,0 +1,20 @@
+*****************************************************************
+* COPYBOOK ADMREC01  -  LEGACY ADMISSIONS EXTRACT (BATCH ADM0420)
+* RECORD LENGTH 210   RECFM=FB   BLOCK=0
+* FIELD LAYOUT (POSITION IS 1-BASED, LEFT-JUSTIFIED, SPACE PADDED):
+*   REC-TYPE       PIC X(04)   START 001
+*   FACILITY       PIC X(10)   START 005
+*   MRN            PIC X(10)   START 015
+*   PATIENT-NAME   PIC X(32)   START 025
+*   SEX            PIC X(02)   START 057
+*   DOB            PIC X(12)   START 059
+*   DX-1           PIC X(16)   START 071
+*   DX-2           PIC X(16)   START 087
+*   DX-3           PIC X(16)   START 103
+*   SYMPTOMS       PIC X(80)   START 119
+*   PAYER          PIC X(12)   START 199
+* DX-n FIELDS ARE SNOMED CT CONCEPT IDS. SYMPTOMS IS SLASH-SEPARATED.
+* EXTRACT DATE 2026-01-15   JOB ADM0420J   STEP 03   RC=0000
+*****************************************************************
+ADM1FAC003    95EFED54  BECHTELAR, SUZI                 O 1986-05-05  72892002        444814009       10509002        dry mouth/blurred vision                                                        PAYER-4471  
+TRAILER 000001 RECORDS  INTERPRETER NOT REQUIRED. PREFERRED LANGUAGE: ENGLISH.

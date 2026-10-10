@@ -1,0 +1,59 @@
+{
+  "fhirVersion": "R4",
+  "exportedAt": "2026-01-15T09:00:00Z",
+  "sourceSystem": "MedVantage-EHR",
+  "subject": {
+    "resourceType": "Patient",
+    "fullName": "Alfreda Wyman",
+    "birthSex": "407377005",
+    "mrn": "MV-6d23a95e",
+    "facility": "Lakeside Regional"
+  },
+  "diagnosisList": [
+    {
+      "codeSystem": "SNOMED-CT",
+      "codeValue": "38341003",
+      "label": "Hypertension",
+      "recordedBy": "Dr. A. Whitfield"
+    },
+    {
+      "codeSystem": "SNOMED-CT",
+      "codeValue": "10509002",
+      "label": "Acute bronchitis (disorder)",
+      "recordedBy": "Dr. A. Whitfield"
+    },
+    {
+      "codeSystem": "SNOMED-CT",
+      "codeValue": "15777000",
+      "label": "Prediabetes",
+      "recordedBy": "Dr. A. Whitfield"
+    }
+  ],
+  "symptomList": [
+    {
+      "description": "chest pain",
+      "reportedAt": "2026-01-15T09:00:00Z",
+      "severity": "mild"
+    },
+    {
+      "description": "joint pain",
+      "reportedAt": "2026-01-15T09:01:00Z",
+      "severity": "moderate"
+    },
+    {
+      "description": "rash",
+      "reportedAt": "2026-01-15T09:02:00Z",
+      "severity": "severe"
+    }
+  ],
+  "billing": {
+    "payerId": "PAYER-4471",
+    "priorAuth": false,
+    "copayCents": 2500
+  },
+  "insurance": {
+    "planName": "Lakeside PPO Gold",
+    "groupNumber": "GRP-8842",
+    "memberSince": "2019-03-01"
+  }
+}

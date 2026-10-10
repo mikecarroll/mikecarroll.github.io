@@ -1,0 +1,66 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# bin/run_v3 — the squishling capstone: one class, zero format-specific
+# code, run against all 100 fixtures (ORIGINAL_35=1 for just the first 35). Unlike bin/run_v1 and bin/run_v2, this makes a real LLM
+# call per fixture — there's no offline/deterministic path to fall back to,
+# because v3 was never given one.
+require "bundler/setup"
+require "json"
+require "squishling"
+require "coolhand"
+require_relative "../lib/v3/parser"
+require_relative "../lib/fixture_manifest"
+require_relative "../lib/usage_log"
+
+unless ENV["ANTHROPIC_API_KEY"]
+  warn "Set ANTHROPIC_API_KEY before running v3 — every fixture here makes a real LLM call."
+  exit 1
+end
+
+RubyLLM.configure { |c| c.anthropic_api_key = ENV["ANTHROPIC_API_KEY"] }
+
+# Coolhand intercepts RubyLLM's outgoing Faraday requests automatically —
+# no squishling-side code change needed to monitor every LLM call below.
+Coolhand.configure do |c|
+  c.api_key = ENV["COOLHAND_API_KEY"]
+  c.silent = true
+end
+
+root = File.expand_path("..", __dir__)
+manifest = FixtureManifest.load(root)
+usage_log_path = File.join(root, "tmp", "usage_v3.jsonl")
+
+passed = 0
+failed = 0
+
+UsageLog.open(usage_log_path) do |usage_log|
+  Squishling.configure do |c|
+    c.default_model = "claude-haiku-4-5-20251001"
+    c.default_provider = :anthropic
+    c.squawk = UsageLog.squawk_for(usage_log)
+  end
+
+  manifest.each do |entry|
+    UsageLog.tag(entry.fetch("file"))
+    raw = File.read(File.join(root, "fixtures", entry.fetch("file")))
+
+    begin
+      record = V3::Parser.parse(raw)
+      if record.matches?(entry.fetch("expected"))
+        passed += 1
+        puts "PASS  #{entry.fetch('file')} (#{entry.fetch('format')})"
+      else
+        failed += 1
+        puts "FAIL  #{entry.fetch('file')} (#{entry.fetch('format')} — parsed but values don't match expected)"
+      end
+    rescue Squishling::InvalidOutputError => e
+      failed += 1
+      puts "FAIL  #{entry.fetch('file')} (#{entry.fetch('format')} — #{e.message})"
+    end
+  end
+end
+
+puts
+puts "v3: #{passed}/#{manifest.size} passed, #{failed}/#{manifest.size} failed"
+puts "usage log: #{usage_log_path}"

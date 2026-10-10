@@ -1,0 +1,1238 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Elastic Software: Calculating tech debt using LLM tokens — Michael Carroll</title>
+
+    <!-- ===================== SEO / AEO ===================== -->
+    <meta
+      name="description"
+      content="Engineers have never been able to price tech debt. LLM tokens change that. A code-forward Ruby talk on quantifying tech debt in tokens — and the elastic software pattern that falls out of it."
+    />
+    <meta
+      name="keywords"
+      content="tech debt, technical debt, LLM tokens, tokenomics, elastic software, Ruby, RubyLLM, software architecture, Coolhand Labs, Michael Carroll, XO Ruby NYC 2026"
+    />
+    <meta name="author" content="Michael Carroll" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#09090b" />
+    <link
+      rel="canonical"
+      href="https://michael.carroll.io/talks/2026/elastic-software/"
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Elastic Software: Calculating tech debt using LLM tokens" />
+    <meta
+      property="og:description"
+      content="Engineers have never been able to price tech debt. LLM tokens change that — and reorder how you architect software."
+    />
+    <meta
+      property="og:url"
+      content="https://michael.carroll.io/talks/2026/elastic-software/"
+    />
+    <meta property="og:site_name" content="Michael Carroll" />
+    <meta
+      property="og:image"
+      content="https://michael.carroll.io/talks/2026/elastic-software/assets/img/og-cover.png"
+    />
+    <meta property="og:image:alt" content="Elastic Software — talk title card" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta name="twitter:title" content="Elastic Software: Calculating tech debt using LLM tokens" />
+    <meta
+      name="twitter:description"
+      content="Engineers have never been able to price tech debt. LLM tokens change that. Michael Carroll, XO Ruby NYC 2026."
+    />
+    <meta
+      name="twitter:image"
+      content="https://michael.carroll.io/talks/2026/elastic-software/assets/img/og-cover.png"
+    />
+
+    <link rel="stylesheet" href="assets/deck.css?v=4" />
+    <link rel="stylesheet" href="assets/theme.css?v=38" />
+
+    <!-- ===================== Structured data (JSON-LD) ===================== -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "PresentationDigitalDocument",
+            "name": "Elastic Software: Calculating tech debt using LLM tokens",
+            "headline": "Elastic Software",
+            "description": "Engineers have never been able to price tech debt. LLM tokens change that. A code-forward Ruby talk on quantifying tech debt in tokens — and the elastic software pattern that falls out of it.",
+            "inLanguage": "en",
+            "url": "https://michael.carroll.io/talks/2026/elastic-software/",
+            "author": { "@id": "https://michael.carroll.io/#michael" },
+            "about": [
+              "Technical debt",
+              "Ruby",
+              "Large language models",
+              "Software architecture",
+              "Tokenomics"
+            ]
+          },
+          {
+            "@type": "Person",
+            "@id": "https://michael.carroll.io/#michael",
+            "name": "Michael Carroll",
+            "jobTitle": "Founder, Coolhand Labs",
+            "url": "https://michael.carroll.io/",
+            "image": "https://michael.carroll.io/talks/2026/elastic-software/assets/img/michael.png",
+            "sameAs": [
+              "https://everythingengineer.substack.com",
+              "https://github.com/mikecarroll",
+              "https://www.linkedin.com/in/michaelscottcarroll"
+            ]
+          },
+          {
+            "@type": "Event",
+            "name": "XO Ruby NYC 2026",
+            "startDate": "2026-10-03",
+            "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+            "location": {
+              "@type": "Place",
+              "name": "New York, NY",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "New York",
+                "addressRegion": "NY",
+                "addressCountry": "US"
+              }
+            },
+            "performer": { "@id": "https://michael.carroll.io/#michael" }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Michael Carroll", "item": "https://michael.carroll.io/" },
+              { "@type": "ListItem", "position": 2, "name": "Talks", "item": "https://michael.carroll.io/talks/" },
+              { "@type": "ListItem", "position": 3, "name": "Elastic Software", "item": "https://michael.carroll.io/talks/2026/elastic-software/" }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+
+  <body>
+    <main class="deck" aria-label="Slide deck: Elastic Software">
+      <div class="stage">
+        <!-- ===================================================== ACT 0 — COLD OPEN -->
+
+        <!-- Slide 1 — Title -->
+        <section class="slide slide--dark center" id="slide-1" aria-label="Title — Elastic Software">
+          <p class="kicker">XO Ruby NYC · 2026</p>
+          <h1 style="padding-top: 3.5rem">Elastic Software</h1>
+          <p class="lead title-tagline">Calculating tech debt using <span class="accent">LLM tokens</span></p>
+          <img src="assets/img/squishling-steamer-closed.png" alt="A closed bamboo steamer basket, glowing softly" width="300" style="position: absolute; left: 50%; top: 70%; transform: translate(-50%, -50%)" />
+          <p class="muted speaker-byline">
+            <a href="https://michael.carroll.io" data-no-advance>Michael Carroll</a><br />Founder, Coolhand Labs
+          </p>
+          <a class="qr qr--corner" href="https://michael.carroll.io/talks/2026/elastic-software/"
+             target="_blank" rel="noopener noreferrer">
+            <img src="assets/qr/talk.svg" alt="QR code — follow along with the slides" />
+            <span class="qr-label">↑ follow along</span>
+          </a>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Title up, say almost nothing. The room is still sitting down. One line:
+            "I'm going to try to do something in the next 35 minutes that I don't
+            think our industry has ever been able to do: put a number on tech debt."
+          </aside>
+        </section>
+
+        <!-- Slide 2 — About me -->
+        <section class="slide" id="slide-2" aria-label="About Michael Carroll">
+          <div class="about">
+            <div class="about-main">
+              <h2>About me</h2>
+              <div class="timeline">
+                <div class="rung">
+                  <div class="rung-when">Founding team</div>
+                  <div class="rung-what">RubiconMD</div>
+                  <p>Health tech built on Ruby. Acquired — now part of CVS Health.</p>
+                </div>
+                <div class="rung">
+                  <div class="rung-when">VP of Engineering</div>
+                  <div class="rung-what">Teladoc Health</div>
+                  <p>Also Ruby! Oversaw 500+ engineers through the pandemic.</p>
+                </div>
+                <div class="rung">
+                  <div class="rung-when">Founder</div>
+                  <div class="rung-what">Coolhand Labs</div>
+                  <p>A supervisor for prod agents — catches silent failures, now.</p>
+                </div>
+              </div>
+            </div>
+            <aside class="about-side">
+              <img class="headshot" src="assets/img/michael.png" alt="Michael Carroll" width="170" height="170" />
+              <a class="qr qr--newsletter" href="https://everythingengineer.substack.com" target="_blank" rel="noopener noreferrer">
+                <span class="newsletter-eyebrow">📬 Newsletter</span>
+                <img src="assets/qr/substack.svg" alt="QR code linking to The Everything Engineer newsletter on Substack" />
+                <span class="qr-label">The Everything Engineer</span>
+              </a>
+            </aside>
+          </div>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.5rem">
+            I may be one of the most AI-pilled people there is<span class="accent">...</span>
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Credibility, fast. RubiconMD is where the rest of this talk's health-tech
+            parser story comes from — slide 9 picks it back up by name. Coolhand Labs
+            is where the tokenomics argument this talk makes gets productized.
+            I also publish <em>The Everything Engineer</em>, a newsletter on this same
+            territory. Then the line itself, straight-faced: let it hang, unexplained —
+            the next slide's own line lands the punchline.
+          </aside>
+        </section>
+
+        <!-- Slide 3 — This AI talk is full of actual code -->
+        <section class="slide center" id="slide-3" aria-label="This AI presentation is full of actual code">
+          <h2>…but this AI presentation is full of <span class="accent">ACTUAL CODE!</span></h2>
+          <p class="shout" style="font-size: 11rem; margin-top: 3rem">🤯</p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Pick up right where the previous slide left it hanging — this line is the
+            payoff to "I may be one of the most AI-pilled people there is…", exploding
+            head and all. Don't explain the joke — let the room laugh and move straight
+            into the next slide.
+          </aside>
+        </section>
+
+        <!-- Slide 4 — Audience participation quiz -->
+        <section class="slide" id="slide-4" aria-label="Audience participation quiz — skyscrapers, sidewalks, and crumple zones">
+          <div class="split">
+            <div class="split-main">
+              <p class="kicker">Okay, but before we get there…</p>
+              <h2>Audience <del>participation</del> <span class="accent">quiz</span> time!</h2>
+              <ol class="steps steps--lg" style="margin-top: 1.5rem">
+                <li class="fragment" data-fragment-index="1">Why do skyscrapers sway?</li>
+                <li class="fragment" data-fragment-index="2">Why do they put that putty stuff in sidewalk cracks?</li>
+                <li class="fragment" data-fragment-index="3">Why is the metal frame of your car designed to crumple?</li>
+              </ol>
+            </div>
+            <aside class="split-side">
+              <img class="photo" src="assets/img/sidewalk-crack.jpg" alt="Sealant filling an expansion-joint crack in a concrete sidewalk" />
+            </aside>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            A genuine audience-participation beat — ask these out loud, actually
+            wait for shouted answers, don't just click through them. The common
+            thread (sway, expansion joints, crumple zones) is that flexibility
+            absorbs stress that rigidity can't — that is the pivot the next
+            slide names directly.
+          </aside>
+        </section>
+
+        <!-- Slide 5 — The payoff: flexibility adds resilience -->
+        <section class="slide slide--dark center" id="slide-5" aria-label="The payoff — flexibility adds resilience in engineering">
+          <h1>Softness &amp; flexibility add <span class="accent">resilience</span> in engineering.</h1>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Say it, then stop — let it land as a general engineering truth
+            before the next slide turns it toward tech debt specifically.
+            This is the bridge the whole quiz was building toward.
+          </aside>
+        </section>
+
+        <!-- Slide 6 — Now apply it to tech debt -->
+        <section class="slide" id="slide-6" aria-label="Now apply it to tech debt — good thing or bad thing?">
+          <div class="split">
+            <div class="split-main">
+              <h2>Now, let's talk about tech debt!</h2>
+              <ol class="steps steps--lg" style="margin-top: 1.5rem">
+                <li class="fragment" data-fragment-index="1">Is tech debt a good thing or a bad thing?</li>
+                <li class="fragment" data-fragment-index="2">Now, how about a credit card — good or bad?</li>
+                <li class="fragment" data-fragment-index="3">Okay, what about a mortgage — good or bad?</li>
+              </ol>
+            </div>
+            <aside class="split-side">
+              <img class="chart" src="assets/img/fed-funds-rate.svg" alt="Line chart of the U.S. effective federal funds rate from 1976 to 2026, spiking near 19% in 1981, falling near zero after 2008 and in 2020, then rising to about 5.3% in 2024 before easing to 3.6% in 2026" />
+            </aside>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Another real audience beat. Tech debt usually gets a chorus of
+            "bad." A credit card splits the room. A mortgage usually flips to
+            "good" — that flip is the whole point, so let it land before
+            clicking to the next slide. The chart is real Fed data (FRED,
+            FEDFUNDS) — same whipsaw shape as tech debt: useful leverage when
+            managed, brutal when it spikes.
+          </aside>
+        </section>
+
+        <!-- Slide 7 — It depends -->
+        <section class="slide slide--dark center" id="slide-7" aria-label="It depends — debt as leverage, in moderation">
+          <h1>It Depends!</h1>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.5rem">
+            If you don't overdo it, <span class="accent">debt gives you leverage.</span>
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The credit card and mortgage answers were never really about
+            credit cards — they were building to this. Debt, including tech
+            debt, is a tool: taken on deliberately and paid down on purpose,
+            it is leverage. Taken on carelessly, it is just debt. That
+            reframing is the setup for the rest of the talk.
+          </aside>
+        </section>
+
+        <!-- Slide 8 — Asset or liability — but how do you measure it? -->
+        <section class="slide center" id="slide-8" aria-label="Tech debt as asset or liability — but how do you measure it?">
+          <h2>Tech debt can be an <span class="accent">asset</span> or a <span class="cost">liability</span>, depending on what you do with it.</h2>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.75rem">
+            But how do you measure it?
+          </p>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.25rem">
+            It's hard to quantify the advantage it gives us,
+            <span class="muted">if we can't quantify the cost of the debt.</span>
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            One click reveals both questions together — they are one thought,
+            not two. This is the actual hook: everyone nods along with
+            "it depends," but nobody in the room has a real answer for how
+            they would measure it. Let the question sit unanswered — that is
+            exactly the gap the rest of this talk closes.
+          </aside>
+        </section>
+
+        <!-- ===================================================== ACT 1 — BEAT 1 -->
+
+        <!-- Slide 9 — Setting -->
+        <section class="slide" id="slide-9" aria-label="Setting — health tech in the 2010s">
+          <p class="kicker">Okay, here comes some code!</p>
+          <h2>Health tech, 2010s.</h2>
+          <ul class="bullets">
+            <li>You have signed a clinical client.</li>
+            <li>You need their patient data in your system.</li>
+            <li class="fragment" data-fragment-index="1">
+              There is a standard for this. <span class="accent">FHIR.</span> Easy peasy!
+            </li>
+          </ul>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Ground it in your own history, not a hypothetical. You built the first
+            RubiconMD product solo and wrote more EHR parsers than any person should.
+            Keep this short — it is scene-setting, not a bio slide.
+          </aside>
+        </section>
+
+        <!-- Slide 10 — The clean parser -->
+        <section class="slide center" id="slide-10" aria-label="The clean parser">
+          <h2>Day one.</h2>
+<pre class="codeblock codeblock--lg" aria-label="A single clean FHIR parser call"><code><span class="k">def</span> <span class="m">call_parser</span>(data)
+  fhir_parser.call(data)
+<span class="k">end</span>
+</code></pre>
+          <aside class="notes">
+            <h4>Beat</h4>
+            This is the "simple, elegant Ruby class" the abstract promised. Let it sit
+            for a second — everyone in the room has written this method and felt good
+            about it. That feeling is the thing we are about to destroy.
+          </aside>
+        </section>
+
+        <!-- ===================================================== ACT 2 — BEAT 2 -->
+
+        <!-- Slide 11 — Build it up -->
+        <section class="slide center" id="slide-11" aria-label="A hundred clients later">
+          <h2>A hundred clients later.</h2>
+<pre class="codeblock codeblock--shrink" aria-label="A case statement with one branch per client, repeated for a hundred clients"><code><span class="k">def</span> <span class="m">call_parser</span>(client_name, data)
+  <span class="k">case</span> client_name
+  <span class="k">when</span> client_a <span class="k">then</span> client_a_parser.call(data)
+  <span class="k">when</span> client_b <span class="k">then</span> client_b_parser.call(data)
+  <span class="k">when</span> client_c <span class="k">then</span> client_c_parser.call(data)
+  <span class="k">when</span> client_d <span class="k">then</span> client_d_parser.call(data)
+  <span class="k">when</span> client_e <span class="k">then</span> client_e_parser.call(data)
+  <span class="k">when</span> client_f <span class="k">then</span> client_f_parser.call(data)
+<span class="tail">  <span class="k">when</span> client_g <span class="k">then</span> client_g_parser.call(data)
+  <span class="k">when</span> client_h <span class="k">then</span> client_h_parser.call(data)
+  <span class="k">when</span> client_i <span class="k">then</span> client_i_parser.call(data)
+  <span class="k">when</span> client_j <span class="k">then</span> client_j_parser.call(data)
+  <span class="k">when</span> client_k <span class="k">then</span> client_k_parser.call(data)
+  <span class="k">when</span> client_l <span class="k">then</span> client_l_parser.call(data)
+  <span class="k">when</span> client_m <span class="k">then</span> client_m_parser.call(data)
+  <span class="k">when</span> client_n <span class="k">then</span> client_n_parser.call(data)
+  <span class="k">when</span> client_o <span class="k">then</span> client_o_parser.call(data)
+  <span class="k">when</span> client_p <span class="k">then</span> client_p_parser.call(data)</span>
+  <span class="ell">#=> ad nauseum</span>
+</code></pre>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The visual joke is that the text becomes unreadable — that is the point, so
+            do not apologize for it. Line: "I am not going to make you read this. That's
+            the first honest measurement we have: you already stopped trying."
+          </aside>
+        </section>
+
+        <!-- Slide 12 — Terrible architecture, no matter who writes it -->
+        <section class="slide" id="slide-12" aria-label="Terrible software architecture, no matter who codes it">
+          <h2>No matter if people or AI codes it, <span class="cost">it's terrible software architecture!</span></h2>
+          <ul class="bullets bullets--arrow fragment" data-fragment-index="1" style="margin-top: 1.75rem">
+            <li>Hard to DRY.</li>
+            <li>Any data format change could break it.</li>
+            <li>Every breakage is a scramble.</li>
+            <li>Adds cost to every new contract.</li>
+            <li>The more clients you sell, <span class="cost">the worse it gets</span>!</li>
+          </ul>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.75rem">
+            The worst kind of debt: <span class="cost">uncontrollable, unavoidable &amp; unmanageable</span>.
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            One click. The point of the first line is that this is not a "the AI
+            parser is sloppy" talk — a hand-written case statement has the exact same
+            shape and the exact same five problems. The closing line is the verdict:
+            not bad because someone was careless, bad because it has these three
+            properties at once. Plant it here; you pay it off in Act 7.
+          </aside>
+        </section>
+
+        <!-- Slide 13 — Let's try this again -->
+        <section class="slide center" id="slide-13" aria-label="Let's try this again — swapping the FHIR parser for an LLM call">
+          <h2>Let's try this again.</h2>
+<pre class="codeblock codeblock--lg" aria-label="A parser call, swapping its FHIR parser line for an LLM-backed one"><code><span class="k">def</span> <span class="m">call_parser</span>(data)
+<span class="fragment hide-on-reveal" data-fragment-index="1">  fhir_parser.call(data)
+</span><span class="fragment" data-fragment-index="1">  <span class="c"># fhir_parser.call(data)</span>
+  <span class="m">RubyLLM</span>.chat
+    .with_instructions(<span class="s">"Please parse this data: #{data}"</span>)
+    .with_schema(<span class="m">PatientRecord</span>)
+    .ask
+</span><span class="k">end</span>
+</code></pre>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.5rem">
+            Same function signature. <span class="accent">Different implementation.</span>
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            One click. The call site does not change — same method name, same
+            argument. What changes is what is now inside it: comment out the
+            hand-written parser, hand the record to an LLM with instructions and the
+            shape you want back.
+          </aside>
+        </section>
+
+        <!-- Slide 14 — I know what you are thinking -->
+        <section class="slide center" id="slide-14" aria-label="I know what you are thinking right now">
+          <h2>I know what you are thinking right now:</h2>
+          <p class="shout fragment" data-fragment-index="1" style="font-size: 8rem; margin-top: 1.5rem">🤮</p>
+          <p class="lead fragment" data-fragment-index="2" style="margin-top: 1.5rem">
+            But think of the <span class="accent">benefits!</span>
+          </p>
+          <div class="grid cols-3" style="margin-top: 1.75rem; text-align: left">
+            <div class="card card--emoji fragment" data-fragment-index="3">
+              <p class="emoji">🛡️</p>
+              <p style="font-size: 1.3rem; margin-top: 0.75rem">Zero brittle code.</p>
+            </div>
+            <div class="card card--emoji fragment" data-fragment-index="3">
+              <p class="emoji">⚡</p>
+              <p style="font-size: 1.3rem; margin-top: 0.75rem">Instant integration.</p>
+            </div>
+            <div class="card card--emoji fragment" data-fragment-index="3">
+              <p class="emoji">🤸</p>
+              <p style="font-size: 1.3rem; margin-top: 0.75rem; font-weight: 650">
+                Flexibility to handle external <span class="accent">factors you can't change</span>.
+              </p>
+            </div>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Name the objection before the room forms it — nobody fully trusts handing
+            parsing to an LLM on first sight, and pretending otherwise loses the room.
+            Let the retch emoji get the laugh, then pivot straight into why it is worth
+            it anyway.
+          </aside>
+        </section>
+
+        <!-- Slide 15 — So now you are thinking -->
+        <section class="slide center" id="slide-15" aria-label="So now you are thinking — the cost objection">
+          <h2>So now you are thinking:</h2>
+          <p class="shout fragment" data-fragment-index="1" style="font-size: 8rem; margin-top: 1.5rem">🤕</p>
+          <p class="lead fragment" data-fragment-index="2" style="margin-top: 1.5rem">
+            But it'll cost a lot of money in <span class="cost">LLM tokens!</span>
+          </p>
+          <div class="grid cols-3" style="margin-top: 1.75rem; text-align: left">
+            <div class="card card--emoji fragment" data-fragment-index="3">
+              <p class="emoji">⚙️</p>
+              <p style="font-size: 1.3rem; margin-top: 0.75rem">Refactor the high-volume bits to be deterministic.</p>
+            </div>
+            <div class="card card--emoji fragment" data-fragment-index="3">
+              <p class="emoji">🤖</p>
+              <p style="font-size: 1.3rem; margin-top: 0.75rem">Keep AI for everything else.</p>
+            </div>
+            <div class="card card--emoji fragment" data-fragment-index="3">
+              <p class="emoji">🧮</p>
+              <p style="font-size: 1.3rem; margin-top: 0.75rem; font-weight: 650">
+                Now your tech debt has <span class="accent">a quantity you can measure</span>
+              </p>
+            </div>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The second objection, same shape as the first. The answer is not "don't
+            worry about cost" — it is that cost is now a dial you can turn: harden the
+            expensive, high-volume paths back into deterministic code and leave AI on
+            the long tail. The punchline is the actual thesis of the talk.
+          </aside>
+        </section>
+
+        <!-- Slide 16 — Wouldn't it be nice -->
+        <section class="slide center" id="slide-16" aria-label="Wouldn't it be nice if there were an elegant Ruby DSL for managing and tuning code-AI hybrid use cases?">
+          <h2>Wouldn't it be nice if there were an <span class="accent">elegant Ruby DSL</span> for managing &amp; tuning code-AI hybrid use cases?</h2>
+          <img class="fragment" data-fragment-index="1" src="assets/img/squishling-steamer-closed.png" alt="A closed bamboo steamer basket, glowing softly — something's inside" width="320" style="margin-top: 2rem" />
+          <aside class="notes">
+            <h4>Beat</h4>
+            Pose it as a wish, not an objection — let the room nod along before the
+            reveal. Let it sit unanswered for a beat: this is exactly the gem squishling
+            exists to be.
+          </aside>
+        </section>
+
+        <!-- Slide 17 — Introducing squishling -->
+        <section class="slide slide--dark center" id="slide-17" aria-label="Introducing squishling">
+          <p class="kicker">Introducing</p>
+          <img src="assets/img/squishling-mascot.png" alt="Squishling mascot — a smiling ruby gem popping out of a bamboo steamer basket" width="520" style="margin-top: 1.25rem" />
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.25rem">
+            Don't just use AI to write code. <span class="accent">Use AI to not need code.</span>
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Name it and let it land — this is Michael's own gem, built directly on this
+            talk's premise. The tagline is the whole pitch: you keep writing normal,
+            deterministic Ruby, and only the parts that genuinely need to flex squish
+            into an LLM call.
+          </aside>
+        </section>
+
+        <!-- Slide 18 — Squishling: define the goal, skip the implementation -->
+        <section class="slide" id="slide-18" aria-label="Squishling — define the goal and output format, squishling does the rest">
+          <p class="kicker">Enter squishling</p>
+          <h2>Make your class squish. Just define your goal and output format, squishling does the rest.</h2>
+          <div class="grid cols-2" style="margin-top: 1.5rem; align-items: start; text-align: left">
+            <div>
+<pre class="codeblock" aria-label="Squishling global configuration setting the default model"><code><span class="m">Squishling</span>.configure <span class="k">do</span> |config|
+  config.default_model = <span class="s">"claude-haiku-4-5-20251001"</span>
+  <span class="c"># falls back to RubyLLM's default when nil</span>
+<span class="k">end</span>
+</code></pre>
+              <img src="assets/img/squishling-gem-logo.png" alt="Squishling mascot — a smiling ruby gem" width="360" style="margin: 1.5rem auto 0; display: block" />
+            </div>
+<pre class="codeblock" aria-label="A squishling class with a purpose, an output schema, and no call method"><code><span class="k">class</span> <span class="m">Parser</span>
+  <span class="k">include</span> <span class="m">Squishling</span>
+
+  purpose <span class="s">"Map the inbound record onto the schema..."</span>
+  output_schema <span class="k">do</span>
+    string :patient_name
+    string :patient_gender, enum: %w[male female trans unknown]
+    array  :diagnosis_codes, of: :string
+    array  :symptoms, of: :string
+  <span class="k">end</span>
+
+<span class="hl">  # no call method — every invocation is squished.</span>
+<span class="k">end</span>
+</code></pre>
+          </div>
+          <div class="fragment pill-row" data-fragment-index="1" style="margin-top: 1.5rem">
+            <p class="lead" style="margin: 0">Run against all 100 fixtures:</p>
+            <p class="pill-group">
+              <span class="pill">pass: 73/100</span>
+              <span class="pill">cost: $0.48 / 100 calls</span>
+            </p>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Squishling is Michael's own gem — built on this talk's own premise, the README
+            cites the Substack article by name. A squished method either runs its Ruby
+            implementation or, if there is none, routes straight to the LLM — "the method
+            has no implementation" is a first-class routing rule, not a fallback hack. This
+            class has no implementation at all. First real run, against all 100 fixtures:
+            73 pass (the original run, against just the first 35, was 23 pass — same
+            purpose, same ~65% rate). On those original 35, every single diagnosis code —
+            exact SNOMED codes, pulled out of four different shapes — came back correct;
+            the failures clustered in three places: HL7 names came back untouched, a
+            couple of gender codes, and a few hallucinated symptoms on records that should
+            have reported none. The 65 added fixtures widen the failure surface to more
+            exotic formats too. Name the failure modes out loud;
+            the next two slides are about chasing them down for real, live, during prep for
+            this talk.
+          </aside>
+        </section>
+
+        <!-- Slide 19 — Let's improve our pass rate -->
+        <section class="slide center" id="slide-19" aria-label="Let's improve our pass rate — clearer instructions, same class">
+          <h2>Let's improve our pass rate!</h2>
+<pre class="codeblock" aria-label="The same squishling class, with a clearer purpose"><code><span class="k">class</span> <span class="m">Parser</span>
+  <span class="k">include</span> <span class="m">Squishling</span>
+
+  purpose <span class="s">&lt;&lt;~PURPOSE
+    Map the record onto the schema below.
+
+    Name: output "First Last" order, even if the source writes
+    it as HL7's LAST^FIRST, often in all caps.
+
+    Gender: translate to "male", "female", "trans", or "unknown".
+    "unknown" for any code you don't recognize — including HL7's
+    bare O / U / A / N letter codes. Never guess.
+
+    Symptoms: only from an explicit symptom field. A diagnosis is
+    not a symptom — never infer one from a diagnosis name.
+  PURPOSE</span>
+
+  ...
+<span class="k">end</span>
+</code></pre>
+          <div class="fragment pill-row" data-fragment-index="1" style="margin-top: 1.25rem">
+            <p class="lead" style="margin: 0">Run against all 100 fixtures:</p>
+            <p class="pill-group">
+              <span class="pill">pass: 95/100</span>
+              <span class="pill">cost: $0.51 / 100 calls</span>
+            </p>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Same class, same schema, same no-call-method trick — the only thing that
+            changed is the purpose. Spelled out HL7's LAST^FIRST name convention,
+            said explicitly that a diagnosis is not a symptom, and gave the gender
+            translation concrete examples, including HL7's bare O/U/A/N letter codes.
+            That alone took it from 23/35 to 31/35 on the original fixtures — 73/100 to
+            95/100 now that there are 100. The same two failure modes are still in there:
+            letter codes and unlabeled SNOMED gender-identity codes the model structurally
+            cannot resolve without a translation table, which v2's hand-written table still
+            catches and v3 can't. The 65 added fixtures contribute exactly one more miss —
+            a dictation transcript with diagnosis codes spoken as digits.
+          </aside>
+        </section>
+
+        <!-- Slide 20 — What if we ask twice? -->
+        <section class="slide center" id="slide-20" aria-label="Testing squishling's judged_squishsum harness against all 100 fixtures">
+          <h2>What if we ask twice?</h2>
+          <div class="grid" style="grid-template-columns: 1fr 2fr; margin-top: 1.5rem; align-items: center; text-align: left">
+            <img src="assets/img/squishling-cuddling.png" alt="Two squishling mascots, glossy red gems, cuddling happily together" style="width: 100%; max-width: 320px; justify-self: center" />
+<pre class="codeblock" aria-label="The same squishling class, with the judged_squishsum harness instead of a single attempt"><code><span class="k">class</span> <span class="m">Parser</span>
+  <span class="k">include</span> <span class="m">Squishling</span>
+
+  ...
+
+  squishling escalation: [<span class="s">"claude-haiku-4-5"</span>, <span class="s">"claude-sonnet-5-5"</span>],
+    harness: { type: :judged_squishsum, judge: <span class="s">"claude-opus-5-5"</span> }
+<span class="k">end</span>
+</code></pre>
+          </div>
+          <div class="fragment pill-row" data-fragment-index="1" style="margin-top: 1.25rem">
+            <p class="lead" style="margin: 0">Two samples per fixture, judge on disagreement:</p>
+            <p class="pill-group">
+              <span class="pill">pass: 95/100</span>
+              <span class="pill pill--red">cost: $1.02 / 100 calls</span>
+            </p>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            judged_squishsum samples the escalation's first step twice, concurrently,
+            and only consults the judge when the two samples disagree. The second step
+            declared here — Sonnet — is currently unused: on squishling's pinned commit,
+            squishsum doesn't yet sample across different steps, so both samples are
+            Haiku regardless of what else is in the escalation. Result: 95/100, $1.02 —
+            the exact same five failures as a single attempt, at double the cost, and
+            zero judge calls across all 100 fixtures. Same conclusion as every other
+            same-model retry in this talk: at temperature 0.1, Haiku doesn't just
+            usually agree with itself, it agreed on every fixture, including the five
+            it got wrong, every time. These are systematic misreadings, not sampling
+            noise — a harness built to catch disagreement never gets a chance to fire
+            unless the samples actually come from different models.
+          </aside>
+        </section>
+
+        <!-- Slide 21 — The elasticity, named -->
+        <section class="slide" id="slide-21" aria-label="The elasticity — a slider between flexible and efficient">
+          <p class="kicker">Elastic Architecture</p>
+          <h2>Now, let's make it cheaper!</h2>
+          <div class="scale" data-no-advance>
+            <div class="scale-track">
+              <span class="scale-callout" style="left: 12%">↓</span>
+              <span class="scale-pin" style="left: 12%"></span>
+              <span class="scale-pin" style="left: 34%"></span>
+              <span class="scale-pin" style="left: 61%"></span>
+              <span class="scale-pin" style="left: 88%"></span>
+            </div>
+            <div class="scale-ends">
+              <div class="flex-end">
+                <div class="end-label">Flexible</div>
+                <div class="end-sub">Model handles it. Higher cost per request.</div>
+              </div>
+              <div class="eff-end">
+                <div class="end-label">Efficient</div>
+                <div class="end-sub">Hardened parser. Cost per request near zero.</div>
+              </div>
+            </div>
+          </div>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.5rem">
+            A quick analysis of the data shows
+            <span class="accent">63% of the requests fit a standard format!</span>
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The one diagram in the deck, so make it count. Clients A and B have earned
+            their hardened parsers; C and D are still riding the flexible layer and may
+            never leave it. The architectural claim: elasticity is per-integration, and
+            the position on this axis is a decision you revisit, not a bet you place at
+            design time.
+          </aside>
+        </section>
+
+        <!-- ===================================================== ACT 3 — THE TRIGGER -->
+
+        <!-- Slide 22 — Code the standard shapes, squish the rest -->
+        <section class="slide center" id="slide-22" aria-label="A basic router — the standard shape goes to the hand-written parser, everything else squishes">
+          <h2>Code the standard shapes. Squish the rest.</h2>
+          <div class="grid" style="grid-template-columns: 1fr 2fr; margin-top: 1.5rem; align-items: center; text-align: left">
+            <img src="assets/img/squishling-router-gem.png" alt="Squishling mascot — a glossy red gem with celebratory splashes on either side, smiling" style="width: 100%; max-width: 280px; justify-self: center" />
+<pre class="codeblock" aria-label="The same squishling class, now with a defined call method that routes the standard shape to the FHIR parser, squishing the rest with the judged_squishsum harness"><code><span class="k">class</span> <span class="m">Parser</span>
+  <span class="k">include</span> <span class="m">Squishling</span>
+
+  ...
+  squishling escalation: [<span class="s">"claude-haiku-4-5"</span>, <span class="s">"claude-sonnet-5-5"</span>],
+    harness: { type: :judged_squishsum, judge: <span class="s">"claude-opus-5-5"</span> }
+
+  <span class="k">def</span> <span class="m">call</span>(data)
+    <span class="k">return</span> fhir_parser.call(data) <span class="k">if</span> fhir_message?(data)
+
+    squish!
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+          </div>
+          <div class="fragment pill-row" data-fragment-index="1" style="margin-top: 1.25rem">
+            <p class="lead" style="margin: 0">Run against the same 100 fixtures:</p>
+            <p class="pill-group">
+              <span class="pill">pass: 95/100</span>
+              <span class="pill pill--green">cost: $0.12 / 100 calls</span>
+            </p>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            This is the whole optimization: one branch for the 63% that already match the
+            canonical FHIR shape, routed straight to a fast, free, hand-written parser;
+            the remaining 37% fall through to squishling — now with judged_squishsum
+            instead of a single attempt. Real cost on these 100 fixtures: $0.12, versus
+            $0.51 for squishing all 100 the old way — still a 76% discount. Pass rate
+            stays flat at 95/100, same five misses as the single-attempt router: on the
+            pinned commit, squishsum still samples the same step twice rather than two
+            different ones, so Sonnet in the escalation above goes unused and the judge
+            never gets consulted. Same honest edge as everywhere else in this talk —
+            asking the same model twice doesn't catch what it confidently got wrong.
+          </aside>
+        </section>
+
+        <!-- Slide 23 — The perfect balance -->
+        <section class="slide" id="slide-23" aria-label="The perfect balance — the hybrid router on the elastic scale">
+          <h2>The perfect balance?</h2>
+          <div class="scale" data-no-advance>
+            <div class="scale-track">
+              <span class="scale-callout" style="left: 61%">↓</span>
+              <span class="scale-pin" style="left: 12%"></span>
+              <span class="scale-pin" style="left: 34%"></span>
+              <span class="scale-pin" style="left: 61%"></span>
+              <span class="scale-pin" style="left: 88%"></span>
+            </div>
+            <div class="scale-ends">
+              <div class="flex-end">
+                <div class="end-label">Flexible</div>
+                <div class="end-sub">Model handles it. Higher cost per request.</div>
+              </div>
+              <div class="eff-end">
+                <div class="end-label">Efficient</div>
+                <div class="end-sub">Hardened parser. Cost per request near zero.</div>
+              </div>
+            </div>
+          </div>
+          <div class="grid cols-3 fragment" data-fragment-index="1" style="margin-top: 1.5rem; text-align: left">
+            <div class="card card--emoji">
+              <p class="emoji">🚀</p>
+              <p style="font-size: 1.2rem; margin-top: 0.75rem">Integrations work on Day 1.</p>
+            </div>
+            <div class="card card--emoji">
+              <p class="emoji">🪙</p>
+              <p style="font-size: 1.2rem; margin-top: 0.75rem">Low cost per request.</p>
+            </div>
+            <div class="card card--emoji">
+              <p class="emoji">📉</p>
+              <p style="font-size: 1.2rem; margin-top: 0.75rem">Total LLM cost well below maintenance costs.</p>
+            </div>
+          </div>
+          <p class="lead fragment" data-fragment-index="2" style="margin-top: 1.5rem">
+            And we can keep revisiting <span class="accent">this balance as the business evolves.</span>
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            This is the payoff of the whole pattern: the router moved one integration's
+            pin from fully flexible to mostly efficient without a rewrite, a
+            re-architecture, or a bet placed up front. The last line is the real claim —
+            this is not a one-time migration, it is a position you keep revisiting as
+            volume and shapes change.
+          </aside>
+        </section>
+
+        <!-- Slide 24 — It runs backwards too -->
+        <section class="slide center" id="slide-24" aria-label="The pattern runs in reverse for legacy estates">
+          <h2>It runs backwards, too.</h2>
+          <p class="lead" style="margin-top: 1.5rem">
+            Drowning under a thousand legacy parsers?
+          </p>
+          <ul class="takeaways" style="max-width: 820px; margin-inline: auto">
+            <li class="fragment" data-fragment-index="1">Find the ones at the tail of your usage curve.</li>
+            <li class="fragment" data-fragment-index="2">Squish them instead.</li>
+            <li class="fragment" data-fragment-index="3"><span class="accent">Delete the code.</span></li>
+          </ul>
+          <aside class="notes">
+            <h4>Beat</h4>
+            For the enterprise engineers in the room, who are not startup people and have
+            been waiting to see if this talk applies to them. Stop living in fear of tiny
+            client X discovering that a change they shipped last year broke your
+            integration two quarters ago.
+          </aside>
+        </section>
+
+        <!-- Slide 25 — Yeah but we don't parse health data -->
+        <section class="slide center" id="slide-25" aria-label="Yeah, cool, but we don't need to parse health data">
+          <h2 class="muted" style="font-weight: 600">
+            "Yeah, cool. But we don't need to parse health data."
+          </h2>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.5rem">
+            Amazing! Do you integrate with <span class="accent">services?</span>
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Name the objection in the room's own voice before they finish forming it —
+            everything so far has been a health-tech example, and half the room is
+            quietly deciding it doesn't apply to them. Let it sit for a beat, then pivot:
+            nothing about the pattern was actually about health data. It was about
+            variable-shaped input and a cost you can finally measure. The second line is
+            the real pivot — every vendor integration has this exact same shape, and the
+            next slide shows it.
+          </aside>
+        </section>
+
+        <!-- Slide 26 — Rescue a parse failure by squishing it -->
+        <section class="slide center" id="slide-26" aria-label="When the Ruby parser fails on a vendor payload, rescue and squish it">
+          <h2>When a service call fails, you should squish it.</h2>
+          <div class="grid cols-2" style="margin-top: 1.5rem; align-items: center; text-align: left">
+            <img class="fragment" data-fragment-index="1" src="assets/img/squish-it-good-gem.png" alt="Squishling mascot — a glossy red gem with a stacked cap, smiling" style="width: 100%; max-width: 320px; justify-self: center" />
+<pre class="codeblock" aria-label="A webhook handler that rescues a vendor parse failure and squishes it to the LLM"><code><span class="k">class</span> <span class="m">WebhookHandler</span>
+  <span class="k">include</span> <span class="m">Squishling</span>
+
+  ...
+
+  <span class="k">def</span> <span class="m">call</span>(service:, body:)
+    <span class="m">VendorWebhooks</span>.fetch(service).parse(body)
+  <span class="k">rescue</span> <span class="m">VendorWebhooks</span>::<span class="m">ParseError</span>
+    squish!
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+          </div>
+          <p class="lead" style="margin-top: 1.25rem">
+            <span class="accent">Save yourself</span> — and the engineers who come after you —
+            uncountable headaches!
+          </p>
+          <p class="shout fragment" data-fragment-index="1" style="margin-top: 2rem">squish it good!</p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Straight from squishling's own README (see the "Error recovery" section) —
+            keep the Ruby parser for the vendor's well-formed payloads, and when it
+            raises, <code>squish!</code> hands the call to the LLM with the error and the
+            parser's own source as context. Same trick as the FHIR router two slides
+            ago, just triggered by an exception instead of a format check. This is the
+            pattern for every brittle vendor integration you already have.
+          </aside>
+        </section>
+
+        <!-- Slide 27 — We don't integrate with services either -->
+        <section class="slide center" id="slide-27" aria-label="We don't integrate with services or APIs, either">
+          <h2 class="muted" style="font-weight: 600">
+            "We don't integrate with services or APIs, either."
+          </h2>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.5rem">
+            Wow, are you hiring?
+          </p>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.25rem">
+            Also, <span class="accent">do you ever have production errors?</span>
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The second objection in the room's own voice, and it should get a real
+            laugh — nobody's stack has zero external integrations. Let the joke land,
+            then the real pivot: production errors are the other half of this problem,
+            and that's exactly what's coming next.
+          </aside>
+        </section>
+
+        <!-- Slide 28 — Even a bug in your own code can squish -->
+        <section class="slide" id="slide-28" aria-label="Squishling rescuing a NoMethodError from a missing dig, not a vendor format mismatch">
+          <h2>Even a bug in your own code can squish.</h2>
+          <div class="grid cols-2" style="margin-top: 1.5rem; align-items: start; text-align: left">
+<pre class="codeblock" aria-label="The plain class with no squishling, and the invocation that breaks it"><code><span class="k">class</span> <span class="m">SomeHelperMethod</span>
+  <span class="k">def</span> <span class="m">call</span>(payload)
+    payload.dig(<span class="s">"user"</span>, <span class="s">"email"</span>)
+  <span class="k">end</span>
+<span class="k">end</span>
+
+payload = { <span class="s">"user"</span> =&gt; <span class="s">"alice@example.com"</span> }
+<span class="c"># oops calling method sent a string, not a hash</span>
+
+<span class="m">SomeHelperMethod</span>.call(payload)
+<span class="c"># =&gt; NoMethodError: undefined method 'dig' for an instance of String</span>
+</code></pre>
+<pre class="codeblock" aria-label="The same class with squishling and a general rescue, and the invocation that succeeds"><code><span class="k">class</span> <span class="m">SomeHelperMethod</span>
+  <span class="k">include</span> <span class="m">Squishling</span>
+
+  ...
+
+  <span class="k">def</span> <span class="m">call</span>(payload)
+    payload.dig(<span class="s">"user"</span>, <span class="s">"email"</span>)
+  <span class="k">rescue</span>
+    squish!
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="m">SomeHelperMethod</span>.call(payload)
+<span class="hl"># =&gt; "alice@example.com"</span>
+</code></pre>
+          </div>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1.5rem">
+            If the answer is in the stack trace somewhere, <span class="accent">squish can find &amp; return it!</span>
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            This is not a vendor format problem — it is a plain old bug, the kind every
+            engineer in the room has shipped. One caller sends "user" as a nested
+            object, another flattens it to a string, and the dig call written for the
+            first shape blows up on the second. Same squish! trick as the parse-failure
+            rescue, just caught by a bare rescue instead of one scoped to a specific
+            error class. The point is not "squishling fixes bugs" — it is that any
+            rescued exception, including ones from your own code, can be the trigger.
+          </aside>
+        </section>
+
+        <!-- Slide 29 — Squishling roadmap -->
+        <section class="slide center" id="slide-29" aria-label="Squishling roadmap — bring your own harness, framework-specific defaults, non-RubyLLM implementations">
+          <div class="grid cols-2" style="align-items: center; text-align: left">
+            <div>
+              <p class="kicker">What's next</p>
+              <h2>Squishling Roadmap</h2>
+              <ul class="takeaways" style="margin-top: 1.5rem">
+                <li>Bring Your Own Harness.</li>
+                <li>Framework-specific defaults.</li>
+                <li>Support non-RubyLLM implementations.</li>
+                <li>Output format annotations.</li>
+                <li>Maintainers spend less time generating Squishling images.</li>
+              </ul>
+            </div>
+            <img src="assets/img/squishling-pondering.png" alt="Squishling mascot — a glossy red gem looking puzzled, with a question mark" style="width: 100%; max-width: 360px; justify-self: center" />
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Earlier in this talk, a harness that didn't exist yet — judged_ensemble —
+            got filed and shipped the same day. Bring Your Own
+            Harness turns that from a PR into a plugin point: a documented interface for
+            a custom harness, so the next idea doesn't need to wait on squishling's own
+            maintainer. Framework-specific defaults: sensible params, logging, and squawk
+            wiring out of the box for Rails, Sinatra, and friends, instead of every app
+            hand-rolling the same Squishling.configure block this demo did five times.
+            Support non-RubyLLM implementations: today squishling's routing and harness
+            logic is built directly on RubyLLM; decoupling that means the same elastic
+            pattern works wherever your team already has an LLM client, not just this one.
+            Output format annotations: metadata on individual schema fields — units,
+            examples, provenance hints — so the purpose doesn't have to spell out in
+            prose what the schema could just say directly. And the last one is only
+            half a joke: this whole demo leaned on the maintainer personally generating
+            mascot art on request — that doesn't scale past one deck.
+          </aside>
+        </section>
+
+        <!-- Slide 30 — Squish the star button -->
+        <section class="slide center" id="slide-30" aria-label="Star squishling on GitHub, share it, and leave feedback">
+          <img src="assets/img/squishling-wordmark-burgundy.png" alt="Squishling wordmark with mascot — a smiling red gem" width="420" />
+          <h2 style="margin-top: 1.5rem">Squish the star button & leave issues <span class="accent">on GitHub.</span></h2>
+          <a class="qr qr--side" href="https://github.com/Coolhand-Labs/squishling"
+             target="_blank" rel="noopener noreferrer" style="margin-top: 1.75rem">
+            <img src="assets/qr/squishling.svg" alt="QR code to github.com/Coolhand-Labs/squishling — please squish the star button, share with your friends, and leave feedback" />
+          </a>
+          <aside class="notes">
+            <h4>Beat</h4>
+            If any of the roadmap sounds useful, the ask is right here: star it, share
+            it, leave feedback. Twenty seconds — don't linger, don't demo it. Open the
+            floor from here rather than asking "any questions?" — ask who in the room
+            already has an AI call in a production path and what broke.
+          </aside>
+        </section>
+      </div>
+    </main>
+
+    <!-- Chrome -->
+    <div class="deck-chrome progress" aria-hidden="true"></div>
+    <div class="deck-chrome slide-num" aria-hidden="true"></div>
+
+    <!-- Speaker notes overlay (N / S) -->
+    <aside class="notes-overlay" hidden aria-label="Speaker notes">
+      <h4>Speaker notes</h4>
+      <div class="notes-body"></div>
+    </aside>
+
+    <!-- Keyboard help overlay (?) -->
+    <div class="help-overlay" hidden>
+      <div class="help-card">
+        <h4>Keyboard &amp; controls</h4>
+        <dl>
+          <dt><kbd>click</kbd> / <kbd>→</kbd> / <kbd>space</kbd></dt><dd>Forward</dd>
+          <dt><kbd>←</kbd> / <kbd>↑</kbd></dt><dd>Back</dd>
+          <dt>tap right half / tap left half</dt><dd>Forward / Back (touch)</dd>
+          <dt><kbd>N</kbd> / <kbd>S</kbd></dt><dd>Speaker notes</dd>
+          <dt><kbd>R</kbd></dt><dd>Reading mode</dd>
+          <dt><kbd>?</kbd></dt><dd>This help</dd>
+        </dl>
+      </div>
+    </div>
+
+    <!-- Transcript — crawlable prose for SEO/AEO -->
+    <article class="transcript">
+      <h1>Elastic Software: Calculating tech debt using LLM tokens</h1>
+      <p class="dek">
+        A talk by <a href="https://michael.carroll.io/">Michael Carroll</a>, founder of
+        Coolhand Labs, given at XO Ruby NYC in October 2026.
+      </p>
+
+      <h2>We have never been able to price tech debt</h2>
+      <p>
+        If you have been working in engineering long enough, you have spent some
+        double-digit percentage of your working life thinking about tech debt, and
+        complaining about it. We should pay some down before we build this. Our
+        estimates were wrong because of historical tech debt. Reason for leaving:
+        too much tech debt.
+      </p>
+      <p>
+        Product managers roll their eyes when engineers say the words, and honestly
+        they have earned the right. We are bad at describing what tech debt is, and
+        we are far worse at quantifying what it costs to fix it or to carry it. We
+        have been asking for budget in a currency nobody outside engineering can
+        read. To borrow from Justice Potter Stewart: I don't know how to quantify
+        it, but I know it when I see it.
+      </p>
+
+      <h2>The pattern: a parser for every client</h2>
+      <p>
+        Here is the shape of the problem, from my own history building health care
+        software at RubiconMD. You build a standard patient data integration — FHIR,
+        or something like it. You tell a clinical client you have data integration
+        and you sign a contract. Then you discover that they implement the standard
+        a little differently, or that some of their data does not come through the
+        integration at all. So you build a custom parser for their unique standard,
+        and you monitor it, and you update it as they break it. And you allow
+        yourself to believe that this parser will now cover you for all future
+        clients — a hope that is dashed by every single new contract.
+      </p>
+      <p>
+        A hundred clients later you have thousands of lines of code that dispatch on
+        a client name through a case statement nobody can read. And the real bill is
+        not the lines of code. It is that every new client is blocked on a discovery
+        and sample-data cycle; that parsers break silently when a client ships a
+        change; that some engineer's quarter has quietly become parser babysitting;
+        and that your best sales month creates your worst backlog.
+      </p>
+      <p>
+        That is tech debt — and every word of that description is a feeling. None of
+        it is a number a CFO can act on.
+      </p>
+
+      <h2>Tokenomics: putting a number on it</h2>
+      <p>
+        We have always had two ways to do this work: pay an engineer to write and own
+        a parser, or pay a machine to handle the record. What is new is that both
+        sides can now be denominated in the same unit.
+      </p>
+      <p>
+        On the software side, you can itemize what one parser actually costs: the
+        time to write it, code review and QA, the ongoing drag of bug reports and
+        maintenance cycles, and the new data type that lands six months later. Those
+        are real engineering hours, and in an AI-assisted shop those hours
+        increasingly carry a token-equivalent cost too. On the AI side, you know your
+        average cost per request for each integration. Break it down by client,
+        multiply by volume, project it forward on your growth assumptions, and you
+        have a clean, compounding monthly and annual number.
+      </p>
+      <p>
+        So the comparison gets refreshingly boring. <strong>AI path: $X per month,
+        scaling with volume. Software path: $Y to build, $Z per month to carry.</strong>
+        Tech debt just became arithmetic.
+      </p>
+      <p>
+        This does not capture every variable — not the cognitive load of one more
+        system to hold in your head, not the context-switching tax, not the morale
+        cost of asking a good engineer to babysit another brittle parser. But you do
+        not need all of them. You need a signal strong enough to make a call you can
+        defend to your product and engineering teams and to your CFO.
+      </p>
+
+      <h2>The inversion</h2>
+      <p>
+        The obvious lesson to draw from all this is the wrong one. It is not "use AI
+        coding agents to write the parsers faster" — that is using AI to produce more
+        of the thing that is hurting you. The actual move is to invert the
+        priorities: <strong>make flexibility the default, and efficiency the
+        optimization.</strong>
+      </p>
+      <p>
+        In practice that means the parser call delegates to an AI parser, and the AI
+        parser is roughly a dozen lines of Ruby using a gem like RubyLLM: a cheap
+        model, a low temperature, an instruction to map the inbound record to your
+        internal schema and return only valid JSON with nulls for anything missing,
+        and a JSON parse on the way out. It will choke a few times, and you will tune
+        the prompt against real failures, but you have a functioning parser in
+        minutes.
+      </p>
+      <p>
+        What disappears is most of the seven-step pattern. There is no discovery
+        cycle, no "please send us sample data to test the integration with." The
+        remaining blocker on a new client is whether you have signed the BAA with
+        your inference provider.
+      </p>
+
+      <h2>Contracting toward efficiency</h2>
+      <p>
+        Then the bill arrives, because running inference on one hundred percent of
+        inbound volume gets expensive. This is the honest middle of the pattern, not
+        a failure of it. Typically a handful of clients account for the vast majority
+        of your volume. Find them, use the production data you have been gathering to
+        write a genuinely good spec, build hardened parsers for those, and let
+        everything else keep flowing through the model.
+      </p>
+      <p>
+        The result looks like the case statement you started with — except it has two
+        branches instead of a hundred, and the data told you to write both of them.
+        That is the elasticity: you start stretched all the way toward flexibility,
+        accepting a higher cost per request in exchange for speed, and you contract
+        toward efficiency as the math justifies it. You do it independently for each
+        integration, each data type, each client. Never all at once, and never up
+        front.
+      </p>
+      <p>
+        The decision rule fits in one sentence: when projected annual inference cost
+        for an integration exceeds what it would cost to build and carry a parser for
+        it, you have a candidate. Startups have always practiced a crude version of
+        this — "doing things that don't scale" is the same pattern with humans in the
+        flexible layer — but the math was always fuzzy. What you need to run it
+        deliberately is cost per request broken out by client, visible without anyone
+        assembling a spreadsheet by hand. That is the frustration Coolhand Labs came
+        out of; the pattern and the product were shaped by the same annoyance.
+      </p>
+
+      <h2>The real win is speed</h2>
+      <p>
+        Optimizing cost is useful, but for a startup it is the smaller half of the
+        story. Close five new hospital systems in a month and, in the old world, that
+        is a scramble disguised as a celebration: who do we build parsers for first,
+        how do we sequence it, how long until they go live and we can realize the
+        revenue? In the elastic model all five go live immediately, the AI layer
+        carries their data from day one, and you start collecting the only thing that
+        can actually tell you who deserves engineering time. If one turns out to be a
+        monster account, the tokenomics surface it quickly. If one churns in month
+        two, you never wasted a line of parser code on it.
+      </p>
+      <p>
+        It runs in the other direction too. If you are an enterprise drowning under a
+        thousand legacy parsers, find the ones sitting at the tail of your usage
+        curve, re-route them to an inference call, and delete the code.
+      </p>
+
+      <h2>Proving it for real</h2>
+      <p>
+        Two malformed records through a dozen lines of Ruby is a good trailer. The real
+        test is 35 real patients — pulled from actual Synthea-generated FHIR bundles,
+        not invented — rendered into four genuinely different wire formats: a canonical
+        FHIR bundle, a re-keyed FHIR variant with different field names, an HL7 v2.3
+        message, and a legacy pipe-delimited flat file. Each one carries real-shaped
+        noise: extra FHIR extensions, extra HL7 segments nobody asked for, a dozen
+        irrelevant flat-file columns. Twenty of the 35 share one shape; the other 15
+        each use a shape the parser has never seen.
+      </p>
+      <p>
+        Pointed at that data, v1 — the "day one, it is beautiful" parser, verbatim —
+        gets 20 of 35, and fails cleanly, not a crash, on the 15 it was never built for.
+        v2 is the monster case statement's honest descendant: a base class, one subclass
+        per format, a dispatcher, and a gender-translation table grounded in real
+        FHIR, HL7, and SNOMED code systems. It gets all 35. It is also four classes and
+        a shared translation module — real, maintained code, for four formats.
+      </p>
+      <p>
+        Then the same problem, handed to a <a href="https://github.com/Coolhand-Labs/squishling">squishling</a>
+        — a gem built on this talk's own premise, whose class declares a purpose and
+        an output schema and nothing else. No shapes, no classes, no translation table:
+        a method with no implementation is squished straight to the LLM by default.
+        First real run against all 35: 23 pass. Every diagnosis code — exact SNOMED
+        codes, pulled out of four different shapes — came back right; the failures
+        clustered in HL7 names coming back untouched, a few gender codes, and a handful
+        of hallucinated symptoms on records that should have reported none.
+      </p>
+      <p>
+        Reporting that hallucination, live, during prep for this talk, got a same-day
+        fix: temperature and other generation params, added to the gem. Rerunning at a
+        low temperature produced the exact same 23 — the same 12 files failed, and one
+        record that had passed by luck now failed every time. That flip was the tell:
+        this was never sampling noise. The model was systematically treating "diagnoses
+        nearby, no symptom entry" as license to invent one; a lower temperature just
+        made the wrong call more reliable, not less.
+      </p>
+      <p>
+        The actual fix was the purpose — spelling out, in plain language, the
+        things v2's code already knew by construction: HL7 writes names LAST^FIRST, a
+        diagnosis is not a symptom, and what an unfamiliar gender code should default
+        to. That got it to 31 of 35. A prompt is code too, and it benefits from the
+        same iteration a case statement would. The last four are the honest edge of it:
+        two bare gender-identity codes with no label attached, where the model
+        correctly refuses to guess rather than fabricate an identity — v2 only gets
+        these right because it was handed the mapping by hand — and two HL7 letter
+        codes it still misreads despite being told exactly what they mean. Code is
+        exact because you give it the answer; the model is elastic because it has to
+        infer one.
+      </p>
+
+      <h2>The hard problems are still wide open</h2>
+      <p>
+        A lot here is still emerging, and these are the questions I get asked by
+        teams implementing some version of this. What are the real failure modes, and
+        what does good monitoring look like across a hybrid system with AI and
+        hardened software paths running side by side? How do you handle drift — the
+        AI layer quietly making different mapping decisions this month than it made
+        last month, with no diff to review? What is the right ops sampling rate to
+        catch a prompt regression before it compounds into a thousand mis-mapped
+        records? And how do these patterns survive contact with regulated
+        environments, where failures have to be justified to an auditor?
+      </p>
+      <p>
+        These are not rhetorical. The teams I see doing this well are working them out
+        in real time. What separates them is not that they have the answers — it is
+        that they treat elastic software as a genuine architectural commitment, with
+        the monitoring and discipline that implies, rather than a clever hack they
+        bolted on to ship faster and hoped nobody would ask about later.
+      </p>
+      <p>
+        If you are building on this pattern, or fighting with it, I would like to hear
+        where it is breaking for you. That is the actual reason I am up here.
+      </p>
+      <p class="muted">
+        Related reading:
+        <a href="https://everythingengineer.substack.com/p/beginners-write-software-with-ai">
+          Beginners Write Software with AI. Pros Use It to Make Software Elastic.
+        </a>
+        in The Everything Engineer.
+      </p>
+    </article>
+    <script src="assets/deck.js?v=4"></script>
+  </body>
+</html>

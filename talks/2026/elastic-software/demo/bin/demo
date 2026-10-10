@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# bin/demo — slide 29's live demo: two genuinely different inbound records
+# (different field names, different date formats, one missing a field
+# entirely) through the same dozen-line parser, printing per-request cost.
+require "bundler/setup"
+require "json"
+require_relative "../lib/call_parser"
+
+unless ENV["ANTHROPIC_API_KEY"]
+  warn "Set ANTHROPIC_API_KEY before running the demo — see README.md."
+  exit 1
+end
+
+RubyLLM.configure { |config| config.anthropic_api_key = ENV["ANTHROPIC_API_KEY"] }
+
+fixtures_dir = File.expand_path("../fixtures", __dir__)
+records = {
+  "fhir_client"  => File.read(File.join(fixtures_dir, "fhir_patient.json")),
+  "hl7v2_client" => File.read(File.join(fixtures_dir, "hl7_adt_a01.hl7")),
+}
+
+records.each do |client_name, raw|
+  puts "== #{client_name} =="
+  result = call_parser(client_name, raw)
+  puts JSON.pretty_generate(result)
+  puts
+end

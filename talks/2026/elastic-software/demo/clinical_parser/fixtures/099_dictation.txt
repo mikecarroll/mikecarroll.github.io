@@ -1,0 +1,10 @@
+[VOICE-TO-TEXT v3.2 | confidence 0.91 | speaker 1 of 1 | duration 02:41 | job 490294]
+[00:00] uh okay this is doctor Ferreira dictating a note for Harborview Community Hospital um date of service january fifteenth twenty twenty six
+[00:09] the patient is Zachariah Osinski that's Z a c h a r i a h O s i n s k i medical record number D B A 3 4 9 4 6 gender male uh date of birth 1920-10-03
+[00:24] okay so, Today he presents with insomnia, abdominal pain, and dry mouth.
+[00:41] vitals are stable. um blood pressure 131 over 80 and heart rate 68
+[00:58] Diagnosis number one, Chronic sinusitis, SNOMED code four zero zero five five zero zero zero. Diagnosis number two, Body mass index 30+ - obesity, SNOMED code one six two eight six four zero zero five. Diagnosis number three, Prediabetes, SNOMED code one five seven seven seven zero zero zero.
+[01:30] we'll continue current medications, Acetaminophen 325 MG Oral Tablet, and uh follow up in four weeks
+[01:44] ah sorry just a second. the parking validation thing. never mind, patient verbalized understanding of discharge instructions.
+[02:20] okay that's the end of dictation, please route to billing, payer forty four seventy one thanks
+[END OF TRANSCRIPT]
