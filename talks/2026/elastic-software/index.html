@@ -1008,222 +1008,175 @@ payload = { <span class="s">"user"</span> =&gt; <span class="s">"alice@example.c
         Coolhand Labs, given at XO Ruby NYC in October 2026.
       </p>
 
-      <h2>We have never been able to price tech debt</h2>
+      <h2>Flexibility is a known engineering trick</h2>
       <p>
-        If you have been working in engineering long enough, you have spent some
-        double-digit percentage of your working life thinking about tech debt, and
-        complaining about it. We should pay some down before we build this. Our
-        estimates were wrong because of historical tech debt. Reason for leaving:
-        too much tech debt.
+        Skyscrapers sway on purpose. Sidewalks get a strip of soft putty at every
+        expansion joint. A car's frame is designed to crumple. In every case, a
+        little deliberate softness is what keeps the rigid parts from cracking under
+        load. Softness and flexibility add resilience in engineering — that is not
+        controversial once you say it about concrete and steel.
       </p>
       <p>
-        Product managers roll their eyes when engineers say the words, and honestly
-        they have earned the right. We are bad at describing what tech debt is, and
-        we are far worse at quantifying what it costs to fix it or to carry it. We
-        have been asking for budget in a currency nobody outside engineering can
-        read. To borrow from Justice Potter Stewart: I don't know how to quantify
-        it, but I know it when I see it.
+        Now say it about tech debt. Ask a room whether tech debt is good or bad and
+        you get a chorus of "bad." Ask about a credit card and the room splits. Ask
+        about a mortgage and it usually flips to "good." The answer was never really
+        about the debt — it was about whether it was leverage, taken on deliberately
+        and paid down on purpose, or just debt, taken on carelessly. Tech debt can be
+        an asset or a liability depending on what you do with it. But that just
+        restates the real problem: it's hard to quantify the advantage tech debt
+        gives you if you can't first quantify the cost of carrying it.
       </p>
 
-      <h2>The pattern: a parser for every client</h2>
+      <h2>Health tech, 2010s: the parser that could not stay clean</h2>
       <p>
         Here is the shape of the problem, from my own history building health care
-        software at RubiconMD. You build a standard patient data integration — FHIR,
-        or something like it. You tell a clinical client you have data integration
-        and you sign a contract. Then you discover that they implement the standard
-        a little differently, or that some of their data does not come through the
-        integration at all. So you build a custom parser for their unique standard,
-        and you monitor it, and you update it as they break it. And you allow
-        yourself to believe that this parser will now cover you for all future
-        clients — a hope that is dashed by every single new contract.
+        software at RubiconMD. You sign a clinical client. You need their patient
+        data in your system. There is a standard for this — FHIR. Easy peasy. Day
+        one, the parser is a single clean method: hand it the data, call
+        <code>fhir_parser</code>, done.
       </p>
       <p>
-        A hundred clients later you have thousands of lines of code that dispatch on
-        a client name through a case statement nobody can read. And the real bill is
-        not the lines of code. It is that every new client is blocked on a discovery
-        and sample-data cycle; that parsers break silently when a client ships a
-        change; that some engineer's quarter has quietly become parser babysitting;
-        and that your best sales month creates your worst backlog.
-      </p>
-      <p>
-        That is tech debt — and every word of that description is a feeling. None of
-        it is a number a CFO can act on.
+        A hundred clients later, that one line has become a case statement with a
+        branch per client, running on so long the slide itself becomes illegible —
+        which is the point. You stop trying to read it long before anyone finishes
+        writing it. And it does not matter whether a person or an AI coding agent
+        wrote that case statement: it is terrible software architecture either way.
+        It is hard to DRY, any data format change can break it, every breakage is a
+        scramble, it adds cost to every new contract, and the more clients you sell
+        the worse it gets. That is the worst kind of debt — uncontrollable,
+        unavoidable, and unmanageable.
       </p>
 
-      <h2>Tokenomics: putting a number on it</h2>
+      <h2>Swap the parser for an LLM call</h2>
       <p>
-        We have always had two ways to do this work: pay an engineer to write and own
-        a parser, or pay a machine to handle the record. What is new is that both
-        sides can now be denominated in the same unit.
+        Let's try this again. Same method, same signature — comment out
+        <code>fhir_parser.call(data)</code> and replace it with a RubyLLM call:
+        instructions describing the record, a schema describing what should come
+        back. The call site never changes; only what's inside it does.
       </p>
       <p>
-        On the software side, you can itemize what one parser actually costs: the
-        time to write it, code review and QA, the ongoing drag of bug reports and
-        maintenance cycles, and the new data type that lands six months later. Those
-        are real engineering hours, and in an AI-assisted shop those hours
-        increasingly carry a token-equivalent cost too. On the AI side, you know your
-        average cost per request for each integration. Break it down by client,
-        multiply by volume, project it forward on your growth assumptions, and you
-        have a clean, compounding monthly and annual number.
-      </p>
-      <p>
-        So the comparison gets refreshingly boring. <strong>AI path: $X per month,
-        scaling with volume. Software path: $Y to build, $Z per month to carry.</strong>
-        Tech debt just became arithmetic.
-      </p>
-      <p>
-        This does not capture every variable — not the cognitive load of one more
-        system to hold in your head, not the context-switching tax, not the morale
-        cost of asking a good engineer to babysit another brittle parser. But you do
-        not need all of them. You need a signal strong enough to make a call you can
-        defend to your product and engineering teams and to your CFO.
+        The gut reaction is to recoil — handing parsing to a model feels wrong on
+        first sight. But look at what you just bought: zero brittle code, instant
+        integration, and the flexibility to handle external factors you can't
+        change. Then the second objection lands right behind the first: won't this
+        cost a lot of money in LLM tokens? The answer is the actual thesis of this
+        talk — refactor the high-volume paths back into deterministic code, keep AI
+        for everything else, and for the first time your tech debt has a quantity
+        you can measure.
       </p>
 
-      <h2>The inversion</h2>
+      <h2>Enter squishling</h2>
       <p>
-        The obvious lesson to draw from all this is the wrong one. It is not "use AI
-        coding agents to write the parsers faster" — that is using AI to produce more
-        of the thing that is hurting you. The actual move is to invert the
-        priorities: <strong>make flexibility the default, and efficiency the
-        optimization.</strong>
+        Wouldn't it be nice if there were an elegant Ruby DSL for managing and tuning
+        exactly that code/AI hybrid? That's <a href="https://github.com/Coolhand-Labs/squishling">squishling</a>
+        — my own gem, built directly on this talk's premise. Don't just use AI to
+        write code; use AI to not need code. A squishling class declares a
+        <code>purpose</code> and an <code>output_schema</code> and nothing else — no
+        <code>call</code> method at all. A method with no implementation is squished
+        straight to the LLM by default.
       </p>
       <p>
-        In practice that means the parser call delegates to an AI parser, and the AI
-        parser is roughly a dozen lines of Ruby using a gem like RubyLLM: a cheap
-        model, a low temperature, an instruction to map the inbound record to your
-        internal schema and return only valid JSON with nulls for anything missing,
-        and a JSON parse on the way out. It will choke a few times, and you will tune
-        the prompt against real failures, but you have a functioning parser in
-        minutes.
+        First real run against all 100 fixtures — real Synthea-generated FHIR
+        patients, rendered into dozens of genuinely different wire shapes, from
+        canonical FHIR and HL7 v2.3 down to a PDF, an OCR'd fax transcript, a SOAP
+        note, and a plain SMS chat log: 73 pass, for forty-eight cents across all 100
+        calls. Every diagnosis code — exact SNOMED codes, pulled out of wildly
+        different shapes — came back right. The failures clustered in three places:
+        HL7 names coming back untouched, a few mis-translated gender codes, and a
+        handful of hallucinated symptoms on records that should have reported none.
       </p>
       <p>
-        What disappears is most of the seven-step pattern. There is no discovery
-        cycle, no "please send us sample data to test the integration with." The
-        remaining blocker on a new client is whether you have signed the BAA with
-        your inference provider.
-      </p>
-
-      <h2>Contracting toward efficiency</h2>
-      <p>
-        Then the bill arrives, because running inference on one hundred percent of
-        inbound volume gets expensive. This is the honest middle of the pattern, not
-        a failure of it. Typically a handful of clients account for the vast majority
-        of your volume. Find them, use the production data you have been gathering to
-        write a genuinely good spec, build hardened parsers for those, and let
-        everything else keep flowing through the model.
-      </p>
-      <p>
-        The result looks like the case statement you started with — except it has two
-        branches instead of a hundred, and the data told you to write both of them.
-        That is the elasticity: you start stretched all the way toward flexibility,
-        accepting a higher cost per request in exchange for speed, and you contract
-        toward efficiency as the math justifies it. You do it independently for each
-        integration, each data type, each client. Never all at once, and never up
-        front.
-      </p>
-      <p>
-        The decision rule fits in one sentence: when projected annual inference cost
-        for an integration exceeds what it would cost to build and carry a parser for
-        it, you have a candidate. Startups have always practiced a crude version of
-        this — "doing things that don't scale" is the same pattern with humans in the
-        flexible layer — but the math was always fuzzy. What you need to run it
-        deliberately is cost per request broken out by client, visible without anyone
-        assembling a spreadsheet by hand. That is the frustration Coolhand Labs came
-        out of; the pattern and the product were shaped by the same annoyance.
+        The fix was not more code — squishling has none to fix. It was the purpose:
+        spelling out, in plain language, what a hand-written parser would have known
+        by construction. HL7 writes names LAST^FIRST, often in all caps. A diagnosis
+        is not a symptom — never infer one from a diagnosis name. An unrecognized
+        gender code, including HL7's bare O/U/A/N letters, maps to "unknown," never a
+        guess. Same class, same schema, same no-call-method trick — only the purpose
+        changed, and the pass rate jumped to 95 of 100, for 51 cents. A prompt is
+        code too, and it benefits from the same iteration a case statement would.
       </p>
 
-      <h2>The real win is speed</h2>
+      <h2>What if we ask twice?</h2>
       <p>
-        Optimizing cost is useful, but for a startup it is the smaller half of the
-        story. Close five new hospital systems in a month and, in the old world, that
-        is a scramble disguised as a celebration: who do we build parsers for first,
-        how do we sequence it, how long until they go live and we can realize the
-        revenue? In the elastic model all five go live immediately, the AI layer
-        carries their data from day one, and you start collecting the only thing that
-        can actually tell you who deserves engineering time. If one turns out to be a
-        monster account, the tokenomics surface it quickly. If one churns in month
-        two, you never wasted a line of parser code on it.
+        During prep for this talk I filed an issue for a harness squishling didn't
+        have yet — sample two different models and have a third judge disagreements
+        — and squishling's maintainer shipped it the same day. Wiring it up on the
+        pinned commit, though, surfaced an honest gap: the harness samples the
+        escalation's <em>first</em> step twice, concurrently, rather than sampling
+        two different steps. So a second model declared in the escalation sits
+        unused — both samples come from the same model regardless.
       </p>
       <p>
-        It runs in the other direction too. If you are an enterprise drowning under a
-        thousand legacy parsers, find the ones sitting at the tail of your usage
-        curve, re-route them to an inference call, and delete the code.
-      </p>
-
-      <h2>Proving it for real</h2>
-      <p>
-        Two malformed records through a dozen lines of Ruby is a good trailer. The real
-        test is 35 real patients — pulled from actual Synthea-generated FHIR bundles,
-        not invented — rendered into four genuinely different wire formats: a canonical
-        FHIR bundle, a re-keyed FHIR variant with different field names, an HL7 v2.3
-        message, and a legacy pipe-delimited flat file. Each one carries real-shaped
-        noise: extra FHIR extensions, extra HL7 segments nobody asked for, a dozen
-        irrelevant flat-file columns. Twenty of the 35 share one shape; the other 15
-        each use a shape the parser has never seen.
-      </p>
-      <p>
-        Pointed at that data, v1 — the "day one, it is beautiful" parser, verbatim —
-        gets 20 of 35, and fails cleanly, not a crash, on the 15 it was never built for.
-        v2 is the monster case statement's honest descendant: a base class, one subclass
-        per format, a dispatcher, and a gender-translation table grounded in real
-        FHIR, HL7, and SNOMED code systems. It gets all 35. It is also four classes and
-        a shared translation module — real, maintained code, for four formats.
-      </p>
-      <p>
-        Then the same problem, handed to a <a href="https://github.com/Coolhand-Labs/squishling">squishling</a>
-        — a gem built on this talk's own premise, whose class declares a purpose and
-        an output schema and nothing else. No shapes, no classes, no translation table:
-        a method with no implementation is squished straight to the LLM by default.
-        First real run against all 35: 23 pass. Every diagnosis code — exact SNOMED
-        codes, pulled out of four different shapes — came back right; the failures
-        clustered in HL7 names coming back untouched, a few gender codes, and a handful
-        of hallucinated symptoms on records that should have reported none.
-      </p>
-      <p>
-        Reporting that hallucination, live, during prep for this talk, got a same-day
-        fix: temperature and other generation params, added to the gem. Rerunning at a
-        low temperature produced the exact same 23 — the same 12 files failed, and one
-        record that had passed by luck now failed every time. That flip was the tell:
-        this was never sampling noise. The model was systematically treating "diagnoses
-        nearby, no symptom entry" as license to invent one; a lower temperature just
-        made the wrong call more reliable, not less.
-      </p>
-      <p>
-        The actual fix was the purpose — spelling out, in plain language, the
-        things v2's code already knew by construction: HL7 writes names LAST^FIRST, a
-        diagnosis is not a symptom, and what an unfamiliar gender code should default
-        to. That got it to 31 of 35. A prompt is code too, and it benefits from the
-        same iteration a case statement would. The last four are the honest edge of it:
-        two bare gender-identity codes with no label attached, where the model
-        correctly refuses to guess rather than fabricate an identity — v2 only gets
-        these right because it was handed the mapping by hand — and two HL7 letter
-        codes it still misreads despite being told exactly what they mean. Code is
-        exact because you give it the answer; the model is elastic because it has to
-        infer one.
+        Run it anyway: 95 of 100, the exact same five failures as a single attempt,
+        at double the cost — $1.02 — and zero judge calls across all 100 fixtures.
+        At a low temperature, that one model doesn't just usually agree with itself;
+        it agreed on every fixture, including the five it got wrong, every single
+        time. These are systematic misreadings, not sampling noise — a harness built
+        to catch disagreement never gets a chance to fire unless the samples
+        actually come from different models.
       </p>
 
-      <h2>The hard problems are still wide open</h2>
+      <h2>The elastic slider, and the router</h2>
       <p>
-        A lot here is still emerging, and these are the questions I get asked by
-        teams implementing some version of this. What are the real failure modes, and
-        what does good monitoring look like across a hybrid system with AI and
-        hardened software paths running side by side? How do you handle drift — the
-        AI layer quietly making different mapping decisions this month than it made
-        last month, with no diff to review? What is the right ops sampling rate to
-        catch a prompt regression before it compounds into a thousand mis-mapped
-        records? And how do these patterns survive contact with regulated
-        environments, where failures have to be justified to an auditor?
+        A quick analysis of the data shows 63% of requests fit the standard
+        canonical FHIR shape. That's the elasticity, drawn as a slider between fully
+        flexible (the model handles everything, at a higher cost per request) and
+        fully efficient (a hardened parser, cost near zero) — and the position on
+        that slider is a decision you keep revisiting per integration, not a bet you
+        place once at design time.
       </p>
       <p>
-        These are not rhetorical. The teams I see doing this well are working them out
-        in real time. What separates them is not that they have the answers — it is
-        that they treat elastic software as a genuine architectural commitment, with
-        the monitoring and discipline that implies, rather than a clever hack they
-        bolted on to ship faster and hoped nobody would ask about later.
+        So: code the standard shapes, squish the rest. One branch routes the 63%
+        that already match canonical FHIR straight to a fast, free, hand-written
+        parser; the other 37% fall through to squishling. Same 100 fixtures, same 95
+        pass rate, 12 cents — a 76% discount over squishing everything, with the same
+        five honest misses, because the pinned harness still samples one model
+        twice. The payoff: integrations work on day one, cost per request stays low,
+        and total LLM cost lands well below what the equivalent maintenance would
+        have cost — without a rewrite, a re-architecture, or a bet placed up front.
       </p>
       <p>
-        If you are building on this pattern, or fighting with it, I would like to hear
-        where it is breaking for you. That is the actual reason I am up here.
+        It runs backward too. If you're an enterprise drowning under a thousand
+        legacy parsers, find the ones sitting at the tail of your usage curve,
+        squish them instead, and delete the code.
+      </p>
+
+      <h2>It was never just about health data</h2>
+      <p>
+        "Yeah, cool, but we don't need to parse health data." Fair — but do you
+        integrate with services? Every vendor integration has this exact same
+        shape. When a vendor webhook payload breaks your hand-written parser, rescue
+        the parse error and <code>squish!</code> it — same trick as the FHIR router,
+        just triggered by an exception instead of a format check, straight out of
+        squishling's own README.
+      </p>
+      <p>
+        "We don't integrate with services or APIs either." Then are you hiring? And
+        more seriously: do you ever have production errors? Because the same trick
+        catches those too — even a plain bug in your own code, a <code>dig</code>
+        call written for one shape that blows up on another, can rescue into a
+        <code>squish!</code> and come back with the right answer pulled straight out
+        of the stack trace. Any rescued exception, including ones from your own code,
+        can be the trigger.
+      </p>
+
+      <h2>What's next for squishling — and the ask</h2>
+      <p>
+        The roadmap is short: Bring Your Own Harness, turning what was a same-day PR
+        for me into a documented plugin point for everyone else; framework-specific
+        defaults for Rails, Sinatra, and friends instead of every app hand-rolling
+        the same configure block; support for non-RubyLLM clients, since today's
+        routing and harness logic is built directly on RubyLLM; and output-format
+        annotations, so a schema can carry units and examples instead of leaving it
+        all to prose in the purpose. The last item is only half a joke — this entire
+        demo leaned on me personally generating mascot art on request, and that does
+        not scale past one deck.
+      </p>
+      <p>
+        If any of that sounds useful: squish the star button on
+        <a href="https://github.com/Coolhand-Labs/squishling">github.com/Coolhand-Labs/squishling</a>,
+        share it, and leave an issue. I'd genuinely like to know where this pattern
+        is breaking for you — that's the actual reason I'm up here.
       </p>
       <p class="muted">
         Related reading:
