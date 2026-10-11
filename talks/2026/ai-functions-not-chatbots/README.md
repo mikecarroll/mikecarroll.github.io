@@ -53,8 +53,6 @@ npm run pdf -- ../talks/2026/ai-functions-not-chatbots   # export to PDF
   on the "review gates levers" and "what a review surface needs" slides, and
   in the transcript) — still worth confirming the repo is public before the
   talk, since the transcript links nothing but speaker notes say it by name.
-- Confirm the **event date/venue** in the JSON-LD `Event` block (currently
-  `2026-10-03`, "Toronto").
 
 `assets/img/og-cover.png` is generated from the real headshot via
 `npm run og-cover -- ../talks/2026/ai-functions-not-chatbots` — rerun it if the

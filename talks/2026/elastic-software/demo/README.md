@@ -1,7 +1,7 @@
 # Elastic Software — demo code
 
 Runnable version of the parser from slides 18/19/22 of "Elastic Software:
-Calculating tech debt using LLM tokens" (XO Ruby Toronto 2026), plus the two
+Calculating tech debt using LLM tokens" (XO Ruby NYC 2026), plus the two
 fixtures for slide 29's live demo.
 
 ## What this is
