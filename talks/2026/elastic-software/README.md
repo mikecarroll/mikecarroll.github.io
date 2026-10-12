@@ -1,6 +1,6 @@
 # Elastic Software: Calculating tech debt using LLM tokens
 
-Slide deck for Michael Carroll's talk at **XO Ruby NYC 2026** (2026-10-03).
+Slide deck for Michael Carroll's talk at **XO Ruby NYC 2026** (2026-10-10).
 
 - **Live:** https://michael.carroll.io/talks/2026/elastic-software/
 - **Self-contained:** all CSS/JS/QR are vendored here — no runtime dependencies.
