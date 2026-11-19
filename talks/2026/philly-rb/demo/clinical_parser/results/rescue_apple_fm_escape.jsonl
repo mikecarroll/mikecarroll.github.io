@@ -1,0 +1,45 @@
+{"adapter":"apple_fm","cond":"escape","case":"control: {data: ...} (Ruby path, no LLM)","ok":true,"squished":false,"got":"this is the data","error":null,"secs":0.0}
+{"adapter":"apple_fm","cond":"escape","case":"control: {data: ...} (Ruby path, no LLM)","ok":true,"squished":false,"got":"this is the data","error":null,"secs":0.0}
+{"adapter":"apple_fm","cond":"escape","case":"control: {data: ...} (Ruby path, no LLM)","ok":true,"squished":false,"got":"this is the data","error":null,"secs":0.0}
+{"adapter":"apple_fm","cond":"escape","case":"control: {data: ...} (Ruby path, no LLM)","ok":true,"squished":false,"got":"this is the data","error":null,"secs":0.0}
+{"adapter":"apple_fm","cond":"escape","case":"control: {data: ...} (Ruby path, no LLM)","ok":true,"squished":false,"got":"this is the data","error":null,"secs":0.0}
+{"adapter":"apple_fm","cond":"escape","case":"bare String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.89}
+{"adapter":"apple_fm","cond":"escape","case":"bare String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.49}
+{"adapter":"apple_fm","cond":"escape","case":"bare String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.48}
+{"adapter":"apple_fm","cond":"escape","case":"bare String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.54}
+{"adapter":"apple_fm","cond":"escape","case":"bare String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.5}
+{"adapter":"apple_fm","cond":"escape","case":"JSON String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.49}
+{"adapter":"apple_fm","cond":"escape","case":"JSON String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.49}
+{"adapter":"apple_fm","cond":"escape","case":"JSON String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.5}
+{"adapter":"apple_fm","cond":"escape","case":"JSON String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.65}
+{"adapter":"apple_fm","cond":"escape","case":"JSON String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.53}
+{"adapter":"apple_fm","cond":"escape","case":"string-keyed Hash","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.49}
+{"adapter":"apple_fm","cond":"escape","case":"string-keyed Hash","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.48}
+{"adapter":"apple_fm","cond":"escape","case":"string-keyed Hash","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.48}
+{"adapter":"apple_fm","cond":"escape","case":"string-keyed Hash","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.49}
+{"adapter":"apple_fm","cond":"escape","case":"string-keyed Hash","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.51}
+{"adapter":"apple_fm","cond":"escape","case":"nested Hash","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.45}
+{"adapter":"apple_fm","cond":"escape","case":"nested Hash","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.46}
+{"adapter":"apple_fm","cond":"escape","case":"nested Hash","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.45}
+{"adapter":"apple_fm","cond":"escape","case":"nested Hash","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.45}
+{"adapter":"apple_fm","cond":"escape","case":"nested Hash","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.46}
+{"adapter":"apple_fm","cond":"escape","case":"Array of one String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.48}
+{"adapter":"apple_fm","cond":"escape","case":"Array of one String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.48}
+{"adapter":"apple_fm","cond":"escape","case":"Array of one String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.48}
+{"adapter":"apple_fm","cond":"escape","case":"Array of one String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.48}
+{"adapter":"apple_fm","cond":"escape","case":"Array of one String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.5}
+{"adapter":"apple_fm","cond":"escape","case":"Hash, renamed key (body:)","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.49}
+{"adapter":"apple_fm","cond":"escape","case":"Hash, renamed key (body:)","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.49}
+{"adapter":"apple_fm","cond":"escape","case":"Hash, renamed key (body:)","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.49}
+{"adapter":"apple_fm","cond":"escape","case":"Hash, renamed key (body:)","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.47}
+{"adapter":"apple_fm","cond":"escape","case":"Hash, renamed key (body:)","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.49}
+{"adapter":"apple_fm","cond":"escape","case":"Hash with noise + wrong key","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.45}
+{"adapter":"apple_fm","cond":"escape","case":"Hash with noise + wrong key","ok":false,"squished":true,"got":null,"error":null,"secs":0.39}
+{"adapter":"apple_fm","cond":"escape","case":"Hash with noise + wrong key","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.45}
+{"adapter":"apple_fm","cond":"escape","case":"Hash with noise + wrong key","ok":false,"squished":true,"got":null,"error":null,"secs":0.4}
+{"adapter":"apple_fm","cond":"escape","case":"Hash with noise + wrong key","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.45}
+{"adapter":"apple_fm","cond":"escape","case":"nil (nothing to recover)","ok":true,"squished":true,"got":null,"error":null,"secs":0.4}
+{"adapter":"apple_fm","cond":"escape","case":"nil (nothing to recover)","ok":true,"squished":true,"got":null,"error":null,"secs":0.39}
+{"adapter":"apple_fm","cond":"escape","case":"nil (nothing to recover)","ok":true,"squished":true,"got":null,"error":null,"secs":0.4}
+{"adapter":"apple_fm","cond":"escape","case":"nil (nothing to recover)","ok":true,"squished":true,"got":null,"error":null,"secs":0.39}
+{"adapter":"apple_fm","cond":"escape","case":"nil (nothing to recover)","ok":true,"squished":true,"got":null,"error":null,"secs":0.4}

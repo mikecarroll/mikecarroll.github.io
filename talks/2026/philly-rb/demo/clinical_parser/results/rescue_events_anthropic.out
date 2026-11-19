@@ -1,0 +1,28 @@
+ERROR: (ResourceGroupNotFound) Resource group 'coolhand-bandguesser' could not be found.
+Code: ResourceGroupNotFound
+Message: Resource group 'coolhand-bandguesser' could not be found.
+suite=events adapter=anthropic reps=5
+
+with_source:
+  control: original shape (Ruby only)        pass 5/5  squished 0/5  avg 0.0s  
+  envelope keys renamed                      pass 5/5  squished 5/5  avg 2.0s  
+  new type name invoice.payment_succeeded    pass 5/5  squished 5/5  avg 1.0s  
+  versioned type v2.invoice.paid             pass 5/5  squished 5/5  avg 3.6s  
+  amount now decimal string "30.00"          pass 5/5  squished 5/5  avg 0.9s  
+  currency now {code: "USD"}                 pass 5/5  squished 5/5  avg 2.4s  
+  wrapped in a list of one                   pass 5/5  squished 5/5  avg 2.0s  
+  raw JSON body string                       pass 5/5  squished 5/5  avg 1.0s  
+  unmapped type invoice.voided               pass 0/5  squished 5/5  avg 0.9s  
+  TOTAL                                      pass 40/45
+
+no_source:
+  control: original shape (Ruby only)        pass 5/5  squished 0/5  avg 0.0s  
+  envelope keys renamed                      pass 5/5  squished 5/5  avg 1.8s  
+  new type name invoice.payment_succeeded    pass 5/5  squished 5/5  avg 1.6s  
+  versioned type v2.invoice.paid             pass 5/5  squished 5/5  avg 1.9s  
+  amount now decimal string "30.00"          pass 5/5  squished 5/5  avg 1.6s  
+  currency now {code: "USD"}                 pass 5/5  squished 5/5  avg 1.0s  
+  wrapped in a list of one                   pass 5/5  squished 5/5  avg 0.9s  
+  raw JSON body string                       pass 5/5  squished 5/5  avg 0.9s  
+  unmapped type invoice.voided               pass 0/5  squished 5/5  avg 2.3s  
+  TOTAL                                      pass 40/45

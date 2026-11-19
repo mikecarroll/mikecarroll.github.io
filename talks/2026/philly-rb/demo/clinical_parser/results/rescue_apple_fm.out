@@ -1,0 +1,25 @@
+adapter=apple_fm reps=5
+
+with_source:
+  control: {data: ...} (Ruby path, no LLM)     pass 5/5  squished 0/5  avg 0.0s
+  bare String                                  pass 5/5  squished 5/5  avg 0.7s
+  JSON String                                  pass 5/5  squished 5/5  avg 0.6s
+  string-keyed Hash                            pass 5/5  squished 5/5  avg 0.5s
+  nested Hash                                  pass 5/5  squished 5/5  avg 0.6s
+  Array of one String                          pass 5/5  squished 5/5  avg 0.6s
+  Hash, renamed key (body:)                    pass 5/5  squished 5/5  avg 0.5s
+  Hash with noise + wrong key                  pass 5/5  squished 5/5  avg 0.6s
+  nil (nothing to recover)                     pass 3/5  squished 5/5  avg 0.5s
+  TOTAL                                        pass 43/45
+
+no_source:
+  control: {data: ...} (Ruby path, no LLM)     pass 5/5  squished 0/5  avg 0.0s
+  bare String                                  pass 5/5  squished 5/5  avg 0.5s
+  JSON String                                  pass 5/5  squished 5/5  avg 0.5s
+  string-keyed Hash                            pass 5/5  squished 5/5  avg 0.5s
+  nested Hash                                  pass 5/5  squished 5/5  avg 0.5s
+  Array of one String                          pass 5/5  squished 5/5  avg 0.5s
+  Hash, renamed key (body:)                    pass 5/5  squished 5/5  avg 0.5s
+  Hash with noise + wrong key                  pass 5/5  squished 5/5  avg 0.5s
+  nil (nothing to recover)                     pass 0/5  squished 5/5  avg 0.5s
+  TOTAL                                        pass 40/45

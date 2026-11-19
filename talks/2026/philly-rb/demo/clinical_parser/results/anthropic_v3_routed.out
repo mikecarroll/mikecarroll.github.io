@@ -1,0 +1,103 @@
+PASS  001_canonical_fhir.json (canonical_fhir)
+PASS  002_canonical_fhir.json (canonical_fhir)
+PASS  003_canonical_fhir.json (canonical_fhir)
+PASS  004_canonical_fhir.json (canonical_fhir)
+PASS  005_canonical_fhir.json (canonical_fhir)
+PASS  006_canonical_fhir.json (canonical_fhir)
+PASS  007_canonical_fhir.json (canonical_fhir)
+PASS  008_canonical_fhir.json (canonical_fhir)
+PASS  009_canonical_fhir.json (canonical_fhir)
+PASS  010_canonical_fhir.json (canonical_fhir)
+PASS  011_canonical_fhir.json (canonical_fhir)
+PASS  012_canonical_fhir.json (canonical_fhir)
+PASS  013_canonical_fhir.json (canonical_fhir)
+PASS  014_canonical_fhir.json (canonical_fhir)
+PASS  015_canonical_fhir.json (canonical_fhir)
+PASS  016_canonical_fhir.json (canonical_fhir)
+PASS  017_canonical_fhir.json (canonical_fhir)
+PASS  018_canonical_fhir.json (canonical_fhir)
+PASS  019_canonical_fhir.json (canonical_fhir)
+PASS  020_canonical_fhir.json (canonical_fhir)
+PASS  021_fhir_variant.json (fhir_variant) [squished]
+PASS  022_fhir_variant.json (fhir_variant) [squished]
+PASS  023_fhir_variant.json (fhir_variant) [squished]
+FAIL  024_fhir_variant.json (fhir_variant — parsed but values don't match expected)
+FAIL  025_fhir_variant.json (fhir_variant — parsed but values don't match expected)
+PASS  026_hl7.hl7 (hl7) [squished]
+PASS  027_hl7.hl7 (hl7) [squished]
+FAIL  028_hl7.hl7 (hl7 — parsed but values don't match expected)
+PASS  029_hl7.hl7 (hl7) [squished]
+FAIL  030_hl7.hl7 (hl7 — parsed but values don't match expected)
+PASS  031_pipe_delimited.txt (pipe_delimited) [squished]
+PASS  032_pipe_delimited.txt (pipe_delimited) [squished]
+PASS  033_pipe_delimited.txt (pipe_delimited) [squished]
+PASS  034_pipe_delimited.txt (pipe_delimited) [squished]
+PASS  035_pipe_delimited.txt (pipe_delimited) [squished]
+PASS  036_canonical_fhir.json (canonical_fhir)
+PASS  037_canonical_fhir.json (canonical_fhir)
+PASS  038_canonical_fhir.json (canonical_fhir)
+PASS  039_canonical_fhir.json (canonical_fhir)
+PASS  040_canonical_fhir.json (canonical_fhir)
+PASS  041_canonical_fhir.json (canonical_fhir)
+PASS  042_canonical_fhir.json (canonical_fhir)
+PASS  043_canonical_fhir.json (canonical_fhir)
+PASS  044_canonical_fhir.json (canonical_fhir)
+PASS  045_canonical_fhir.json (canonical_fhir)
+PASS  046_canonical_fhir.json (canonical_fhir)
+PASS  047_canonical_fhir.json (canonical_fhir)
+PASS  048_canonical_fhir.json (canonical_fhir)
+PASS  049_canonical_fhir.json (canonical_fhir)
+PASS  050_canonical_fhir.json (canonical_fhir)
+PASS  051_canonical_fhir.json (canonical_fhir)
+PASS  052_canonical_fhir.json (canonical_fhir)
+PASS  053_canonical_fhir.json (canonical_fhir)
+PASS  054_canonical_fhir.json (canonical_fhir)
+PASS  055_canonical_fhir.json (canonical_fhir)
+PASS  056_canonical_fhir.json (canonical_fhir)
+PASS  057_canonical_fhir.json (canonical_fhir)
+PASS  058_canonical_fhir.json (canonical_fhir)
+PASS  059_canonical_fhir.json (canonical_fhir)
+PASS  060_canonical_fhir.json (canonical_fhir)
+PASS  061_canonical_fhir.json (canonical_fhir)
+PASS  062_canonical_fhir.json (canonical_fhir)
+PASS  063_canonical_fhir.json (canonical_fhir)
+PASS  064_canonical_fhir.json (canonical_fhir)
+PASS  065_canonical_fhir.json (canonical_fhir)
+PASS  066_canonical_fhir.json (canonical_fhir)
+PASS  067_canonical_fhir.json (canonical_fhir)
+PASS  068_canonical_fhir.json (canonical_fhir)
+PASS  069_canonical_fhir.json (canonical_fhir)
+PASS  070_canonical_fhir.json (canonical_fhir)
+PASS  071_canonical_fhir.json (canonical_fhir)
+PASS  072_canonical_fhir.json (canonical_fhir)
+PASS  073_canonical_fhir.json (canonical_fhir)
+PASS  074_canonical_fhir.json (canonical_fhir)
+PASS  075_canonical_fhir.json (canonical_fhir)
+PASS  076_canonical_fhir.json (canonical_fhir)
+PASS  077_canonical_fhir.json (canonical_fhir)
+PASS  078_canonical_fhir.json (canonical_fhir)
+PASS  079_cda_xml.xml (cda_xml) [squished]
+PASS  080_fhir_xml.xml (fhir_xml) [squished]
+PASS  081_pdf.pdf (pdf) [squished]
+PASS  082_soap_note.txt (soap_note) [squished]
+PASS  083_csv.csv (csv) [squished]
+PASS  084_yaml.yaml (yaml) [squished]
+PASS  085_eml.eml (eml) [squished]
+PASS  086_rtf.rtf (rtf) [squished]
+PASS  087_markdown.md (markdown) [squished]
+PASS  088_html_portal.html (html_portal) [squished]
+PASS  089_html_embedded_fhir.html (html_embedded_fhir) [squished]
+PASS  090_sql_dump.sql (sql_dump) [squished]
+FAIL  091_x12_837.x12 (x12_837 — parsed but values don't match expected)
+PASS  092_ndjson_bulk.ndjson (ndjson_bulk) [squished]
+PASS  093_fixed_width.dat (fixed_width) [squished]
+PASS  094_sms_chat.txt (sms_chat) [squished]
+PASS  095_spreadsheetml.xml (spreadsheetml) [squished]
+PASS  096_rdf_turtle.ttl (rdf_turtle) [squished]
+PASS  097_json_ld.jsonld (json_ld) [squished]
+PASS  098_ocr_fax.txt (ocr_fax) [squished]
+FAIL  099_dictation.txt (dictation — parsed but values don't match expected)
+PASS  100_base64_envelope.json (base64_envelope) [squished]
+
+v3_routed_judged_ensemble: 94/100 passed, 6/100 failed (63 routed free to V1::Parser, 37 squished)
+usage log: /Users/woodchip/conductor/workspaces/mikecarroll.github.io/san-diego-v5/talks/2026/philly-rb/demo/clinical_parser/tmp/usage_v3_routed_judged_ensemble.jsonl

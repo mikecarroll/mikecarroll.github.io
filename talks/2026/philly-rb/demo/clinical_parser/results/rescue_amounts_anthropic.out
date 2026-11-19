@@ -1,0 +1,30 @@
+ERROR: (ResourceGroupNotFound) Resource group 'coolhand-bandguesser' could not be found.
+Code: ResourceGroupNotFound
+Message: Resource group 'coolhand-bandguesser' could not be found.
+suite=amounts adapter=anthropic reps=5
+
+with_source:
+  control: "1250.50" (Ruby only)             pass 5/5  squished 0/5  avg 0.0s  
+  "$1,250.50"                                pass 5/5  squished 5/5  avg 3.4s  
+  EU format "1.250,50 €"                     pass 5/5  squished 5/5  avg 0.8s  
+  "USD 1250.5"                               pass 5/5  squished 5/5  avg 1.6s  
+  French spacing "1 250,50 CAD"              pass 5/5  squished 5/5  avg 1.6s  
+  accounting negative "(250.00)"             pass 5/5  squished 5/5  avg 0.9s  
+  "1.25k USD"                                pass 5/5  squished 5/5  avg 1.6s  
+  words "twelve hundred fifty dollars"       pass 5/5  squished 5/5  avg 1.6s  
+  yen "¥1,250" (no minor unit)               pass 0/5  squished 5/5  avg 0.7s  wrong: minor_unitsx5
+  "call for pricing" (no amount)             pass 0/5  squished 5/5  avg 1.5s  
+  TOTAL                                      pass 40/50
+
+no_source:
+  control: "1250.50" (Ruby only)             pass 5/5  squished 0/5  avg 0.0s  
+  "$1,250.50"                                pass 5/5  squished 5/5  avg 1.4s  
+  EU format "1.250,50 €"                     pass 5/5  squished 5/5  avg 0.9s  
+  "USD 1250.5"                               pass 5/5  squished 5/5  avg 1.4s  
+  French spacing "1 250,50 CAD"              pass 5/5  squished 5/5  avg 0.9s  
+  accounting negative "(250.00)"             pass 5/5  squished 5/5  avg 1.3s  
+  "1.25k USD"                                pass 5/5  squished 5/5  avg 1.3s  
+  words "twelve hundred fifty dollars"       pass 5/5  squished 5/5  avg 1.3s  
+  yen "¥1,250" (no minor unit)               pass 5/5  squished 5/5  avg 1.3s  
+  "call for pricing" (no amount)             pass 0/5  squished 5/5  avg 0.7s  
+  TOTAL                                      pass 45/50

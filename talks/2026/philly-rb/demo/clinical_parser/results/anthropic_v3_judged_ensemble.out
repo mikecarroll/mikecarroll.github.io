@@ -1,0 +1,514 @@
+== 001_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 002_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 003_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 004_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 005_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 006_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 007_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 008_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 009_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 010_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 011_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 012_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 013_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 014_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 015_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 016_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 017_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 018_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 019_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 020_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 021_fhir_variant.json (fhir_variant) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 022_fhir_variant.json (fhir_variant) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 023_fhir_variant.json (fhir_variant) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 024_fhir_variant.json (fhir_variant) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+FAIL — parsed but values don't match expected
+  expected: {"patient_name":"Alfreda Wyman","patient_gender":"trans","diagnosis_codes":["38341003","10509002","15777000"],"symptoms":["chest pain","joint pain","rash"]}
+  actual:   {"patient_name":"Alfreda Wyman","patient_gender":"unknown","diagnosis_codes":["38341003","10509002","15777000"],"symptoms":["chest pain","joint pain","rash"]}
+
+== 025_fhir_variant.json (fhir_variant) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+FAIL — parsed but values don't match expected
+  expected: {"patient_name":"Alica Powlowski","patient_gender":"trans","diagnosis_codes":["195662009","444814009","87433001"],"symptoms":["chills","congestion","insomnia","abdominal pain"]}
+  actual:   {"patient_name":"Alica Powlowski","patient_gender":"unknown","diagnosis_codes":["195662009","444814009","87433001"],"symptoms":["chills","congestion","insomnia","abdominal pain"]}
+
+== 026_hl7.hl7 (hl7) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 027_hl7.hl7 (hl7) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 028_hl7.hl7 (hl7) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+FAIL — parsed but values don't match expected
+  expected: {"patient_name":"Amiee Buckridge","patient_gender":"unknown","diagnosis_codes":["444814009","75498004","10509002"],"symptoms":["wheezing","fever"]}
+  actual:   {"patient_name":"Amiee Buckridge","patient_gender":"female","diagnosis_codes":["444814009","75498004","10509002"],"symptoms":["wheezing","fever"]}
+
+== 029_hl7.hl7 (hl7) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 030_hl7.hl7 (hl7) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+FAIL — parsed but values don't match expected
+  expected: {"patient_name":"Angele Greenfelder","patient_gender":"unknown","diagnosis_codes":["40055000","36971009","444814009"],"symptoms":["shortness of breath","sore throat","chest pain","joint pain"]}
+  actual:   {"patient_name":"Angele Greenfelder","patient_gender":"female","diagnosis_codes":["40055000","36971009","444814009"],"symptoms":["shortness of breath","sore throat","chest pain","joint pain"]}
+
+== 031_pipe_delimited.txt (pipe_delimited) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 032_pipe_delimited.txt (pipe_delimited) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 033_pipe_delimited.txt (pipe_delimited) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 034_pipe_delimited.txt (pipe_delimited) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 035_pipe_delimited.txt (pipe_delimited) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 036_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 037_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 038_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 039_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 040_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 041_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 042_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 043_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 044_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 045_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 046_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 047_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 048_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 049_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 050_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 051_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 052_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 053_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 054_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 055_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 056_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 057_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 058_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 059_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 060_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 061_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 062_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 063_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 064_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 065_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 066_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 067_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 068_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 069_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 070_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 071_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 072_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 073_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 074_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 075_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 076_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 077_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 078_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 079_cda_xml.xml (cda_xml) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 080_fhir_xml.xml (fhir_xml) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 081_pdf.pdf (pdf) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 082_soap_note.txt (soap_note) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 083_csv.csv (csv) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 084_yaml.yaml (yaml) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 085_eml.eml (eml) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 086_rtf.rtf (rtf) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 087_markdown.md (markdown) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 088_html_portal.html (html_portal) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 089_html_embedded_fhir.html (html_embedded_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 090_sql_dump.sql (sql_dump) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 091_x12_837.x12 (x12_837) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+FAIL — parsed but values don't match expected
+  expected: {"patient_name":"Sofia Koepp","patient_gender":"unknown","diagnosis_codes":["195662009","444814009","370247008"],"symptoms":[]}
+  actual:   {"patient_name":"Sofia Koepp","patient_gender":"female","diagnosis_codes":["195662009","444814009","370247008"],"symptoms":[]}
+
+== 092_ndjson_bulk.ndjson (ndjson_bulk) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 093_fixed_width.dat (fixed_width) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 094_sms_chat.txt (sms_chat) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 095_spreadsheetml.xml (spreadsheetml) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 096_rdf_turtle.ttl (rdf_turtle) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 097_json_ld.jsonld (json_ld) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 098_ocr_fax.txt (ocr_fax) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+== 099_dictation.txt (dictation) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+FAIL — parsed but values don't match expected
+  expected: {"patient_name":"Zachariah Osinski","patient_gender":"male","diagnosis_codes":["40055000","162864005","15777000"],"symptoms":["insomnia","abdominal pain","dry mouth"]}
+  actual:   {"patient_name":"Zachariah Osinski","patient_gender":"male","diagnosis_codes":["400550000","162864005","157770000"],"symptoms":["insomnia","abdominal pain","dry mouth"]}
+
+== 100_base64_envelope.json (base64_envelope) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=
+PASS
+
+v3_judged_ensemble: 94/100 passed, 6/100 failed (0 calls to the judge, claude-opus-5-5)
+usage log: /Users/woodchip/conductor/workspaces/mikecarroll.github.io/san-diego-v5/talks/2026/philly-rb/demo/clinical_parser/tmp/usage_v3_judged_ensemble.jsonl

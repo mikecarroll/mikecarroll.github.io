@@ -1,0 +1,52 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# bin/run_cache_test — prompt caching on vs off (squishling >= 0.6), Claude Haiku 4.5.
+# Same V3::Parser, a fixed sample of fixtures (every STEP-th), three passes:
+#   1. cache off   2. cache on, cold (first write)   3. cache on, warm (same inputs again)
+# Cost is priced from squawk usage at Haiku 4.5 list prices (per 1M tokens:
+# input $1, output $5, cache write $1.25, cache read $0.10).
+require "bundler/setup"
+require "json"
+require "ruby_llm"
+require "squishling"
+require_relative "../lib/v3/parser"
+require_relative "../lib/fixture_manifest"
+
+abort "Set ANTHROPIC_API_KEY" unless ENV["ANTHROPIC_API_KEY"]
+RubyLLM.configure { |c| c.anthropic_api_key = ENV["ANTHROPIC_API_KEY"] }
+step = Integer(ENV.fetch("STEP", "5"))
+root = File.expand_path("..", __dir__)
+sample = FixtureManifest.load(root).each_slice(step).map(&:first)
+
+usage = Hash.new(0)
+Squishling.configure do |c|
+  c.default_model = "claude-haiku-4-5-20251001"
+  c.default_provider = :anthropic
+  c.squawk = lambda do |output:, metadata:, error:|
+    u = metadata[:usage] || {}
+    usage[:in] += u[:input_tokens].to_i
+    usage[:out] += u[:output_tokens].to_i
+    usage[:cr] += u[:cache_read_tokens].to_i
+    usage[:cw] += u[:cache_write_tokens].to_i
+  end
+end
+
+def cost(u) = (u[:in] * 1.0 + u[:out] * 5.0 + u[:cw] * 1.25 + u[:cr] * 0.10) / 1e6
+
+results = {}
+[["cache off", false], ["cache on, cold", true], ["cache on, warm (repeat)", true]].each do |label, cache|
+  usage.clear
+  Squishling.configure { |c| c.default_cache = cache }
+  passed = 0
+  sample.each do |e|
+    raw = File.read(File.join(root, "fixtures", e.fetch("file")))
+    passed += 1 if (V3::Parser.parse(raw).matches?(e.fetch("expected")) rescue false)
+  end
+  results[label] = { cost: cost(usage), passed:, n: sample.size, **usage }
+  puts format("%-26s %2d/%d passed  cost $%.4f  (in %d, out %d, cache write %d, cache read %d)",
+              label, passed, sample.size, cost(usage), usage[:in], usage[:out], usage[:cw], usage[:cr])
+end
+base = results["cache off"][:cost]
+results.each { |l, r| puts format("%-26s %+.0f%% vs cache off", l, (r[:cost] / base - 1) * 100) }
+File.write(File.join(root, "results", "cache_test_anthropic.json"), JSON.pretty_generate(results))

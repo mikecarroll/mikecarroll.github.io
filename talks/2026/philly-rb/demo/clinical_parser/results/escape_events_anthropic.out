@@ -1,0 +1,13 @@
+suite=events adapter=anthropic reps=5
+
+escape:
+  control: original shape (Ruby only)        pass 5/5  squished 0/5  avg 0.0s  
+  envelope keys renamed                      pass 5/5  squished 5/5  avg 1.3s  
+  new type name invoice.payment_succeeded    pass 5/5  squished 5/5  avg 0.8s  
+  versioned type v2.invoice.paid             pass 5/5  squished 5/5  avg 0.7s  
+  amount now decimal string "30.00"          pass 5/5  squished 5/5  avg 0.7s  
+  currency now {code: "USD"}                 pass 5/5  squished 5/5  avg 1.8s  
+  wrapped in a list of one                   pass 5/5  squished 5/5  avg 0.7s  
+  raw JSON body string                       pass 5/5  squished 5/5  avg 1.8s  
+  unmapped type invoice.voided               pass 5/5  squished 5/5  avg 0.8s  
+  TOTAL                                      pass 45/45

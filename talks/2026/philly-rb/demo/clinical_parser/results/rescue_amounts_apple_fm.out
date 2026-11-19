@@ -1,0 +1,27 @@
+suite=amounts adapter=apple_fm reps=5
+
+with_source:
+  control: "1250.50" (Ruby only)             pass 5/5  squished 0/5  avg 0.0s  
+  "$1,250.50"                                pass 4/5  squished 5/5  avg 0.7s  wrong: minor_unitsx1
+  EU format "1.250,50 €"                     pass 0/5  squished 5/5  avg 0.7s  wrong: minor_unitsx5
+  "USD 1250.5"                               pass 5/5  squished 5/5  avg 0.7s  
+  French spacing "1 250,50 CAD"              pass 0/5  squished 5/5  avg 0.7s  wrong: minor_unitsx5
+  accounting negative "(250.00)"             pass 0/5  squished 5/5  avg 0.7s  wrong: minor_unitsx5
+  "1.25k USD"                                pass 0/5  squished 5/5  avg 0.7s  wrong: minor_unitsx5
+  words "twelve hundred fifty dollars"       pass 0/5  squished 5/5  avg 0.7s  wrong: minor_unitsx5
+  yen "¥1,250" (no minor unit)               pass 5/5  squished 5/5  avg 0.7s  
+  "call for pricing" (no amount)             pass 0/5  squished 5/5  avg 0.7s  
+  TOTAL                                      pass 19/50
+
+no_source:
+  control: "1250.50" (Ruby only)             pass 5/5  squished 0/5  avg 0.0s  
+  "$1,250.50"                                pass 0/5  squished 5/5  avg 0.6s  wrong: minor_unitsx5
+  EU format "1.250,50 €"                     pass 0/5  squished 5/5  avg 0.6s  wrong: minor_unitsx5
+  "USD 1250.5"                               pass 0/5  squished 5/5  avg 0.6s  wrong: minor_unitsx5
+  French spacing "1 250,50 CAD"              pass 0/5  squished 5/5  avg 0.6s  wrong: minor_unitsx5
+  accounting negative "(250.00)"             pass 1/5  squished 5/5  avg 0.5s  wrong: minor_unitsx4
+  "1.25k USD"                                pass 0/5  squished 5/5  avg 0.6s  wrong: minor_unitsx5
+  words "twelve hundred fifty dollars"       pass 0/5  squished 5/5  avg 0.6s  wrong: minor_unitsx5
+  yen "¥1,250" (no minor unit)               pass 5/5  squished 5/5  avg 0.6s  
+  "call for pricing" (no amount)             pass 0/5  squished 5/5  avg 0.5s  
+  TOTAL                                      pass 11/50

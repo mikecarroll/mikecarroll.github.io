@@ -1,0 +1,31 @@
+-- 1 of 2 --
+FAX TRANSMISSION  ====  Received: 01/15/2026 08:12  ====  From: (555) 010-2097  p. 1/2
+~~~~ ~~ . ,,
+ST. BRIGID MEDICAL CENTER
+REGISTRATION / REFERRAL FORM      form no. RF-297
+__________________________________________________
+
+PATIENT NAME:  FUNK, WERNER
+SEX:  M        DOB:  1915-07-03
+MEDICAL RECORD #:  3819264D
+ADDRESS:  675 Mertz Lane, West Springfield Town Massachusetts 01089
+PH:  555-474-1405
+
+INSURANCE:  Lakeside PPO Gold    ID  MBR3039689    GRP  GRP-8842
+Referring physician:  Dr. R. Okafor      signature:  ______________
+
+[x] Urgent   [ ] Routine   [ ] Lab only
+
+DIAGNOSES (SNOMED):
+   449868002   Smokes tobacco daily
+   15777000   Prediabetes
+   271737000   Anemia (disorder)
+
+PRESENTING SYMPTOMS:  rash, chills
+
+Please bring your insurance card to every visit.
+' ,.  |||  . ..
+-- 2 of 2 --
+CONFIDENTIALITY NOTICE: This facsimile contains privileged and confidential information.
+If you have received this fax in error please call (555) 010-0000 immediately.
+~~~~ [scan quality: low] ~~~~

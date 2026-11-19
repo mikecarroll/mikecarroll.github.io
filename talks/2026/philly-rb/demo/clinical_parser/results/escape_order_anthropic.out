@@ -1,0 +1,14 @@
+adapter=anthropic reps=5
+
+escape:
+  control: original shape (Ruby only)      pass 5/5  squished 0/5  avg 0.0s  
+  extra wrapper {data: {order: ...}}       pass 0/5  squished 5/5  avg 1.3s  wrong: placed_onx5
+  camelCase keys                           pass 3/5  squished 5/5  avg 1.0s  wrong: placed_onx2
+  price now decimal dollar strings         pass 0/5  squished 5/5  avg 0.8s  wrong: placed_onx5
+  timestamp now epoch MILLISECONDS         pass 0/5  squished 5/5  avg 0.8s  wrong: placed_onx5
+  timestamp now ISO-8601 string            pass 5/5  squished 5/5  avg 0.8s  
+  status now an object {code, label}       pass 0/5  squished 5/5  avg 2.0s  wrong: placed_onx5
+  items now a Hash keyed by SKU            pass 3/5  squished 5/5  avg 1.7s  wrong: placed_onx2
+  whole order as one CSV line              pass 0/5  squished 5/5  avg 0.9s  wrong: total_dollarsx5 placed_onx2
+  prices missing (cannot be totaled)       pass 5/5  squished 5/5  avg 0.8s  
+  TOTAL                                    pass 21/50

@@ -1,0 +1,25 @@
+suite=events adapter=apple_fm reps=5
+
+with_source:
+  control: original shape (Ruby only)        pass 5/5  squished 0/5  avg 0.0s  
+  envelope keys renamed                      pass 5/5  squished 5/5  avg 1.4s  
+  new type name invoice.payment_succeeded    pass 5/5  squished 5/5  avg 1.5s  
+  versioned type v2.invoice.paid             pass 5/5  squished 5/5  avg 1.5s  
+  amount now decimal string "30.00"          pass 1/5  squished 5/5  avg 1.5s  wrong: amount_centsx4
+  currency now {code: "USD"}                 pass 5/5  squished 5/5  avg 1.5s  
+  wrapped in a list of one                   pass 5/5  squished 5/5  avg 1.5s  
+  raw JSON body string                       pass 5/5  squished 5/5  avg 1.5s  
+  unmapped type invoice.voided               pass 0/5  squished 5/5  avg 1.5s  
+  TOTAL                                      pass 36/45
+
+no_source:
+  control: original shape (Ruby only)        pass 5/5  squished 0/5  avg 0.0s  
+  envelope keys renamed                      pass 5/5  squished 5/5  avg 1.1s  
+  new type name invoice.payment_succeeded    pass 5/5  squished 5/5  avg 1.2s  
+  versioned type v2.invoice.paid             pass 5/5  squished 5/5  avg 1.2s  
+  amount now decimal string "30.00"          pass 0/5  squished 5/5  avg 1.1s  wrong: amount_centsx5 kindx1
+  currency now {code: "USD"}                 pass 2/5  squished 5/5  avg 1.1s  wrong: customer_emailx3
+  wrapped in a list of one                   pass 5/5  squished 5/5  avg 1.1s  
+  raw JSON body string                       pass 4/5  squished 5/5  avg 1.2s  wrong: customer_emailx1
+  unmapped type invoice.voided               pass 0/5  squished 5/5  avg 1.1s  
+  TOTAL                                      pass 31/45

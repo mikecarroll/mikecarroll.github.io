@@ -1,0 +1,137 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# bin/run_rescue_order — the harder rescue test (lib/rescue/order_normalizer.rb):
+# a multi-field order normalizer whose inbound shape changes in nine ways.
+# Every case describes the SAME logical order, so every case has the same
+# expected summary. Runs each case REPS times, with and without the method's
+# own source in the prompt, and prints a pass matrix plus per-field misses.
+#
+#   ADAPTER=anthropic bin/run_rescue_order
+#   BUNDLE_GEMFILE=Gemfile.fm RUBYOPT=-r./lib/use_apple_fm ADAPTER=apple_fm bin/run_rescue_order
+require "bundler/setup"
+require "fileutils"
+require "json"
+require "ruby_llm"
+require "squishling"
+require_relative "../lib/rescue/order_normalizer"
+require_relative "../lib/rescue/escape_hatch"
+ESCAPE = ENV["ESCAPE"] == "1"
+
+adapter = ENV.fetch("ADAPTER", "anthropic")
+reps = Integer(ENV.fetch("REPS", "5"))
+
+if adapter == "anthropic"
+  abort "Set ANTHROPIC_API_KEY" unless ENV["ANTHROPIC_API_KEY"]
+  RubyLLM.configure { |c| c.anthropic_api_key = ENV["ANTHROPIC_API_KEY"] }
+  Squishling.configure do |c|
+    c.default_model = "claude-haiku-4-5-20251001"
+    c.default_provider = :anthropic
+  end
+end
+
+# The one logical order: 2 x $12.50 + 1 x $5.00 = $30.00, 3 units, placed 2023-11-14 22:13:20 UTC.
+EXPECTED = {
+  "order_id" => "A-1001", "customer_email" => "ada@example.com", "total_dollars" => 30.0,
+  "item_count" => 3, "placed_on" => "2023-11-14", "status" => "paid"
+}.freeze
+TS = 1_700_000_000
+
+ORIGINAL = {
+  order: {
+    id: "A-1001", customer: { email: "Ada@Example.com", name: "Ada L." },
+    items: [{ sku: "WID-1", qty: 2, unit_price_cents: 1250 }, { sku: "GAD-9", qty: 1, unit_price_cents: 500 }],
+    placed_at: TS, status: "paid"
+  }
+}.freeze
+
+CASES = [
+  ["control: original shape (Ruby only)", ORIGINAL, EXPECTED],
+  ["extra wrapper {data: {order: ...}}", { data: ORIGINAL }, EXPECTED],
+  ["camelCase keys", { order: { orderId: "A-1001", customer: { emailAddress: "Ada@Example.com" },
+                               items: [{ sku: "WID-1", quantity: 2, unitPriceCents: 1250 },
+                                       { sku: "GAD-9", quantity: 1, unitPriceCents: 500 }],
+                               placedAt: TS, status: "paid" } }, EXPECTED],
+  ["price now decimal dollar strings", { order: { id: "A-1001", customer: { email: "Ada@Example.com" },
+                                                   items: [{ sku: "WID-1", qty: 2, unit_price: "12.50" },
+                                                           { sku: "GAD-9", qty: 1, unit_price: "5.00" }],
+                                                   placed_at: TS, status: "paid" } }, EXPECTED],
+  ["timestamp now epoch MILLISECONDS", { order: { id: "A-1001", customer: { email: "Ada@Example.com" },
+                                                   items: [{ sku: "WID-1", qty: 2, unit_price_cents: 1250 },
+                                                           { sku: "GAD-9", qty: 1, unit_price_cents: 500 }],
+                                                   placed_at: TS * 1000, status: "paid" } }, EXPECTED],
+  ["timestamp now ISO-8601 string", { order: { id: "A-1001", customer: { email: "Ada@Example.com" },
+                                                items: [{ sku: "WID-1", qty: 2, unit_price_cents: 1250 },
+                                                        { sku: "GAD-9", qty: 1, unit_price_cents: 500 }],
+                                                placed_at: "2023-11-14T22:13:20Z", status: "paid" } }, EXPECTED],
+  ["status now an object {code, label}", { order: { id: "A-1001", customer: { email: "Ada@Example.com" },
+                                                     items: [{ sku: "WID-1", qty: 2, unit_price_cents: 1250 },
+                                                             { sku: "GAD-9", qty: 1, unit_price_cents: 500 }],
+                                                     placed_at: TS,
+                                                     status: { code: 2, label: "Payment captured" } } }, EXPECTED],
+  ["items now a Hash keyed by SKU", { order: { id: "A-1001", customer: { email: "Ada@Example.com" },
+                                                items: { "WID-1" => { qty: 2, unit_price_cents: 1250 },
+                                                         "GAD-9" => { qty: 1, unit_price_cents: 500 } },
+                                                placed_at: TS, status: "paid" } }, EXPECTED],
+  ["whole order as one CSV line", "A-1001,Ada@Example.com,WID-1:2:1250;GAD-9:1:500,#{TS},paid", EXPECTED],
+  ["prices missing (cannot be totaled)", { order: { id: "A-1001", customer: { email: "Ada@Example.com" },
+                                                    items: [{ sku: "WID-1", qty: 2 }, { sku: "GAD-9", qty: 1 }],
+                                                    placed_at: TS, status: "paid" } }, nil]
+].freeze
+
+CLASSES = (ESCAPE ? { "escape" => Rescue::Escape::OrderNormalizer } : { "with_source" => Rescue::OrderNormalizer, "no_source" => Rescue::OrderNormalizerNoSource }).freeze
+
+def score(result, expected)
+  got = result.to_h.transform_keys(&:to_s)
+  bad = expected.keys.reject do |k|
+    k == "total_dollars" ? (got[k].to_f - expected[k]).abs < 0.005 : got[k].to_s == expected[k].to_s
+  end
+  bad
+end
+
+root = File.expand_path("..", __dir__)
+FileUtils.mkdir_p(File.join(root, "results"))
+log = File.open(File.join(root, "results", "rescue_order_#{adapter}#{ESCAPE ? "_escape" : ""}.jsonl"), "w")
+tally = Hash.new { |h, k| h[k] = { ok: 0, n: 0, squished: 0, secs: 0.0, bad: Hash.new(0), errs: 0 } }
+
+CLASSES.each do |cond, klass|
+  CASES.each do |name, payload, expected|
+    reps.times do
+      t0 = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+      got = err = squished = bad = nil
+      begin
+        r = klass.call(payload)
+        squished = r.squished?
+        got = r.to_h
+        bad = expected ? score(r, expected) : []
+      rescue StandardError => e
+        err = "#{e.class}: #{e.message[0, 100]}"
+      end
+      secs = Process.clock_gettime(Process::CLOCK_MONOTONIC) - t0
+      ok = expected.nil? ? (!err.nil? || (ESCAPE && !got.nil? && got[:total_dollars].nil?)) : (err.nil? && bad.empty?) # unrecoverable: raising is the right answer
+      t = tally[[cond, name]]
+      t[:n] += 1
+      t[:ok] += 1 if ok
+      t[:squished] += 1 if squished
+      t[:secs] += secs
+      t[:errs] += 1 if err
+      (bad || []).each { |k| t[:bad][k] += 1 } unless expected.nil?
+      log.puts({ adapter:, cond:, case: name, ok:, squished:, got:, bad:, error: err, secs: secs.round(2) }.to_json)
+    end
+  end
+end
+log.close
+
+puts "adapter=#{adapter} reps=#{reps}"
+CLASSES.each_key do |cond|
+  puts "\n#{cond}:"
+  CASES.each do |name, _, _|
+    t = tally[[cond, name]]
+    extra = []
+    extra << "wrong: #{t[:bad].map { |k, v| "#{k}x#{v}" }.join(' ')}" unless t[:bad].empty?
+    extra << "raised x#{t[:errs]}" if t[:errs].positive?
+    puts format("  %-40s pass %d/%d  squished %d/%d  avg %.1fs  %s", name, t[:ok], t[:n], t[:squished], t[:n], t[:secs] / t[:n], extra.join("; "))
+  end
+  rows = CASES.map { |name, _, _| tally[[cond, name]] }
+  puts format("  %-40s pass %d/%d", "TOTAL", rows.sum { _1[:ok] }, rows.sum { _1[:n] })
+end

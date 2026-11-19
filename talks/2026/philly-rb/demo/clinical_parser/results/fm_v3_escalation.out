@@ -1,0 +1,137 @@
+FAIL  001_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  002_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  003_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  004_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  005_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  006_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  007_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  008_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  009_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  010_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  011_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  012_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  013_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  014_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  015_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  016_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  017_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  018_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  019_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  020_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+PASS  021_fhir_variant.json (fhir_variant)
+PASS  022_fhir_variant.json (fhir_variant)
+PASS  023_fhir_variant.json (fhir_variant)
+FAIL  024_fhir_variant.json (fhir_variant — parsed but values don't match expected)
+        expected: {"patient_name":"Alfreda Wyman","patient_gender":"trans","diagnosis_codes":["38341003","10509002","15777000"],"symptoms":["chest pain","joint pain","rash"]}
+        actual:   {"patient_name":"Alfreda Wyman","patient_gender":"female","diagnosis_codes":["38341003","10509002","15777000"],"symptoms":["chest pain","joint pain","rash"]}
+FAIL  025_fhir_variant.json (fhir_variant — parsed but values don't match expected)
+        expected: {"patient_name":"Alica Powlowski","patient_gender":"trans","diagnosis_codes":["195662009","444814009","87433001"],"symptoms":["chills","congestion","insomnia","abdominal pain"]}
+        actual:   {"patient_name":"Alica Powlowski","patient_gender":"female","diagnosis_codes":["195662009","444814009","87433001"],"symptoms":["chills","congestion","insomnia","abdominal pain"]}
+FAIL  026_hl7.hl7 (hl7 — parsed but values don't match expected)
+        expected: {"patient_name":"Alix Reilly","patient_gender":"female","diagnosis_codes":["74400008","428251008","72892002"],"symptoms":[]}
+        actual:   {"patient_name":"Reilly Alex","patient_gender":"female","diagnosis_codes":["74400008","428251008","72892002"],"symptoms":[]}
+FAIL  027_hl7.hl7 (hl7 — parsed but values don't match expected)
+        expected: {"patient_name":"Almeda Conn","patient_gender":"male","diagnosis_codes":["162864005","38341003","44054006"],"symptoms":["palpitations"]}
+        actual:   {"patient_name":"Springfield MA","patient_gender":"female","diagnosis_codes":["38341003","44054006"],"symptoms":["palpitations"]}
+FAIL  028_hl7.hl7 (hl7 — parsed but values don't match expected)
+        expected: {"patient_name":"Amiee Buckridge","patient_gender":"unknown","diagnosis_codes":["444814009","75498004","10509002"],"symptoms":["wheezing","fever"]}
+        actual:   {"patient_name":"Amie Buckeyridge","patient_gender":"female","diagnosis_codes":["444814009","75498004","10509002"],"symptoms":["wheezing","fever"]}
+FAIL  029_hl7.hl7 (hl7 — parsed but values don't match expected)
+        expected: {"patient_name":"Ammie Huels","patient_gender":"unknown","diagnosis_codes":["162864005","15777000","195662009"],"symptoms":["headache","nausea","dizziness"]}
+        actual:   {"patient_name":"Ammie Huels","patient_gender":"female","diagnosis_codes":["162864005","15777000","195662009"],"symptoms":["headache","nausea","dizziness"]}
+FAIL  030_hl7.hl7 (hl7 — parsed but values don't match expected)
+        expected: {"patient_name":"Angele Greenfelder","patient_gender":"unknown","diagnosis_codes":["40055000","36971009","444814009"],"symptoms":["shortness of breath","sore throat","chest pain","joint pain"]}
+        actual:   {"patient_name":"Greenfelder, Angela","patient_gender":"female","diagnosis_codes":["40055000","36971009","444814009"],"symptoms":["shortness of breath","sore throat","chest pain","joint pain"]}
+PASS  031_pipe_delimited.txt (pipe_delimited)
+PASS  032_pipe_delimited.txt (pipe_delimited)
+PASS  033_pipe_delimited.txt (pipe_delimited)
+PASS  034_pipe_delimited.txt (pipe_delimited)
+PASS  035_pipe_delimited.txt (pipe_delimited)
+FAIL  036_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  037_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  038_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  039_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  040_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  041_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  042_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  043_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  044_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  045_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  046_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  047_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  048_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  049_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  050_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  051_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  052_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  053_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  054_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  055_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  056_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  057_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  058_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  059_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  060_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  061_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  062_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  063_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  064_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  065_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  066_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  067_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  068_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  069_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  070_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  071_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  072_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  073_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  074_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  075_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  076_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  077_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  078_canonical_fhir.json (canonical_fhir — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  079_cda_xml.xml (cda_xml — V3::ParserEscalation#call: the prompt, schema, and answer didn't fit the model's 4096-token context window)
+FAIL  080_fhir_xml.xml (fhir_xml — parsed but values don't match expected)
+        expected: {"patient_name":"Marsha Hayes","patient_gender":"unknown","diagnosis_codes":["232353008","72892002","43878008"],"symptoms":["blurred vision","palpitations","night sweats","cough"]}
+        actual:   {"patient_name":"Marsha Hayes","patient_gender":"trans","diagnosis_codes":["232353008","43878008"],"symptoms":["blurred vision","palpitations","night sweats","cough"]}
+FAIL  081_pdf.pdf (pdf — parsed but values don't match expected)
+        expected: {"patient_name":"Mathilda O'Keefe","patient_gender":"female","diagnosis_codes":["24079001","233678006","367498001"],"symptoms":[]}
+        actual:   {"patient_name":"Mathilda O'Keefe","patient_gender":"female","diagnosis_codes":["24079001","233678006","367498001"],"symptoms":["None reported."]}
+PASS  082_soap_note.txt (soap_note)
+FAIL  083_csv.csv (csv — parsed but values don't match expected)
+        expected: {"patient_name":"Mayte Escobar","patient_gender":"female","diagnosis_codes":["15777000","271737000","19169002"],"symptoms":["dizziness","shortness of breath"]}
+        actual:   {"patient_name":"Mayte Escobar","patient_gender":"female","diagnosis_codes":["Prediabetes","Anemia (disorder)","Miscarriage in first trimester"],"symptoms":["dizziness","shortness of breath"]}
+PASS  084_yaml.yaml (yaml)
+PASS  085_eml.eml (eml)
+FAIL  086_rtf.rtf (rtf — parsed but values don't match expected)
+        expected: {"patient_name":"Oralia Stark","patient_gender":"female","diagnosis_codes":["128613002","703151001","44465007"],"symptoms":[]}
+        actual:   {"patient_name":"Oralia Stark","patient_gender":"female","diagnosis_codes":["SNOMED 128613002","SNOMED 703151001","SNOMED 44465007"],"symptoms":[]}
+PASS  087_markdown.md (markdown)
+PASS  088_html_portal.html (html_portal)
+PASS  089_html_embedded_fhir.html (html_embedded_fhir)
+FAIL  090_sql_dump.sql (sql_dump — parsed but values don't match expected)
+        expected: {"patient_name":"Silvana Cremin","patient_gender":"female","diagnosis_codes":["44054006","19169002","302870006"],"symptoms":["shortness of breath","sore throat","chest pain","joint pain"]}
+        actual:   {"patient_name":"Silvana Cremin","patient_gender":"female","diagnosis_codes":["44054006","19169002","302870006"],"symptoms":["shortness of breath","sore throat","chest pain"]}
+FAIL  091_x12_837.x12 (x12_837 — parsed but values don't match expected)
+        expected: {"patient_name":"Sofia Koepp","patient_gender":"unknown","diagnosis_codes":["195662009","444814009","370247008"],"symptoms":[]}
+        actual:   {"patient_name":"LAKESIDE REGIONAL","patient_gender":"female","diagnosis_codes":["260115"],"symptoms":["CLM368910"]}
+PASS  092_ndjson_bulk.ndjson (ndjson_bulk)
+FAIL  093_fixed_width.dat (fixed_width — parsed but values don't match expected)
+        expected: {"patient_name":"Suzi Bechtelar","patient_gender":"unknown","diagnosis_codes":["72892002","444814009","10509002"],"symptoms":["dry mouth","blurred vision"]}
+        actual:   {"patient_name":"Suzi Bechtelar","patient_gender":"female","diagnosis_codes":["dry mouth/blurred vision"],"symptoms":["dry mouth/blurred vision"]}
+PASS  094_sms_chat.txt (sms_chat)
+PASS  095_spreadsheetml.xml (spreadsheetml)
+FAIL  096_rdf_turtle.ttl (rdf_turtle — parsed but values don't match expected)
+        expected: {"patient_name":"Vera Spinka","patient_gender":"female","diagnosis_codes":["195662009","72892002","19169002"],"symptoms":[]}
+        actual:   {"patient_name":"Vera Spinka","patient_gender":"female","diagnosis_codes":["195662009","19169002"],"symptoms":[]}
+PASS  097_json_ld.jsonld (json_ld)
+PASS  098_ocr_fax.txt (ocr_fax)
+FAIL  099_dictation.txt (dictation — parsed but values don't match expected)
+        expected: {"patient_name":"Zachariah Osinski","patient_gender":"male","diagnosis_codes":["40055000","162864005","15777000"],"symptoms":["insomnia","abdominal pain","dry mouth"]}
+        actual:   {"patient_name":"Zachariah Osinski","patient_gender":"male","diagnosis_codes":["400550000","162864005","157777000"],"symptoms":["insomnia","abdominal pain","dry mouth"]}
+FAIL  100_base64_envelope.json (base64_envelope — parsed but values don't match expected)
+        expected: {"patient_name":"Zula Beer","patient_gender":"female","diagnosis_codes":["19169002","40055000","15777000"],"symptoms":["blurred vision","palpitations","night sweats","cough"]}
+        actual:   {"patient_name":"John Doe","patient_gender":"male","diagnosis_codes":["CPT-49010","CPT-49011"],"symptoms":["headache","fatigue"]}
+
+v3_escalation: 19/100 passed, 81/100 failed (64 calls escalated to claude-sonnet-5-5)
+usage log: /Users/woodchip/conductor/workspaces/mikecarroll.github.io/san-diego-v5/.context/fm_run/clinical_parser/tmp/usage_v3_escalation.jsonl
