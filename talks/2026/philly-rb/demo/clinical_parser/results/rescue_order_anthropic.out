@@ -1,0 +1,30 @@
+ERROR: (ResourceGroupNotFound) Resource group 'coolhand-bandguesser' could not be found.
+Code: ResourceGroupNotFound
+Message: Resource group 'coolhand-bandguesser' could not be found.
+adapter=anthropic reps=5
+
+with_source:
+  control: original shape (Ruby only)      pass 5/5  squished 0/5  avg 0.0s  
+  extra wrapper {data: {order: ...}}       pass 4/5  squished 5/5  avg 4.2s  wrong: placed_onx1
+  camelCase keys                           pass 3/5  squished 5/5  avg 2.3s  wrong: placed_onx2
+  price now decimal dollar strings         pass 1/5  squished 5/5  avg 2.4s  wrong: placed_onx4
+  timestamp now epoch MILLISECONDS         pass 3/5  squished 5/5  avg 1.9s  wrong: placed_onx2
+  timestamp now ISO-8601 string            pass 5/5  squished 5/5  avg 1.9s  
+  status now an object {code, label}       pass 1/5  squished 5/5  avg 1.3s  wrong: placed_onx4
+  items now a Hash keyed by SKU            pass 2/5  squished 5/5  avg 1.3s  wrong: placed_onx3
+  whole order as one CSV line              pass 0/5  squished 5/5  avg 1.9s  wrong: total_dollarsx5 placed_onx5
+  prices missing (cannot be totaled)       pass 0/5  squished 5/5  avg 2.4s  
+  TOTAL                                    pass 24/50
+
+no_source:
+  control: original shape (Ruby only)      pass 5/5  squished 0/5  avg 0.0s  
+  extra wrapper {data: {order: ...}}       pass 3/5  squished 5/5  avg 1.9s  wrong: placed_onx2
+  camelCase keys                           pass 1/5  squished 5/5  avg 1.6s  wrong: placed_onx4
+  price now decimal dollar strings         pass 1/5  squished 5/5  avg 1.9s  wrong: placed_onx4
+  timestamp now epoch MILLISECONDS         pass 1/5  squished 5/5  avg 1.0s  wrong: placed_onx4
+  timestamp now ISO-8601 string            pass 5/5  squished 5/5  avg 1.0s  
+  status now an object {code, label}       pass 1/5  squished 5/5  avg 1.8s  wrong: placed_onx4
+  items now a Hash keyed by SKU            pass 0/5  squished 5/5  avg 2.0s  wrong: placed_onx5
+  whole order as one CSV line              pass 0/5  squished 5/5  avg 1.9s  wrong: total_dollarsx5 placed_onx3
+  prices missing (cannot be totaled)       pass 0/5  squished 5/5  avg 0.9s  
+  TOTAL                                    pass 17/50

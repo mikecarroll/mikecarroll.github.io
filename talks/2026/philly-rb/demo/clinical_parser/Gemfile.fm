@@ -1,0 +1,5 @@
+# Same bundle as Gemfile, plus the Apple Intelligence (on-device) adapter.
+# Use: BUNDLE_GEMFILE=Gemfile.fm bundle exec ruby -r./lib/use_apple_fm bin/run_v3
+eval_gemfile "Gemfile"
+# 0.2.0 (ignore_unsupported_params) is tagged on GitHub but not yet on RubyGems (0.1.0 only).
+gem "squishling-apple_fm", git: "https://github.com/Coolhand-Labs/squishling-apple-fm-adapter", tag: "v0.2.0"

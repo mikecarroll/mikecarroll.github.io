@@ -1,0 +1,14 @@
+adapter=apple_fm reps=5
+
+escape:
+  control: original shape (Ruby only)      pass 5/5  squished 0/5  avg 0.0s  
+  extra wrapper {data: {order: ...}}       pass 0/5  squished 5/5  avg 1.7s  wrong: total_dollarsx5 placed_onx5 customer_emailx3
+  camelCase keys                           pass 0/5  squished 5/5  avg 1.6s  wrong: total_dollarsx5 placed_onx5
+  price now decimal dollar strings         pass 0/5  squished 5/5  avg 1.7s  wrong: total_dollarsx5 placed_onx5
+  timestamp now epoch MILLISECONDS         pass 0/5  squished 5/5  avg 1.7s  wrong: total_dollarsx5 placed_onx5
+  timestamp now ISO-8601 string            pass 0/5  squished 5/5  avg 1.4s  wrong: total_dollarsx5
+  status now an object {code, label}       pass 0/5  squished 5/5  avg 1.6s  wrong: total_dollarsx5 placed_onx5
+  items now a Hash keyed by SKU            pass 0/5  squished 5/5  avg 1.6s  wrong: total_dollarsx5 placed_onx5
+  whole order as one CSV line              pass 0/5  squished 5/5  avg 1.6s  wrong: total_dollarsx5 item_countx5 placed_onx5
+  prices missing (cannot be totaled)       pass 0/5  squished 5/5  avg 1.5s  
+  TOTAL                                    pass 5/50

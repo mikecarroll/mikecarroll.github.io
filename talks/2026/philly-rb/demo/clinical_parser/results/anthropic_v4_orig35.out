@@ -1,0 +1,38 @@
+PASS  001_canonical_fhir.json (canonical_fhir)
+PASS  002_canonical_fhir.json (canonical_fhir)
+PASS  003_canonical_fhir.json (canonical_fhir)
+PASS  004_canonical_fhir.json (canonical_fhir)
+PASS  005_canonical_fhir.json (canonical_fhir)
+PASS  006_canonical_fhir.json (canonical_fhir)
+PASS  007_canonical_fhir.json (canonical_fhir)
+PASS  008_canonical_fhir.json (canonical_fhir)
+PASS  009_canonical_fhir.json (canonical_fhir)
+PASS  010_canonical_fhir.json (canonical_fhir)
+PASS  011_canonical_fhir.json (canonical_fhir)
+PASS  012_canonical_fhir.json (canonical_fhir)
+PASS  013_canonical_fhir.json (canonical_fhir)
+PASS  014_canonical_fhir.json (canonical_fhir)
+PASS  015_canonical_fhir.json (canonical_fhir)
+PASS  016_canonical_fhir.json (canonical_fhir)
+PASS  017_canonical_fhir.json (canonical_fhir)
+PASS  018_canonical_fhir.json (canonical_fhir)
+PASS  019_canonical_fhir.json (canonical_fhir)
+PASS  020_canonical_fhir.json (canonical_fhir)
+PASS  021_fhir_variant.json (fhir_variant) [squished]
+PASS  022_fhir_variant.json (fhir_variant) [squished]
+PASS  023_fhir_variant.json (fhir_variant) [squished]
+FAIL  024_fhir_variant.json (fhir_variant — parsed but values don't match expected)
+FAIL  025_fhir_variant.json (fhir_variant — parsed but values don't match expected)
+PASS  026_hl7.hl7 (hl7) [squished]
+PASS  027_hl7.hl7 (hl7) [squished]
+FAIL  028_hl7.hl7 (hl7 — parsed but values don't match expected)
+FAIL  029_hl7.hl7 (hl7 — parsed but values don't match expected)
+FAIL  030_hl7.hl7 (hl7 — parsed but values don't match expected)
+PASS  031_pipe_delimited.txt (pipe_delimited) [squished]
+PASS  032_pipe_delimited.txt (pipe_delimited) [squished]
+PASS  033_pipe_delimited.txt (pipe_delimited) [squished]
+PASS  034_pipe_delimited.txt (pipe_delimited) [squished]
+PASS  035_pipe_delimited.txt (pipe_delimited) [squished]
+PASS  missing_gender.json (canonical_fhir (rescue 2 — nil gender)) [squished]
+
+v4: 31/36 passed, 5/36 failed (16 escalated to the LLM, 20 stayed pure Ruby)

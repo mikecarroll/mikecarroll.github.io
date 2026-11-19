@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SMART app launch - Cedar Ridge Health</title>
+  <link rel="stylesheet" href="/assets/app-88.css">
+  <script src="https://cdn.example.org/jquery-3.7.1.min.js"></script>
+  <script id="launch-context" type="application/json">{"iss":"https://fhir.example.org/r4","launch":"3a44aee2","scope":"patient/*.read launch openid fhirUser","state":"3a44aee2"}</script>
+</head>
+<body class="loading">
+  <div id="app">Loading chart for MRN 3A44AEE2&hellip;</div>
+  <script id="prefetched-bundle" type="application/fhir+json">
+    {
+      "resourceType": "Bundle",
+      "type": "collection",
+      "entry": [
+        {
+          "resource": {
+            "resourceType": "Patient",
+            "id": "3a44aee2-523a-4e97-8f47-bd07c4926590",
+            "name": [
+              {
+                "use": "official",
+                "family": "Walker",
+                "given": [
+                  "Shin"
+                ]
+              }
+            ],
+            "gender": "female",
+            "birthDate": "1990-06-19"
+          }
+        },
+        {
+          "resource": {
+            "resourceType": "Condition",
+            "code": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "72892002",
+                  "display": "Normal pregnancy"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "urn:uuid:3a44aee2-523a-4e97-8f47-bd07c4926590"
+            }
+          }
+        },
+        {
+          "resource": {
+            "resourceType": "Condition",
+            "code": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "10509002",
+                  "display": "Acute bronchitis (disorder)"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "urn:uuid:3a44aee2-523a-4e97-8f47-bd07c4926590"
+            }
+          }
+        },
+        {
+          "resource": {
+            "resourceType": "Condition",
+            "code": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "444814009",
+                  "display": "Viral sinusitis (disorder)"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "urn:uuid:3a44aee2-523a-4e97-8f47-bd07c4926590"
+            }
+          }
+        },
+        {
+          "resource": {
+            "resourceType": "Observation",
+            "status": "final",
+            "code": {
+              "text": "symptom"
+            },
+            "valueString": "headache",
+            "subject": {
+              "reference": "urn:uuid:3a44aee2-523a-4e97-8f47-bd07c4926590"
+            }
+          }
+        },
+        {
+          "resource": {
+            "resourceType": "Observation",
+            "status": "final",
+            "code": {
+              "text": "symptom"
+            },
+            "valueString": "nausea",
+            "subject": {
+              "reference": "urn:uuid:3a44aee2-523a-4e97-8f47-bd07c4926590"
+            }
+          }
+        },
+        {
+          "resource": {
+            "resourceType": "Observation",
+            "status": "final",
+            "code": {
+              "text": "symptom"
+            },
+            "valueString": "dizziness",
+            "subject": {
+              "reference": "urn:uuid:3a44aee2-523a-4e97-8f47-bd07c4926590"
+            }
+          }
+        }
+      ]
+    }
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var raw = document.getElementById("prefetched-bundle").textContent;
+      renderChart(JSON.parse(raw));
+      document.body.className = "ready";
+    });
+  </script>
+</body>
+</html>

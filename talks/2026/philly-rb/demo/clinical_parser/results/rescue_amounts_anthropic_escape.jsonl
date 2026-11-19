@@ -1,0 +1,50 @@
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"control: \"1250.50\" (Ruby only)","ok":true,"squished":false,"got":{"minor_units":125050,"currency":"USD"},"bad":[],"error":null,"secs":0.0}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"control: \"1250.50\" (Ruby only)","ok":true,"squished":false,"got":{"minor_units":125050,"currency":"USD"},"bad":[],"error":null,"secs":0.0}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"control: \"1250.50\" (Ruby only)","ok":true,"squished":false,"got":{"minor_units":125050,"currency":"USD"},"bad":[],"error":null,"secs":0.0}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"control: \"1250.50\" (Ruby only)","ok":true,"squished":false,"got":{"minor_units":125050,"currency":"USD"},"bad":[],"error":null,"secs":0.0}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"control: \"1250.50\" (Ruby only)","ok":true,"squished":false,"got":{"minor_units":125050,"currency":"USD"},"bad":[],"error":null,"secs":0.0}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"\"$1,250.50\"","ok":true,"squished":true,"got":{"minor_units":125050,"currency":"USD"},"bad":[],"error":null,"secs":2.05}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"\"$1,250.50\"","ok":true,"squished":true,"got":{"minor_units":125050,"currency":"USD"},"bad":[],"error":null,"secs":0.66}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"\"$1,250.50\"","ok":true,"squished":true,"got":{"minor_units":125050,"currency":"USD"},"bad":[],"error":null,"secs":0.62}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"\"$1,250.50\"","ok":true,"squished":true,"got":{"minor_units":125050,"currency":"USD"},"bad":[],"error":null,"secs":0.55}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"\"$1,250.50\"","ok":true,"squished":true,"got":{"minor_units":125050,"currency":"USD"},"bad":[],"error":null,"secs":0.58}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"EU format \"1.250,50 €\"","ok":true,"squished":true,"got":{"minor_units":125050,"currency":"EUR"},"bad":[],"error":null,"secs":0.61}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"EU format \"1.250,50 €\"","ok":true,"squished":true,"got":{"minor_units":125050,"currency":"EUR"},"bad":[],"error":null,"secs":0.69}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"EU format \"1.250,50 €\"","ok":true,"squished":true,"got":{"minor_units":125050,"currency":"EUR"},"bad":[],"error":null,"secs":0.64}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"EU format \"1.250,50 €\"","ok":true,"squished":true,"got":{"minor_units":125050,"currency":"EUR"},"bad":[],"error":null,"secs":0.59}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"EU format \"1.250,50 €\"","ok":true,"squished":true,"got":{"minor_units":125050,"currency":"EUR"},"bad":[],"error":null,"secs":0.59}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"\"USD 1250.5\"","ok":true,"squished":true,"got":{"minor_units":125050,"currency":"USD"},"bad":[],"error":null,"secs":1.43}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"\"USD 1250.5\"","ok":true,"squished":true,"got":{"minor_units":125050,"currency":"USD"},"bad":[],"error":null,"secs":1.41}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"\"USD 1250.5\"","ok":true,"squished":true,"got":{"minor_units":125050,"currency":"USD"},"bad":[],"error":null,"secs":1.43}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"\"USD 1250.5\"","ok":true,"squished":true,"got":{"minor_units":125050,"currency":"USD"},"bad":[],"error":null,"secs":0.69}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"\"USD 1250.5\"","ok":true,"squished":true,"got":{"minor_units":125050,"currency":"USD"},"bad":[],"error":null,"secs":1.43}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"French spacing \"1 250,50 CAD\"","ok":true,"squished":true,"got":{"minor_units":125050,"currency":"CAD"},"bad":[],"error":null,"secs":0.8}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"French spacing \"1 250,50 CAD\"","ok":true,"squished":true,"got":{"minor_units":125050,"currency":"CAD"},"bad":[],"error":null,"secs":0.62}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"French spacing \"1 250,50 CAD\"","ok":true,"squished":true,"got":{"minor_units":125050,"currency":"CAD"},"bad":[],"error":null,"secs":0.73}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"French spacing \"1 250,50 CAD\"","ok":true,"squished":true,"got":{"minor_units":125050,"currency":"CAD"},"bad":[],"error":null,"secs":0.75}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"French spacing \"1 250,50 CAD\"","ok":true,"squished":true,"got":{"minor_units":125050,"currency":"CAD"},"bad":[],"error":null,"secs":0.55}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"accounting negative \"(250.00)\"","ok":false,"squished":true,"got":{"minor_units":-25000,"currency":null},"bad":["currency"],"error":null,"secs":0.55}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"accounting negative \"(250.00)\"","ok":false,"squished":true,"got":{"minor_units":-25000,"currency":null},"bad":["currency"],"error":null,"secs":0.61}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"accounting negative \"(250.00)\"","ok":false,"squished":true,"got":{"minor_units":-25000,"currency":null},"bad":["currency"],"error":null,"secs":0.55}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"accounting negative \"(250.00)\"","ok":false,"squished":true,"got":{"minor_units":-25000,"currency":null},"bad":["currency"],"error":null,"secs":0.6}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"accounting negative \"(250.00)\"","ok":false,"squished":true,"got":{"minor_units":-25000,"currency":null},"bad":["currency"],"error":null,"secs":0.55}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"\"1.25k USD\"","ok":false,"squished":true,"got":{"minor_units":1250000,"currency":"USD"},"bad":["minor_units"],"error":null,"secs":0.62}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"\"1.25k USD\"","ok":true,"squished":true,"got":{"minor_units":125000,"currency":"USD"},"bad":[],"error":null,"secs":0.5}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"\"1.25k USD\"","ok":false,"squished":true,"got":{"minor_units":1250000,"currency":"USD"},"bad":["minor_units"],"error":null,"secs":0.71}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"\"1.25k USD\"","ok":true,"squished":true,"got":{"minor_units":125000,"currency":"USD"},"bad":[],"error":null,"secs":0.64}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"\"1.25k USD\"","ok":false,"squished":true,"got":{"minor_units":1250000,"currency":"USD"},"bad":["minor_units"],"error":null,"secs":0.55}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"words \"twelve hundred fifty dollars\"","ok":true,"squished":true,"got":{"minor_units":125000,"currency":"USD"},"bad":[],"error":null,"secs":0.57}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"words \"twelve hundred fifty dollars\"","ok":true,"squished":true,"got":{"minor_units":125000,"currency":"USD"},"bad":[],"error":null,"secs":0.53}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"words \"twelve hundred fifty dollars\"","ok":true,"squished":true,"got":{"minor_units":125000,"currency":"USD"},"bad":[],"error":null,"secs":0.63}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"words \"twelve hundred fifty dollars\"","ok":true,"squished":true,"got":{"minor_units":125000,"currency":"USD"},"bad":[],"error":null,"secs":0.5}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"words \"twelve hundred fifty dollars\"","ok":true,"squished":true,"got":{"minor_units":125000,"currency":"USD"},"bad":[],"error":null,"secs":0.6}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"yen \"¥1,250\" (no minor unit)","ok":true,"squished":true,"got":{"minor_units":1250,"currency":"JPY"},"bad":[],"error":null,"secs":0.69}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"yen \"¥1,250\" (no minor unit)","ok":false,"squished":true,"got":{"minor_units":125000,"currency":"JPY"},"bad":["minor_units"],"error":null,"secs":0.6}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"yen \"¥1,250\" (no minor unit)","ok":false,"squished":true,"got":{"minor_units":125000,"currency":"JPY"},"bad":["minor_units"],"error":null,"secs":0.62}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"yen \"¥1,250\" (no minor unit)","ok":false,"squished":true,"got":{"minor_units":125000,"currency":"JPY"},"bad":["minor_units"],"error":null,"secs":0.61}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"yen \"¥1,250\" (no minor unit)","ok":false,"squished":true,"got":{"minor_units":125000,"currency":"JPY"},"bad":["minor_units"],"error":null,"secs":0.56}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"\"call for pricing\" (no amount)","ok":true,"squished":true,"got":{"minor_units":null,"currency":null},"bad":[],"error":null,"secs":1.45}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"\"call for pricing\" (no amount)","ok":true,"squished":true,"got":{"minor_units":null,"currency":null},"bad":[],"error":null,"secs":0.77}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"\"call for pricing\" (no amount)","ok":true,"squished":true,"got":{"minor_units":null,"currency":null},"bad":[],"error":null,"secs":1.56}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"\"call for pricing\" (no amount)","ok":true,"squished":true,"got":{"minor_units":null,"currency":null},"bad":[],"error":null,"secs":1.49}
+{"suite":"amounts","adapter":"anthropic","cond":"escape","case":"\"call for pricing\" (no amount)","ok":true,"squished":true,"got":{"minor_units":null,"currency":null},"bad":[],"error":null,"secs":0.76}

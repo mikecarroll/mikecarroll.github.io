@@ -1,0 +1,54 @@
+{
+  "fhirVersion": "R4",
+  "exportedAt": "2026-01-15T09:00:00Z",
+  "sourceSystem": "MedVantage-EHR",
+  "subject": {
+    "resourceType": "Patient",
+    "fullName": "Alexia Senger",
+    "birthSex": "unknown",
+    "mrn": "MV-2d95f315",
+    "facility": "Lakeside Regional"
+  },
+  "diagnosisList": [
+    {
+      "codeSystem": "SNOMED-CT",
+      "codeValue": "15777000",
+      "label": "Prediabetes",
+      "recordedBy": "Dr. A. Whitfield"
+    },
+    {
+      "codeSystem": "SNOMED-CT",
+      "codeValue": "271737000",
+      "label": "Anemia (disorder)",
+      "recordedBy": "Dr. A. Whitfield"
+    },
+    {
+      "codeSystem": "SNOMED-CT",
+      "codeValue": "239873007",
+      "label": "Osteoarthritis of knee",
+      "recordedBy": "Dr. A. Whitfield"
+    }
+  ],
+  "symptomList": [
+    {
+      "description": "dizziness",
+      "reportedAt": "2026-01-15T09:00:00Z",
+      "severity": "mild"
+    },
+    {
+      "description": "shortness of breath",
+      "reportedAt": "2026-01-15T09:01:00Z",
+      "severity": "moderate"
+    }
+  ],
+  "billing": {
+    "payerId": "PAYER-4471",
+    "priorAuth": false,
+    "copayCents": 2500
+  },
+  "insurance": {
+    "planName": "Lakeside PPO Gold",
+    "groupNumber": "GRP-8842",
+    "memberSince": "2019-03-01"
+  }
+}

@@ -1,0 +1,13 @@
+suite=events adapter=apple_fm reps=5
+
+escape:
+  control: original shape (Ruby only)        pass 5/5  squished 0/5  avg 0.0s  
+  envelope keys renamed                      pass 4/5  squished 5/5  avg 1.1s  wrong: kindx1 currencyx1
+  new type name invoice.payment_succeeded    pass 4/5  squished 5/5  avg 1.0s  wrong: kindx1
+  versioned type v2.invoice.paid             pass 1/5  squished 5/5  avg 1.0s  wrong: kindx4 currencyx1
+  amount now decimal string "30.00"          pass 0/5  squished 5/5  avg 1.0s  wrong: amount_centsx5 kindx3
+  currency now {code: "USD"}                 pass 4/5  squished 5/5  avg 1.0s  wrong: customer_emailx1
+  wrapped in a list of one                   pass 4/5  squished 5/5  avg 1.0s  wrong: kindx1 amount_centsx1 currencyx1
+  raw JSON body string                       pass 2/5  squished 5/5  avg 1.0s  wrong: kindx2 currencyx2
+  unmapped type invoice.voided               pass 5/5  squished 5/5  avg 1.0s  
+  TOTAL                                      pass 29/45

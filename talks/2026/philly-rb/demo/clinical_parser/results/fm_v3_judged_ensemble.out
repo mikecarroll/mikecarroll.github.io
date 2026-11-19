@@ -1,0 +1,473 @@
+== 001_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 002_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 003_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 004_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 005_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 006_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 007_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 008_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 009_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 010_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 011_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 012_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 013_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 014_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 015_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 016_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 017_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 018_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 019_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 020_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 021_fhir_variant.json (fhir_variant) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+PASS
+
+== 022_fhir_variant.json (fhir_variant) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+PASS
+
+== 023_fhir_variant.json (fhir_variant) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+PASS
+
+== 024_fhir_variant.json (fhir_variant) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+FAIL — parsed but values don't match expected
+  expected: {"patient_name":"Alfreda Wyman","patient_gender":"trans","diagnosis_codes":["38341003","10509002","15777000"],"symptoms":["chest pain","joint pain","rash"]}
+  actual:   {"patient_name":"Alfreda Wyman","patient_gender":"female","diagnosis_codes":["38341003","10509002","15777000"],"symptoms":["chest pain","joint pain","rash"]}
+
+== 025_fhir_variant.json (fhir_variant) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+FAIL — parsed but values don't match expected
+  expected: {"patient_name":"Alica Powlowski","patient_gender":"trans","diagnosis_codes":["195662009","444814009","87433001"],"symptoms":["chills","congestion","insomnia","abdominal pain"]}
+  actual:   {"patient_name":"Alica Powlowski","patient_gender":"female","diagnosis_codes":["195662009","444814009","87433001"],"symptoms":["chills","congestion","insomnia","abdominal pain"]}
+
+== 026_hl7.hl7 (hl7) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=claude-opus-5-5 attempt=0/0 final=true error=Squishling::DisagreementError
+FAIL — samples disagreed and the judge rejected both: LLM output was invalid: the judge rejected both samples
+
+== 027_hl7.hl7 (hl7) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+FAIL — parsed but values don't match expected
+  expected: {"patient_name":"Almeda Conn","patient_gender":"male","diagnosis_codes":["162864005","38341003","44054006"],"symptoms":["palpitations"]}
+  actual:   {"patient_name":"Springfield MA","patient_gender":"male","diagnosis_codes":["38341003","44054006"],"symptoms":["palpitations"]}
+
+== 028_hl7.hl7 (hl7) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+FAIL — parsed but values don't match expected
+  expected: {"patient_name":"Amiee Buckridge","patient_gender":"unknown","diagnosis_codes":["444814009","75498004","10509002"],"symptoms":["wheezing","fever"]}
+  actual:   {"patient_name":"Amie Buckeyridge","patient_gender":"female","diagnosis_codes":["444814009","75498004","10509002"],"symptoms":["wheezing","fever"]}
+
+== 029_hl7.hl7 (hl7) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+FAIL — parsed but values don't match expected
+  expected: {"patient_name":"Ammie Huels","patient_gender":"unknown","diagnosis_codes":["162864005","15777000","195662009"],"symptoms":["headache","nausea","dizziness"]}
+  actual:   {"patient_name":"Ammie Huels","patient_gender":"female","diagnosis_codes":["162864005","15777000","195662009"],"symptoms":["headache","nausea","dizziness"]}
+
+== 030_hl7.hl7 (hl7) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+FAIL — parsed but values don't match expected
+  expected: {"patient_name":"Angele Greenfelder","patient_gender":"unknown","diagnosis_codes":["40055000","36971009","444814009"],"symptoms":["shortness of breath","sore throat","chest pain","joint pain"]}
+  actual:   {"patient_name":"Greenfelder, Angela","patient_gender":"female","diagnosis_codes":["40055000","36971009","444814009"],"symptoms":["shortness of breath","sore throat","chest pain","joint pain"]}
+
+== 031_pipe_delimited.txt (pipe_delimited) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+PASS
+
+== 032_pipe_delimited.txt (pipe_delimited) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+PASS
+
+== 033_pipe_delimited.txt (pipe_delimited) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+PASS
+
+== 034_pipe_delimited.txt (pipe_delimited) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+PASS
+
+== 035_pipe_delimited.txt (pipe_delimited) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+PASS
+
+== 036_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 037_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 038_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 039_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 040_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 041_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 042_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 043_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 044_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 045_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 046_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 047_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 048_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 049_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 050_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 051_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 052_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 053_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 054_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 055_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 056_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 057_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 058_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 059_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 060_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 061_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 062_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 063_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 064_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 065_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 066_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 067_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 068_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 069_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 070_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 071_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 072_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 073_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 074_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 075_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 076_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 077_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 078_canonical_fhir.json (canonical_fhir) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 079_cda_xml.xml (cda_xml) ==
+        squawk: model=claude-haiku-4-5-20251001 attempt=1/1 final=true error=Squishling::LLMError
+FAIL — V3::ParserJudgedEnsemble#call: the prompt, schema, and answer didn't fit the model's 4096-token context window
+
+== 080_fhir_xml.xml (fhir_xml) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+FAIL — parsed but values don't match expected
+  expected: {"patient_name":"Marsha Hayes","patient_gender":"unknown","diagnosis_codes":["232353008","72892002","43878008"],"symptoms":["blurred vision","palpitations","night sweats","cough"]}
+  actual:   {"patient_name":"Marsha Hayes","patient_gender":"trans","diagnosis_codes":["232353008","43878008"],"symptoms":["blurred vision","palpitations","night sweats","cough"]}
+
+== 081_pdf.pdf (pdf) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+FAIL — parsed but values don't match expected
+  expected: {"patient_name":"Mathilda O'Keefe","patient_gender":"female","diagnosis_codes":["24079001","233678006","367498001"],"symptoms":[]}
+  actual:   {"patient_name":"Mathilda O'Keefe","patient_gender":"female","diagnosis_codes":["24079001","233678006","367498001"],"symptoms":["None reported."]}
+
+== 082_soap_note.txt (soap_note) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+PASS
+
+== 083_csv.csv (csv) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+FAIL — parsed but values don't match expected
+  expected: {"patient_name":"Mayte Escobar","patient_gender":"female","diagnosis_codes":["15777000","271737000","19169002"],"symptoms":["dizziness","shortness of breath"]}
+  actual:   {"patient_name":"Mayte Escobar","patient_gender":"female","diagnosis_codes":["Prediabetes","Anemia (disorder)","Miscarriage in first trimester"],"symptoms":["dizziness","shortness of breath"]}
+
+== 084_yaml.yaml (yaml) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+PASS
+
+== 085_eml.eml (eml) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+PASS
+
+== 086_rtf.rtf (rtf) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+FAIL — parsed but values don't match expected
+  expected: {"patient_name":"Oralia Stark","patient_gender":"female","diagnosis_codes":["128613002","703151001","44465007"],"symptoms":[]}
+  actual:   {"patient_name":"Oralia Stark","patient_gender":"female","diagnosis_codes":["SNOMED 128613002","SNOMED 703151001","SNOMED 44465007"],"symptoms":[]}
+
+== 087_markdown.md (markdown) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+PASS
+
+== 088_html_portal.html (html_portal) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+PASS
+
+== 089_html_embedded_fhir.html (html_embedded_fhir) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+PASS
+
+== 090_sql_dump.sql (sql_dump) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+PASS
+
+== 091_x12_837.x12 (x12_837) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+FAIL — parsed but values don't match expected
+  expected: {"patient_name":"Sofia Koepp","patient_gender":"unknown","diagnosis_codes":["195662009","444814009","370247008"],"symptoms":[]}
+  actual:   {"patient_name":"LAKESIDE REGIONAL","patient_gender":"female","diagnosis_codes":["260115"],"symptoms":["CLM368910"]}
+
+== 092_ndjson_bulk.ndjson (ndjson_bulk) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+PASS
+
+== 093_fixed_width.dat (fixed_width) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+FAIL — parsed but values don't match expected
+  expected: {"patient_name":"Suzi Bechtelar","patient_gender":"unknown","diagnosis_codes":["72892002","444814009","10509002"],"symptoms":["dry mouth","blurred vision"]}
+  actual:   {"patient_name":"Suzi Bechtelar","patient_gender":"female","diagnosis_codes":["dry mouth/blurred vision"],"symptoms":["dry mouth/blurred vision"]}
+
+== 094_sms_chat.txt (sms_chat) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+PASS
+
+== 095_spreadsheetml.xml (spreadsheetml) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+PASS
+
+== 096_rdf_turtle.ttl (rdf_turtle) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+FAIL — parsed but values don't match expected
+  expected: {"patient_name":"Vera Spinka","patient_gender":"female","diagnosis_codes":["195662009","72892002","19169002"],"symptoms":[]}
+  actual:   {"patient_name":"Vera Spinka","patient_gender":"female","diagnosis_codes":["195662009","19169002"],"symptoms":[]}
+
+== 097_json_ld.jsonld (json_ld) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+PASS
+
+== 098_ocr_fax.txt (ocr_fax) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+PASS
+
+== 099_dictation.txt (dictation) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+FAIL — parsed but values don't match expected
+  expected: {"patient_name":"Zachariah Osinski","patient_gender":"male","diagnosis_codes":["40055000","162864005","15777000"],"symptoms":["insomnia","abdominal pain","dry mouth"]}
+  actual:   {"patient_name":"Zachariah Osinski","patient_gender":"male","diagnosis_codes":["400550000","162864005","157777000"],"symptoms":["insomnia","abdominal pain","dry mouth"]}
+
+== 100_base64_envelope.json (base64_envelope) ==
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+        squawk: model=apple-foundation-model attempt=1/1 final=true error=
+FAIL — parsed but values don't match expected
+  expected: {"patient_name":"Zula Beer","patient_gender":"female","diagnosis_codes":["19169002","40055000","15777000"],"symptoms":["blurred vision","palpitations","night sweats","cough"]}
+  actual:   {"patient_name":"John Doe","patient_gender":"male","diagnosis_codes":["ICD-10:101.0"],"symptoms":["headache"]}
+
+v3_judged_ensemble: 20/100 passed, 80/100 failed (1 calls to the judge, claude-opus-5-5)
+usage log: /Users/woodchip/conductor/workspaces/mikecarroll.github.io/san-diego-v5/.context/fm_run/clinical_parser/tmp/usage_v3_judged_ensemble.jsonl

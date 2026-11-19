@@ -1,0 +1,95 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Title (Discharge Summary C7792DA2) /Author (Harborview Community Hospital HIM) /Producer (LegacyReportEngine 4.2) /Keywords (discharge,summary,C7792DA2,draft) /CreationDate (D:20260116110500-05'00') >>
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 7 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> >>
+endobj
+7 0 obj
+<< /Length 1802 >>
+stream
+BT
+/F2 16 Tf 1 0 0 1 54 750 Tm (HARBORVIEW COMMUNITY HOSPITAL - DISCHARGE SUMMARY) Tj
+/F1 9 Tf 1 0 0 1 54 726 Tm (Dept. of Medicine | 1 Hospital Way, Needham, Massachusetts | Tel \(555\) 010-1080 | Fax \(555\) 010-9180) Tj
+/F1 9 Tf 1 0 0 1 54 712 Tm (CONFIDENTIAL - contains protected health information \(synthetic test data\)) Tj
+/F1 6 Tf 1 0 0 1 54 698 Tm ( ) Tj
+/F2 11 Tf 1 0 0 1 54 689 Tm (PATIENT) Tj
+/F1 10 Tf 1 0 0 1 54 672 Tm (Name: Mathilda O'Keefe        MRN: C7792DA2        DOB: 2006-07-31) Tj
+/F1 10 Tf 1 0 0 1 54 657 Tm (Sex: Female        Phone: 555-258-9836) Tj
+/F1 10 Tf 1 0 0 1 54 642 Tm (Address: 406 Metz Ranch, Needham, Massachusetts 02492) Tj
+/F1 6 Tf 1 0 0 1 54 627 Tm ( ) Tj
+/F2 11 Tf 1 0 0 1 54 618 Tm (ENCOUNTER) Tj
+/F1 10 Tf 1 0 0 1 54 601 Tm (Admit: 2026-01-15 08:41        Discharge: 2026-01-16 11:05        Ward: B-9) Tj
+/F1 10 Tf 1 0 0 1 54 586 Tm (Attending: Dr. L. Ferreira        Disposition: Home with outpatient follow-up) Tj
+/F1 6 Tf 1 0 0 1 54 571 Tm ( ) Tj
+/F2 11 Tf 1 0 0 1 54 562 Tm (VITALS ON ADMISSION) Tj
+/F1 10 Tf 1 0 0 1 54 545 Tm (BP 110/66 mmHg   HR 58 bpm   Temp 98.2 F   SpO2 96%   Wt 82 kg   Ht 150 cm) Tj
+/F1 6 Tf 1 0 0 1 54 530 Tm ( ) Tj
+/F2 11 Tf 1 0 0 1 54 521 Tm (DISCHARGE MEDICATIONS) Tj
+/F1 10 Tf 1 0 0 1 54 504 Tm (  - lisinopril 10 MG Oral Tablet   [RxNorm 314076]   1 tab PO daily) Tj
+/F1 10 Tf 1 0 0 1 54 489 Tm (  - Metformin hydrochloride 500 MG Oral Tablet   [RxNorm 861007]   1 tab PO daily) Tj
+/F1 6 Tf 1 0 0 1 54 474 Tm ( ) Tj
+/F2 11 Tf 1 0 0 1 54 465 Tm (INSURANCE / BILLING) Tj
+/F1 10 Tf 1 0 0 1 54 448 Tm (Payer: Lakeside PPO Gold   Group: GRP-8842   Member: MBR2506960   Copay: $25.00) Tj
+/F1 10 Tf 1 0 0 1 54 433 Tm (Claim ref: CLM-2026-0327920   Status: pending adjudication) Tj
+/F1 8 Tf 1 0 0 1 54 418 Tm (Page 1 of 2) Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 9 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> >>
+endobj
+9 0 obj
+<< /Length 1123 >>
+stream
+BT
+/F2 16 Tf 1 0 0 1 54 750 Tm (HARBORVIEW COMMUNITY HOSPITAL - DISCHARGE SUMMARY \(cont.\)) Tj
+/F1 9 Tf 1 0 0 1 54 726 Tm (Patient: Mathilda O'Keefe   MRN: C7792DA2) Tj
+/F1 6 Tf 1 0 0 1 54 712 Tm ( ) Tj
+/F2 11 Tf 1 0 0 1 54 703 Tm (DIAGNOSES \(SNOMED CT\)) Tj
+/F1 10 Tf 1 0 0 1 54 686 Tm (  1. 24079001 - Atopic dermatitis) Tj
+/F1 10 Tf 1 0 0 1 54 671 Tm (  2. 233678006 - Childhood asthma) Tj
+/F1 10 Tf 1 0 0 1 54 656 Tm (  3. 367498001 - Seasonal allergic rhinitis) Tj
+/F1 6 Tf 1 0 0 1 54 641 Tm ( ) Tj
+/F2 11 Tf 1 0 0 1 54 632 Tm (PRESENTING SYMPTOMS) Tj
+/F1 10 Tf 1 0 0 1 54 615 Tm (  None reported.) Tj
+/F1 6 Tf 1 0 0 1 54 600 Tm ( ) Tj
+/F2 11 Tf 1 0 0 1 54 591 Tm (HOSPITAL COURSE) Tj
+/F1 10 Tf 1 0 0 1 54 574 Tm (Fall risk screen negative. PHQ-2 score 0.) Tj
+/F1 10 Tf 1 0 0 1 54 559 Tm (Please bring your insurance card to every visit.) Tj
+/F1 10 Tf 1 0 0 1 54 544 Tm (Follow-up in 2 weeks with primary care. Return precautions reviewed.) Tj
+/F1 6 Tf 1 0 0 1 54 529 Tm ( ) Tj
+/F1 10 Tf 1 0 0 1 54 520 Tm (Electronically signed: Dr. L. Ferreira   2026-01-16 11:12) Tj
+/F1 8 Tf 1 0 0 1 54 505 Tm (Page 2 of 2) Tj
+ET
+endstream
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000121 00000 n 
+0000000218 00000 n 
+0000000320 00000 n 
+0000000541 00000 n 
+0000000677 00000 n 
+0000002530 00000 n 
+0000002666 00000 n 
+trailer
+<< /Size 10 /Root 1 0 R /Info 5 0 R >>
+startxref
+3840
+%%EOF

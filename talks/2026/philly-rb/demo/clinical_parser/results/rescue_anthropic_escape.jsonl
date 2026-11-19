@@ -1,0 +1,45 @@
+{"adapter":"anthropic","cond":"escape","case":"control: {data: ...} (Ruby path, no LLM)","ok":true,"squished":false,"got":"this is the data","error":null,"secs":0.01}
+{"adapter":"anthropic","cond":"escape","case":"control: {data: ...} (Ruby path, no LLM)","ok":true,"squished":false,"got":"this is the data","error":null,"secs":0.0}
+{"adapter":"anthropic","cond":"escape","case":"control: {data: ...} (Ruby path, no LLM)","ok":true,"squished":false,"got":"this is the data","error":null,"secs":0.0}
+{"adapter":"anthropic","cond":"escape","case":"control: {data: ...} (Ruby path, no LLM)","ok":true,"squished":false,"got":"this is the data","error":null,"secs":0.0}
+{"adapter":"anthropic","cond":"escape","case":"control: {data: ...} (Ruby path, no LLM)","ok":true,"squished":false,"got":"this is the data","error":null,"secs":0.0}
+{"adapter":"anthropic","cond":"escape","case":"bare String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":2.33}
+{"adapter":"anthropic","cond":"escape","case":"bare String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":1.52}
+{"adapter":"anthropic","cond":"escape","case":"bare String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":1.49}
+{"adapter":"anthropic","cond":"escape","case":"bare String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":1.57}
+{"adapter":"anthropic","cond":"escape","case":"bare String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":1.4}
+{"adapter":"anthropic","cond":"escape","case":"JSON String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":1.37}
+{"adapter":"anthropic","cond":"escape","case":"JSON String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":1.43}
+{"adapter":"anthropic","cond":"escape","case":"JSON String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":1.38}
+{"adapter":"anthropic","cond":"escape","case":"JSON String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":1.49}
+{"adapter":"anthropic","cond":"escape","case":"JSON String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":1.43}
+{"adapter":"anthropic","cond":"escape","case":"string-keyed Hash","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.94}
+{"adapter":"anthropic","cond":"escape","case":"string-keyed Hash","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.53}
+{"adapter":"anthropic","cond":"escape","case":"string-keyed Hash","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.53}
+{"adapter":"anthropic","cond":"escape","case":"string-keyed Hash","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.56}
+{"adapter":"anthropic","cond":"escape","case":"string-keyed Hash","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.52}
+{"adapter":"anthropic","cond":"escape","case":"nested Hash","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.49}
+{"adapter":"anthropic","cond":"escape","case":"nested Hash","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.52}
+{"adapter":"anthropic","cond":"escape","case":"nested Hash","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.55}
+{"adapter":"anthropic","cond":"escape","case":"nested Hash","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.53}
+{"adapter":"anthropic","cond":"escape","case":"nested Hash","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.5}
+{"adapter":"anthropic","cond":"escape","case":"Array of one String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.53}
+{"adapter":"anthropic","cond":"escape","case":"Array of one String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.52}
+{"adapter":"anthropic","cond":"escape","case":"Array of one String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.52}
+{"adapter":"anthropic","cond":"escape","case":"Array of one String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.52}
+{"adapter":"anthropic","cond":"escape","case":"Array of one String","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.54}
+{"adapter":"anthropic","cond":"escape","case":"Hash, renamed key (body:)","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.56}
+{"adapter":"anthropic","cond":"escape","case":"Hash, renamed key (body:)","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.47}
+{"adapter":"anthropic","cond":"escape","case":"Hash, renamed key (body:)","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.52}
+{"adapter":"anthropic","cond":"escape","case":"Hash, renamed key (body:)","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.52}
+{"adapter":"anthropic","cond":"escape","case":"Hash, renamed key (body:)","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.54}
+{"adapter":"anthropic","cond":"escape","case":"Hash with noise + wrong key","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.52}
+{"adapter":"anthropic","cond":"escape","case":"Hash with noise + wrong key","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.58}
+{"adapter":"anthropic","cond":"escape","case":"Hash with noise + wrong key","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.52}
+{"adapter":"anthropic","cond":"escape","case":"Hash with noise + wrong key","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.5}
+{"adapter":"anthropic","cond":"escape","case":"Hash with noise + wrong key","ok":true,"squished":true,"got":"this is the data","error":null,"secs":0.56}
+{"adapter":"anthropic","cond":"escape","case":"nil (nothing to recover)","ok":true,"squished":true,"got":null,"error":null,"secs":0.56}
+{"adapter":"anthropic","cond":"escape","case":"nil (nothing to recover)","ok":true,"squished":true,"got":null,"error":null,"secs":0.5}
+{"adapter":"anthropic","cond":"escape","case":"nil (nothing to recover)","ok":true,"squished":true,"got":null,"error":null,"secs":0.49}
+{"adapter":"anthropic","cond":"escape","case":"nil (nothing to recover)","ok":true,"squished":true,"got":null,"error":null,"secs":0.49}
+{"adapter":"anthropic","cond":"escape","case":"nil (nothing to recover)","ok":true,"squished":true,"got":null,"error":null,"secs":0.5}

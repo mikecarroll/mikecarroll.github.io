@@ -1,0 +1,29 @@
+{
+  "cache off": {
+    "cost": 0.09647,
+    "passed": 19,
+    "n": 20,
+    "in": 92280,
+    "out": 838,
+    "cr": 0,
+    "cw": 0
+  },
+  "cache on, cold": {
+    "cost": 0.11693175,
+    "passed": 19,
+    "n": 20,
+    "in": 10553,
+    "out": 844,
+    "cr": 0,
+    "cw": 81727
+  },
+  "cache on, warm (repeat)": {
+    "cost": 0.0229757,
+    "passed": 19,
+    "n": 20,
+    "in": 10553,
+    "out": 850,
+    "cr": 81727,
+    "cw": 0
+  }
+}

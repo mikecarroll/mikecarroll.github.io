@@ -1,0 +1,93 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# bin/run_rescue — does squish! rescue a method whose input shape changed?
+# (lib/rescue/data_normalizer.rb). Runs every case REPS times, with and without
+# the class's own source appended to the prompt, and prints a pass matrix.
+#
+#   ADAPTER=anthropic bin/run_rescue                      # Claude Haiku (needs ANTHROPIC_API_KEY)
+#   BUNDLE_GEMFILE=Gemfile.fm RUBYOPT=-r./lib/use_apple_fm ADAPTER=apple_fm bin/run_rescue
+#
+# REPS=5 by default. Writes results/rescue_<adapter>.jsonl.
+require "bundler/setup"
+require "fileutils"
+require "json"
+require "time"
+require "ruby_llm"
+require "squishling"
+require_relative "../lib/rescue/data_normalizer"
+require_relative "../lib/rescue/escape_hatch"
+ESCAPE = ENV["ESCAPE"] == "1" # escape-hatch schema (nullable data), see lib/rescue/escape_hatch.rb
+
+adapter = ENV.fetch("ADAPTER", "anthropic")
+reps = Integer(ENV.fetch("REPS", "5"))
+
+if adapter == "anthropic"
+  abort "Set ANTHROPIC_API_KEY" unless ENV["ANTHROPIC_API_KEY"]
+  RubyLLM.configure { |c| c.anthropic_api_key = ENV["ANTHROPIC_API_KEY"] }
+  Squishling.configure do |c|
+    c.default_model = "claude-haiku-4-5-20251001"
+    c.default_provider = :anthropic
+  end
+end
+
+TEXT = "this is the data"
+# [name, payload, expected]. expected nil = there is no answer to recover (must not be invented).
+CASES = [
+  ["control: {data: ...} (Ruby path, no LLM)", { data: TEXT },                       TEXT],
+  ["bare String",                              TEXT,                                 TEXT],
+  ["JSON String",                              %({"data":"#{TEXT}"}),                TEXT],
+  ["string-keyed Hash",                        { "data" => TEXT },                   TEXT],
+  ["nested Hash",                              { payload: { data: TEXT } },          TEXT],
+  ["Array of one String",                      [TEXT],                               TEXT],
+  ["Hash, renamed key (body:)",                { body: TEXT },                       TEXT],
+  ["Hash with noise + wrong key",              { id: 7, meta: { ts: 1 }, text: TEXT }, TEXT],
+  ["nil (nothing to recover)",                 nil,                                  nil]
+].freeze
+
+CLASSES = (ESCAPE ? { "escape" => Rescue::Escape::DataNormalizer } : { "with_source" => Rescue::DataNormalizer, "no_source" => Rescue::DataNormalizerNoSource }).freeze
+
+root = File.expand_path("..", __dir__)
+FileUtils.mkdir_p(File.join(root, "results"))
+log = File.open(File.join(root, "results", "rescue_#{adapter}#{ESCAPE ? "_escape" : ""}.jsonl"), "w")
+tally = Hash.new { |h, k| h[k] = { ok: 0, n: 0, squished: 0, secs: 0.0 } }
+
+CLASSES.each do |cond, klass|
+  CASES.each do |name, payload, expected|
+    reps.times do
+      t0 = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+      got = err = squished = nil
+      begin
+        r = klass.call(payload)
+        got = r.data
+        squished = r.squished?
+      rescue StandardError => e
+        err = "#{e.class}: #{e.message[0, 120]}"
+      end
+      secs = Process.clock_gettime(Process::CLOCK_MONOTONIC) - t0
+      ok = if expected.nil?
+             err || got.to_s.strip.empty? # raising or returning empty is the right call; inventing text is not
+           else
+             got.to_s.strip == expected
+           end
+      t = tally[[cond, name]]
+      t[:n] += 1
+      t[:ok] += 1 if ok
+      t[:squished] += 1 if squished
+      t[:secs] += secs
+      log.puts({ adapter:, cond:, case: name, ok:, squished:, got:, error: err, secs: secs.round(2) }.to_json)
+    end
+  end
+end
+log.close
+
+puts "adapter=#{adapter} reps=#{reps}"
+CLASSES.each_key do |cond|
+  puts "\n#{cond}:"
+  CASES.each do |name, _, _|
+    t = tally[[cond, name]]
+    puts format("  %-44s pass %d/%d  squished %d/%d  avg %.1fs", name, t[:ok], t[:n], t[:squished], t[:n], t[:secs] / t[:n])
+  end
+  rows = CASES.map { |name, _, _| tally[[cond, name]] }
+  puts format("  %-44s pass %d/%d", "TOTAL", rows.sum { _1[:ok] }, rows.sum { _1[:n] })
+end

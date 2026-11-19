@@ -1,0 +1,13 @@
+adapter=anthropic reps=5
+
+escape:
+  control: {data: ...} (Ruby path, no LLM)     pass 5/5  squished 0/5  avg 0.0s
+  bare String                                  pass 5/5  squished 5/5  avg 1.7s
+  JSON String                                  pass 5/5  squished 5/5  avg 1.4s
+  string-keyed Hash                            pass 5/5  squished 5/5  avg 0.6s
+  nested Hash                                  pass 5/5  squished 5/5  avg 0.5s
+  Array of one String                          pass 5/5  squished 5/5  avg 0.5s
+  Hash, renamed key (body:)                    pass 5/5  squished 5/5  avg 0.5s
+  Hash with noise + wrong key                  pass 5/5  squished 5/5  avg 0.5s
+  nil (nothing to recover)                     pass 5/5  squished 5/5  avg 0.5s
+  TOTAL                                        pass 45/45

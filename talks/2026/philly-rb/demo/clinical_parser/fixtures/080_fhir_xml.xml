@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bundle xmlns="http://hl7.org/fhir">
+  <id value="bundle-5fbee500"/>
+  <meta><lastUpdated value="2026-01-15T09:00:00.000+00:00"/><profile value="http://hl7.org/fhir/us/core/StructureDefinition/us-core-patient"/></meta>
+  <type value="collection"/>
+  <entry>
+    <fullUrl value="urn:uuid:5fbee500-9b99-4dad-bce4-0a4de9f9f3b9"/>
+    <resource>
+      <Patient>
+        <id value="5fbee500-9b99-4dad-bce4-0a4de9f9f3b9"/>
+        <identifier><type><coding><system value="http://terminology.hl7.org/CodeSystem/v2-0203"/><code value="MR"/></coding></type><value value="5FBEE500"/></identifier>
+        <name><use value="official"/><family value="Hayes"/><given value="Marsha"/></name>
+        <telecom><system value="phone"/><value value="555-836-3614"/><use value="home"/></telecom>
+        <gender value="other"/>
+        <birthDate value="1980-07-30"/>
+        <address><line value="1047 Gusikowski Bypass Unit 87"/><city value="Newton"/><state value="Massachusetts"/><postalCode value="02458"/></address>
+      </Patient>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="urn:uuid:cond-79-0"/>
+    <resource>
+      <Condition>
+        <id value="cond-79-0"/>
+        <clinicalStatus><coding><system value="http://terminology.hl7.org/CodeSystem/condition-clinical"/><code value="active"/></coding></clinicalStatus>
+        <code><coding><system value="http://snomed.info/sct"/><code value="232353008"/><display value="Perennial allergic rhinitis with seasonal variation"/></coding><text value="Perennial allergic rhinitis with seasonal variation"/></code>
+        <subject><reference value="urn:uuid:5fbee500-9b99-4dad-bce4-0a4de9f9f3b9"/></subject>
+        <onsetDateTime value="2010-01-01T00:00:00+00:00"/>
+      </Condition>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="urn:uuid:cond-79-1"/>
+    <resource>
+      <Condition>
+        <id value="cond-79-1"/>
+        <clinicalStatus><coding><system value="http://terminology.hl7.org/CodeSystem/condition-clinical"/><code value="active"/></coding></clinicalStatus>
+        <code><coding><system value="http://snomed.info/sct"/><code value="72892002"/><display value="Normal pregnancy"/></coding><text value="Normal pregnancy"/></code>
+        <subject><reference value="urn:uuid:5fbee500-9b99-4dad-bce4-0a4de9f9f3b9"/></subject>
+        <onsetDateTime value="2010-01-01T00:00:00+00:00"/>
+      </Condition>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="urn:uuid:cond-79-2"/>
+    <resource>
+      <Condition>
+        <id value="cond-79-2"/>
+        <clinicalStatus><coding><system value="http://terminology.hl7.org/CodeSystem/condition-clinical"/><code value="active"/></coding></clinicalStatus>
+        <code><coding><system value="http://snomed.info/sct"/><code value="43878008"/><display value="Streptococcal sore throat (disorder)"/></coding><text value="Streptococcal sore throat (disorder)"/></code>
+        <subject><reference value="urn:uuid:5fbee500-9b99-4dad-bce4-0a4de9f9f3b9"/></subject>
+        <onsetDateTime value="2010-01-01T00:00:00+00:00"/>
+      </Condition>
+    </resource>
+  </entry>
+  <entry>
+    <resource>
+      <Observation>
+        <id value="symptom-1-5fbee500-9b99-4dad-bce4-0a4de9f9f3b9"/>
+        <status value="final"/>
+        <category><coding><system value="http://terminology.hl7.org/CodeSystem/observation-category"/><code value="symptom"/></coding></category>
+        <code><text value="symptom"/></code>
+        <subject><reference value="urn:uuid:5fbee500-9b99-4dad-bce4-0a4de9f9f3b9"/></subject>
+        <effectiveDateTime value="2026-01-15T09:00:00+00:00"/>
+        <valueString value="blurred vision"/>
+      </Observation>
+    </resource>
+  </entry>
+  <entry>
+    <resource>
+      <Observation>
+        <id value="symptom-2-5fbee500-9b99-4dad-bce4-0a4de9f9f3b9"/>
+        <status value="final"/>
+        <category><coding><system value="http://terminology.hl7.org/CodeSystem/observation-category"/><code value="symptom"/></coding></category>
+        <code><text value="symptom"/></code>
+        <subject><reference value="urn:uuid:5fbee500-9b99-4dad-bce4-0a4de9f9f3b9"/></subject>
+        <effectiveDateTime value="2026-01-15T09:00:00+00:00"/>
+        <valueString value="palpitations"/>
+      </Observation>
+    </resource>
+  </entry>
+  <entry>
+    <resource>
+      <Observation>
+        <id value="symptom-3-5fbee500-9b99-4dad-bce4-0a4de9f9f3b9"/>
+        <status value="final"/>
+        <category><coding><system value="http://terminology.hl7.org/CodeSystem/observation-category"/><code value="symptom"/></coding></category>
+        <code><text value="symptom"/></code>
+        <subject><reference value="urn:uuid:5fbee500-9b99-4dad-bce4-0a4de9f9f3b9"/></subject>
+        <effectiveDateTime value="2026-01-15T09:00:00+00:00"/>
+        <valueString value="night sweats"/>
+      </Observation>
+    </resource>
+  </entry>
+  <entry>
+    <resource>
+      <Observation>
+        <id value="symptom-4-5fbee500-9b99-4dad-bce4-0a4de9f9f3b9"/>
+        <status value="final"/>
+        <category><coding><system value="http://terminology.hl7.org/CodeSystem/observation-category"/><code value="symptom"/></coding></category>
+        <code><text value="symptom"/></code>
+        <subject><reference value="urn:uuid:5fbee500-9b99-4dad-bce4-0a4de9f9f3b9"/></subject>
+        <effectiveDateTime value="2026-01-15T09:00:00+00:00"/>
+        <valueString value="cough"/>
+      </Observation>
+    </resource>
+  </entry>
+  <entry>
+    <resource>
+      <Coverage>
+        <status value="active"/>
+        <subscriberId value="MBR2475623"/>
+        <beneficiary><reference value="urn:uuid:5fbee500-9b99-4dad-bce4-0a4de9f9f3b9"/></beneficiary>
+        <payor><display value="Lakeside PPO Gold"/></payor>
+      </Coverage>
+    </resource>
+  </entry>
+</Bundle>

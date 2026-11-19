@@ -1,0 +1,123 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# bin/run_rescue_suite — SUITE=events|amounts (lib/rescue/suites.rb).
+# Runs every case REPS times with and without the method's own source in the
+# prompt and prints a pass matrix with per-field misses.
+#
+#   SUITE=events ADAPTER=anthropic bin/run_rescue_suite
+#   SUITE=amounts BUNDLE_GEMFILE=Gemfile.fm RUBYOPT=-r./lib/use_apple_fm ADAPTER=apple_fm bin/run_rescue_suite
+require "bundler/setup"
+require "fileutils"
+require "json"
+require "ruby_llm"
+require "squishling"
+require_relative "../lib/rescue/suites"
+require_relative "../lib/rescue/escape_hatch"
+ESCAPE = ENV["ESCAPE"] == "1"
+
+suite = ENV.fetch("SUITE")
+adapter = ENV.fetch("ADAPTER", "anthropic")
+reps = Integer(ENV.fetch("REPS", "5"))
+
+if adapter == "anthropic"
+  abort "Set ANTHROPIC_API_KEY" unless ENV["ANTHROPIC_API_KEY"]
+  RubyLLM.configure { |c| c.anthropic_api_key = ENV["ANTHROPIC_API_KEY"] }
+  Squishling.configure do |c|
+    c.default_model = "claude-haiku-4-5-20251001"
+    c.default_provider = :anthropic
+  end
+end
+
+S = Rescue::Suites
+
+case suite
+when "events"
+  # One logical event: invoice.paid, $30.00 USD.
+  EXPECTED = { "event_id" => "evt_1", "kind" => "payment_succeeded", "invoice_id" => "in_9",
+               "amount_cents" => 3000, "currency" => "USD", "customer_email" => "ada@example.com" }.freeze
+  obj = { id: "in_9", amount_paid: 3000, currency: "usd", customer_email: "Ada@Example.com" }
+  orig = { id: "evt_1", type: "invoice.paid", created: 1_700_000_000, data: { object: obj } }
+  CASES = [
+    ["control: original shape (Ruby only)", orig, EXPECTED],
+    ["envelope keys renamed", { event_id: "evt_1", event_type: "invoice.paid", payload: { object: obj } }, EXPECTED],
+    ["new type name invoice.payment_succeeded", orig.merge(type: "invoice.payment_succeeded"), EXPECTED],
+    ["versioned type v2.invoice.paid", orig.merge(type: "v2.invoice.paid"), EXPECTED],
+    ["amount now decimal string \"30.00\"", orig.merge(data: { object: obj.reject { |k, _| k == :amount_paid }.merge(amount_paid_decimal: "30.00") }), EXPECTED],
+    ["currency now {code: \"USD\"}", orig.merge(data: { object: obj.merge(currency: { code: "USD" }) }), EXPECTED],
+    ["wrapped in a list of one", [orig], EXPECTED],
+    ["raw JSON body string", JSON.generate(orig), EXPECTED],
+    ["unmapped type invoice.voided", orig.merge(type: "invoice.voided"), nil]
+  ].freeze
+  CLASSES = (ESCAPE ? { "escape" => Rescue::Escape::EventRouter } : { "with_source" => S::EventRouter, "no_source" => S::EventRouterNoSource }).freeze
+  DECLINED = ->(h) { h[:kind] == "unknown" }
+when "amounts"
+  CASES = [
+    ["control: \"1250.50\" (Ruby only)", "1250.50", { "minor_units" => 125_050, "currency" => "USD" }],
+    ["\"$1,250.50\"", "$1,250.50", { "minor_units" => 125_050, "currency" => "USD" }],
+    ["EU format \"1.250,50 €\"", "1.250,50 €", { "minor_units" => 125_050, "currency" => "EUR" }],
+    ["\"USD 1250.5\"", "USD 1250.5", { "minor_units" => 125_050, "currency" => "USD" }],
+    ["French spacing \"1 250,50 CAD\"", "1 250,50 CAD", { "minor_units" => 125_050, "currency" => "CAD" }],
+    ["accounting negative \"(250.00)\"", "(250.00)", { "minor_units" => -25_000, "currency" => "USD" }],
+    ["\"1.25k USD\"", "1.25k USD", { "minor_units" => 125_000, "currency" => "USD" }],
+    ["words \"twelve hundred fifty dollars\"", "twelve hundred fifty dollars", { "minor_units" => 125_000, "currency" => "USD" }],
+    ["yen \"¥1,250\" (no minor unit)", "¥1,250", { "minor_units" => 1250, "currency" => "JPY" }],
+    ["\"call for pricing\" (no amount)", "call for pricing", nil]
+  ].freeze
+  CLASSES = (ESCAPE ? { "escape" => Rescue::Escape::AmountParser } : { "with_source" => S::AmountParser, "no_source" => S::AmountParserNoSource }).freeze
+  DECLINED = ->(h) { h[:minor_units].nil? }
+else
+  abort "SUITE must be events or amounts"
+end
+
+def score(result, expected)
+  got = result.to_h.transform_keys(&:to_s)
+  expected.keys.reject { |k| got[k].to_s == expected[k].to_s }
+end
+
+root = File.expand_path("..", __dir__)
+FileUtils.mkdir_p(File.join(root, "results"))
+log = File.open(File.join(root, "results", "rescue_#{suite}_#{adapter}#{ESCAPE ? "_escape" : ""}.jsonl"), "w")
+tally = Hash.new { |h, k| h[k] = { ok: 0, n: 0, squished: 0, secs: 0.0, bad: Hash.new(0), errs: 0 } }
+
+CLASSES.each do |cond, klass|
+  CASES.each do |name, payload, expected|
+    reps.times do
+      t0 = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+      got = err = squished = bad = nil
+      begin
+        r = klass.call(payload)
+        squished = r.squished?
+        got = r.to_h
+        bad = expected ? score(r, expected) : []
+      rescue StandardError => e
+        err = "#{e.class}: #{e.message[0, 100]}"
+      end
+      secs = Process.clock_gettime(Process::CLOCK_MONOTONIC) - t0
+      ok = expected.nil? ? (!err.nil? || (ESCAPE && !got.nil? && DECLINED.call(got))) : (err.nil? && bad.empty?) # unrecoverable: raising is the right answer
+      t = tally[[cond, name]]
+      t[:n] += 1
+      t[:ok] += 1 if ok
+      t[:squished] += 1 if squished
+      t[:secs] += secs
+      t[:errs] += 1 if err
+      (bad || []).each { |k| t[:bad][k] += 1 } unless expected.nil?
+      log.puts({ suite:, adapter:, cond:, case: name, ok:, squished:, got:, bad:, error: err, secs: secs.round(2) }.to_json)
+    end
+  end
+end
+log.close
+
+puts "suite=#{suite} adapter=#{adapter} reps=#{reps}"
+CLASSES.each_key do |cond|
+  puts "\n#{cond}:"
+  CASES.each do |name, _, _|
+    t = tally[[cond, name]]
+    extra = []
+    extra << "wrong: #{t[:bad].map { |k, v| "#{k}x#{v}" }.join(' ')}" unless t[:bad].empty?
+    extra << "raised x#{t[:errs]}" if t[:errs].positive?
+    puts format("  %-42s pass %d/%d  squished %d/%d  avg %.1fs  %s", name, t[:ok], t[:n], t[:squished], t[:n], t[:secs] / t[:n], extra.join("; "))
+  end
+  rows = CASES.map { |name, _, _| tally[[cond, name]] }
+  puts format("  %-42s pass %d/%d", "TOTAL", rows.sum { _1[:ok] }, rows.sum { _1[:n] })
+end

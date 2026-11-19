@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>MyChart-ish | After Visit Summary</title>
+  <style>
+    body { font-family: Verdana, sans-serif; background: #f4f6f8; }
+    .card { background: #fff; border: 1px solid #ccd; margin: 12px; padding: 12px; }
+    .banner { background: #004a7c; color: #fff; padding: 8px; }
+    th { text-align: left; }
+  </style>
+  <script>window.dataLayer = window.dataLayer || []; dataLayer.push({visit: "8C8BEA6B"});</script>
+</head>
+<body>
+  <div class="banner"><img src="/static/logo.svg" alt="Northfield Family Clinic"> Northfield Family Clinic - Patient Portal</div>
+  <nav><a href="/inbox">Messages (3)</a> | <a href="/billing">Billing</a> | <a href="/appointments">Appointments</a> | <a href="/logout">Log out</a></nav>
+  <div class="card" id="demographics">
+    <h2>After Visit Summary</h2>
+    <table>
+      <tr><th>Name</th><td class="pt-name">Sal Strosin</td></tr>
+      <tr><th>Gender</th><td class="pt-gender">Male</td></tr>
+      <tr><th>Date of birth</th><td>1939-01-27</td></tr>
+      <tr><th>MRN</th><td>8C8BEA6B</td></tr>
+    </table>
+  </div>
+  <div class="card" id="diagnoses">
+    <h3>Your diagnoses</h3>
+    <ul>
+      <li data-snomed="40055000"><strong>Chronic sinusitis (disorder)</strong> <small>(code 40055000)</small></li>
+      <li data-snomed="201834006"><strong>Localized, primary osteoarthritis of the hand</strong> <small>(code 201834006)</small></li>
+      <li data-snomed="444814009"><strong>Viral sinusitis (disorder)</strong> <small>(code 444814009)</small></li>
+    </ul>
+  </div>
+  <div class="card" id="symptoms">
+    <h3>Symptoms you reported</h3>
+    <ul><li>wheezing</li><li>fever</li></ul>
+  </div>
+  <div class="card" id="billing"><h3>Balance</h3><p>Copay due: $25.00. Payer PAYER-4471, group GRP-8842.</p><button onclick="pay()">Pay now</button></div>
+  <footer><small>Fall risk screen negative. PHQ-2 score 0. &copy; 2026 Northfield Family Clinic</small></footer>
+</body>
+</html>
