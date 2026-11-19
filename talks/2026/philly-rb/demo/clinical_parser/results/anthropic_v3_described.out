@@ -1,6 +1,3 @@
-ERROR: (ResourceGroupNotFound) Resource group 'coolhand-bandguesser' could not be found.
-Code: ResourceGroupNotFound
-Message: Resource group 'coolhand-bandguesser' could not be found.
 PASS  001_canonical_fhir.json (canonical_fhir)
 PASS  002_canonical_fhir.json (canonical_fhir)
 PASS  003_canonical_fhir.json (canonical_fhir)
@@ -84,7 +81,7 @@ PASS  080_fhir_xml.xml (fhir_xml)
 PASS  081_pdf.pdf (pdf)
 PASS  082_soap_note.txt (soap_note)
 PASS  083_csv.csv (csv)
-FAIL  084_yaml.yaml (yaml — parsed but values don't match expected)
+PASS  084_yaml.yaml (yaml)
 PASS  085_eml.eml (eml)
 PASS  086_rtf.rtf (rtf)
 PASS  087_markdown.md (markdown)
@@ -93,8 +90,8 @@ PASS  089_html_embedded_fhir.html (html_embedded_fhir)
 PASS  090_sql_dump.sql (sql_dump)
 FAIL  091_x12_837.x12 (x12_837 — parsed but values don't match expected)
 PASS  092_ndjson_bulk.ndjson (ndjson_bulk)
-PASS  093_fixed_width.dat (fixed_width)
-FAIL  094_sms_chat.txt (sms_chat — parsed but values don't match expected)
+FAIL  093_fixed_width.dat (fixed_width — parsed but values don't match expected)
+PASS  094_sms_chat.txt (sms_chat)
 PASS  095_spreadsheetml.xml (spreadsheetml)
 PASS  096_rdf_turtle.ttl (rdf_turtle)
 PASS  097_json_ld.jsonld (json_ld)
@@ -102,5 +99,5 @@ PASS  098_ocr_fax.txt (ocr_fax)
 FAIL  099_dictation.txt (dictation — parsed but values don't match expected)
 PASS  100_base64_envelope.json (base64_envelope)
 
-v3_described: 92/100 passed, 8/100 failed
+v3_described: 93/100 passed, 7/100 failed
 usage log: /Users/woodchip/conductor/workspaces/mikecarroll.github.io/san-diego-v5/talks/2026/philly-rb/demo/clinical_parser/tmp/usage_v3_described.jsonl

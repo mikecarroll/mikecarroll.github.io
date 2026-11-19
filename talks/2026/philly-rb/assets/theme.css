@@ -1056,3 +1056,8 @@
 .compare .accent-col {
   color: hsl(var(--accent));
 }
+
+/* a cell worth looking at — the failing result in a .compare table */
+.compare td.bad {
+  color: hsl(var(--cost));
+}

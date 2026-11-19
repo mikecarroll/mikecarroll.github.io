@@ -52,7 +52,7 @@
     />
 
     <link rel="stylesheet" href="assets/deck.css?v=4" />
-    <link rel="stylesheet" href="assets/theme.css?v=39" />
+    <link rel="stylesheet" href="assets/theme.css?v=40" />
 
     <!-- ===================== Structured data (JSON-LD) ===================== -->
     <script type="application/ld+json">
@@ -780,8 +780,69 @@
           </aside>
         </section>
 
-        <!-- Slide 24 — It runs backwards too -->
-        <section class="slide center" id="slide-24" aria-label="The pattern runs in reverse for legacy estates">
+        <!-- Slide 24 — Putting it all together -->
+        <section class="slide" id="slide-24" aria-label="Fully refactored — a short purpose, field annotations, a harness, and a code path for the standard shape">
+          <h2><span class="accent">Fully</span> refactored</h2>
+          <div class="grid" style="grid-template-columns: 1fr 1.5fr; margin-top: 0.75rem; align-items: center; text-align: left; gap: 1.75rem">
+            <div>
+              <ul class="takeaways" style="margin-top: 0; gap: 0.9rem">
+                <li style="font-size: 1.25rem"><strong>Annotations</strong><br /><span class="muted">The rules sit next to the field they explain. The purpose stays one line.</span></li>
+                <li style="font-size: 1.25rem"><strong>A harness</strong><br /><span class="muted">Two samples and a judge double-check each answer.</span></li>
+                <li style="font-size: 1.25rem"><strong>A code path</strong><br /><span class="muted">The standard shape runs in Ruby. Only the rest squishes.</span></li>
+              </ul>
+              <div class="fragment pill-row" data-fragment-index="1" style="margin-top: 1.5rem">
+                <p class="pill-group"><span class="lead" style="margin: 0; font-size: 1.1rem">Results:</span> <span class="pill pill--green">94/100 · $0.13</span></p>
+              </div>
+            </div>
+<pre class="codeblock" aria-label="One class: a short purpose, field descriptions in the output schema, a judged_squishsum harness, and a call method that routes the standard shape to the FHIR parser" style="font-size: 0.84em; line-height: 1.3; margin: 0; width: 100%; box-sizing: border-box"><code><span class="k">class</span> <span class="m">Parser</span>
+  <span class="k">include</span> <span class="m">Squishling</span>
+
+  purpose <span class="s">"Map the record onto the schema."</span>
+
+  output_schema <span class="k">do</span>
+    string :patient_name,
+      description: <span class="s">"First Last order,
+        even if HL7 LAST^FIRST."</span>
+    string :patient_gender,
+      enum: %w[male female trans unknown],
+      description: <span class="s">"Never guess. unknown
+        for codes you don't recognize."</span>
+    array :diagnosis_codes, of: :string
+    array :symptoms, of: :string,
+      description: <span class="s">"Explicit symptoms only."</span>
+  <span class="k">end</span>
+
+  squishling escalation: [<span class="s">"claude-haiku-4-5"</span>, <span class="s">"claude-sonnet-5-5"</span>],
+    harness: { type: :judged_squishsum, judge: <span class="s">"claude-opus-5-5"</span> }
+
+  <span class="k">def</span> <span class="m">call</span>(data)
+    <span class="k">return</span> fhir_parser.call(data) <span class="k">if</span> fhir_message?(data)
+
+    squish!
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+          </div>
+          <aside class="notes">
+            <h4>Beat</h4>
+            The whole talk in one class. Step one: the rules from the long purpose on
+            slide 19 move into per-field annotations (the description: option) in the output schema.
+            Squishling's docs call this the best practice: the model sees each rule right
+            where the value goes, and the purpose shrinks to the goal. Same rules, nothing
+            lost: 93 of 100 on a single attempt at 50 cents, the same as the long purpose
+            within run-to-run noise. (The code on the slide is abbreviated; the real
+            annotations spell out the "trans" rule and the empty-symptoms case.) Step two:
+            the judged_squishsum harness from slide 20. Step three: the call method from
+            slide 22, so the 63 standard FHIR bundles never touch the model. The result
+            on all 100 fixtures: 94 passed for 13 cents. That is the NYC router's number
+            at a quarter of the single-attempt cost, and this time the judge fired once
+            (one Opus call) instead of never. The same misses remain: unlabeled gender
+            codes and the dictation transcript.
+          </aside>
+        </section>
+
+        <!-- Slide 25 — It runs backwards too -->
+        <section class="slide center" id="slide-25" aria-label="The pattern runs in reverse for legacy estates">
           <h2>It runs backwards, too.</h2>
           <p class="lead" style="margin-top: 1.5rem">
             Drowning under a thousand legacy parsers?
@@ -800,8 +861,8 @@
           </aside>
         </section>
 
-        <!-- Slide 25 — Yeah but we don't parse health data -->
-        <section class="slide center" id="slide-25" aria-label="Yeah, cool, but we don't need to parse health data">
+        <!-- Slide 26 — Yeah but we don't parse health data -->
+        <section class="slide center" id="slide-26" aria-label="Yeah, cool, but we don't need to parse health data">
           <h2 class="muted" style="font-weight: 600">
             "Yeah, cool. But we don't need to parse health data."
           </h2>
@@ -820,8 +881,8 @@
           </aside>
         </section>
 
-        <!-- Slide 26 — Rescue a parse failure by squishing it -->
-        <section class="slide center" id="slide-26" aria-label="When the Ruby parser fails on a vendor payload, rescue and squish it">
+        <!-- Slide 27 — Rescue a parse failure by squishing it -->
+        <section class="slide center" id="slide-27" aria-label="When the Ruby parser fails on a vendor payload, rescue and squish it">
           <h2>When a service call fails, you should squish it.</h2>
           <div class="grid cols-2" style="margin-top: 1.5rem; align-items: center; text-align: left">
             <img class="fragment" data-fragment-index="1" src="assets/img/squish-it-good-gem.png" alt="Squishling mascot — a glossy red gem with a stacked cap, smiling" style="width: 100%; max-width: 320px; justify-self: center" />
@@ -854,8 +915,8 @@
           </aside>
         </section>
 
-        <!-- Slide 27 — We don't integrate with services either -->
-        <section class="slide center" id="slide-27" aria-label="We don't integrate with services or APIs, either">
+        <!-- Slide 28 — We don't integrate with services either -->
+        <section class="slide center" id="slide-28" aria-label="We don't integrate with services or APIs, either">
           <h2 class="muted" style="font-weight: 600">
             "We don't integrate with services or APIs, either."
           </h2>
@@ -874,8 +935,8 @@
           </aside>
         </section>
 
-        <!-- Slide 28 — Even a bug in your own code can squish -->
-        <section class="slide" id="slide-28" aria-label="Squishling rescuing a NoMethodError from a missing dig, not a vendor format mismatch">
+        <!-- Slide 29 — Even a bug in your own code can squish -->
+        <section class="slide" id="slide-29" aria-label="Squishling rescuing a NoMethodError from a missing dig, not a vendor format mismatch">
           <h2>Even a bug in your own code can squish.</h2>
           <div class="grid cols-2" style="margin-top: 1.5rem; align-items: start; text-align: left">
 <pre class="codeblock" aria-label="The plain class with no squishling, and the invocation that breaks it"><code><span class="k">class</span> <span class="m">SomeHelperMethod</span>
@@ -894,11 +955,12 @@ payload = { <span class="s">"user"</span> =&gt; <span class="s">"alice@example.c
   <span class="k">include</span> <span class="m">Squishling</span>
 
   ...
+<span class="hl">  append_to_purpose <span class="s">"The code it runs:"</span>, <span class="k">self</span></span>
 
   <span class="k">def</span> <span class="m">call</span>(payload)
     payload.dig(<span class="s">"user"</span>, <span class="s">"email"</span>)
-  <span class="k">rescue</span>
-    squish!
+  <span class="k">rescue</span> =&gt; e
+    squish!(context: { error: e })
   <span class="k">end</span>
 <span class="k">end</span>
 
@@ -916,32 +978,34 @@ payload = { <span class="s">"user"</span> =&gt; <span class="s">"alice@example.c
             object, another flattens it to a string, and the dig call written for the
             first shape blows up on the second. Same squish! trick as the parse-failure
             rescue, just caught by a bare rescue instead of one scoped to a specific
-            error class. The point is not "squishling fixes bugs" — it is that any
+            error class. Two lines do the work: append_to_purpose "...", self puts this
+            class's own source into the prompt, and squish!(context: { error: e }) sends the
+            raised error along with the arguments, so the model sees the code, the input and
+            the exact failure. The point is not "squishling fixes bugs" — it is that any
             rescued exception, including ones from your own code, can be the trigger.
           </aside>
         </section>
 
-        <!-- Slide 29 — 0.2.0 → 0.6.0: what it's worth -->
-        <section class="slide" id="slide-29" aria-label="Squishling 0.2.0 to 0.6.0 — what each release is worth: double-checks, shareable harnesses, adapt it yourself, and a more cost-efficient prompt cache">
-          <p class="kicker">What it's worth · since XO Ruby NYC</p>
+        <!-- Slide 30 — 0.2.0 → 0.6.0: what it's worth -->
+        <section class="slide" id="slide-30" aria-label="Squishling 0.2.0 to 0.6.0 — what each release is worth: double-checks, shareable harnesses, adapt it yourself, and a more cost-efficient prompt cache">
           <h2>0.2.0 <span class="accent">→</span> 0.6.0</h2>
           <div class="timeline">
-            <div class="rung fragment" data-fragment-index="1">
+            <div class="rung">
               <div class="rung-when">0.3.0 · Oct 10</div>
               <div class="rung-what">Double-check the answer</div>
               <p>Harnesses: two samples plus a judge. Insurance, at <code>2×</code> the cost.</p>
             </div>
-            <div class="rung fragment" data-fragment-index="2">
+            <div class="rung">
               <div class="rung-when">0.4.0 · Oct 18</div>
               <div class="rung-what">Shareable harnesses</div>
               <p>Write your own harness and share it. Built-in Coolhand cost tracking, zero config.</p>
             </div>
-            <div class="rung fragment" data-fragment-index="3">
+            <div class="rung">
               <div class="rung-when">0.5.0 – 0.5.1 · Oct 28–31</div>
               <div class="rung-what">Adapt it yourself</div>
               <p>Write your own adapter for any model or endpoint. A scripted test adapter, so tests make no LLM calls. Token budgets cap spend.</p>
             </div>
-            <div class="rung fragment" data-fragment-index="4">
+            <div class="rung">
               <div class="rung-when">0.6.0 · Nov 1</div>
               <div class="rung-what">More cost efficient</div>
               <p>Prompt caching, on by default: <span class="accent">−76%</span> on repeat calls. First write costs <code>+21%</code>. Opt out: <code>cache: false</code>.</p>
@@ -967,8 +1031,8 @@ payload = { <span class="s">"user"</span> =&gt; <span class="s">"alice@example.c
           </aside>
         </section>
 
-        <!-- Slide 30 — The biggest change: local models -->
-        <section class="slide slide--dark center" id="slide-30" aria-label="I want it cheaper! I want it with no dependencies! — local models">
+        <!-- Slide 31 — The biggest change: local models -->
+        <section class="slide slide--dark center" id="slide-31" aria-label="I want it cheaper! I want it with no dependencies! — local models">
           <p class="kicker">But the biggest change…</p>
           <h2 style="font-size: 3.4rem">I want it <span class="accent">cheaper!</span><br />I want it with <span class="accent">no dependencies!</span></h2>
           <p class="pill-group fragment" data-fragment-index="1" style="margin-top: 2.5rem; justify-content: center">
@@ -988,8 +1052,8 @@ payload = { <span class="s">"user"</span> =&gt; <span class="s">"alice@example.c
           </aside>
         </section>
 
-        <!-- Slide 31 — Squishling on-device: Apple FM -->
-        <section class="slide" id="slide-31" aria-label="Squishling on-device with the Apple FM adapter — the same demo, side by side with Claude Haiku 4.5">
+        <!-- Slide 32 — Squishling on-device: Apple FM -->
+        <section class="slide" id="slide-32" aria-label="Squishling on-device with the Apple FM adapter — the same demo, side by side with Claude Haiku 4.5">
           <p class="kicker">Same demo, different adapter</p>
           <h2>Squishling runs on-device, too: <span class="accent">Apple FM</span></h2>
           <table class="compare">
@@ -1004,7 +1068,6 @@ payload = { <span class="s">"user"</span> =&gt; <span class="s">"alice@example.c
               <tr><td>Single attempt, first-pass purpose</td><td class="num">73</td><td class="num accent-col">18</td></tr>
               <tr><td>Single attempt, refined purpose</td><td class="num">95</td><td class="num accent-col">20</td></tr>
               <tr><td>judged_squishsum</td><td class="num">94</td><td class="num accent-col">19</td></tr>
-              <tr><td>Router: Ruby for FHIR, squish the rest</td><td class="num">94</td><td class="num accent-col">82</td></tr>
               <tr><td>Cost per 100 fixtures</td><td class="num">$0.51 / $0.12 routed</td><td class="num accent-col">$0</td></tr>
             </tbody>
           </table>
@@ -1029,8 +1092,8 @@ payload = { <span class="s">"user"</span> =&gt; <span class="s">"alice@example.c
           </aside>
         </section>
 
-        <!-- Slide 32 — Rescue test: the input shape changed -->
-        <section class="slide" id="slide-32" aria-label="Rescue test — a Hash method suddenly receives a String; squish! recovers it on Claude Haiku and Apple FM">
+        <!-- Slide 33 — Rescue test: the input shape changed -->
+        <section class="slide" id="slide-33" aria-label="Rescue test — a Hash method suddenly receives a String; squish! recovers it on Claude Haiku and Apple FM">
           <p class="kicker">Rescue test · 5 runs per case</p>
           <h2>The caller changed. Does <span class="accent">squish!</span> catch it?</h2>
 <pre class="codeblock" aria-label="A method written for a payload of {data: ...} that rescues into squish!" style="margin-top: 0.75rem; font-size: 0.85em; line-height: 1.35; padding-block: 0.6rem"><code><span class="k">def</span> <span class="m">call</span>(payload)   <span class="c"># was always { data: "this is the data" }</span>
@@ -1061,7 +1124,7 @@ payload = { <span class="s">"user"</span> =&gt; <span class="s">"alice@example.c
           </p>
           <aside class="notes">
             <h4>Beat</h4>
-            Slide 28's idea, measured. The Ruby was written for { data: "this is the data" }.
+            Slide 29's idea, measured. The Ruby was written for { data: "this is the data" }.
             Then the caller changes. squish! hands that one call to the LLM with the raised
             error as context, and the schema (one string field named data) says what must
             come back. Nine cases, five runs each, on Claude Haiku 4.5 and on the on-device
@@ -1081,8 +1144,63 @@ payload = { <span class="s">"user"</span> =&gt; <span class="s">"alice@example.c
           </aside>
         </section>
 
-        <!-- Slide 33 — Harder rescue tests -->
-        <section class="slide" id="slide-33" aria-label="Harder rescue tests — order, event and money parsing, Claude Haiku versus Apple FM, with and without the method's source">
+        <!-- Slide 34 — Why did Haiku miss with the source? -->
+        <section class="slide" id="slide-34" aria-label="Why Haiku missed renamed keys when the method's source was in the prompt, and how rewording the prompt fixed it">
+          <p class="kicker">Follow-up · Haiku, 5 runs per case</p>
+          <h2>Why did the source <span class="accent">hurt?</span></h2>
+          <table class="compare">
+            <thead>
+              <tr>
+                <th>Renamed or nested key</th>
+                <th class="num">Haiku + source</th>
+                <th class="num">Haiku</th>
+                <th class="num accent-col">FM + source</th>
+                <th class="num accent-col">FM</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Passed</td><td class="num bad">2/15</td><td class="num">15/15</td><td class="num accent-col">15/15</td><td class="num accent-col">15/15</td></tr>
+            </tbody>
+          </table>
+          <table class="compare" style="margin-top: 1.5rem">
+            <thead>
+              <tr>
+                <th>How the prompt introduces the source</th>
+                <th class="num">nested</th>
+                <th class="num">renamed <code>body:</code></th>
+                <th class="num">noise + <code>text:</code></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>"…for context on the intent"</td><td class="num">4/5</td><td class="num bad">0/5</td><td class="num bad">0/5</td></tr>
+              <tr><td>"This Ruby handled the <strong>OLD</strong> input shape and failed on the new one. Find the value that plays the role of <code>:data</code>."</td><td class="num">5/5</td><td class="num">5/5</td><td class="num">5/5</td></tr>
+              <tr><td>No source</td><td class="num">5/5</td><td class="num">5/5</td><td class="num">5/5</td></tr>
+            </tbody>
+          </table>
+          <p class="lead fragment" data-fragment-index="1" style="margin-top: 1rem; font-size: 1.3rem">
+            It read <code>fetch(:data)</code> as still in force, found no <code>:data</code>, and returned <span class="accent">""</span>. Say the source is the <span class="accent">old</span> shape.
+          </p>
+          <aside class="notes">
+            <h4>Beat</h4>
+            Why did Haiku get only 2 of 15 on renamed or nested keys when it had the
+            method's source, and 15 of 15 without it? In all 13 failures it returned an
+            empty string, never made-up text. With the source in the prompt it could see
+            payload.fetch(:data) and the error "key not found: :data", and concluded there
+            was no data. My wording called the source "context on the intent", so it read
+            the code as the rules still in force. Without the source it only knew to return
+            the data field, and went looking for the value that fit. To confirm, I reran
+            just those three cases, five times each, changing only the line that introduces
+            the source. Original wording: 4, 0 and 0 out of 5 (4 of 15 this time, versus 2
+            of 15 in the first run: normal run-to-run noise). Telling the model that the
+            source handled the OLD shape and failed on the new one, and asking it to find
+            the value that plays the role of data: 15 of 15, the same as no source. So
+            append_to_purpose with the class's own source works, but say the source
+            describes the old shape that just failed.
+          </aside>
+        </section>
+
+        <!-- Slide 35 — Harder rescue tests -->
+        <section class="slide" id="slide-35" aria-label="Harder rescue tests — order, event and money parsing, Claude Haiku versus Apple FM, with and without the method's source">
           <p class="kicker">Harder rescue tests · 5 runs per case</p>
           <h2>Moved data: <span class="accent">rescued</span>. Missing data: <span class="accent">invented</span>.</h2>
           <table class="compare">
@@ -1104,7 +1222,7 @@ payload = { <span class="s">"user"</span> =&gt; <span class="s">"alice@example.c
           </table>
           <aside class="notes">
             <h4>Beat</h4>
-            Three harder versions of slide 32, each with its own typed schema, each run five
+            Three harder versions of slide 33, each with its own typed schema, each run five
             times per case on Claude Haiku 4.5 and on Apple FM, with and without the
             method's own source in the prompt. Every suite includes a control that never
             leaves Ruby, which is why the on-device totals bottom out at 5. Webhook events:
@@ -1125,8 +1243,8 @@ payload = { <span class="s">"user"</span> =&gt; <span class="s">"alice@example.c
           </aside>
         </section>
 
-        <!-- Slide 34 — Escape hatch, tested -->
-        <section class="slide" id="slide-34" aria-label="The escape hatch, tested — nullable fields and an unknown value make Haiku and Apple FM decline instead of invent, at some cost in recovered cases">
+        <!-- Slide 36 — Escape hatch, tested -->
+        <section class="slide" id="slide-36" aria-label="The escape hatch, tested — nullable fields and an unknown value make Haiku and Apple FM decline instead of invent, at some cost in recovered cases">
           <p class="kicker">Same tests, with an escape hatch</p>
           <h2>Declined, <span class="accent">not invented.</span> At a price.</h2>
           <table class="compare">
@@ -1167,8 +1285,8 @@ payload = { <span class="s">"user"</span> =&gt; <span class="s">"alice@example.c
           </aside>
         </section>
 
-        <!-- Slide 35 — Three lessons -->
-        <section class="slide" id="slide-35" aria-label="Three lessons from the rescue tests: small models are bad at math, give models an escape hatch, Apple FM is not a great model yet">
+        <!-- Slide 37 — Three lessons -->
+        <section class="slide" id="slide-37" aria-label="Three lessons from the rescue tests: small models are bad at math, give models an escape hatch, Apple FM is not a great model yet">
           <p class="kicker">From the rescue tests</p>
           <h2>Three lessons</h2>
           <ul class="takeaways" style="max-width: 1000px">
@@ -1194,8 +1312,8 @@ payload = { <span class="s">"user"</span> =&gt; <span class="s">"alice@example.c
           </aside>
         </section>
 
-        <!-- Slide 36 — Squishling roadmap -->
-        <section class="slide center" id="slide-36" aria-label="Squishling roadmap — A/B testing of code and model pathways, native Rails error integration and rescue, a squishy benchmarks registry, a forever-services bootstrapper">
+        <!-- Slide 38 — Squishling roadmap -->
+        <section class="slide center" id="slide-38" aria-label="Squishling roadmap — A/B testing of code and model pathways, native Rails error integration and rescue, a squishy benchmarks registry, a forever-services bootstrapper">
           <div class="grid cols-2" style="align-items: center; text-align: left">
             <div>
               <p class="kicker">What's next</p>
@@ -1226,8 +1344,8 @@ payload = { <span class="s">"user"</span> =&gt; <span class="s">"alice@example.c
           </aside>
         </section>
 
-        <!-- Slide 37 — Squish the star button -->
-        <section class="slide center" id="slide-37" aria-label="Star squishling on GitHub, share it, and leave feedback">
+        <!-- Slide 39 — Squish the star button -->
+        <section class="slide center" id="slide-39" aria-label="Star squishling on GitHub, share it, and leave feedback">
           <img src="assets/img/squishling-wordmark-burgundy.png" alt="Squishling wordmark with mascot — a smiling red gem" width="420" />
           <h2 style="margin-top: 1.5rem">Squish the star button & leave issues <span class="accent">on GitHub.</span></h2>
           <a class="qr qr--side" href="https://github.com/Coolhand-Labs/squishling"
